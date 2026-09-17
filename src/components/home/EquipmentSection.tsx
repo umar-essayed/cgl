@@ -12,7 +12,9 @@ import {
   Crosshair, 
   ArrowUpLeft, 
   ArrowUpRight, 
-  CheckCircle2 
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { CGL_EQUIPMENT_FLEET } from '@/lib/data';
 import { Locale, getDictionary } from '@/lib/i18n';
@@ -24,9 +26,11 @@ interface EquipmentSectionProps {
 
 export default function EquipmentSection({ lang = 'ar' }: EquipmentSectionProps) {
   const [selectedCategory, setSelectedCategory] = useState<EquipmentCategory>('all');
+  const [showAll, setShowAll] = useState(false);
   const dict = getDictionary(lang);
   const isRtl = lang === 'ar';
   const ArrowIcon = isRtl ? ArrowUpLeft : ArrowUpRight;
+  const ChevronIcon = isRtl ? ChevronLeft : ChevronRight;
 
   const categories: { id: EquipmentCategory; label: string; icon: React.ElementType }[] = [
     { id: 'all', label: dict.equipment.filterAll, icon: Wrench },
@@ -39,6 +43,8 @@ export default function EquipmentSection({ lang = 'ar' }: EquipmentSectionProps)
   const filteredEquipment = selectedCategory === 'all'
     ? CGL_EQUIPMENT_FLEET
     : CGL_EQUIPMENT_FLEET.filter((item) => item.category === selectedCategory);
+
+  const displayedEquipment = showAll ? filteredEquipment : filteredEquipment.slice(0, 3);
 
   return (
     <section id="equipment" className="py-20 sm:py-28 bg-black border-b border-[#1f1f1f] text-white relative overflow-hidden">
@@ -62,8 +68,8 @@ export default function EquipmentSection({ lang = 'ar' }: EquipmentSectionProps)
           </div>
 
           <div className="text-xs font-mono text-stone-400 bg-[#111111] px-4 py-2 rounded-xl border border-[#1f1f1f] self-start md:self-auto flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#8bc34a]" />
-            <span>{isRtl ? 'جاهزية الأسطول: 100% معاير ومعتمد' : 'Fleet Status: 100% Calibrated & Certified'}</span>
+            <span>{isRtl ? 'المعدات المعروضة: ' : 'Showing: '}</span>
+            <span className="text-[#8bc34a] font-bold">0{displayedEquipment.length} / 0{filteredEquipment.length}</span>
           </div>
         </div>
 
@@ -76,7 +82,10 @@ export default function EquipmentSection({ lang = 'ar' }: EquipmentSectionProps)
               <button
                 key={cat.id}
                 type="button"
-                onClick={() => setSelectedCategory(cat.id)}
+                onClick={() => {
+                  setSelectedCategory(cat.id);
+                  setShowAll(false);
+                }}
                 className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all whitespace-nowrap border ${
                   isSelected
                     ? 'bg-[#8bc34a] text-black font-bold border-[#8bc34a] shadow-lg shadow-[#8bc34a]/20 scale-100'
@@ -96,7 +105,7 @@ export default function EquipmentSection({ lang = 'ar' }: EquipmentSectionProps)
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           <AnimatePresence>
-            {filteredEquipment.map((item, idx) => {
+            {displayedEquipment.map((item, idx) => {
               const name = isRtl ? item.nameAr : item.nameEn;
               const categoryName = isRtl ? item.categoryNameAr : item.categoryNameEn;
               const specs = isRtl ? item.specsAr : item.specsEn;
@@ -184,6 +193,25 @@ export default function EquipmentSection({ lang = 'ar' }: EquipmentSectionProps)
             })}
           </AnimatePresence>
         </motion.div>
+
+        {/* Expand / Collapse Button if more than 3 items exist */}
+        {filteredEquipment.length > 3 && (
+          <div className="mt-10 sm:mt-12 flex justify-center">
+            <button
+              type="button"
+              onClick={() => setShowAll(!showAll)}
+              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#161616] border border-[#222222] hover:border-[#8bc34a]/40 text-stone-200 hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-sm group active:scale-95"
+            >
+              <span>
+                {showAll
+                  ? (isRtl ? 'طي قائمة المعدات (عرض 3 فقط)' : 'Collapse Equipment (Show 3 only)')
+                  : (isRtl ? `عرض كافة تجهيزات الأسطول (${filteredEquipment.length} معدات)` : `View All Fleet Equipment (${filteredEquipment.length} units)`)
+                }
+              </span>
+              <ChevronIcon className={`w-4 h-4 text-[#8bc34a] transition-transform duration-300 ${showAll ? '-rotate-90' : 'rotate-0'}`} />
+            </button>
+          </div>
+        )}
 
       </div>
     </section>
