@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Shield, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Shield } from 'lucide-react';
 import { CGL_COMPANY_INFO } from '@/lib/data';
 import { Locale, getDictionary } from '@/lib/i18n';
 
@@ -27,8 +27,6 @@ function AnimatedCounter({ target, duration = 2200 }: { target: number; duration
 
       if (progress < 1) {
         frameId = requestAnimationFrame(step);
-      } else {
-        setCount(target);
       }
     };
 
@@ -44,8 +42,6 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
   const dict = getDictionary(lang);
   const isRtl = lang === 'ar';
 
-  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const tabsContainerRef = useRef<HTMLDivElement | null>(null);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
@@ -72,19 +68,6 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
     }, 6000);
     return () => clearInterval(timer);
   }, [totalSlides]);
-
-  // Auto-scroll ONLY the tabs container horizontally, NEVER the window
-  useEffect(() => {
-    const container = tabsContainerRef.current;
-    const activeTab = tabRefs.current[currentSlide];
-    if (container && activeTab) {
-      const targetScroll = activeTab.offsetLeft - (container.clientWidth / 2) + (activeTab.clientWidth / 2);
-      container.scrollTo({
-        left: targetScroll,
-        behavior: 'smooth'
-      });
-    }
-  }, [currentSlide]);
 
   // Touch Swipe Handlers for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -282,49 +265,33 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
 
       {/* Bottom Controls Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-20 w-full pt-3 sm:pt-4 border-t border-white/10">
-        <div className="flex items-center justify-between gap-3 sm:gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
           
-          {/* Mobile Prev / Next Arrows */}
-          <div className="flex sm:hidden items-center gap-1.5 flex-shrink-0">
-            <button
-              type="button"
-              onClick={isRtl ? nextSlide : prevSlide}
-              aria-label="Previous Slide"
-              className="w-8 h-8 rounded-lg bg-black/80 border border-white/20 text-white flex items-center justify-center active:scale-95 transition-all"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button
-              type="button"
-              onClick={isRtl ? prevSlide : nextSlide}
-              aria-label="Next Slide"
-              className="w-8 h-8 rounded-lg bg-black/80 border border-white/20 text-white flex items-center justify-center active:scale-95 transition-all"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          {/* Slide Switcher Tabs: Touch Scrollable on Mobile with Snap */}
-          <div ref={tabsContainerRef} className="flex items-center gap-2 overflow-x-auto snap-x snap-mandatory scrollbar-none touch-pan-x py-1 w-full max-w-full">
-            {dict.hero.slides.map((s, idx) => {
-              const isActive = currentSlide === idx;
-              return (
-                <button
-                  ref={(el) => { tabRefs.current[idx] = el; }}
-                  key={s.id}
-                  type="button"
-                  onClick={() => setCurrentSlide(idx)}
-                  className={`snap-center px-3 sm:px-3.5 py-1.5 sm:py-1.5 rounded-xl text-[11px] sm:text-xs font-sans transition-all whitespace-nowrap flex items-center gap-2 flex-shrink-0 active:scale-95 ${
-                    isActive
-                      ? 'bg-white text-black font-bold shadow-lg ring-1 ring-white/50'
-                      : 'bg-black/70 text-stone-300 hover:text-white border border-white/15 hover:bg-black/90'
-                  }`}
-                >
-                  <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isActive ? 'bg-[#3b76b3]' : 'bg-stone-600'}`} />
-                  <span>0{idx + 1}. {s.tag}</span>
-                </button>
-              );
-            })}
+          {/* Slide Switcher Tabs: Fixed No-Scroll Grid on Mobile, Flex Row on Desktop */}
+          <div className="w-full sm:w-auto">
+            <div className="grid grid-cols-3 gap-1.5 sm:flex sm:items-center sm:gap-2 w-full">
+              {dict.hero.slides.map((s, idx) => {
+                const isActive = currentSlide === idx;
+                return (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() => setCurrentSlide(idx)}
+                    className={`px-1.5 py-2 sm:px-3.5 sm:py-1.5 rounded-xl text-[10px] sm:text-xs font-sans transition-all flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 active:scale-95 text-center sm:text-start ${
+                      isActive
+                        ? 'bg-white text-black font-bold shadow-lg ring-1 ring-white/50'
+                        : 'bg-black/70 text-stone-300 hover:text-white border border-white/15 hover:bg-black/90'
+                    }`}
+                  >
+                    <div className="flex items-center gap-1 flex-shrink-0">
+                      <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isActive ? 'bg-[#3b76b3]' : 'bg-stone-600'}`} />
+                      <span className="font-mono font-bold text-[10px] sm:text-xs">0{idx + 1}.</span>
+                    </div>
+                    <span className="line-clamp-2 leading-tight text-[10px] sm:text-xs sm:whitespace-nowrap">{s.tag}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Quick Affiliation Info */}
