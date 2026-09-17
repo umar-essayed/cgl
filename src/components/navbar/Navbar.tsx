@@ -36,6 +36,8 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
     { label: dict.nav.about, href: `/${lang}/about` },
     { label: dict.nav.services, href: `/${lang}#services` },
     { label: dict.nav.projects, href: `/${lang}#projects` },
+    { label: dict.nav.equipment, href: `/${lang}#equipment` },
+    { label: dict.nav.news, href: `/${lang}#news` },
     { label: dict.nav.contact, href: `/${lang}#location` },
   ];
 
@@ -81,12 +83,12 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
             {navLinks.map((link, idx) => (
               <Link
                 key={idx}
                 href={link.href}
-                className="text-xs sm:text-sm font-medium text-stone-300 hover:text-[#8bc34a] transition-colors"
+                className="text-xs xl:text-sm font-medium text-stone-300 hover:text-[#8bc34a] transition-colors whitespace-nowrap"
               >
                 {link.label}
               </Link>
@@ -94,7 +96,7 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
           </nav>
 
           {/* Desktop Actions */}
-          <div className="hidden sm:flex items-center gap-2.5">
+          <div className="hidden lg:flex items-center gap-2.5">
             {/* WhatsApp Hotline */}
             <a
               href={`https://wa.me/${CGL_COMPANY_INFO.whatsapp1Raw}`}
@@ -121,9 +123,16 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
             </Link>
           </div>
 
-          {/* Mobile Actions Bar */}
-          <div className="sm:hidden flex items-center gap-1.5">
+          {/* Mobile & Tablet Actions Bar */}
+          <div className="lg:hidden flex items-center gap-2">
             <LanguageSwitcher currentLang={lang} />
+
+            <Link
+              href={`/${lang}/rfq`}
+              className="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 bg-[#8bc34a] hover:bg-[#7cb342] text-black text-xs font-bold rounded-lg transition-all shadow-sm"
+            >
+              <span>{dict.nav.rfq}</span>
+            </Link>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -136,9 +145,9 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
 
         </div>
 
-        {/* Mobile Drawer */}
+        {/* Mobile & Tablet Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#0a0a0a] border-b border-[#1f1f1f] px-5 py-5 space-y-4 shadow-2xl backdrop-blur-xl">
+          <div className="lg:hidden bg-[#0a0a0a] border-b border-[#1f1f1f] px-5 py-5 space-y-4 shadow-2xl backdrop-blur-xl">
             <nav className="space-y-1 border-b border-[#1f1f1f] pb-3">
               {navLinks.map((link, idx) => (
                 <Link

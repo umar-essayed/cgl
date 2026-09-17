@@ -105,3 +105,36 @@ export interface AuthorizedPartner {
   logo: string;
   logoLight?: string;
 }
+
+export type EquipmentCategory = 'all' | 'drilling' | 'ndt' | 'materials' | 'surveying';
+
+export interface EquipmentItem {
+  id: string;
+  code: string;
+  nameAr: string;
+  nameEn: string;
+  category: 'drilling' | 'ndt' | 'materials' | 'surveying';
+  categoryNameAr: string;
+  categoryNameEn: string;
+  specsAr: string[];
+  specsEn: string[];
+  standards: string[];
+  image: string;
+  serviceId?: ServiceId;
+}
+
+export interface NewsArticle {
+  id: string;
+  titleAr: string;
+  titleEn: string;
+  excerptAr: string;
+  excerptEn: string;
+  categoryAr: string;
+  categoryEn: string;
+  date: string;
+  readTimeAr: string;
+  readTimeEn: string;
+  image: string;
+  featured?: boolean;
+}
+

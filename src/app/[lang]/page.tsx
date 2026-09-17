@@ -7,6 +7,8 @@ import Hero from '@/components/home/Hero';
 import PartnersTicker from '@/components/home/PartnersTicker';
 import ServicesSection from '@/components/home/ServicesSection';
 import ProjectsEvidenceSection from '@/components/home/ProjectsEvidenceSection';
+import EquipmentSection from '@/components/home/EquipmentSection';
+import NewsSection from '@/components/home/NewsSection';
 import CompanyLocationSection from '@/components/home/CompanyLocationSection';
 import RfqSection from '@/components/home/RfqSection';
 import Footer from '@/components/footer/Footer';
@@ -44,14 +46,16 @@ export default async function HomePage({
   }
 
   return (
-    <main className="min-h-screen flex flex-col bg-white dark:bg-[#000000] text-slate-900 dark:text-white selection:bg-[#8bc34a] selection:text-black transition-colors">
+    <main className="min-h-screen flex flex-col bg-[#000000] text-white selection:bg-[#8bc34a] selection:text-black">
       <Navbar lang={lang} />
       <Hero lang={lang} />
       <PartnersTicker lang={lang} />
       <ServicesSection lang={lang} />
       <ProjectsEvidenceSection lang={lang} />
-      <CompanyLocationSection lang={lang} />
+      <EquipmentSection lang={lang} />
+      <NewsSection lang={lang} />
       <RfqSection lang={lang} />
+      <CompanyLocationSection lang={lang} />
       <Footer lang={lang} />
     </main>
   );
