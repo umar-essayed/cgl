@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#000000] text-stone-100 font-sans antialiased selection:bg-[#8bc34a] selection:text-black;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-white;
+  }
+}
+
+/* Rich Architectural Canvas & Textures Rooted in Pure Dark Geotechnical Identity */
+.engineering-canvas {
+  background-color: #000000;
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139, 195, 74, 0.08), transparent),
+    radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
+}
+
+.engineering-canvas-secondary {
+  background-color: #0a0a0a;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(139, 195, 74, 0.05), transparent 70%),
+    radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+}
+
+.engineering-card {
+  background: #0a0a0a;
+  border: 1px solid #1f1f1f;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.engineering-card:hover {
+  background: #111111;
+  border-color: rgba(139, 195, 74, 0.4);
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.85);
+}
+
+/* Mobile-Friendly Smooth Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f1f1f;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8bc34a;
+}
+
+/* 100% Smooth Infinite Marquee (Mathematical Loop with Zero Jerk) */
+@keyframes marquee-seamless {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-seamless {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-seamless 45s linear infinite;
+}
+
+.animate-marquee-seamless:hover {
+  animation-play-state: paused;
+}
+
+/* Smooth Checkmark SVG Drawing Animation */
+@keyframes strokeCircle {
+  0% {
+    stroke-dashoffset: 280;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes strokeCheck {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes popScale {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-pop-scale {
+  animation: popScale 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.animate-stroke-circle {
+  stroke-dasharray: 280;
+  stroke-dashoffset: 280;
+  animation: strokeCircle 0.55s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.animate-stroke-check {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: strokeCheck 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.4s forwards;
+}
+
