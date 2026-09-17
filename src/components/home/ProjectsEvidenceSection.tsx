@@ -22,7 +22,7 @@ export default function ProjectsEvidenceSection({ lang = 'ar' }: ProjectsEvidenc
   const visibleProjects = showAllProjects ? CGL_PROJECTS_EVIDENCE : CGL_PROJECTS_EVIDENCE.slice(0, 3);
 
   return (
-    <section id="projects" className="py-14 sm:py-24 bg-white dark:bg-black border-b border-slate-200 dark:border-[#1f1f1f] text-slate-900 dark:text-white relative transition-colors">
+    <section id="projects" className="py-14 sm:py-24 bg-slate-50 dark:bg-black border-b border-slate-200/80 dark:border-[#1f1f1f] text-slate-900 dark:text-white relative transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10 pb-5 sm:pb-6 border-b border-slate-200 dark:border-[#1f1f1f]">
@@ -70,7 +70,8 @@ export default function ProjectsEvidenceSection({ lang = 'ar' }: ProjectsEvidenc
                     fill
                     className="object-cover object-center group-hover:scale-105 transition-transform duration-700 filter brightness-95 group-hover:brightness-100"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                  {/* Subtle Vignette Gradient - seamlessly melted into card body */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent dark:from-[#0a0a0a] dark:via-transparent dark:to-transparent" />
                 </div>
 
                 {/* Card Body */}

@@ -101,7 +101,8 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
             fill
             className="object-cover object-center transform group-hover:scale-105 transition-transform duration-700 filter brightness-95 group-hover:brightness-100"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          {/* Subtle Vignette Gradient - seamlessly melted into card body */}
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent dark:from-[#0a0a0a] dark:via-[#0a0a0a]/50 dark:to-transparent" />
         </div>
 
         {/* Content Body */}
@@ -190,7 +191,8 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
                     fill
                     className="object-cover object-center"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  {/* Subtle Vignette Gradient - seamlessly melted into card body */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent dark:from-[#0a0a0a] dark:via-[#0a0a0a]/50 dark:to-transparent" />
                 </div>
 
                 <div className="p-4 flex flex-col justify-between">

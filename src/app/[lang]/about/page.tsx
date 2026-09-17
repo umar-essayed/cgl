@@ -132,9 +132,15 @@ export default async function AboutPage({
             alt="CGL Field Operations"
             fill
             priority
-            className="object-cover object-center filter contrast-105 opacity-25 dark:opacity-50 dark:brightness-40 transition-opacity"
+            className="object-cover object-center filter contrast-105 opacity-80 sm:opacity-85 dark:opacity-50 dark:brightness-40 transition-opacity"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/85 to-slate-50/70 dark:from-black dark:via-black/75 dark:to-black/90 transition-colors" />
+          {/* Directional Scrim for Content Readability */}
+          <div className={`absolute inset-0 ${
+            isRtl 
+              ? 'bg-gradient-to-l from-slate-50/95 via-slate-50/75 to-slate-50/25 dark:from-black/95 dark:via-black/75 dark:to-black/30' 
+              : 'bg-gradient-to-r from-slate-50/95 via-slate-50/75 to-slate-50/25 dark:from-black/95 dark:via-black/75 dark:to-black/30'
+          } transition-colors duration-300`} />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/40 to-transparent dark:from-black dark:via-black/40 dark:to-transparent transition-colors duration-300" />
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

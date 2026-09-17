@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-white text-slate-900 dark:bg-[#000000] dark:text-stone-100 font-sans antialiased selection:bg-[#8bc34a] selection:text-black transition-colors duration-200;
+    @apply bg-slate-50 text-slate-800 dark:bg-[#000000] dark:text-stone-100 font-sans antialiased selection:bg-[#8bc34a] selection:text-black transition-colors duration-200;
     overflow-x: hidden;
   }
 

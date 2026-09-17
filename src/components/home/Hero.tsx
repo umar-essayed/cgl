@@ -64,14 +64,14 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
   const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
 
   return (
-    <section className="relative min-h-[100dvh] sm:min-h-[700px] max-h-[1050px] flex flex-col justify-between pt-20 pb-3 sm:pt-28 sm:pb-8 engineering-canvas overflow-hidden bg-white dark:bg-black transition-colors">
+    <section className="relative min-h-[100dvh] sm:min-h-[700px] max-h-[1050px] flex flex-col justify-between pt-20 pb-3 sm:pt-28 sm:pb-8 engineering-canvas overflow-hidden bg-[#f8fafc] dark:bg-black transition-colors">
       {/* Background Image Carousel with Smooth AnimatePresence */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={slideData.id}
             initial={{ opacity: 0, scale: 1.03 }}
-            animate={{ opacity: 0.65, scale: 1 }}
+            animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
             className="absolute inset-0"
@@ -81,13 +81,20 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
               alt={slideData.title}
               fill
               priority
-              className="object-cover object-center filter contrast-105 opacity-30 dark:opacity-65 transition-opacity"
+              className="object-cover object-center filter contrast-105 opacity-85 sm:opacity-90 dark:opacity-65 transition-opacity"
             />
           </motion.div>
         </AnimatePresence>
-        {/* Dual Vignette: Soft bottom transition and subtle top header shade */}
-        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/85 to-white/70 dark:from-[#000000] dark:via-black/40 dark:to-[#000000]/80 transition-colors duration-300" />
-        <div className="absolute inset-0 bg-white/40 dark:bg-[#000000]/30 transition-colors duration-300" />
+
+        {/* Directional Scrim for Content Readability (Adapts to RTL / LTR) */}
+        <div className={`absolute inset-0 ${
+          isRtl
+            ? 'bg-gradient-to-l from-[#f8fafc]/95 via-[#f8fafc]/75 to-[#f8fafc]/25 dark:from-[#000000]/95 dark:via-black/75 dark:to-black/30'
+            : 'bg-gradient-to-r from-[#f8fafc]/95 via-[#f8fafc]/75 to-[#f8fafc]/25 dark:from-[#000000]/95 dark:via-black/75 dark:to-black/30'
+        } transition-colors duration-300`} />
+
+        {/* Soft Bottom Transition into Next Section */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#f8fafc] via-[#f8fafc]/40 to-transparent dark:from-[#000000] dark:via-black/40 dark:to-transparent transition-colors duration-300" />
       </div>
 
       {/* Main Content Area */}
