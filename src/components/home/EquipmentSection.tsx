@@ -77,8 +77,8 @@ export default function EquipmentSection({ lang = 'ar' }: EquipmentSectionProps)
           })}
         </div>
 
-        {/* Clean 3-Item Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {/* Mobile: Horizontal scroll slider | Desktop: Exact same 3-column grid */}
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 pb-4 md:pb-0">
           {displayedEquipment.map((item) => {
             const name = isRtl ? item.nameAr : item.nameEn;
             const categoryName = isRtl ? item.categoryNameAr : item.categoryNameEn;
@@ -87,7 +87,7 @@ export default function EquipmentSection({ lang = 'ar' }: EquipmentSectionProps)
             return (
               <div
                 key={item.id}
-                className="bg-[#0c0c0c] border border-[#1e1e1e] rounded-2xl overflow-hidden flex flex-col justify-between hover:border-stone-600 transition-colors group"
+                className="w-[82vw] sm:w-[320px] md:w-auto flex-shrink-0 md:flex-shrink snap-center sm:snap-start bg-[#0c0c0c] border border-[#1e1e1e] rounded-2xl overflow-hidden flex flex-col justify-between hover:border-stone-600 transition-colors group"
               >
                 {/* Clean Image (No floating stickers or fake overlays) */}
                 <div className="relative h-56 sm:h-60 w-full overflow-hidden bg-[#141414]">

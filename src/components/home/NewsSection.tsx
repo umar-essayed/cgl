@@ -35,8 +35,8 @@ export default function NewsSection({ lang = 'ar' }: NewsSectionProps) {
           </p>
         </div>
 
-        {/* Clean Editorial 3-Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Mobile: Horizontal scroll slider | Desktop: Exact same 3-column grid */}
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 pb-4 md:pb-0">
           {CGL_LATEST_NEWS.map((article) => {
             const title = isRtl ? article.titleAr : article.titleEn;
             const excerpt = isRtl ? article.excerptAr : article.excerptEn;
@@ -45,7 +45,7 @@ export default function NewsSection({ lang = 'ar' }: NewsSectionProps) {
             return (
               <article
                 key={article.id}
-                className="group flex flex-col justify-between"
+                className="w-[82vw] sm:w-[320px] md:w-auto flex-shrink-0 md:flex-shrink snap-center sm:snap-start group flex flex-col justify-between"
               >
                 <div>
                   {/* Clean Image */}
