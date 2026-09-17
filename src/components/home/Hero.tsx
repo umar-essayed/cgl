@@ -45,6 +45,7 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
   const isRtl = lang === 'ar';
 
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const tabsContainerRef = useRef<HTMLDivElement | null>(null);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
@@ -72,13 +73,15 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
     return () => clearInterval(timer);
   }, [totalSlides]);
 
-  // Auto-scroll active tab into view when currentSlide changes
+  // Auto-scroll ONLY the tabs container horizontally, NEVER the window
   useEffect(() => {
-    if (tabRefs.current[currentSlide]) {
-      tabRefs.current[currentSlide]?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center'
+    const container = tabsContainerRef.current;
+    const activeTab = tabRefs.current[currentSlide];
+    if (container && activeTab) {
+      const targetScroll = activeTab.offsetLeft - (container.clientWidth / 2) + (activeTab.clientWidth / 2);
+      container.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
       });
     }
   }, [currentSlide]);
@@ -302,7 +305,7 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
           </div>
 
           {/* Slide Switcher Tabs: Touch Scrollable on Mobile with Snap */}
-          <div className="flex items-center gap-2 overflow-x-auto snap-x snap-mandatory scrollbar-none touch-pan-x py-1 w-full max-w-full">
+          <div ref={tabsContainerRef} className="flex items-center gap-2 overflow-x-auto snap-x snap-mandatory scrollbar-none touch-pan-x py-1 w-full max-w-full">
             {dict.hero.slides.map((s, idx) => {
               const isActive = currentSlide === idx;
               return (
