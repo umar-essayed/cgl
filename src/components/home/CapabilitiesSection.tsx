@@ -26,8 +26,8 @@ export default function CapabilitiesSection() {
         {/* Concise Section Header & Segment Filter */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 mb-10 pb-6 border-b border-[#1f1f1f]">
           <div>
-            <div className="inline-flex items-center space-x-2 space-x-reverse px-3 py-1 rounded-full bg-[#111111] border border-[#1f1f1f] text-xs font-sans text-[#8bc34a] mb-2.5">
-              <span className="w-1.5 h-1.5 bg-[#8bc34a] rounded-full" />
+            <div className="inline-flex items-center space-x-2 space-x-reverse px-3 py-1 rounded-full bg-[#111111] border border-[#1f1f1f] text-xs font-sans text-[#3b76b3] mb-2.5">
+              <span className="w-1.5 h-1.5 bg-[#3b76b3] rounded-full" />
               <span className="font-semibold">الأسطول الميداني والمخبري</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-white tracking-tight">
@@ -41,7 +41,7 @@ export default function CapabilitiesSection() {
               onClick={() => { setFilter('All'); setShowAll(false); }}
               className={`px-4 py-2 rounded-lg text-xs font-sans font-bold transition-all ${
                 filter === 'All'
-                  ? 'bg-[#8bc34a] text-black shadow-sm'
+                  ? 'bg-[#3b76b3] text-white shadow-sm'
                   : 'text-stone-400 hover:text-white'
               }`}
             >
@@ -51,7 +51,7 @@ export default function CapabilitiesSection() {
               onClick={() => { setFilter('Field'); setShowAll(false); }}
               className={`px-4 py-2 rounded-lg text-xs font-sans font-bold transition-all ${
                 filter === 'Field'
-                  ? 'bg-[#8bc34a] text-black shadow-sm'
+                  ? 'bg-[#3b76b3] text-white shadow-sm'
                   : 'text-stone-400 hover:text-white'
               }`}
             >
@@ -61,7 +61,7 @@ export default function CapabilitiesSection() {
               onClick={() => { setFilter('Laboratory'); setShowAll(false); }}
               className={`px-4 py-2 rounded-lg text-xs font-sans font-bold transition-all ${
                 filter === 'Laboratory'
-                  ? 'bg-[#8bc34a] text-black shadow-sm'
+                  ? 'bg-[#3b76b3] text-white shadow-sm'
                   : 'text-stone-400 hover:text-white'
               }`}
             >
@@ -80,7 +80,7 @@ export default function CapabilitiesSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: idx * 0.05 }}
               onClick={() => setSelectedCap(cap)}
-              className="group cursor-pointer rounded-2xl bg-[#0a0a0a] border border-[#1f1f1f] hover:border-[#8bc34a]/50 transition-all duration-300 flex flex-col overflow-hidden hover:shadow-2xl hover:shadow-black/80"
+              className="group cursor-pointer rounded-2xl bg-[#0a0a0a] border border-[#1f1f1f] hover:border-[#3b76b3]/50 transition-all duration-300 flex flex-col overflow-hidden hover:shadow-2xl hover:shadow-black/80"
             >
               {/* Photo */}
               <div className="relative aspect-[16/10] w-full bg-[#111111] overflow-hidden">
@@ -96,10 +96,10 @@ export default function CapabilitiesSection() {
               {/* Body */}
               <div className="p-5 flex flex-col flex-grow justify-between">
                 <div>
-                  <div className="text-[11px] font-mono text-[#8bc34a] font-medium mb-1">
+                  <div className="text-[11px] font-mono text-[#3b76b3] font-medium mb-1">
                     {cap.category === 'Field' ? 'فحص ميداني' : cap.category === 'Laboratory' ? 'فحص مخبري' : 'ميداني ومخبري'}
                   </div>
-                  <h3 className="font-display font-bold text-base sm:text-lg text-white group-hover:text-[#82B74B] transition-colors line-clamp-1 mb-1">
+                  <h3 className="font-display font-bold text-base sm:text-lg text-white group-hover:text-[#3b76b3] transition-colors line-clamp-1 mb-1">
                     {cap.nameAr}
                   </h3>
                   <p className="text-[11px] font-mono text-stone-400 line-clamp-1 mb-3">
@@ -113,10 +113,10 @@ export default function CapabilitiesSection() {
                 {/* Clean Bottom Metric & Action */}
                 <div className="pt-3.5 border-t border-white/5 flex items-center justify-between text-xs">
                   <div className="flex items-center text-stone-400 text-[11px] font-mono">
-                    <span className="text-[#82B74B] font-bold ml-1.5">•</span>
+                    <span className="text-[#3b76b3] font-bold ml-1.5">•</span>
                     <span className="truncate max-w-[170px]">{cap.applicableStandards[0]}</span>
                   </div>
-                  <span className="inline-flex items-center text-[#82B74B] font-bold group-hover:translate-x-[-2px] transition-transform">
+                  <span className="inline-flex items-center text-[#3b76b3] font-bold group-hover:translate-x-[-2px] transition-transform">
                     <span>التفاصيل</span>
                     <ChevronLeft className="w-4 h-4 mr-0.5" />
                   </span>
@@ -132,10 +132,10 @@ export default function CapabilitiesSection() {
             <button
               type="button"
               onClick={() => setShowAll(!showAll)}
-              className="inline-flex items-center space-x-2 space-x-reverse px-6 py-3 rounded-xl bg-[#161a22] hover:bg-[#1f2430] border border-white/10 hover:border-[#82B74B]/40 text-stone-200 hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-md"
+              className="inline-flex items-center space-x-2 space-x-reverse px-6 py-3 rounded-xl bg-[#161a22] hover:bg-[#1f2430] border border-white/10 hover:border-[#3b76b3]/40 text-stone-200 hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-md"
             >
               <span>{showAll ? 'عرض أقل' : `عرض كافة التجهيزات (${filteredCapabilities.length})`}</span>
-              <ChevronLeft className={`w-4 h-4 text-[#82B74B] transition-transform duration-300 ${showAll ? '-rotate-90' : ''}`} />
+              <ChevronLeft className={`w-4 h-4 text-[#3b76b3] transition-transform duration-300 ${showAll ? '-rotate-90' : ''}`} />
             </button>
           </div>
         )}
@@ -167,7 +167,7 @@ export default function CapabilitiesSection() {
 
               {/* Modal Header */}
               <div className="mb-5 pb-4 border-b border-[#1f1f1f] pr-1">
-                <span className="text-[11px] font-bold text-[#8bc34a] uppercase tracking-wider block mb-1">
+                <span className="text-[11px] font-bold text-[#3b76b3] uppercase tracking-wider block mb-1">
                   {selectedCap.category === 'Field' ? 'أسطول ميداني' : 'مختبر مركزي'}
                 </span>
                 <h3 className="text-xl font-display font-bold text-white mb-1">
@@ -185,7 +185,7 @@ export default function CapabilitiesSection() {
                   <ul className="space-y-1.5 bg-[#111111] p-3 rounded-xl border border-[#1f1f1f]">
                     {selectedCap.equipmentUsedAr.map((eq, i) => (
                       <li key={i} className="text-stone-200 flex items-center">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#8bc34a] ml-2 flex-shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#3b76b3] ml-2 flex-shrink-0" />
                         <span>{eq}</span>
                       </li>
                     ))}
@@ -197,7 +197,7 @@ export default function CapabilitiesSection() {
                   <ul className="space-y-1.5 bg-[#111111] p-3 rounded-xl border border-[#1f1f1f]">
                     {selectedCap.testingMethodsAr.map((m, i) => (
                       <li key={i} className="text-stone-200 flex items-center">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#8bc34a] ml-2 flex-shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#3b76b3] ml-2 flex-shrink-0" />
                         <span>{m}</span>
                       </li>
                     ))}
@@ -205,8 +205,8 @@ export default function CapabilitiesSection() {
                 </div>
 
                 {selectedCap.capacityRangeAr && (
-                  <div className="p-3 rounded-xl bg-[#8bc34a]/10 border border-[#8bc34a]/20">
-                    <span className="text-[11px] text-[#8bc34a] font-bold block mb-1">المدى التشغيلي والطاقة:</span>
+                  <div className="p-3 rounded-xl bg-[#3b76b3]/10 border border-[#3b76b3]/20">
+                    <span className="text-[11px] text-[#3b76b3] font-bold block mb-1">المدى التشغيلي والطاقة:</span>
                     <span className="text-xs text-white font-mono">{selectedCap.capacityRangeAr}</span>
                   </div>
                 )}
@@ -226,7 +226,7 @@ export default function CapabilitiesSection() {
                 <Link
                   href="/rfq"
                   onClick={() => setSelectedCap(null)}
-                  className="px-5 py-2.5 rounded-xl bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-xs sm:text-sm transition-all shadow-md"
+                  className="px-5 py-2.5 rounded-xl bg-[#3b76b3] hover:bg-[#2a5b8c] text-white font-bold text-xs sm:text-sm transition-all shadow-md"
                 >
                   طلب تسعير بهذه الخدمة
                 </Link>

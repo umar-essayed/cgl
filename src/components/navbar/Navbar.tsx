@@ -61,7 +61,7 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
       }`}>
         {/* Straight Green Accent Edge Line */}
         {isScrolled && (
-          <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#8bc34a] shadow-[0_1px_8px_rgba(139,195,74,0.45)] pointer-events-none" />
+          <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#3b76b3] shadow-[0_1px_8px_rgba(59, 118, 179,0.45)] pointer-events-none" />
         )}
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between">
@@ -88,7 +88,7 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
               <Link
                 key={idx}
                 href={link.href}
-                className="text-xs xl:text-sm font-medium text-stone-300 hover:text-[#8bc34a] transition-colors whitespace-nowrap"
+                className="text-xs xl:text-sm font-medium text-stone-300 hover:text-[#3b76b3] transition-colors whitespace-nowrap"
               >
                 {link.label}
               </Link>
@@ -116,7 +116,7 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
             {/* RFQ CTA Button */}
             <Link
               href={`/${lang}/rfq`}
-              className="inline-flex items-center gap-1 px-4 py-2 bg-[#8bc34a] hover:bg-[#7cb342] text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-[#8bc34a]/20 active:scale-95"
+              className="inline-flex items-center gap-1 px-4 py-2 bg-[#3b76b3] hover:bg-[#2a5b8c] text-white text-xs font-bold rounded-lg transition-all shadow-md shadow-[#3b76b3]/20 active:scale-95"
             >
               <span>{dict.nav.rfq}</span>
               <ArrowIcon className="w-3.5 h-3.5" />
@@ -129,7 +129,7 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
 
             <Link
               href={`/${lang}/rfq`}
-              className="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 bg-[#8bc34a] hover:bg-[#7cb342] text-black text-xs font-bold rounded-lg transition-all shadow-sm"
+              className="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 bg-[#3b76b3] hover:bg-[#2a5b8c] text-white text-xs font-bold rounded-lg transition-all shadow-sm"
             >
               <span>{dict.nav.rfq}</span>
             </Link>
@@ -154,7 +154,7 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
                   key={idx}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block text-sm font-medium text-stone-200 hover:text-[#8bc34a] py-2 px-2 rounded-lg hover:bg-white/5 transition-colors"
+                  className="block text-sm font-medium text-stone-200 hover:text-[#3b76b3] py-2 px-2 rounded-lg hover:bg-white/5 transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -179,7 +179,7 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
             <Link
               href={`/${lang}/rfq`}
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center w-full py-2.5 bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold rounded-lg text-xs shadow mt-2 transition-colors"
+              className="flex items-center justify-center w-full py-2.5 bg-[#3b76b3] hover:bg-[#2a5b8c] text-white font-bold rounded-lg text-xs shadow mt-2 transition-colors"
             >
               <span>{dict.nav.rfq}</span>
               <ArrowIcon className="w-4 h-4 mr-1" />

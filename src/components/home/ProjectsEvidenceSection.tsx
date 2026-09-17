@@ -27,8 +27,8 @@ export default function ProjectsEvidenceSection({ lang = 'ar' }: ProjectsEvidenc
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10 pb-5 sm:pb-6 border-b border-[#1f1f1f]">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#111111] border border-[#1f1f1f] text-xs font-sans text-[#8bc34a] mb-2.5 shadow-sm">
-              <span className="w-2 h-2 bg-[#8bc34a] rounded-full animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#111111] border border-[#1f1f1f] text-xs font-sans text-[#3b76b3] mb-2.5 shadow-sm">
+              <span className="w-2 h-2 bg-[#3b76b3] rounded-full animate-pulse" />
               <span className="font-semibold">{dict.projects.badge}</span>
             </div>
             <h2 className="text-xl sm:text-3xl md:text-4xl font-display font-bold text-white tracking-tight">
@@ -41,7 +41,7 @@ export default function ProjectsEvidenceSection({ lang = 'ar' }: ProjectsEvidenc
 
           <div className="flex-shrink-0 text-xs font-mono text-stone-400 bg-[#111111] px-3.5 py-1.5 rounded-xl border border-[#1f1f1f] self-start sm:self-auto shadow-sm">
             <span>{isRtl ? 'المشاريع: ' : 'Projects: '}</span>
-            <span className="text-[#8bc34a] font-bold">0{visibleProjects.length} / 0{CGL_PROJECTS_EVIDENCE.length}</span>
+            <span className="text-[#3b76b3] font-bold">0{visibleProjects.length} / 0{CGL_PROJECTS_EVIDENCE.length}</span>
           </div>
         </div>
 
@@ -60,7 +60,7 @@ export default function ProjectsEvidenceSection({ lang = 'ar' }: ProjectsEvidenc
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
-                className="group flex flex-col justify-between rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1f1f1f] hover:border-[#8bc34a]/40 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-black/80"
+                className="group flex flex-col justify-between rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1f1f1f] hover:border-[#3b76b3]/40 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-black/80"
               >
                 {/* Card Image */}
                 <div className="relative h-56 sm:h-60 w-full overflow-hidden bg-[#111111]">
@@ -78,14 +78,14 @@ export default function ProjectsEvidenceSection({ lang = 'ar' }: ProjectsEvidenc
                 <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between">
                   <div>
                     <div className="flex items-center justify-between text-xs text-stone-400 mb-2.5 font-mono">
-                      <span className="text-[#8bc34a] font-medium">{sector}</span>
+                      <span className="text-[#3b76b3] font-medium">{sector}</span>
                       <span className="flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5 text-[#8bc34a]" />
+                        <MapPin className="w-3.5 h-3.5 text-[#3b76b3]" />
                         {location}
                       </span>
                     </div>
 
-                    <h3 className="font-display font-bold text-lg sm:text-xl text-white group-hover:text-[#8bc34a] transition-colors line-clamp-2 leading-snug mb-2">
+                    <h3 className="font-display font-bold text-lg sm:text-xl text-white group-hover:text-[#3b76b3] transition-colors line-clamp-2 leading-snug mb-2">
                       {name}
                     </h3>
                     <p className="text-xs text-stone-400 font-sans line-clamp-2 leading-relaxed mb-4">
@@ -108,10 +108,10 @@ export default function ProjectsEvidenceSection({ lang = 'ar' }: ProjectsEvidenc
 
                     <Link
                       href={`/${lang}/projects/${project.id}`}
-                      className="inline-flex items-center text-xs font-bold text-white group-hover:text-[#8bc34a] transition-colors gap-1"
+                      className="inline-flex items-center text-xs font-bold text-white group-hover:text-[#3b76b3] transition-colors gap-1"
                     >
                       <span>{dict.projects.detailsBtn}</span>
-                      <ArrowIcon className="w-4 h-4 text-[#8bc34a] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      <ArrowIcon className="w-4 h-4 text-[#3b76b3] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </Link>
                   </div>
                 </div>
@@ -125,7 +125,7 @@ export default function ProjectsEvidenceSection({ lang = 'ar' }: ProjectsEvidenc
           <button
             type="button"
             onClick={() => setShowAllProjects(!showAllProjects)}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#1a1a1a] border border-[#1f1f1f] text-stone-200 hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-sm group hover:border-[#8bc34a]/40"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#1a1a1a] border border-[#1f1f1f] text-stone-200 hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-sm group hover:border-[#3b76b3]/40"
           >
             <span>
               {showAllProjects 
@@ -133,7 +133,7 @@ export default function ProjectsEvidenceSection({ lang = 'ar' }: ProjectsEvidenc
                 : (isRtl ? `عرض كافة دراسات المشاريع (${CGL_PROJECTS_EVIDENCE.length} مشاريع)` : `View All Case Studies (${CGL_PROJECTS_EVIDENCE.length} Projects)`)
               }
             </span>
-            <ChevronIcon className={`w-4 h-4 text-[#8bc34a] transition-transform duration-300 ${showAllProjects ? '-rotate-90' : 'rotate-0'}`} />
+            <ChevronIcon className={`w-4 h-4 text-[#3b76b3] transition-transform duration-300 ${showAllProjects ? '-rotate-90' : 'rotate-0'}`} />
           </button>
         </div>
 

@@ -28,8 +28,8 @@ export default function RfqSection({ lang = 'ar' }: RfqSectionProps) {
           
           {/* Authority Callout */}
           <div className="max-w-2xl">
-            <div className="flex items-center gap-2 text-xs font-mono text-[#8bc34a] mb-3">
-              <span className="w-2 h-2 rounded-full bg-[#8bc34a]" />
+            <div className="flex items-center gap-2 text-xs font-mono text-[#3b76b3] mb-3">
+              <span className="w-2 h-2 rounded-full bg-[#3b76b3]" />
               <span>{dict.rfq.badge}</span>
             </div>
             
@@ -45,12 +45,12 @@ export default function RfqSection({ lang = 'ar' }: RfqSectionProps) {
 
             <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-stone-400">
               <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-[#8bc34a] flex-shrink-0" />
+                <ShieldCheck className="w-4 h-4 text-[#3b76b3] flex-shrink-0" />
                 <span>SBC 303 • SBC 304 Standards</span>
               </span>
               <span className="text-stone-700">•</span>
               <span className="flex items-center gap-1.5">
-                <Clock className="w-4 h-4 text-[#8bc34a] flex-shrink-0" />
+                <Clock className="w-4 h-4 text-[#3b76b3] flex-shrink-0" />
                 <span>{isRtl ? 'دراسة المتطلبات خلال ساعات العمل' : 'Rapid 24h Project Review'}</span>
               </span>
             </div>
@@ -60,7 +60,7 @@ export default function RfqSection({ lang = 'ar' }: RfqSectionProps) {
           <div className="flex flex-col sm:flex-row lg:flex-col gap-3.5 sm:w-auto w-full flex-shrink-0">
             <Link
               href={`/${lang}/rfq`}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-sm sm:text-base transition-all shadow-lg hover:shadow-xl hover:shadow-[#8bc34a]/20 active:scale-[0.99]"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#3b76b3] hover:bg-[#2a5b8c] text-white font-bold text-sm sm:text-base transition-all shadow-lg hover:shadow-xl hover:shadow-[#3b76b3]/20 active:scale-[0.99]"
             >
               <span>{isRtl ? 'بدء تخصيص ونطاق التسعير الفني' : 'Start Technical RFQ Scope'}</span>
               <ArrowIcon className="w-4 h-4" />

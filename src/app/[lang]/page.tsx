@@ -46,7 +46,7 @@ export default async function HomePage({
   }
 
   return (
-    <main className="min-h-screen flex flex-col bg-[#000000] text-white selection:bg-[#8bc34a] selection:text-black">
+    <main className="min-h-screen flex flex-col bg-[#000000] text-white selection:bg-[#3b76b3] selection:text-black">
       <Navbar lang={lang} />
       <Hero lang={lang} />
       <PartnersTicker lang={lang} />

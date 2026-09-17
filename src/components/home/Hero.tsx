@@ -106,8 +106,8 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
                 className="space-y-2 sm:space-y-4"
               >
                 {/* Tag Pill */}
-                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-[#111111]/90 border border-[#1f1f1f] text-[10px] sm:text-xs font-sans text-[#8bc34a] shadow-sm w-fit">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#8bc34a] animate-pulse" />
+                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-[#111111]/90 border border-[#1f1f1f] text-[10px] sm:text-xs font-sans text-[#3b76b3] shadow-sm w-fit">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#3b76b3] animate-pulse" />
                   <span className="font-semibold">{slideData.tag}</span>
                   <span className="text-stone-600">|</span>
                   <span className="text-stone-300 font-mono text-[10px] sm:text-xs">{slideData.metrics}</span>
@@ -130,7 +130,7 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
           <div className="flex flex-row gap-2 sm:gap-4 items-center mt-3 sm:mt-6">
             <Link
               href={`/${lang}/rfq`}
-              className="inline-flex items-center justify-center flex-1 sm:flex-initial px-3 sm:px-7 py-2.5 sm:py-3 bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-[#8bc34a]/20 active:scale-[0.98] transition-all text-center gap-1.5"
+              className="inline-flex items-center justify-center flex-1 sm:flex-initial px-3 sm:px-7 py-2.5 sm:py-3 bg-[#3b76b3] hover:bg-[#2a5b8c] text-white font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-[#3b76b3]/20 active:scale-[0.98] transition-all text-center gap-1.5"
             >
               <span>{dict.hero.ctaRfq}</span>
               <ArrowIcon className="w-3.5 h-3.5 text-black" />
@@ -151,7 +151,7 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
                 <span className="text-base font-bold text-white tracking-tight">
                   <AnimatedCounter target={dict.hero.stats.partners.num} />
                 </span>
-                <span className="text-[#8bc34a] font-bold text-xs">+</span>
+                <span className="text-[#3b76b3] font-bold text-xs">+</span>
                 <span className="text-[10px] text-stone-300 font-sans font-medium">{dict.hero.stats.partners.label}</span>
               </div>
 
@@ -161,7 +161,7 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
                 <span className="text-base font-bold text-white tracking-tight">
                   <AnimatedCounter target={dict.hero.stats.solutions.num} />
                 </span>
-                <span className="text-[#8bc34a] font-bold text-xs">+</span>
+                <span className="text-[#3b76b3] font-bold text-xs">+</span>
                 <span className="text-[10px] text-stone-300 font-sans font-medium">{dict.hero.stats.solutions.label}</span>
               </div>
 
@@ -171,7 +171,7 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
                 <span className="text-base font-bold text-white tracking-tight">
                   <AnimatedCounter target={dict.hero.stats.experience.num} />
                 </span>
-                <span className="text-[#8bc34a] font-bold text-xs">+</span>
+                <span className="text-[#3b76b3] font-bold text-xs">+</span>
                 <span className="text-[10px] text-stone-300 font-sans font-medium">{dict.hero.stats.experience.label}</span>
               </div>
             </div>
@@ -186,7 +186,7 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
             <span className="text-xl font-bold text-white tracking-tight">
               <AnimatedCounter target={dict.hero.stats.partners.num} />
             </span>
-            <span className="text-[#8bc34a] font-bold text-sm">+</span>
+            <span className="text-[#3b76b3] font-bold text-sm">+</span>
             <span className="text-xs text-stone-300 font-sans font-medium">{dict.hero.stats.partners.label}</span>
           </div>
 
@@ -196,7 +196,7 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
             <span className="text-xl font-bold text-white tracking-tight">
               <AnimatedCounter target={dict.hero.stats.solutions.num} />
             </span>
-            <span className="text-[#8bc34a] font-bold text-sm">+</span>
+            <span className="text-[#3b76b3] font-bold text-sm">+</span>
             <span className="text-xs text-stone-300 font-sans font-medium">{dict.hero.stats.solutions.label}</span>
           </div>
 
@@ -206,7 +206,7 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
             <span className="text-xl font-bold text-white tracking-tight">
               <AnimatedCounter target={dict.hero.stats.experience.num} />
             </span>
-            <span className="text-[#8bc34a] font-bold text-sm">+</span>
+            <span className="text-[#3b76b3] font-bold text-sm">+</span>
             <span className="text-xs text-stone-300 font-sans font-medium">{dict.hero.stats.experience.label}</span>
           </div>
         </div>
@@ -229,7 +229,7 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
                       : 'bg-black/60 text-stone-300 hover:text-white border border-white/15'
                   }`}
                 >
-                  <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-[#8bc34a]' : 'bg-stone-600'}`} />
+                  <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-[#3b76b3]' : 'bg-stone-600'}`} />
                   <span>0{idx + 1}. {s.tag}</span>
                 </button>
               );
@@ -239,7 +239,7 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
           {/* Quick Affiliation Info */}
           <div className="hidden md:flex items-center gap-3 text-xs text-stone-300 font-sans">
             <span className="flex items-center gap-1.5 text-stone-200">
-              <Shield className="w-3.5 h-3.5 text-[#8bc34a]" />
+              <Shield className="w-3.5 h-3.5 text-[#3b76b3]" />
               {isRtl ? CGL_COMPANY_INFO.affiliationAr : CGL_COMPANY_INFO.affiliationEn}
             </span>
             <span className="text-stone-600">•</span>

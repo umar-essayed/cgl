@@ -13,19 +13,19 @@ interface ServicesSectionProps {
 }
 
 const serviceIconMap: Record<string, React.ReactNode> = {
-  'geotechnical-investigation': <Layers className="w-5 h-5 text-[#82B74B]" />,
+  'geotechnical-investigation': <Layers className="w-5 h-5 text-[#3b76b3]" />,
   'structural-integrity': <ShieldCheck className="w-5 h-5 text-[#3B76B3]" />,
   'materials-testing': <Beaker className="w-5 h-5 text-[#D4A359]" />,
-  'engineering-surveying': <Crosshair className="w-5 h-5 text-[#82B74B]" />,
+  'engineering-surveying': <Crosshair className="w-5 h-5 text-[#3b76b3]" />,
   'mining-testing': <Pickaxe className="w-5 h-5 text-[#A94845]" />,
   'shoring-dewatering': <Compass className="w-5 h-5 text-[#3B76B3]" />,
-  'environmental-testing': <Trees className="w-5 h-5 text-[#82B74B]" />,
+  'environmental-testing': <Trees className="w-5 h-5 text-[#3b76b3]" />,
 };
 
 const serviceColorMap: Record<string, { border: string; glow: string }> = {
   'geotechnical-investigation': {
-    border: 'hover:border-[#82B74B]/60 dark:hover:border-[#82B74B]/50',
-    glow: 'from-[#82B74B]/15',
+    border: 'hover:border-[#3b76b3]/60 dark:hover:border-[#3b76b3]/50',
+    glow: 'from-[#3b76b3]/15',
   },
   'structural-integrity': {
     border: 'hover:border-[#3B76B3]/60 dark:hover:border-[#3B76B3]/50',
@@ -36,8 +36,8 @@ const serviceColorMap: Record<string, { border: string; glow: string }> = {
     glow: 'from-[#D4A359]/15',
   },
   'engineering-surveying': {
-    border: 'hover:border-[#82B74B]/60 dark:hover:border-[#82B74B]/50',
-    glow: 'from-[#82B74B]/15',
+    border: 'hover:border-[#3b76b3]/60 dark:hover:border-[#3b76b3]/50',
+    glow: 'from-[#3b76b3]/15',
   },
   'mining-testing': {
     border: 'hover:border-[#A94845]/60 dark:hover:border-[#A94845]/50',
@@ -48,8 +48,8 @@ const serviceColorMap: Record<string, { border: string; glow: string }> = {
     glow: 'from-[#3B76B3]/15',
   },
   'environmental-testing': {
-    border: 'hover:border-[#82B74B]/60 dark:hover:border-[#82B74B]/50',
-    glow: 'from-[#82B74B]/15',
+    border: 'hover:border-[#3b76b3]/60 dark:hover:border-[#3b76b3]/50',
+    glow: 'from-[#3b76b3]/15',
   },
 };
 
@@ -109,7 +109,7 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
         <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between relative z-10">
           <div>
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-mono font-bold text-[#8bc34a]">
+              <span className="text-xs font-mono font-bold text-[#3b76b3]">
                 0{originalIndex + 1}
               </span>
               <div className="text-stone-400">
@@ -145,7 +145,7 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
               className="inline-flex items-center text-xs font-medium text-stone-300 hover:text-white transition-colors gap-1"
             >
               <span>{dict.services.requestPricing}</span>
-              <ArrowIcon className="w-3.5 h-3.5 text-[#8bc34a]" />
+              <ArrowIcon className="w-3.5 h-3.5 text-[#3b76b3]" />
             </Link>
           </div>
         </div>
@@ -158,8 +158,8 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
         {/* Section Header */}
         <div className="mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#181b22] border border-[#82B74B]/30 text-xs font-sans text-[#97C369] shadow-sm mb-3">
-            <span className="w-2 h-2 bg-[#8bc34a] rounded-full animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#181b22] border border-[#3b76b3]/30 text-xs font-sans text-[#508ecb] shadow-sm mb-3">
+            <span className="w-2 h-2 bg-[#3b76b3] rounded-full animate-pulse" />
             <span className="font-semibold">{dict.services.badge}</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight">
@@ -197,7 +197,7 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
 
                 <div className="p-4 flex flex-col justify-between">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-mono font-bold text-[#8bc34a]">
+                    <span className="text-xs font-mono font-bold text-[#3b76b3]">
                       0{idx + 1}
                     </span>
                     <div className="text-stone-400">
@@ -216,7 +216,7 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
                     </span>
                     <Link
                       href={`/${lang}/rfq`}
-                      className="inline-flex items-center text-xs font-bold text-[#8bc34a] gap-1"
+                      className="inline-flex items-center text-xs font-bold text-[#3b76b3] gap-1"
                     >
                       <span>{dict.services.requestPricing}</span>
                       <ArrowIcon className="w-3.5 h-3.5" />
@@ -246,7 +246,7 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
           <button
             type="button"
             onClick={() => setShowAll(!showAll)}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#1a1a1a] border border-[#1f1f1f] text-stone-200 hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-sm group hover:border-[#8bc34a]/40"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#1a1a1a] border border-[#1f1f1f] text-stone-200 hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-sm group hover:border-[#3b76b3]/40"
           >
             <span>
               {showAll 
@@ -254,7 +254,7 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
                 : (isRtl ? 'عرض كافة الخدمات الهندسية (7 خدمات)' : 'Explore All Engineering Services (7 Services)')
               }
             </span>
-            <ChevronIcon className={`w-4 h-4 text-[#8bc34a] transition-transform duration-300 ${showAll ? '-rotate-90' : 'rotate-0'}`} />
+            <ChevronIcon className={`w-4 h-4 text-[#3b76b3] transition-transform duration-300 ${showAll ? '-rotate-90' : 'rotate-0'}`} />
           </button>
         </div>
 

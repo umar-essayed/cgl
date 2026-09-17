@@ -31,7 +31,7 @@ export default function CompanyLocationSection({ lang = 'ar' }: CompanyLocationS
         {/* Minimal Clean Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 sm:mb-6">
           <div>
-            <span className="text-xs font-mono text-[#8bc34a] font-bold block mb-0.5">
+            <span className="text-xs font-mono text-[#3b76b3] font-bold block mb-0.5">
               {dict.location.badge}
             </span>
             <h2 className="text-xl sm:text-2xl font-display font-bold text-white">
@@ -43,7 +43,7 @@ export default function CompanyLocationSection({ lang = 'ar' }: CompanyLocationS
             href={CGL_COMPANY_INFO.googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-xs sm:text-sm transition-all shadow-md active:scale-95 w-fit"
+            className="inline-flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-[#3b76b3] hover:bg-[#2a5b8c] text-white font-bold text-xs sm:text-sm transition-all shadow-md active:scale-95 w-fit"
           >
             <Navigation className="w-4 h-4" />
             <span>{dict.location.openInMaps}</span>
@@ -58,7 +58,7 @@ export default function CompanyLocationSection({ lang = 'ar' }: CompanyLocationS
           {/* Floating Brand Pin Badge */}
           <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 pointer-events-auto">
             <div className="p-2.5 sm:p-3.5 rounded-xl bg-[#0a0a0a]/95 border border-[#1f1f1f] shadow-2xl backdrop-blur-md flex items-center gap-2.5 max-w-[270px] sm:max-w-sm">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#8bc34a]/15 border border-[#8bc34a] flex items-center justify-center flex-shrink-0 p-1">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#3b76b3]/15 border border-[#3b76b3] flex items-center justify-center flex-shrink-0 p-1">
                 <Image
                   src="/assets/cgl-logo1.png"
                   alt="CGL"
@@ -74,7 +74,7 @@ export default function CompanyLocationSection({ lang = 'ar' }: CompanyLocationS
                 <span className="text-[10px] sm:text-[11px] text-stone-300 font-mono block">
                   {isRtl ? CGL_COMPANY_INFO.addressAr : CGL_COMPANY_INFO.addressEn}
                 </span>
-                <div className="flex items-center gap-2 mt-0.5 text-[10px] sm:text-[11px] font-mono text-[#8bc34a]">
+                <div className="flex items-center gap-2 mt-0.5 text-[10px] sm:text-[11px] font-mono text-[#3b76b3]">
                   <a 
                     href={`https://wa.me/${CGL_COMPANY_INFO.whatsapp1Raw}`} 
                     target="_blank" 

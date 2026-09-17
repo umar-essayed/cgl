@@ -23,7 +23,7 @@ export default function NewsSection({ lang = 'ar' }: NewsSectionProps) {
         {/* Header */}
         <div className="mb-10 sm:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <p className="text-xs sm:text-sm font-mono text-[#8bc34a] mb-2 tracking-wider">
+            <p className="text-xs sm:text-sm font-mono text-[#3b76b3] mb-2 tracking-wider">
               {dict.news.badge}
             </p>
             <h2 className="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight">
@@ -61,13 +61,13 @@ export default function NewsSection({ lang = 'ar' }: NewsSectionProps) {
 
                   {/* Category & Date */}
                   <div className="flex items-center gap-2 text-xs font-mono text-stone-400 mb-2">
-                    <span className="text-[#8bc34a]">{category}</span>
+                    <span className="text-[#3b76b3]">{category}</span>
                     <span>•</span>
                     <span>{article.date}</span>
                   </div>
 
                   {/* Headline */}
-                  <h3 className="font-display font-semibold text-lg text-white group-hover:text-[#8bc34a] transition-colors leading-snug mb-3">
+                  <h3 className="font-display font-semibold text-lg text-white group-hover:text-[#3b76b3] transition-colors leading-snug mb-3">
                     {title}
                   </h3>
 
@@ -81,10 +81,10 @@ export default function NewsSection({ lang = 'ar' }: NewsSectionProps) {
                 <div className="pt-2">
                   <Link
                     href={`/${lang}/rfq`}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-stone-300 group-hover:text-[#8bc34a] transition-colors"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-stone-300 group-hover:text-[#3b76b3] transition-colors"
                   >
                     <span>{dict.news.readArticle}</span>
-                    <ArrowIcon className="w-3.5 h-3.5 text-[#8bc34a]" />
+                    <ArrowIcon className="w-3.5 h-3.5 text-[#3b76b3]" />
                   </Link>
                 </div>
               </article>

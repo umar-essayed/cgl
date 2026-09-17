@@ -47,22 +47,22 @@ export default function Footer({ lang = 'ar' }: FooterProps) {
 
           {/* 2. Quick Navigation Links */}
           <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 text-stone-300 font-medium">
-            <Link href={`/${lang}`} className="hover:text-[#8bc34a] transition-colors">{dict.nav.home}</Link>
-            <Link href={`/${lang}/about`} className="hover:text-[#8bc34a] transition-colors">{dict.nav.about}</Link>
-            <Link href={`/${lang}#services`} className="hover:text-[#8bc34a] transition-colors">{dict.nav.services}</Link>
-            <Link href={`/${lang}#projects`} className="hover:text-[#8bc34a] transition-colors">{dict.nav.projects}</Link>
-            <Link href={`/${lang}/rfq`} className="hover:text-[#8bc34a] transition-colors text-[#8bc34a] font-bold">{dict.nav.rfq}</Link>
+            <Link href={`/${lang}`} className="hover:text-[#3b76b3] transition-colors">{dict.nav.home}</Link>
+            <Link href={`/${lang}/about`} className="hover:text-[#3b76b3] transition-colors">{dict.nav.about}</Link>
+            <Link href={`/${lang}#services`} className="hover:text-[#3b76b3] transition-colors">{dict.nav.services}</Link>
+            <Link href={`/${lang}#projects`} className="hover:text-[#3b76b3] transition-colors">{dict.nav.projects}</Link>
+            <Link href={`/${lang}/rfq`} className="hover:text-[#3b76b3] transition-colors text-[#3b76b3] font-bold">{dict.nav.rfq}</Link>
           </div>
 
           {/* 3. Direct Contact */}
           <div className="flex flex-col items-center md:items-end space-y-2 text-stone-400 font-mono text-xs">
             <div className="flex items-center gap-2" dir="ltr">
-              <Phone className="w-3.5 h-3.5 text-[#8bc34a]" />
+              <Phone className="w-3.5 h-3.5 text-[#3b76b3]" />
               <a
                 href={`https://wa.me/${CGL_COMPANY_INFO.whatsapp1Raw}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-[#8bc34a] transition-colors font-bold"
+                className="text-white hover:text-[#3b76b3] transition-colors font-bold"
               >
                 {CGL_COMPANY_INFO.phone1}
               </a>
@@ -71,7 +71,7 @@ export default function Footer({ lang = 'ar' }: FooterProps) {
                 href={`https://wa.me/${CGL_COMPANY_INFO.whatsapp2Raw}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-[#8bc34a] transition-colors font-bold"
+                className="text-white hover:text-[#3b76b3] transition-colors font-bold"
               >
                 {CGL_COMPANY_INFO.phone2}
               </a>
@@ -90,7 +90,7 @@ export default function Footer({ lang = 'ar' }: FooterProps) {
               href={CGL_COMPANY_INFO.googleMapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-stone-300 hover:text-[#8bc34a] transition-colors font-sans text-xs"
+              className="inline-flex items-center gap-1.5 text-stone-300 hover:text-[#3b76b3] transition-colors font-sans text-xs"
             >
               <MapPin className="w-3.5 h-3.5 text-[#C45B58] flex-shrink-0" />
               <span>{isRtl ? `${CGL_COMPANY_INFO.addressAr}` : `${CGL_COMPANY_INFO.addressEn}`}</span>

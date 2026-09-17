@@ -121,7 +121,7 @@ export default async function AboutPage({
   ];
 
   return (
-    <div className="min-h-screen bg-[#000000] text-stone-100 flex flex-col font-sans selection:bg-[#8bc34a] selection:text-black">
+    <div className="min-h-screen bg-[#000000] text-stone-100 flex flex-col font-sans selection:bg-[#3b76b3] selection:text-black">
       <Navbar lang={lang} />
 
       {/* 1. Cinematic Hero Header */}
@@ -144,16 +144,16 @@ export default async function AboutPage({
           <div className="mb-6">
             <Link
               href={`/${lang}`}
-              className="inline-flex items-center text-xs sm:text-sm font-medium text-stone-300 hover:text-[#8bc34a] transition-colors group gap-2"
+              className="inline-flex items-center text-xs sm:text-sm font-medium text-stone-300 hover:text-[#3b76b3] transition-colors group gap-2"
             >
-              <BackIcon className="w-4 h-4 text-[#8bc34a] group-hover:-translate-x-0.5 transition-transform" />
+              <BackIcon className="w-4 h-4 text-[#3b76b3] group-hover:-translate-x-0.5 transition-transform" />
               <span>{dict.aboutPage.breadcrumbHome}</span>
             </Link>
           </div>
 
           {/* Title & Subtitle */}
           <div className="max-w-3xl">
-            <div className="text-xs sm:text-sm font-mono text-[#8bc34a] font-bold mb-3">
+            <div className="text-xs sm:text-sm font-mono text-[#3b76b3] font-bold mb-3">
               {dict.aboutPage.affiliation}
             </div>
 
@@ -177,7 +177,7 @@ export default async function AboutPage({
           {/* Text & 4 Stats */}
           <div className="lg:col-span-7 space-y-6">
             <div>
-              <span className="text-xs font-mono text-[#8bc34a] font-bold block mb-2">
+              <span className="text-xs font-mono text-[#3b76b3] font-bold block mb-2">
                 {dict.aboutPage.identityBadge}
               </span>
               <h2 className="text-2xl sm:text-3xl font-display font-bold text-white leading-snug">
@@ -193,7 +193,7 @@ export default async function AboutPage({
             <div className="grid grid-cols-2 gap-3 pt-2">
               <div className="p-4 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] shadow-sm">
                 <div className="text-2xl sm:text-3xl font-bold font-mono text-white tracking-tight">
-                  650<span className="text-[#8bc34a]">+</span>
+                  650<span className="text-[#3b76b3]">+</span>
                 </div>
                 <div className="text-xs sm:text-sm font-bold text-stone-200 mt-1">
                   {dict.aboutPage.stats.partners}
@@ -205,7 +205,7 @@ export default async function AboutPage({
 
               <div className="p-4 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] shadow-sm">
                 <div className="text-2xl sm:text-3xl font-bold font-mono text-white tracking-tight">
-                  300<span className="text-[#8bc34a]">+</span>
+                  300<span className="text-[#3b76b3]">+</span>
                 </div>
                 <div className="text-xs sm:text-sm font-bold text-stone-200 mt-1">
                   {dict.aboutPage.stats.solutions}
@@ -217,7 +217,7 @@ export default async function AboutPage({
 
               <div className="p-4 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] shadow-sm">
                 <div className="text-2xl sm:text-3xl font-bold font-mono text-white tracking-tight">
-                  20<span className="text-[#8bc34a]">+</span>
+                  20<span className="text-[#3b76b3]">+</span>
                 </div>
                 <div className="text-xs sm:text-sm font-bold text-stone-200 mt-1">
                   {dict.aboutPage.stats.experience}
@@ -229,7 +229,7 @@ export default async function AboutPage({
 
               <div className="p-4 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] shadow-sm">
                 <div className="text-2xl sm:text-3xl font-bold font-mono text-white tracking-tight">
-                  {isRtl ? 'فرعان' : '2 Branches'}<span className="text-[#8bc34a] ml-1">🇸🇦🇺🇸</span>
+                  {isRtl ? 'فرعان' : '2 Branches'}<span className="text-[#3b76b3] ml-1">🇸🇦🇺🇸</span>
                 </div>
                 <div className="text-xs sm:text-sm font-bold text-stone-200 mt-1">
                   {dict.aboutPage.stats.branches}
@@ -257,7 +257,7 @@ export default async function AboutPage({
         <section className="p-6 sm:p-10 rounded-2xl bg-[#0a0a0a] border border-[#1f1f1f] shadow-sm">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-10 pb-4 border-b border-[#1f1f1f]">
             <div>
-              <span className="text-xs font-mono text-[#8bc34a] font-bold block mb-1">
+              <span className="text-xs font-mono text-[#3b76b3] font-bold block mb-1">
                 {dict.aboutPage.roadmapBadge}
               </span>
               <h2 className="text-xl sm:text-2xl font-display font-bold text-white">
@@ -265,7 +265,7 @@ export default async function AboutPage({
               </h2>
             </div>
             <div className="inline-flex items-center text-xs font-mono text-stone-400 gap-1.5">
-              <Milestone className="w-4 h-4 text-[#8bc34a]" />
+              <Milestone className="w-4 h-4 text-[#3b76b3]" />
               <span>{dict.aboutPage.roadmapSub}</span>
             </div>
           </div>
@@ -275,11 +275,11 @@ export default async function AboutPage({
             {dict.aboutPage.roadmapSteps.map((step, idx) => (
               <div 
                 key={idx} 
-                className="relative flex flex-col justify-between p-5 rounded-xl bg-[#111111] border border-[#1f1f1f] hover:border-[#8bc34a]/40 shadow-sm transition-all group"
+                className="relative flex flex-col justify-between p-5 rounded-xl bg-[#111111] border border-[#1f1f1f] hover:border-[#3b76b3]/40 shadow-sm transition-all group"
               >
                 <div>
                   <div className="mb-3">
-                    <span className="text-2xl font-bold font-mono text-white group-hover:text-[#8bc34a] transition-colors">
+                    <span className="text-2xl font-bold font-mono text-white group-hover:text-[#3b76b3] transition-colors">
                       {step.year}
                     </span>
                   </div>
@@ -295,7 +295,7 @@ export default async function AboutPage({
 
                 <div className="pt-4 mt-4 border-t border-[#1f1f1f] flex items-center justify-between text-[11px] font-mono text-stone-500">
                   <span>{dict.aboutPage.roadmapStage} 0{idx + 1}</span>
-                  <span className="w-2 h-2 rounded-full bg-[#8bc34a]/40 group-hover:bg-[#8bc34a] transition-colors" />
+                  <span className="w-2 h-2 rounded-full bg-[#3b76b3]/40 group-hover:bg-[#3b76b3] transition-colors" />
                 </div>
               </div>
             ))}
@@ -306,28 +306,28 @@ export default async function AboutPage({
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* OUR MISSION */}
-          <div className="p-8 sm:p-10 rounded-2xl bg-[#0a0a0a] border border-[#1f1f1f] flex flex-col justify-between hover:border-[#8bc34a]/40 transition-all relative overflow-hidden shadow-sm">
-            <div className={`absolute top-0 ${isRtl ? 'right-0' : 'left-0'} w-28 h-1 bg-[#8bc34a]`} />
+          <div className="p-8 sm:p-10 rounded-2xl bg-[#0a0a0a] border border-[#1f1f1f] flex flex-col justify-between hover:border-[#3b76b3]/40 transition-all relative overflow-hidden shadow-sm">
+            <div className={`absolute top-0 ${isRtl ? 'right-0' : 'left-0'} w-28 h-1 bg-[#3b76b3]`} />
             
             <div>
               <div className="flex items-center gap-3.5 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-[#111111] border border-[#1f1f1f] flex items-center justify-center text-[#8bc34a] flex-shrink-0 shadow-sm">
+                <div className="w-12 h-12 rounded-xl bg-[#111111] border border-[#1f1f1f] flex items-center justify-center text-[#3b76b3] flex-shrink-0 shadow-sm">
                   <Target className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-xs font-mono text-[#8bc34a] font-bold">{dict.aboutPage.missionBadge}</span>
+                  <span className="text-xs font-mono text-[#3b76b3] font-bold">{dict.aboutPage.missionBadge}</span>
                   <h3 className="text-xl font-bold text-white font-display">{dict.aboutPage.missionTitle}</h3>
                 </div>
               </div>
 
-              <blockquote className={`text-lg sm:text-xl font-medium text-white leading-relaxed mb-6 ${isRtl ? 'border-r-4 pr-4' : 'border-l-4 pl-4'} border-[#8bc34a] bg-[#111111]/50 p-4 rounded-xl shadow-sm`}>
+              <blockquote className={`text-lg sm:text-xl font-medium text-white leading-relaxed mb-6 ${isRtl ? 'border-r-4 pr-4' : 'border-l-4 pl-4'} border-[#3b76b3] bg-[#111111]/50 p-4 rounded-xl shadow-sm`}>
                 "{isRtl ? CGL_COMPANY_INFO.missionAr : CGL_COMPANY_INFO.missionEn}"
               </blockquote>
 
               <div className="space-y-3 pt-2">
                 {dict.aboutPage.missionPillars.map((pillar, pIdx) => (
                   <div key={pIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-300">
-                    <CheckCircle2 className="w-4 h-4 text-[#8bc34a] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#3b76b3] flex-shrink-0 mt-0.5" />
                     <span>{pillar}</span>
                   </div>
                 ))}
@@ -336,28 +336,28 @@ export default async function AboutPage({
           </div>
 
           {/* OUR VISION */}
-          <div className="p-8 sm:p-10 rounded-2xl bg-[#0a0a0a] border border-[#1f1f1f] flex flex-col justify-between hover:border-[#8bc34a]/40 transition-all relative overflow-hidden shadow-sm">
-            <div className={`absolute top-0 ${isRtl ? 'right-0' : 'left-0'} w-28 h-1 bg-[#8bc34a]`} />
+          <div className="p-8 sm:p-10 rounded-2xl bg-[#0a0a0a] border border-[#1f1f1f] flex flex-col justify-between hover:border-[#3b76b3]/40 transition-all relative overflow-hidden shadow-sm">
+            <div className={`absolute top-0 ${isRtl ? 'right-0' : 'left-0'} w-28 h-1 bg-[#3b76b3]`} />
             
             <div>
               <div className="flex items-center gap-3.5 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-[#111111] border border-[#1f1f1f] flex items-center justify-center text-[#8bc34a] flex-shrink-0 shadow-sm">
+                <div className="w-12 h-12 rounded-xl bg-[#111111] border border-[#1f1f1f] flex items-center justify-center text-[#3b76b3] flex-shrink-0 shadow-sm">
                   <Compass className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-xs font-mono text-[#8bc34a] font-bold">{dict.aboutPage.visionBadge}</span>
+                  <span className="text-xs font-mono text-[#3b76b3] font-bold">{dict.aboutPage.visionBadge}</span>
                   <h3 className="text-xl font-bold text-white font-display">{dict.aboutPage.visionTitle}</h3>
                 </div>
               </div>
 
-              <div className={`text-base sm:text-lg font-medium text-white leading-relaxed mb-6 ${isRtl ? 'border-r-4 pr-4' : 'border-l-4 pl-4'} border-[#8bc34a] bg-[#111111]/50 p-4 rounded-xl shadow-sm`}>
+              <div className={`text-base sm:text-lg font-medium text-white leading-relaxed mb-6 ${isRtl ? 'border-r-4 pr-4' : 'border-l-4 pl-4'} border-[#3b76b3] bg-[#111111]/50 p-4 rounded-xl shadow-sm`}>
                 {isRtl ? CGL_COMPANY_INFO.visionAr.lead : CGL_COMPANY_INFO.visionEn.lead}
               </div>
 
               <div className="space-y-3 pt-2">
                 {(isRtl ? CGL_COMPANY_INFO.visionAr.points : CGL_COMPANY_INFO.visionEn.points).map((point, ptIdx) => (
                   <div key={ptIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-300">
-                    <CheckCircle2 className="w-4 h-4 text-[#8bc34a] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#3b76b3] flex-shrink-0 mt-0.5" />
                     <span>{point}</span>
                   </div>
                 ))}
@@ -370,7 +370,7 @@ export default async function AboutPage({
         {/* 5. Values Grid (4x2 Clean Layout) */}
         <section className="space-y-8">
           <div className="text-center max-w-2xl mx-auto">
-            <span className="text-xs font-mono text-[#8bc34a] font-bold block mb-2">
+            <span className="text-xs font-mono text-[#3b76b3] font-bold block mb-2">
               {dict.aboutPage.valuesBadge}
             </span>
             <h2 className="text-2xl sm:text-3xl font-display font-bold text-white">
@@ -387,14 +387,14 @@ export default async function AboutPage({
               return (
                 <div
                   key={idx}
-                  className="p-5 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] hover:border-[#8bc34a]/40 shadow-sm transition-all group flex flex-col justify-between"
+                  className="p-5 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] hover:border-[#3b76b3]/40 shadow-sm transition-all group flex flex-col justify-between"
                 >
                   <div>
-                    <div className="w-10 h-10 rounded-lg bg-[#111111] border border-[#1f1f1f] flex items-center justify-center text-[#8bc34a] mb-4 group-hover:scale-105 transition-transform shadow-sm">
+                    <div className="w-10 h-10 rounded-lg bg-[#111111] border border-[#1f1f1f] flex items-center justify-center text-[#3b76b3] mb-4 group-hover:scale-105 transition-transform shadow-sm">
                       <IconComp className="w-5 h-5" />
                     </div>
 
-                    <h3 className="text-sm sm:text-base font-bold text-white font-display mb-1.5 group-hover:text-[#8bc34a] transition-colors">
+                    <h3 className="text-sm sm:text-base font-bold text-white font-display mb-1.5 group-hover:text-[#3b76b3] transition-colors">
                       {val.title}
                     </h3>
 
@@ -428,7 +428,7 @@ export default async function AboutPage({
 
             <Link
               href={`/${lang}/rfq`}
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-sm shadow-lg transition-all flex-shrink-0"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#3b76b3] hover:bg-[#2a5b8c] text-white font-bold text-sm shadow-lg transition-all flex-shrink-0"
             >
               <span>{dict.nav.rfq}</span>
               <ArrowIcon className="w-4 h-4" />
