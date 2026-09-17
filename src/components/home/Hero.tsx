@@ -86,15 +86,9 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
           </motion.div>
         </AnimatePresence>
 
-        {/* Minimal Subtle Scrim (Almost nonexistent in light mode, preserving raw photography) */}
-        <div className={`absolute inset-0 ${
-          isRtl
-            ? 'bg-gradient-to-l from-white/35 via-white/15 to-transparent dark:from-[#000000]/95 dark:via-black/75 dark:to-black/30'
-            : 'bg-gradient-to-r from-white/35 via-white/15 to-transparent dark:from-[#000000]/95 dark:via-black/75 dark:to-black/30'
-        } transition-colors duration-300`} />
-
-        {/* Minimal Bottom Fade into Next Section */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#f8fafc]/30 via-transparent to-transparent dark:from-[#000000] dark:via-black/40 dark:to-transparent transition-colors duration-300" />
+        {/* Clean Vignette: Soft bottom transition and subtle top header shade (Zero side haze) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#f8fafc]/50 via-transparent to-black/20 dark:from-[#000000] dark:via-transparent dark:to-[#000000]/70 pointer-events-none transition-colors duration-300" />
+        <div className="absolute inset-0 bg-black/5 dark:bg-[#000000]/30 pointer-events-none transition-colors duration-300" />
       </div>
 
       {/* Main Content Area */}
@@ -119,13 +113,13 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
                   <span className="text-slate-600 dark:text-stone-300 font-mono text-[10px] sm:text-xs">{slideData.metrics}</span>
                 </div>
 
-                {/* Headline */}
-                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-950 dark:text-white leading-snug tracking-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)] dark:drop-shadow-none">
+                {/* Headline - 100% Crisp Vector Typography */}
+                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-900 dark:text-white leading-snug tracking-tight">
                   {slideData.title}
                 </h1>
 
-                {/* Subtitle */}
-                <p className="text-xs sm:text-base md:text-lg text-slate-900 dark:text-stone-200 font-sans leading-relaxed max-w-2xl font-normal drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)] dark:drop-shadow-none line-clamp-2 sm:line-clamp-none">
+                {/* Subtitle - 100% Crisp Vector Typography */}
+                <p className="text-xs sm:text-base md:text-lg text-slate-700 dark:text-stone-200 font-sans leading-relaxed max-w-2xl font-normal line-clamp-2 sm:line-clamp-none">
                   {slideData.subtitle}
                 </p>
               </motion.div>

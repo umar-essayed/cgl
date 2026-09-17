@@ -56,7 +56,7 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
       <header className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${
         (isScrolled || mobileMenuOpen) 
           ? 'bg-white/95 dark:bg-[#0a0a0a]/95 backdrop-blur-xl py-2.5 shadow-md dark:shadow-2xl border-b border-slate-200 dark:border-[#1f1f1f]' 
-          : 'bg-white/85 dark:bg-transparent backdrop-blur-md dark:backdrop-blur-none py-2.5 sm:py-3.5 border-b border-slate-200/60 dark:border-transparent'
+          : 'bg-transparent py-2.5 sm:py-3.5 border-b border-transparent'
       }`}>
         {/* Straight Green Accent Edge Line */}
         {isScrolled && (
