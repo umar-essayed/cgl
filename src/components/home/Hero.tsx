@@ -4,35 +4,13 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Shield } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Shield } from 'lucide-react';
 import { CGL_COMPANY_INFO } from '@/lib/data';
+import { Locale, getDictionary } from '@/lib/i18n';
 
-const heroSlides = [
-  {
-    id: 1,
-    image: '/assets/sliders/slider1.jpg',
-    tag: 'استكشاف التربة والأساسات',
-    title: 'الدقة الجيوتقنية التي تبنى عليها أضخم مشاريع المملكة',
-    subtitle: 'حفر الجسات الآلية وتحديد قدرة تحمل التربة وتوصيات الأساسات وفق كود البناء السعودي.',
-    metrics: 'أعماق حفر +50 متراً'
-  },
-  {
-    id: 2,
-    image: '/uploads/projects_images/project_688d08b6e73ee4.36242119.jpg',
-    tag: 'اختبارات التحميل الاستاتيكي',
-    title: 'تأكيد سلامة الأساسات العميقة بروافع تتجاوز 1000 طن',
-    subtitle: 'منظومة هيدروليكية وخلايا ضغط معايرة لحساب الهبوط بدقة مليمترية وفق ASTM D1143.',
-    metrics: 'أحمال فحص +1000 طن'
-  },
-  {
-    id: 3,
-    image: '/uploads/projects_images/project_688d0f1061e875.99060450.jpg',
-    tag: 'المسح الطبوغرافي والجيوديسي',
-    title: 'رصد مساحي رقمي دقيق ونمذجة ثلاثية الأبعاد للمواقع',
-    subtitle: 'أحدث محطات الرصد الشاملة وأجهزة GNSS لتثبيت محاور المنشآت وحساب الكميات بدقة قطعية.',
-    metrics: 'دقة رصد ثانية واحدة'
-  }
-];
+interface HeroProps {
+  lang?: Locale;
+}
 
 function AnimatedCounter({ target, duration = 2200 }: { target: number; duration?: number }) {
   const [count, setCount] = useState(0);
@@ -62,26 +40,36 @@ function AnimatedCounter({ target, duration = 2200 }: { target: number; duration
   return <>{count.toLocaleString('en-US')}</>;
 }
 
-export default function Hero() {
+export default function Hero({ lang = 'ar' }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const dict = getDictionary(lang);
+  const isRtl = lang === 'ar';
+
+  const slideImages = [
+    '/assets/sliders/slider1.jpg',
+    '/uploads/projects_images/project_688d08b6e73ee4.36242119.jpg',
+    '/uploads/projects_images/project_688d0f1061e875.99060450.jpg'
+  ];
 
   // Auto slide advance every 6 seconds
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % heroSlides.length);
+      setCurrentSlide(prev => (prev + 1) % dict.hero.slides.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, []);
+  }, [dict.hero.slides.length]);
 
-  const slide = heroSlides[currentSlide];
+  const slideData = dict.hero.slides[currentSlide] || dict.hero.slides[0];
+  const slideImage = slideImages[currentSlide] || slideImages[0];
+  const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
 
   return (
-    <section className="relative min-h-[100dvh] sm:min-h-[700px] max-h-[1050px] flex flex-col justify-between pt-20 pb-3 sm:pt-28 sm:pb-8 engineering-canvas overflow-hidden">
+    <section className="relative min-h-[100dvh] sm:min-h-[700px] max-h-[1050px] flex flex-col justify-between pt-20 pb-3 sm:pt-28 sm:pb-8 engineering-canvas overflow-hidden bg-white dark:bg-black transition-colors">
       {/* Background Image Carousel with Smooth AnimatePresence */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
           <motion.div
-            key={slide.id}
+            key={slideData.id}
             initial={{ opacity: 0, scale: 1.03 }}
             animate={{ opacity: 0.65, scale: 1 }}
             exit={{ opacity: 0 }}
@@ -89,27 +77,27 @@ export default function Hero() {
             className="absolute inset-0"
           >
             <Image
-              src={slide.image}
-              alt={slide.title}
+              src={slideImage}
+              alt={slideData.title}
               fill
               priority
-              className="object-cover object-center filter contrast-105 brightness-95"
+              className="object-cover object-center filter contrast-105 opacity-30 dark:opacity-65 transition-opacity"
             />
           </motion.div>
         </AnimatePresence>
-        {/* Dual Vignette: Soft bottom transition and subtle top header shade for crystal-clear navbar integration */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-[#000000]/70" />
-        <div className="absolute inset-0 bg-[#000000]/30" />
+        {/* Dual Vignette: Soft bottom transition and subtle top header shade */}
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/85 to-white/70 dark:from-[#000000] dark:via-black/40 dark:to-[#000000]/80 transition-colors duration-300" />
+        <div className="absolute inset-0 bg-white/40 dark:bg-[#000000]/30 transition-colors duration-300" />
       </div>
 
-      {/* Main Content Area - Locked Height Container to Eliminate Layout Shift */}
+      {/* Main Content Area */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 w-full my-auto">
         <div className="max-w-4xl">
-          {/* Stable Content Box with Responsive Min-Height */}
+          {/* Stable Content Box */}
           <div className="min-h-[160px] sm:min-h-[280px] flex flex-col justify-center">
             <AnimatePresence mode="wait">
               <motion.div
-                key={slide.id}
+                key={slideData.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -117,130 +105,130 @@ export default function Hero() {
                 className="space-y-2 sm:space-y-4"
               >
                 {/* Tag Pill */}
-                <div className="inline-flex items-center space-x-2 space-x-reverse px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-[#111111]/90 border border-[#1f1f1f] text-[10px] sm:text-xs font-sans text-[#8bc34a] shadow-sm w-fit">
+                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-white/90 dark:bg-[#111111]/90 border border-slate-200 dark:border-[#1f1f1f] text-[10px] sm:text-xs font-sans text-[#689f38] dark:text-[#8bc34a] shadow-sm w-fit">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#8bc34a] animate-pulse" />
-                  <span className="font-semibold">{slide.tag}</span>
-                  <span className="text-stone-600">|</span>
-                  <span className="text-stone-300 font-mono text-[10px] sm:text-xs">{slide.metrics}</span>
+                  <span className="font-semibold">{slideData.tag}</span>
+                  <span className="text-slate-300 dark:text-stone-600">|</span>
+                  <span className="text-slate-600 dark:text-stone-300 font-mono text-[10px] sm:text-xs">{slideData.metrics}</span>
                 </div>
 
-                {/* Responsive Headline (El Messiri) */}
-                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-snug tracking-tight">
-                  {slide.title}
+                {/* Headline */}
+                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-900 dark:text-white leading-snug tracking-tight">
+                  {slideData.title}
                 </h1>
 
-                {/* Responsive Subtitle (Cairo) */}
-                <p className="text-xs sm:text-base md:text-lg text-stone-300 font-sans leading-relaxed max-w-2xl font-normal line-clamp-2 sm:line-clamp-none">
-                  {slide.subtitle}
+                {/* Subtitle */}
+                <p className="text-xs sm:text-base md:text-lg text-slate-700 dark:text-stone-200 font-sans leading-relaxed max-w-2xl font-normal line-clamp-2 sm:line-clamp-none">
+                  {slideData.subtitle}
                 </p>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Action Buttons - Compact side-by-side on mobile, expansive on desktop */}
+          {/* Action Buttons */}
           <div className="flex flex-row gap-2 sm:gap-4 items-center mt-3 sm:mt-6">
             <Link
-              href="/rfq"
-              className="inline-flex items-center justify-center flex-1 sm:flex-initial px-3 sm:px-7 py-2.5 sm:py-3 bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-[#8bc34a]/20 active:scale-[0.98] transition-all text-center"
+              href={`/${lang}/rfq`}
+              className="inline-flex items-center justify-center flex-1 sm:flex-initial px-3 sm:px-7 py-2.5 sm:py-3 bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-[#8bc34a]/20 active:scale-[0.98] transition-all text-center gap-1.5"
             >
-              <span>طلب تسعير واستشارة</span>
-              <ArrowLeft className="w-3.5 h-3.5 mr-1 text-black" />
+              <span>{dict.hero.ctaRfq}</span>
+              <ArrowIcon className="w-3.5 h-3.5 text-black" />
             </Link>
 
             <a
-              href="#services"
-              className="inline-flex items-center justify-center flex-1 sm:flex-initial px-3 sm:px-5 py-2.5 sm:py-3 bg-[#111111]/90 hover:bg-[#1a1a1a] text-stone-200 hover:text-white font-medium text-xs sm:text-sm rounded-xl border border-[#1f1f1f] transition-all text-center"
+              href={`/${lang}#services`}
+              className="inline-flex items-center justify-center flex-1 sm:flex-initial px-3 sm:px-5 py-2.5 sm:py-3 bg-white/90 hover:bg-white dark:bg-black/60 dark:hover:bg-black/80 backdrop-blur-md text-slate-900 dark:text-white font-medium text-xs sm:text-sm rounded-xl border border-slate-300 dark:border-white/20 shadow-sm transition-all text-center"
             >
-              <span>الركائز الهندسية</span>
+              <span>{dict.hero.ctaServices}</span>
             </a>
           </div>
 
-          {/* Mobile-Only Raised Analytics Counter (Immediately visible on page load on mobile) */}
-          <div className="sm:hidden mt-3.5 pt-3 border-t border-white/10 w-full">
+          {/* Mobile-Only Raised Analytics Counter */}
+          <div className="sm:hidden mt-3.5 pt-3 border-t border-slate-200 dark:border-white/10 w-full">
             <div className="flex items-center justify-between gap-1 text-xs font-mono">
-              <div className="flex items-baseline gap-1">
-                <span className="text-base font-bold text-white tracking-tight">
-                  <AnimatedCounter target={650} />
+              <div className="flex items-baseline gap-0.5">
+                <span className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
+                  <AnimatedCounter target={dict.hero.stats.partners.num} />
                 </span>
                 <span className="text-[#8bc34a] font-bold text-xs">+</span>
-                <span className="text-[10px] text-stone-300 font-sans font-medium mr-0.5">Global Partners</span>
+                <span className="text-[10px] text-slate-600 dark:text-stone-300 font-sans font-medium">{dict.hero.stats.partners.label}</span>
               </div>
 
-              <span className="text-stone-700">•</span>
+              <span className="text-slate-300 dark:text-stone-700">•</span>
 
-              <div className="flex items-baseline gap-1">
-                <span className="text-base font-bold text-white tracking-tight">
-                  <AnimatedCounter target={300} />
+              <div className="flex items-baseline gap-0.5">
+                <span className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
+                  <AnimatedCounter target={dict.hero.stats.solutions.num} />
                 </span>
                 <span className="text-[#8bc34a] font-bold text-xs">+</span>
-                <span className="text-[10px] text-stone-300 font-sans font-medium mr-0.5">Solutions</span>
+                <span className="text-[10px] text-slate-600 dark:text-stone-300 font-sans font-medium">{dict.hero.stats.solutions.label}</span>
               </div>
 
-              <span className="text-stone-700">•</span>
+              <span className="text-slate-300 dark:text-stone-700">•</span>
 
-              <div className="flex items-baseline gap-1">
-                <span className="text-base font-bold text-white tracking-tight">
-                  <AnimatedCounter target={20} />
+              <div className="flex items-baseline gap-0.5">
+                <span className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
+                  <AnimatedCounter target={dict.hero.stats.experience.num} />
                 </span>
                 <span className="text-[#8bc34a] font-bold text-xs">+</span>
-                <span className="text-[10px] text-stone-300 font-sans font-medium mr-0.5">Years Growth</span>
+                <span className="text-[10px] text-slate-600 dark:text-stone-300 font-sans font-medium">{dict.hero.stats.experience.label}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Desktop-Only Metrics Counter (100% Preserved & Untouched on Computer Screens) */}
+      {/* Desktop-Only Metrics Counter */}
       <div className="hidden sm:block max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 w-full mb-3">
         <div className="flex items-center justify-start gap-7 text-xs font-mono">
           <div className="flex items-baseline gap-1">
-            <span className="text-xl font-bold text-white tracking-tight">
-              <AnimatedCounter target={650} />
+            <span className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+              <AnimatedCounter target={dict.hero.stats.partners.num} />
             </span>
             <span className="text-[#8bc34a] font-bold text-sm">+</span>
-            <span className="text-xs text-stone-300 font-sans font-medium mr-1">Global Partners</span>
+            <span className="text-xs text-slate-600 dark:text-stone-300 font-sans font-medium">{dict.hero.stats.partners.label}</span>
           </div>
 
-          <span className="text-stone-700">•</span>
+          <span className="text-slate-300 dark:text-stone-700">•</span>
 
           <div className="flex items-baseline gap-1">
-            <span className="text-xl font-bold text-white tracking-tight">
-              <AnimatedCounter target={300} />
+            <span className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+              <AnimatedCounter target={dict.hero.stats.solutions.num} />
             </span>
             <span className="text-[#8bc34a] font-bold text-sm">+</span>
-            <span className="text-xs text-stone-300 font-sans font-medium mr-1">Innovative Solutions</span>
+            <span className="text-xs text-slate-600 dark:text-stone-300 font-sans font-medium">{dict.hero.stats.solutions.label}</span>
           </div>
 
-          <span className="text-stone-700">•</span>
+          <span className="text-slate-300 dark:text-stone-700">•</span>
 
           <div className="flex items-baseline gap-1">
-            <span className="text-xl font-bold text-white tracking-tight">
-              <AnimatedCounter target={20} />
+            <span className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+              <AnimatedCounter target={dict.hero.stats.experience.num} />
             </span>
             <span className="text-[#8bc34a] font-bold text-sm">+</span>
-            <span className="text-xs text-stone-300 font-sans font-medium mr-1">Years of Growth</span>
+            <span className="text-xs text-slate-600 dark:text-stone-300 font-sans font-medium">{dict.hero.stats.experience.label}</span>
           </div>
         </div>
       </div>
 
       {/* Bottom Controls Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 w-full pt-2.5 sm:pt-4 border-t border-[#1f1f1f]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 w-full pt-2.5 sm:pt-4 border-t border-slate-200 dark:border-white/10">
         <div className="flex items-center justify-between gap-4">
           {/* Slide Switcher Tabs */}
-          <div className="flex items-center space-x-2 space-x-reverse overflow-x-auto max-w-full pb-1 sm:pb-0 scrollbar-none">
-            {heroSlides.map((s, idx) => {
+          <div className="flex items-center gap-2 overflow-x-auto max-w-full pb-1 sm:pb-0 scrollbar-none">
+            {dict.hero.slides.map((s, idx) => {
               const isActive = currentSlide === idx;
               return (
                 <button
                   key={s.id}
                   onClick={() => setCurrentSlide(idx)}
-                  className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-sans transition-all whitespace-nowrap flex items-center space-x-1.5 space-x-reverse flex-shrink-0 ${
+                  className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-sans transition-all whitespace-nowrap flex items-center gap-1.5 flex-shrink-0 ${
                     isActive
-                      ? 'bg-white text-black font-bold shadow-md'
-                      : 'bg-[#111111]/80 text-stone-400 hover:text-white border border-[#1f1f1f]'
+                      ? 'bg-slate-900 text-white dark:bg-white dark:text-black font-bold shadow-md'
+                      : 'bg-white/90 text-slate-700 hover:text-slate-900 border border-slate-200 dark:bg-black/60 dark:text-stone-300 dark:hover:text-white dark:border-white/15'
                   }`}
                 >
-                  <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-[#8bc34a]' : 'bg-stone-600'}`} />
+                  <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-[#8bc34a]' : 'bg-slate-300 dark:bg-stone-600'}`} />
                   <span>0{idx + 1}. {s.tag}</span>
                 </button>
               );
@@ -248,13 +236,13 @@ export default function Hero() {
           </div>
 
           {/* Quick Affiliation Info */}
-          <div className="hidden md:flex items-center space-x-3 space-x-reverse text-xs text-stone-400 font-sans">
-            <span className="flex items-center text-stone-300">
-              <Shield className="w-3.5 h-3.5 ml-1.5 text-[#82B74B]" />
-              {CGL_COMPANY_INFO.affiliationAr}
+          <div className="hidden md:flex items-center gap-3 text-xs text-slate-600 dark:text-stone-300 font-sans">
+            <span className="flex items-center gap-1.5 text-slate-700 dark:text-stone-200">
+              <Shield className="w-3.5 h-3.5 text-[#689f38] dark:text-[#8bc34a]" />
+              {isRtl ? CGL_COMPANY_INFO.affiliationAr : CGL_COMPANY_INFO.affiliationEn}
             </span>
-            <span className="text-stone-600">•</span>
-            <span>معايير كود البناء السعودي SBC 303 • SBC 304</span>
+            <span className="text-slate-300 dark:text-stone-600">•</span>
+            <span>{dict.hero.sbcCompliance}</span>
           </div>
         </div>
       </div>
