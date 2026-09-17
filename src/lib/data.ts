@@ -743,15 +743,15 @@ export const CGL_EQUIPMENT_FLEET: EquipmentItem[] = [
   {
     id: 'equip-01',
     code: 'CGL-RIG-500',
-    nameAr: 'حفارة الجسات الهيدروليكية الدوارة (Rotary Drilling Rig)',
+    nameAr: 'حفارة الجسات الهيدروليكية الدوارة',
     nameEn: 'Hydraulic Rotary Core Drilling Rig',
     category: 'drilling',
     categoryNameAr: 'حفر واستكشاف التربة',
     categoryNameEn: 'Drilling & Geotechnical',
     specsAr: [
       'عمق حفر استكشافي يصل حتى 80 متراً',
-      'استخراج عينات صخرية مستمرة (NQ/HQ Core Barrels)',
-      'منظومة اختبار الاختراق القياسي الأوتوماتيكية (Auto SPT)'
+      'استخراج عينات صخرية أسطوانية مستمرة وعالية الدقة',
+      'منظومة آلية لاختبار الاختراق القياسي للتربة'
     ],
     specsEn: [
       'Exploratory drilling depth up to 80 meters',
@@ -759,21 +759,23 @@ export const CGL_EQUIPMENT_FLEET: EquipmentItem[] = [
       'Integrated automated standard penetration hammer (Auto SPT)'
     ],
     standards: ['ASTM D1586', 'ASTM D2113', 'SBC 303'],
+    standardsAr: ['كود البناء السعودي SBC 303', 'معايير ASTM الدولية'],
+    standardsEn: ['Saudi Building Code SBC 303', 'ASTM International Standards'],
     image: '/uploads/equipments/equip_688f127ce7aef5.17984599.jpg',
     serviceId: 'geotechnical-investigation'
   },
   {
     id: 'equip-02',
     code: 'CGL-PRESS-3000',
-    nameAr: 'ماكينة كسر وضغط الخرسانة الرقمية 3,000kN',
+    nameAr: 'ماكينة كسر وضغط الخرسانة الرقمية',
     nameEn: 'Digital Concrete Compression Testing Machine (3,000 kN)',
     category: 'materials',
     categoryNameAr: 'مختبر فحص المواد',
     categoryNameEn: 'Materials Testing',
     specsAr: [
-      'طاقة تحميل هيدروليكية قصوى 3,000 كيلو نيوتن',
-      'تحكم رقمي مغلق الحلقة وتسجيل آلي لمنحنى الإجهاد والانفعال',
-      'معايرة دورية معتمدة لإصدار شهادات الكسر للمشاريع'
+      'طاقة تحميل هيدروليكية قصوى تصل إلى 3000 كيلو نيوتن',
+      'تحكم رقمي وتسجيل آلي لمنحنى الإجهاد والانفعال',
+      'معايرة دورية معتمدة لإصدار شهادات المطابقة للمشاريع'
     ],
     specsEn: [
       'Maximum compressive capacity of 3,000 kN',
@@ -781,21 +783,23 @@ export const CGL_EQUIPMENT_FLEET: EquipmentItem[] = [
       'Periodically calibrated and certified for official compliance testing'
     ],
     standards: ['ASTM C39', 'BS EN 12390', 'SBC 304'],
+    standardsAr: ['كود البناء السعودي SBC 304', 'معايير ASTM الدولية'],
+    standardsEn: ['Saudi Building Code SBC 304', 'ASTM International Standards'],
     image: '/uploads/curated/materials_compression_press.jpg',
     serviceId: 'materials-testing'
   },
   {
     id: 'equip-03',
     code: 'GPR-NDT-PRO',
-    nameAr: 'رادار المسح الإنشائي الخرساني ثلاثي الأبعاد (Proceq GPR)',
+    nameAr: 'رادار المسح الإنشائي الخرساني ثلاثي الأبعاد',
     nameEn: 'High-Frequency Concrete GPR Radar System',
     category: 'ndt',
     categoryNameAr: 'الفحوصات غير الإتلافية',
     categoryNameEn: 'NDT & Structural Radar',
     specsAr: [
       'كشف شبكات حديد التسليح والفجوات لعمق يصل إلى 80 سم',
-      'توليد خرائط مقطعية ثلاثية الأبعاد (3D Tomography) فورية',
-      'هوائيات رادارية عالية التردد لفحص الجسور والأبراج والمباني التراثية'
+      'توليد مخططات مقطعية ثلاثية الأبعاد فورية للخرسانة',
+      'فحص راداري غير إتلافي للأبراج والمباني الحيوية والتراثية'
     ],
     specsEn: [
       'Rebar mapping and subsurface void detection up to 80cm depth',
@@ -803,20 +807,22 @@ export const CGL_EQUIPMENT_FLEET: EquipmentItem[] = [
       'Ultra-wideband stepped frequency antenna for non-invasive testing'
     ],
     standards: ['ASTM D6432', 'ACI 228.1R', 'BS 1881'],
+    standardsAr: ['معايير ASTM القياسية', 'المواصفات البريطانية BS'],
+    standardsEn: ['ASTM D6432 Standards', 'British Standards BS 1881'],
     image: '/uploads/user_provided/concrete_ndt_radar.jpeg',
     serviceId: 'structural-integrity'
   },
   {
     id: 'equip-04',
     code: 'TS-GEO-01',
-    nameAr: 'محطة الرصد المساحي الإلكترونية الشاملة (High-Precision Total Station)',
+    nameAr: 'محطة الرصد المساحي الإلكترونية الشاملة',
     nameEn: 'High-Precision Geodetic Total Station',
     category: 'surveying',
     categoryNameAr: 'المسح الهندسي والجيوديسي',
     categoryNameEn: 'Geodetic & Surveying',
     specsAr: [
-      'دقة رصد زوايا فائقة تبلغ ثانية واحدة (1" Angular Accuracy)',
-      'مدى قياس ليزري خالي من العواكس يصل حتى 1,000 متر',
+      'دقة رصد زوايا فائقة تبلغ ثانية واحدة',
+      'مدى قياس ليزري خالي من العواكس يصل حتى 1000 متر',
       'رصد تشوهات وهبوط المنشآت والجسور بدقة مليمترية مستمرة'
     ],
     specsEn: [
@@ -825,21 +831,23 @@ export const CGL_EQUIPMENT_FLEET: EquipmentItem[] = [
       'Millimeter structural displacement and deformation monitoring'
     ],
     standards: ['ISO 17123-3', 'MOMRA Standards', 'FGDC Guidelines'],
+    standardsAr: ['معايير الآيزو الدولية ISO', 'المواصفات البلدية المعتمدة'],
+    standardsEn: ['ISO 17123-3 Standards', 'MOMRA Municipal Standards'],
     image: '/uploads/user_provided/topographic_survey.jpeg',
     serviceId: 'engineering-surveying'
   },
   {
     id: 'equip-05',
     code: 'CGL-PLT-1000',
-    nameAr: 'منظومة فحص التحميل الاستاتيكي للخوازيق (Pile Load Assembly)',
+    nameAr: 'منظومة فحص التحميل الاستاتيكي للخوازيق',
     nameEn: 'Static Axial Pile Load Testing Assembly & Calibrated Jacks',
     category: 'drilling',
     categoryNameAr: 'حفر واستكشاف التربة',
     categoryNameEn: 'Drilling & Geotechnical',
     specsAr: [
-      'روافع هيدروليكية معايرة تصل قدرتها حتى 1,200 طن',
-      'ساعات قياس هبوط رقمية بحساسية متناهية الصغر (0.01 مم)',
-      'منظومة كمرات كتل رد الفعل (Reaction Kentledge) للأحمال الكبرى'
+      'روافع هيدروليكية معايرة تصل قدرتها حتى 1200 طن',
+      'ساعات قياس هبوط رقمية بحساسية فائقة تبلغ 0.01 مم',
+      'منظومة كمرات رد فعل فولاذية معتمدة للأحمال الكبرى'
     ],
     specsEn: [
       'Calibrated hydraulic jacking cylinders up to 1,200 tons capacity',
@@ -847,21 +855,23 @@ export const CGL_EQUIPMENT_FLEET: EquipmentItem[] = [
       'Heavy structural steel reaction beam system for deep foundation verification'
     ],
     standards: ['ASTM D1143 / D1143M', 'SBC 303'],
+    standardsAr: ['كود البناء السعودي SBC 303', 'معايير ASTM الدولية'],
+    standardsEn: ['Saudi Building Code SBC 303', 'ASTM D1143 Standards'],
     image: '/uploads/equipments/equip_688f1df225e884.34621239.jpg',
     serviceId: 'geotechnical-investigation'
   },
   {
     id: 'equip-06',
     code: 'INC-PROBE-60',
-    nameAr: 'مجسات الإنكلينوميتر الرقمية لرصد ميول الحفر والجدران الساندة',
+    nameAr: 'مجسات رقمية لرصد ميول الحفر والجدران الساندة',
     nameEn: 'Digital Vertical Inclinometer Probe & Readout System',
     category: 'ndt',
     categoryNameAr: 'الفحوصات غير الإتلافية',
     categoryNameEn: 'NDT & Structural Radar',
     specsAr: [
       'رصد أعماق الحفر والجدران الساندة حتى عمق 60 متراً رأسياً',
-      'حساسات تسارع رقمية ثنائية المحور (MEMS Bi-Axial Sensors)',
-      'كشف أي إزاحة جانبية في جوانب الحفر بدقة 0.01 مم/متر'
+      'حساسات تسارع رقمية ثنائية المحور عالية الدقة',
+      'كشف أي إزاحة جانبية في جوانب الحفر بدقة 0.01 مم لكل متر'
     ],
     specsEn: [
       'Deep excavation and retaining wall monitoring up to 60m depth',
@@ -869,6 +879,8 @@ export const CGL_EQUIPMENT_FLEET: EquipmentItem[] = [
       'Detects horizontal deflections with 0.01mm per meter precision'
     ],
     standards: ['ASTM D6230', 'CIRIA C760', 'SBC 303'],
+    standardsAr: ['كود البناء السعودي SBC 303', 'معايير ASTM الدولية'],
+    standardsEn: ['Saudi Building Code SBC 303', 'ASTM D6230 Standards'],
     image: '/uploads/user_provided/inclinometer_monitoring.jpeg',
     serviceId: 'shoring-dewatering'
   }
@@ -877,13 +889,15 @@ export const CGL_EQUIPMENT_FLEET: EquipmentItem[] = [
 export const CGL_LATEST_NEWS: NewsArticle[] = [
   {
     id: 'news-01',
-    titleAr: 'مختبرات CGL تطبق الاشتراطات الإلزامية المحدثة لكود البناء السعودي (SBC 303/304)',
-    titleEn: 'CGL Laboratories Upgrades Geotechnical Standards Aligned with Saudi Building Code (SBC 303/304)',
+    titleAr: 'مختبرات CGL تطبق الاشتراطات الإلزامية المحدثة لكود البناء السعودي',
+    titleEn: 'CGL Laboratories Upgrades Geotechnical Standards Aligned with Saudi Building Code',
     excerptAr: 'تحديث شامل لبروتوكولات استكشاف التربة، اختبارات الكثافة الحقلية، وفحوصات مطابقة الخرسانة المسلحة بما يتوافق بدقة مع اشتراطات الكود السعودي المعتمد.',
     excerptEn: 'Full enhancement of soil exploration, field compaction tests, and concrete compliance testing strictly aligned with mandatory SBC protocols.',
     categoryAr: 'كود البناء واللوائح',
     categoryEn: 'Building Code & Standards',
     date: '15 سبتمبر 2026',
+    dateAr: '15 سبتمبر 2026',
+    dateEn: 'September 15, 2026',
     readTimeAr: '3 دقائق قراءة',
     readTimeEn: '3 min read',
     image: '/uploads/news_images/0f84f5e97c3a0b73151ac499b71da813.jpg',
@@ -898,19 +912,23 @@ export const CGL_LATEST_NEWS: NewsArticle[] = [
     categoryAr: 'الأسطول والعمليات الميدانية',
     categoryEn: 'Fleet & Operations',
     date: '02 سبتمبر 2026',
+    dateAr: '02 سبتمبر 2026',
+    dateEn: 'September 02, 2026',
     readTimeAr: '4 دقائق قراءة',
     readTimeEn: '4 min read',
     image: '/uploads/news_images/3c0fd973afa1024f0df21a09eb65a03c.jpg'
   },
   {
     id: 'news-03',
-    titleAr: 'اعتماد أحدث تقنيات الرادار ثلاثي الأبعاد (GPR) لتقييم المنشآت الحيوية والتراثية',
+    titleAr: 'اعتماد أحدث تقنيات الرادار ثلاثي الأبعاد لتقييم المنشآت الحيوية والتراثية',
     titleEn: 'Next-Gen 3D GPR Radar Solutions Deployed for Heritage & Critical Structural Audits',
     excerptAr: 'تطبيق أحدث حلول الفحص الإنشائي غير الإتلافي للكشف الدقيق عن شبكات حديد التسليح والفجوات الخرسانية وتحديد سلامة الأساسات دون أي ضرر بالمنشآت القائمة.',
     excerptEn: 'Applying non-destructive subsurface scanning for rebar mapping, concrete cover verification, and structural integrity preservation without coring.',
     categoryAr: 'التقنيات الهندسية والابتكار',
     categoryEn: 'Engineering Innovation',
     date: '18 أغسطس 2026',
+    dateAr: '18 أغسطس 2026',
+    dateEn: 'August 18, 2026',
     readTimeAr: '3 دقائق قراءة',
     readTimeEn: '3 min read',
     image: '/uploads/news_images/af29d27795468d9bc0807b6d58115908.jpg'

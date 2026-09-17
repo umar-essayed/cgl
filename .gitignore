@@ -35,3 +35,4 @@ screencapture-*.png
 # Unused heavy media archives
 public/assets/sliders/archive
 public/assets/sliders/untitled folder
+.env*

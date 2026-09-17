@@ -125,7 +125,7 @@ export default function EquipmentSection({ lang = 'ar' }: EquipmentSectionProps)
                   {/* Footer Action */}
                   <div className="pt-4 border-t border-[#1a1a1a] flex items-center justify-between">
                     <div className="flex flex-wrap gap-1.5">
-                      {item.standards.slice(0, 2).map((std, stIdx) => (
+                      {((isRtl ? item.standardsAr : item.standardsEn) || item.standards).slice(0, 2).map((std, stIdx) => (
                         <span
                           key={stIdx}
                           className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#161616] text-stone-400 border border-[#222222]"
