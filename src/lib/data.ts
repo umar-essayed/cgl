@@ -587,7 +587,8 @@ export const CGL_AUTHORIZED_PARTNERS: AuthorizedPartner[] = [
     sectorAr: 'مشاريع الطاقة والصناعة الكبرى',
     collaborationScopeAr: 'الفحوصات الجيوتقنية المعقدة للمنشآت الصناعية الثقيلة وتحديد استقرار المنحدرات.',
     badge: 'عميل استراتيجي',
-    logo: '/assets/partners/aramco.svg'
+    logo: '/assets/partners/aramco.svg',
+    logoLight: '/assets/partners/aramco-light.svg'
   },
   {
     id: 'roshn',
@@ -597,7 +598,8 @@ export const CGL_AUTHORIZED_PARTNERS: AuthorizedPartner[] = [
     sectorAr: 'التطوير العقاري والمجتمعات العمرانية الكبرى',
     collaborationScopeAr: 'حفر الجسات الاستكشافية وفحوصات التربة لتأسيس الأحياء السكنية المتكاملة.',
     badge: 'مطور وطني',
-    logo: '/assets/partners/roshn.svg'
+    logo: '/assets/partners/roshn.svg',
+    logoLight: '/assets/partners/roshn-light.svg'
   },
   {
     id: 'binladin',
@@ -607,7 +609,8 @@ export const CGL_AUTHORIZED_PARTNERS: AuthorizedPartner[] = [
     sectorAr: 'الإنشاءات الكبرى والمطارات والبنية التحتية',
     collaborationScopeAr: 'فحوصات استكشاف التربة، اختبارات التحميل الاستاتيكي للخوازيق، ومطابقة المواد الإنشائية.',
     badge: 'مقاول معتمد Tier-1',
-    logo: '/assets/partners/Saudi_Binladin.png'
+    logo: '/assets/partners/Saudi_Binladin.png',
+    logoLight: '/assets/partners/Saudi_Binladin-light.png'
   },
   {
     id: 'albalad',
@@ -627,7 +630,8 @@ export const CGL_AUTHORIZED_PARTNERS: AuthorizedPartner[] = [
     sectorAr: 'المقاولات العامة والأبراج الشاهقة',
     collaborationScopeAr: 'اختبارات الخوازيق العميقة وفحوصات الخرسانة عالية المقاومة للأبراج والمنشآت.',
     badge: 'مقاول رئيسي',
-    logo: '/assets/partners/elseif.svg'
+    logo: '/assets/partners/elseif.svg',
+    logoLight: '/assets/partners/elseif-light.svg'
   },
   {
     id: 'nesma',
@@ -637,7 +641,8 @@ export const CGL_AUTHORIZED_PARTNERS: AuthorizedPartner[] = [
     sectorAr: 'مشاريع البنية التحتية والمحطات الكبرى',
     collaborationScopeAr: 'أعمال المسح الطبوغرافي ونزح المياه الجوفية وفحص دك التربة للبنية التحتية.',
     badge: 'مقاول بنية تحتية',
-    logo: '/assets/partners/nesma.svg'
+    logo: '/assets/partners/nesma.svg',
+    logoLight: '/assets/partners/nesma-light.svg'
   },
   {
     id: 'albawani',
@@ -647,7 +652,8 @@ export const CGL_AUTHORIZED_PARTNERS: AuthorizedPartner[] = [
     sectorAr: 'المجمعات الطبية والتعليمية والإنشاءات الكبرى',
     collaborationScopeAr: 'فحص التربة الميداني، وضبط جودة الخرسانة والصلب للمشاريع الحيوية.',
     badge: 'مقاول رئيسي',
-    logo: '/assets/partners/albawani.svg'
+    logo: '/assets/partners/albawani.svg',
+    logoLight: '/assets/partners/albawani-light.svg'
   },
   {
     id: 'mbl',
@@ -667,7 +673,8 @@ export const CGL_AUTHORIZED_PARTNERS: AuthorizedPartner[] = [
     sectorAr: 'التطوير والاستثمار العقاري والمكتبي',
     collaborationScopeAr: 'دراسات ميكانيكا التربة وفحوصات الأساسات للأبراج والمباني الاستثمارية.',
     badge: 'مطور عقاري',
-    logo: '/assets/partners/levels.png'
+    logo: '/assets/partners/levels.png',
+    logoLight: '/assets/partners/levels-light.png'
   },
   {
     id: 'abuljadayel',
@@ -697,7 +704,8 @@ export const CGL_AUTHORIZED_PARTNERS: AuthorizedPartner[] = [
     sectorAr: 'أعمال الطرق والجسور والبنية التحتية',
     collaborationScopeAr: 'فحوصات الخلطات الإسفلتية والركام واختبارات الكثافة الحقلية المستمرة.',
     badge: 'مقاول طرق وإنشاءات',
-    logo: '/assets/partners/occ.png'
+    logo: '/assets/partners/occ.png',
+    logoLight: '/assets/partners/occ-light.png'
   }
 ];
 

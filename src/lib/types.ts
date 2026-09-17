@@ -103,4 +103,5 @@ export interface AuthorizedPartner {
   collaborationScopeAr: string;
   badge: string;
   logo: string;
+  logoLight?: string;
 }

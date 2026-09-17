@@ -132,15 +132,15 @@ export default async function AboutPage({
             alt="CGL Field Operations"
             fill
             priority
-            className="object-cover object-center filter contrast-105 opacity-80 sm:opacity-85 dark:opacity-50 dark:brightness-40 transition-opacity"
+            className="object-cover object-center filter contrast-105 opacity-100 dark:opacity-50 dark:brightness-40 transition-opacity"
           />
-          {/* Directional Scrim for Content Readability */}
+          {/* Minimal Subtle Scrim (Almost nonexistent in light mode) */}
           <div className={`absolute inset-0 ${
             isRtl 
-              ? 'bg-gradient-to-l from-slate-50/95 via-slate-50/75 to-slate-50/25 dark:from-black/95 dark:via-black/75 dark:to-black/30' 
-              : 'bg-gradient-to-r from-slate-50/95 via-slate-50/75 to-slate-50/25 dark:from-black/95 dark:via-black/75 dark:to-black/30'
+              ? 'bg-gradient-to-l from-white/35 via-white/15 to-transparent dark:from-black/95 dark:via-black/75 dark:to-black/30' 
+              : 'bg-gradient-to-r from-white/35 via-white/15 to-transparent dark:from-black/95 dark:via-black/75 dark:to-black/30'
           } transition-colors duration-300`} />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/40 to-transparent dark:from-black dark:via-black/40 dark:to-transparent transition-colors duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-50/30 via-transparent to-transparent dark:from-black dark:via-black/40 dark:to-transparent transition-colors duration-300" />
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -161,11 +161,11 @@ export default async function AboutPage({
               {dict.aboutPage.affiliation}
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold text-slate-900 dark:text-white tracking-tight leading-tight mb-4">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold text-slate-950 dark:text-white tracking-tight leading-tight mb-4 drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)] dark:drop-shadow-none">
               {dict.aboutPage.heroTitle}
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-700 dark:text-stone-200 font-sans leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-900 dark:text-stone-200 font-sans leading-relaxed drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)] dark:drop-shadow-none">
               {dict.aboutPage.heroSubtitle}
             </p>
           </div>

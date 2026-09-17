@@ -81,20 +81,20 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
               alt={slideData.title}
               fill
               priority
-              className="object-cover object-center filter contrast-105 opacity-85 sm:opacity-90 dark:opacity-65 transition-opacity"
+              className="object-cover object-center filter contrast-105 opacity-100 dark:opacity-65 transition-opacity"
             />
           </motion.div>
         </AnimatePresence>
 
-        {/* Directional Scrim for Content Readability (Adapts to RTL / LTR) */}
+        {/* Minimal Subtle Scrim (Almost nonexistent in light mode, preserving raw photography) */}
         <div className={`absolute inset-0 ${
           isRtl
-            ? 'bg-gradient-to-l from-[#f8fafc]/95 via-[#f8fafc]/75 to-[#f8fafc]/25 dark:from-[#000000]/95 dark:via-black/75 dark:to-black/30'
-            : 'bg-gradient-to-r from-[#f8fafc]/95 via-[#f8fafc]/75 to-[#f8fafc]/25 dark:from-[#000000]/95 dark:via-black/75 dark:to-black/30'
+            ? 'bg-gradient-to-l from-white/35 via-white/15 to-transparent dark:from-[#000000]/95 dark:via-black/75 dark:to-black/30'
+            : 'bg-gradient-to-r from-white/35 via-white/15 to-transparent dark:from-[#000000]/95 dark:via-black/75 dark:to-black/30'
         } transition-colors duration-300`} />
 
-        {/* Soft Bottom Transition into Next Section */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#f8fafc] via-[#f8fafc]/40 to-transparent dark:from-[#000000] dark:via-black/40 dark:to-transparent transition-colors duration-300" />
+        {/* Minimal Bottom Fade into Next Section */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#f8fafc]/30 via-transparent to-transparent dark:from-[#000000] dark:via-black/40 dark:to-transparent transition-colors duration-300" />
       </div>
 
       {/* Main Content Area */}
@@ -120,12 +120,12 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
                 </div>
 
                 {/* Headline */}
-                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-900 dark:text-white leading-snug tracking-tight">
+                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-slate-950 dark:text-white leading-snug tracking-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)] dark:drop-shadow-none">
                   {slideData.title}
                 </h1>
 
                 {/* Subtitle */}
-                <p className="text-xs sm:text-base md:text-lg text-slate-700 dark:text-stone-200 font-sans leading-relaxed max-w-2xl font-normal line-clamp-2 sm:line-clamp-none">
+                <p className="text-xs sm:text-base md:text-lg text-slate-900 dark:text-stone-200 font-sans leading-relaxed max-w-2xl font-normal drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)] dark:drop-shadow-none line-clamp-2 sm:line-clamp-none">
                   {slideData.subtitle}
                 </p>
               </motion.div>
