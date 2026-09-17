@@ -78,7 +78,6 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
     }
 
     const title = isRtl ? service.titleAr : service.titleEn;
-    const subtitle = isRtl ? service.titleEn : service.titleAr;
     const desc = isRtl ? service.shortDescAr : service.shortDescEn;
 
     return (
@@ -116,12 +115,9 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
                 {icon}
               </div>
             </div>
-            <h3 className="font-display font-bold text-lg sm:text-xl text-white group-hover:text-stone-100 transition-colors mb-1.5 leading-snug">
+            <h3 className="font-display font-bold text-lg sm:text-xl text-white group-hover:text-stone-100 transition-colors mb-2 leading-snug">
               {title}
             </h3>
-            <p className="text-[11px] sm:text-xs font-mono text-stone-400 mb-3 tracking-wide">
-              {subtitle}
-            </p>
             <p className="text-xs sm:text-sm text-stone-300 font-sans leading-relaxed line-clamp-3 mb-4">
               {desc}
             </p>

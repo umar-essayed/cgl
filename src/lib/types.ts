@@ -119,6 +119,8 @@ export interface EquipmentItem {
   specsAr: string[];
   specsEn: string[];
   standards: string[];
+  standardsAr?: string[];
+  standardsEn?: string[];
   image: string;
   serviceId?: ServiceId;
 }
@@ -132,6 +134,8 @@ export interface NewsArticle {
   categoryAr: string;
   categoryEn: string;
   date: string;
+  dateAr?: string;
+  dateEn?: string;
   readTimeAr: string;
   readTimeEn: string;
   image: string;

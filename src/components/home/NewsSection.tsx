@@ -41,6 +41,7 @@ export default function NewsSection({ lang = 'ar' }: NewsSectionProps) {
             const title = isRtl ? article.titleAr : article.titleEn;
             const excerpt = isRtl ? article.excerptAr : article.excerptEn;
             const category = isRtl ? article.categoryAr : article.categoryEn;
+            const date = (isRtl ? article.dateAr : article.dateEn) || article.date;
 
             return (
               <article
@@ -63,7 +64,7 @@ export default function NewsSection({ lang = 'ar' }: NewsSectionProps) {
                   <div className="flex items-center gap-2 text-xs font-mono text-stone-400 mb-2">
                     <span className="text-[#3b76b3]">{category}</span>
                     <span>•</span>
-                    <span>{article.date}</span>
+                    <span>{date}</span>
                   </div>
 
                   {/* Headline */}
