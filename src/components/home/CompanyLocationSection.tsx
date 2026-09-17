@@ -25,16 +25,16 @@ export default function CompanyLocationSection({ lang = 'ar' }: CompanyLocationS
   const isRtl = lang === 'ar';
 
   return (
-    <section id="location" className="py-10 sm:py-16 bg-slate-50 dark:bg-[#000000] border-b border-slate-200 dark:border-[#1f1f1f] text-slate-900 dark:text-white relative transition-colors">
+    <section id="location" className="py-10 sm:py-16 bg-[#000000] border-b border-[#1f1f1f] text-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         
         {/* Minimal Clean Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 sm:mb-6">
           <div>
-            <span className="text-xs font-mono text-[#689f38] dark:text-[#8bc34a] font-bold block mb-0.5">
+            <span className="text-xs font-mono text-[#8bc34a] font-bold block mb-0.5">
               {dict.location.badge}
             </span>
-            <h2 className="text-xl sm:text-2xl font-display font-bold text-slate-900 dark:text-white">
+            <h2 className="text-xl sm:text-2xl font-display font-bold text-white">
               {dict.location.title} • {isRtl ? 'جدة 23215، حي الرويس' : '23215 Al-Ruwais, Jeddah'}
             </h2>
           </div>
@@ -52,12 +52,12 @@ export default function CompanyLocationSection({ lang = 'ar' }: CompanyLocationS
         </div>
 
         {/* Map Box */}
-        <div className="relative isolate z-10 w-full h-[320px] sm:h-[440px] md:h-[480px] rounded-2xl overflow-hidden border border-slate-200 dark:border-[#1f1f1f] shadow-xl dark:shadow-2xl bg-slate-100 dark:bg-[#000000]">
+        <div className="relative isolate z-10 w-full h-[320px] sm:h-[440px] md:h-[480px] rounded-2xl overflow-hidden border border-[#1f1f1f] shadow-2xl bg-[#000000]">
           <DarkLocationMap />
 
           {/* Floating Brand Pin Badge */}
           <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 pointer-events-auto">
-            <div className="p-2.5 sm:p-3.5 rounded-xl bg-white/95 dark:bg-[#0a0a0a]/95 border border-slate-200 dark:border-[#1f1f1f] shadow-2xl backdrop-blur-md flex items-center gap-2.5 max-w-[270px] sm:max-w-sm">
+            <div className="p-2.5 sm:p-3.5 rounded-xl bg-[#0a0a0a]/95 border border-[#1f1f1f] shadow-2xl backdrop-blur-md flex items-center gap-2.5 max-w-[270px] sm:max-w-sm">
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#8bc34a]/15 border border-[#8bc34a] flex items-center justify-center flex-shrink-0 p-1">
                 <Image
                   src="/assets/cgl-logo1.png"
@@ -68,13 +68,13 @@ export default function CompanyLocationSection({ lang = 'ar' }: CompanyLocationS
                 />
               </div>
               <div className="text-start min-w-0">
-                <span className="text-xs font-bold text-slate-900 dark:text-white block truncate">
+                <span className="text-xs font-bold text-white block truncate">
                   CGL Laboratories
                 </span>
-                <span className="text-[10px] sm:text-[11px] text-slate-600 dark:text-stone-300 font-mono block">
+                <span className="text-[10px] sm:text-[11px] text-stone-300 font-mono block">
                   {isRtl ? CGL_COMPANY_INFO.addressAr : CGL_COMPANY_INFO.addressEn}
                 </span>
-                <div className="flex items-center gap-2 mt-0.5 text-[10px] sm:text-[11px] font-mono text-[#689f38] dark:text-[#82B74B]">
+                <div className="flex items-center gap-2 mt-0.5 text-[10px] sm:text-[11px] font-mono text-[#8bc34a]">
                   <a 
                     href={`https://wa.me/${CGL_COMPANY_INFO.whatsapp1Raw}`} 
                     target="_blank" 

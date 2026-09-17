@@ -4,25 +4,17 @@
 
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-800 dark:bg-[#000000] dark:text-stone-100 font-sans antialiased selection:bg-[#8bc34a] selection:text-black transition-colors duration-200;
+    @apply bg-[#000000] text-stone-100 font-sans antialiased selection:bg-[#8bc34a] selection:text-black;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-slate-900 dark:text-white;
+    @apply font-display tracking-tight text-white;
   }
 }
 
-/* Light Architectural Grid & Dark Geotechnical Identity */
+/* Geotechnical Engineering Grid Background */
 .engineering-canvas {
-  background-color: #f8fafc;
-  background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139, 195, 74, 0.12), transparent),
-    radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-  background-size: 100% 100%, 28px 28px;
-}
-
-.dark .engineering-canvas {
   background-color: #000000;
   background-image: 
     radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139, 195, 74, 0.08), transparent),
@@ -31,14 +23,6 @@
 }
 
 .engineering-canvas-secondary {
-  background-color: #f1f5f9;
-  background-image: 
-    radial-gradient(circle at 50% 0%, rgba(139, 195, 74, 0.08), transparent 70%),
-    radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-  background-size: 100% 100%, 24px 24px;
-}
-
-.dark .engineering-canvas-secondary {
   background-color: #0a0a0a;
   background-image: 
     radial-gradient(circle at 50% 0%, rgba(139, 195, 74, 0.05), transparent 70%),
@@ -47,12 +31,6 @@
 }
 
 .engineering-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-}
-
-.dark .engineering-card {
   background: #0a0a0a;
   border: 1px solid #1f1f1f;
   backdrop-filter: blur(16px);
@@ -60,11 +38,6 @@
 }
 
 .engineering-card:hover {
-  border-color: rgba(139, 195, 74, 0.5);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-}
-
-.dark .engineering-card:hover {
   background: #111111;
   border-color: rgba(139, 195, 74, 0.4);
   box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.85);
@@ -77,20 +50,12 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
-
-.dark ::-webkit-scrollbar-track {
   background: #000000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
-}
-
-.dark ::-webkit-scrollbar-thumb {
   background: #1f1f1f;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

@@ -21,11 +21,11 @@ export default function Footer({ lang = 'ar' }: FooterProps) {
   };
 
   return (
-    <footer className="bg-slate-950 dark:bg-[#000000] text-stone-300 font-sans border-t border-slate-800 dark:border-[#1f1f1f] pt-12 pb-8 text-xs transition-colors">
+    <footer className="bg-[#000000] text-stone-300 font-sans border-t border-[#1f1f1f] pt-12 pb-8 text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         
         {/* Main Clean Row */}
-        <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 pb-8 border-b border-slate-800 dark:border-[#1f1f1f] text-center md:text-start">
+        <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 pb-8 border-b border-[#1f1f1f] text-center md:text-start">
           
           {/* 1. Identity */}
           <div className="flex flex-col items-center md:items-start max-w-sm">

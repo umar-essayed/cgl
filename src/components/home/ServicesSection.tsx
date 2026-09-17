@@ -88,7 +88,7 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.4, delay: index * 0.06 }}
-        className={`${isHiddenOnMobile ? 'hidden md:flex' : 'flex'} ${isHiddenOnDesktop ? 'md:hidden' : ''} group relative rounded-2xl overflow-hidden bg-white dark:bg-[#0a0a0a] border border-slate-200 dark:border-[#1f1f1f] ${styling.border} transition-all duration-300 shadow-sm hover:shadow-2xl hover:shadow-black/20 dark:hover:shadow-black/80 flex-col justify-between`}
+        className={`${isHiddenOnMobile ? 'hidden md:flex' : 'flex'} ${isHiddenOnDesktop ? 'md:hidden' : ''} group relative rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1f1f1f] ${styling.border} transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-black/80 flex-col justify-between`}
       >
         {/* Ambient Top Glow */}
         <div className={`absolute top-0 right-0 left-0 h-32 bg-gradient-to-b ${styling.glow} to-transparent opacity-20 pointer-events-none`} />
@@ -102,7 +102,7 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
             className="object-cover object-center transform group-hover:scale-105 transition-transform duration-700 filter brightness-95 group-hover:brightness-100"
           />
           {/* Subtle Vignette Gradient - seamlessly melted into card body */}
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent dark:from-[#0a0a0a] dark:via-[#0a0a0a]/50 dark:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
         </div>
 
         {/* Content Body */}
@@ -116,24 +116,24 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
                 {icon}
               </div>
             </div>
-            <h3 className="font-display font-bold text-lg sm:text-xl text-slate-900 dark:text-white group-hover:text-[#689f38] dark:group-hover:text-stone-100 transition-colors mb-1.5 leading-snug">
+            <h3 className="font-display font-bold text-lg sm:text-xl text-white group-hover:text-stone-100 transition-colors mb-1.5 leading-snug">
               {title}
             </h3>
-            <p className="text-[11px] sm:text-xs font-mono text-slate-500 dark:text-stone-400 mb-3 tracking-wide">
+            <p className="text-[11px] sm:text-xs font-mono text-stone-400 mb-3 tracking-wide">
               {subtitle}
             </p>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-300 font-sans leading-relaxed line-clamp-3 mb-4">
+            <p className="text-xs sm:text-sm text-stone-300 font-sans leading-relaxed line-clamp-3 mb-4">
               {desc}
             </p>
           </div>
 
           {/* Footer: Standards & Link */}
-          <div className="pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between gap-2 mt-auto">
+          <div className="pt-3 border-t border-white/5 flex items-center justify-between gap-2 mt-auto">
             <div className="flex flex-wrap gap-1.5">
               {service.standards.slice(0, 2).map((std, sIdx) => (
                 <span 
                   key={sIdx}
-                  className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200 dark:bg-white/5 dark:text-stone-300 dark:border-white/10"
+                  className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-stone-300 border border-white/10"
                 >
                   {std}
                 </span>
@@ -142,7 +142,7 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
 
             <Link
               href={`/${lang}/rfq`}
-              className="inline-flex items-center text-xs font-medium text-slate-600 hover:text-black dark:text-stone-300 dark:group-hover:text-white transition-colors gap-1"
+              className="inline-flex items-center text-xs font-medium text-stone-300 hover:text-white transition-colors gap-1"
             >
               <span>{dict.services.requestPricing}</span>
               <ArrowIcon className="w-3.5 h-3.5 text-[#8bc34a]" />
@@ -154,18 +154,18 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
   };
 
   return (
-    <section id="services" className="py-20 sm:py-28 bg-slate-50/70 dark:bg-black border-b border-slate-200 dark:border-white/5 relative transition-colors">
+    <section id="services" className="py-20 sm:py-28 bg-black border-b border-white/5 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
         {/* Section Header */}
         <div className="mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-[#181b22] border border-slate-200 dark:border-[#82B74B]/30 text-xs font-sans text-slate-700 dark:text-[#97C369] shadow-sm mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#181b22] border border-[#82B74B]/30 text-xs font-sans text-[#97C369] shadow-sm mb-3">
             <span className="w-2 h-2 bg-[#8bc34a] rounded-full animate-pulse" />
             <span className="font-semibold">{dict.services.badge}</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-display font-bold text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight">
             {dict.services.title}
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-400 font-sans mt-2 max-w-2xl leading-relaxed">
+          <p className="text-xs sm:text-sm text-stone-400 font-sans mt-2 max-w-2xl leading-relaxed">
             {dict.services.subtitle}
           </p>
         </div>
@@ -182,7 +182,7 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
             return (
               <div
                 key={service.id}
-                className={`rounded-2xl overflow-hidden bg-white dark:bg-[#0a0a0a] border border-slate-200 dark:border-[#1f1f1f] ${styling.border} flex flex-col shadow-sm`}
+                className={`rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1f1f1f] ${styling.border} flex flex-col shadow-sm`}
               >
                 <div className="relative w-full h-40 overflow-hidden">
                   <Image
@@ -192,7 +192,7 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
                     className="object-cover object-center"
                   />
                   {/* Subtle Vignette Gradient - seamlessly melted into card body */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent dark:from-[#0a0a0a] dark:via-[#0a0a0a]/50 dark:to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
                 </div>
 
                 <div className="p-4 flex flex-col justify-between">
@@ -204,19 +204,19 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
                       {icon}
                     </div>
                   </div>
-                  <h3 className="font-display font-bold text-base text-slate-900 dark:text-white mb-1">
+                  <h3 className="font-display font-bold text-base text-white mb-1">
                     {title}
                   </h3>
-                  <p className="text-xs text-slate-600 dark:text-stone-300 font-sans leading-relaxed line-clamp-2 mb-3">
+                  <p className="text-xs text-stone-300 font-sans leading-relaxed line-clamp-2 mb-3">
                     {desc}
                   </p>
-                  <div className="pt-2.5 border-t border-slate-100 dark:border-[#1f1f1f] flex items-center justify-between">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200 dark:bg-white/5 dark:text-stone-400 dark:border-[#1f1f1f]">
+                  <div className="pt-2.5 border-t border-[#1f1f1f] flex items-center justify-between">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-stone-400 border border-[#1f1f1f]">
                       {service.standards[0]}
                     </span>
                     <Link
                       href={`/${lang}/rfq`}
-                      className="inline-flex items-center text-xs font-bold text-[#689f38] dark:text-[#8bc34a] gap-1"
+                      className="inline-flex items-center text-xs font-bold text-[#8bc34a] gap-1"
                     >
                       <span>{dict.services.requestPricing}</span>
                       <ArrowIcon className="w-3.5 h-3.5" />
@@ -246,7 +246,7 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
           <button
             type="button"
             onClick={() => setShowAll(!showAll)}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 dark:bg-[#111111] dark:hover:bg-[#1a1a1a] dark:border-[#1f1f1f] dark:text-stone-200 dark:hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-sm group hover:border-[#8bc34a]/40"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#1a1a1a] border border-[#1f1f1f] text-stone-200 hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-sm group hover:border-[#8bc34a]/40"
           >
             <span>
               {showAll 

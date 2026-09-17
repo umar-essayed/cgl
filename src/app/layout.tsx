@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Cairo, El_Messiri } from 'next/font/google';
 import './globals.css';
-import { ThemeProvider } from '@/components/theme/ThemeProvider';
 
 const cairo = Cairo({
   subsets: ['arabic', 'latin'],
@@ -87,30 +86,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ar" dir="rtl" className={`${cairo.variable} ${elMessiri.variable} scroll-smooth`} suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                var saved = localStorage.getItem('cgl-theme');
-                var isDark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-                if (isDark) {
-                  document.documentElement.classList.add('dark');
-                  document.documentElement.classList.remove('light');
-                } else {
-                  document.documentElement.classList.remove('dark');
-                  document.documentElement.classList.add('light');
-                }
-              } catch (e) {}
-            `,
-          }}
-        />
-      </head>
-      <body className="bg-white dark:bg-[#000000] text-slate-900 dark:text-stone-100 font-sans min-h-screen flex flex-col selection:bg-[#8bc34a] selection:text-black transition-colors">
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+    <html lang="ar" dir="rtl" className={`dark ${cairo.variable} ${elMessiri.variable} scroll-smooth`}>
+      <body className="bg-[#000000] text-stone-100 font-sans min-h-screen flex flex-col selection:bg-[#8bc34a] selection:text-black">
+        {children}
       </body>
     </html>
   );

@@ -115,7 +115,7 @@ export default function RfqClient({ lang }: RfqClientProps) {
   const activeServiceObj = services.find((s) => s.id === selectedService) || services[0];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#000000] text-slate-900 dark:text-stone-100 flex flex-col font-sans transition-colors">
+    <div className="min-h-screen bg-[#000000] text-stone-100 flex flex-col font-sans">
       <Navbar lang={lang} />
 
       <main className="flex-grow pt-28 sm:pt-36 pb-20">
@@ -123,51 +123,45 @@ export default function RfqClient({ lang }: RfqClientProps) {
           
           {/* Header */}
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-[#111111] border border-slate-200 dark:border-[#1f1f1f] text-xs font-sans text-[#689f38] dark:text-[#8bc34a] mb-3 shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#111111] border border-[#1f1f1f] text-xs font-sans text-[#8bc34a] mb-3 shadow-sm">
               <span className="w-2 h-2 bg-[#8bc34a] rounded-full animate-pulse" />
               <span>{dict.rfq.badge}</span>
             </div>
-            <h1 className="text-2xl sm:text-4xl font-display font-bold text-slate-900 dark:text-white tracking-tight mb-2">
+            <h1 className="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight mb-2">
               {dict.rfq.title}
             </h1>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-400 font-sans">
+            <p className="text-xs sm:text-sm text-stone-400 font-sans">
               {dict.rfq.subtitle}
             </p>
           </div>
 
           {!isSuccess ? (
-            <div className="bg-white dark:bg-[#0a0a0a] rounded-2xl border border-slate-200 dark:border-[#1f1f1f] p-6 sm:p-10 shadow-xl">
+            <div className="bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f] p-6 sm:p-10 shadow-xl">
               
               {/* 3-Step Progress Indicator */}
               <div className="relative mb-10">
-                <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-slate-200 dark:bg-[#1f1f1f] -translate-y-1/2 z-0" />
+                <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-[#1f1f1f] -translate-y-1/2 z-0" />
                 <div className="relative z-10 flex justify-between">
                   {[1, 2, 3].map((step) => {
                     const isPassed = currentStep > step;
                     const isCurrent = currentStep === step;
                     return (
                       <div key={step} className="flex flex-col items-center">
-                        <button
-                          onClick={() => {
-                            if (currentStep > step) setCurrentStep(step);
-                          }}
-                          disabled={currentStep < step}
-                          className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs transition-all ${
+                        <div
+                          className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-mono text-xs sm:text-sm font-bold transition-all ${
                             isCurrent
-                              ? 'bg-[#8bc34a] text-black ring-4 ring-[#8bc34a]/20 font-bold'
+                              ? 'bg-[#8bc34a] text-black ring-4 ring-[#8bc34a]/20 shadow-md'
                               : isPassed
                               ? 'bg-[#8bc34a]/20 text-[#8bc34a] border border-[#8bc34a]'
-                              : 'bg-slate-100 dark:bg-[#111111] text-slate-400 dark:text-stone-500 border border-slate-200 dark:border-[#1f1f1f]'
+                              : 'bg-[#111111] text-stone-500 border border-[#222222]'
                           }`}
                         >
-                          {isPassed ? <Check className="w-4 h-4" /> : step}
-                        </button>
-                        <span className="text-[11px] font-mono mt-2 text-slate-500 dark:text-stone-400">
-                          {step === 1 
-                            ? (isRtl ? 'الخدمة والقطاع' : 'Service & Sector') 
-                            : step === 2 
-                            ? (isRtl ? 'الموقع والنطاق' : 'Location & Scope') 
-                            : (isRtl ? 'بيانات التواصل' : 'Contact Details')}
+                          {isPassed ? <Check className="w-4 h-4" /> : `0${step}`}
+                        </div>
+                        <span className={`text-[10px] sm:text-xs font-sans mt-2 ${isCurrent ? 'text-white font-bold' : 'text-stone-400'}`}>
+                          {step === 1 && (isRtl ? 'الخدمة' : 'Service')}
+                          {step === 2 && (isRtl ? 'الموقع والنطاق' : 'Scope')}
+                          {step === 3 && (isRtl ? 'بيانات التواصل' : 'Contact')}
                         </span>
                       </div>
                     );
@@ -179,7 +173,7 @@ export default function RfqClient({ lang }: RfqClientProps) {
               {currentStep === 1 && (
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">
+                    <h3 className="text-base font-bold text-white mb-3">
                       {isRtl ? '1. اختر نوع الفحص أو الخدمة الهندسية المطلوبة' : '1. Select Required Engineering Service'}
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -193,18 +187,18 @@ export default function RfqClient({ lang }: RfqClientProps) {
                             className={`p-4 rounded-xl border cursor-pointer transition-all ${
                               isSelected
                                 ? 'bg-[#8bc34a]/10 border-[#8bc34a] shadow-sm'
-                                : 'bg-slate-50 dark:bg-[#111111] border-slate-200 dark:border-[#1f1f1f] hover:border-slate-300 dark:hover:border-stone-700'
+                                : 'bg-[#111111] border-[#1f1f1f] hover:border-stone-700'
                             }`}
                           >
                             <div className="flex items-start gap-3">
-                              <div className={`p-2 rounded-lg ${isSelected ? 'bg-[#8bc34a] text-black' : 'bg-slate-200 dark:bg-white/5 text-slate-700 dark:text-stone-400'}`}>
+                              <div className={`p-2 rounded-lg ${isSelected ? 'bg-[#8bc34a] text-black' : 'bg-white/5 text-stone-400'}`}>
                                 <IconComponent className="w-5 h-5" />
                               </div>
                               <div className="min-w-0">
-                                <h4 className={`text-sm font-bold leading-snug ${isSelected ? 'text-slate-900 dark:text-white' : 'text-slate-800 dark:text-stone-200'}`}>
+                                <h4 className={`text-sm font-bold leading-snug ${isSelected ? 'text-white' : 'text-stone-200'}`}>
                                   {srv.title}
                                 </h4>
-                                <p className="text-xs text-slate-600 dark:text-stone-400 mt-1 line-clamp-2">
+                                <p className="text-xs text-stone-400 mt-1 line-clamp-2">
                                   {srv.desc}
                                 </p>
                               </div>
@@ -216,7 +210,7 @@ export default function RfqClient({ lang }: RfqClientProps) {
                   </div>
 
                   <div>
-                    <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">
+                    <h3 className="text-base font-bold text-white mb-3">
                       {isRtl ? '2. قطاع ونوع المشروع' : '2. Project Sector / Classification'}
                     </h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
@@ -229,8 +223,8 @@ export default function RfqClient({ lang }: RfqClientProps) {
                             onClick={() => setSelectedSector(sec)}
                             className={`p-3 rounded-lg text-xs font-medium border text-center transition-all ${
                               isSelected
-                                ? 'bg-[#8bc34a]/15 border-[#8bc34a] text-[#689f38] dark:text-[#8bc34a] font-bold'
-                                : 'bg-slate-50 dark:bg-[#111111] border-slate-200 dark:border-[#1f1f1f] text-slate-700 dark:text-stone-300 hover:bg-slate-100 dark:hover:bg-white/5'
+                                ? 'bg-[#8bc34a]/15 border-[#8bc34a] text-[#8bc34a] font-bold'
+                                : 'bg-[#111111] border-[#1f1f1f] text-stone-300 hover:bg-white/5'
                             }`}
                           >
                             {sec}
@@ -270,8 +264,8 @@ export default function RfqClient({ lang }: RfqClientProps) {
                             onClick={() => setSelectedCity(city)}
                             className={`p-3 rounded-lg text-xs font-medium border text-center transition-all ${
                               isSelected
-                                ? 'bg-[#8bc34a]/15 border-[#8bc34a] text-[#689f38] dark:text-[#8bc34a] font-bold'
-                                : 'bg-slate-50 dark:bg-[#111111] border-slate-200 dark:border-[#1f1f1f] text-slate-700 dark:text-stone-300 hover:bg-slate-100 dark:hover:bg-white/5'
+                                ? 'bg-[#8bc34a]/15 border-[#8bc34a] text-[#8bc34a] font-bold'
+                                : 'bg-[#111111] border-[#1f1f1f] text-stone-300 hover:bg-white/5'
                             }`}
                           >
                             {city}
@@ -282,7 +276,7 @@ export default function RfqClient({ lang }: RfqClientProps) {
                   </div>
 
                   <div>
-                    <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">
+                    <h3 className="text-base font-bold text-white mb-3">
                       {isRtl ? '2. حجم العمل التقديري أو عدد الجسات' : '2. Estimated Scope or Boreholes'}
                     </h3>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -295,8 +289,8 @@ export default function RfqClient({ lang }: RfqClientProps) {
                             onClick={() => setSelectedSamples(range)}
                             className={`p-3 rounded-lg text-xs font-medium border text-center transition-all ${
                               isSelected
-                                ? 'bg-[#8bc34a]/15 border-[#8bc34a] text-[#689f38] dark:text-[#8bc34a] font-bold'
-                                : 'bg-slate-50 dark:bg-[#111111] border-slate-200 dark:border-[#1f1f1f] text-slate-700 dark:text-stone-300 hover:bg-slate-100 dark:hover:bg-white/5'
+                                ? 'bg-[#8bc34a]/15 border-[#8bc34a] text-[#8bc34a] font-bold'
+                                : 'bg-[#111111] border-[#1f1f1f] text-stone-300 hover:bg-white/5'
                             }`}
                           >
                             {range}
@@ -307,7 +301,7 @@ export default function RfqClient({ lang }: RfqClientProps) {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono text-slate-700 dark:text-stone-300 mb-2">
+                    <label className="block text-xs font-mono text-stone-300 mb-2">
                       {dict.rfq.form.notes}
                     </label>
                     <textarea
@@ -316,7 +310,7 @@ export default function RfqClient({ lang }: RfqClientProps) {
                       value={formData.notes}
                       onChange={handleInputChange}
                       placeholder={dict.rfq.form.notesPlaceholder}
-                      className="w-full p-3 rounded-xl bg-slate-50 dark:bg-[#111111] border border-slate-300 dark:border-[#222222] text-slate-900 dark:text-white text-xs focus:outline-none focus:border-[#8bc34a]"
+                      className="w-full p-3 rounded-xl bg-[#111111] border border-[#222222] text-white text-xs focus:outline-none focus:border-[#8bc34a]"
                     />
                   </div>
 
@@ -324,7 +318,7 @@ export default function RfqClient({ lang }: RfqClientProps) {
                     <button
                       type="button"
                       onClick={() => setCurrentStep(1)}
-                      className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-[#111111] text-slate-700 dark:text-stone-300 font-medium text-xs border border-slate-200 dark:border-[#1f1f1f]"
+                      className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#111111] text-stone-300 font-medium text-xs border border-[#1f1f1f]"
                     >
                       <BackIcon className="w-4 h-4" />
                       <span>{isRtl ? 'السابق' : 'Back'}</span>
@@ -347,7 +341,7 @@ export default function RfqClient({ lang }: RfqClientProps) {
                 <form onSubmit={handleFormSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-mono text-slate-700 dark:text-stone-300 mb-1.5">
+                      <label className="block text-xs font-mono text-stone-300 mb-1.5">
                         {dict.rfq.form.fullName} *
                       </label>
                       <input
@@ -357,12 +351,12 @@ export default function RfqClient({ lang }: RfqClientProps) {
                         value={formData.fullName}
                         onChange={handleInputChange}
                         placeholder={dict.rfq.form.fullNamePlaceholder}
-                        className="w-full p-3 rounded-xl bg-slate-50 dark:bg-[#111111] border border-slate-300 dark:border-[#222222] text-slate-900 dark:text-white text-xs focus:outline-none focus:border-[#8bc34a]"
+                        className="w-full p-3 rounded-xl bg-[#111111] border border-[#222222] text-white text-xs focus:outline-none focus:border-[#8bc34a]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono text-slate-700 dark:text-stone-300 mb-1.5">
+                      <label className="block text-xs font-mono text-stone-300 mb-1.5">
                         {dict.rfq.form.company}
                       </label>
                       <input
@@ -371,12 +365,12 @@ export default function RfqClient({ lang }: RfqClientProps) {
                         value={formData.company}
                         onChange={handleInputChange}
                         placeholder={dict.rfq.form.companyPlaceholder}
-                        className="w-full p-3 rounded-xl bg-slate-50 dark:bg-[#111111] border border-slate-300 dark:border-[#222222] text-slate-900 dark:text-white text-xs focus:outline-none focus:border-[#8bc34a]"
+                        className="w-full p-3 rounded-xl bg-[#111111] border border-[#222222] text-white text-xs focus:outline-none focus:border-[#8bc34a]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono text-slate-700 dark:text-stone-300 mb-1.5">
+                      <label className="block text-xs font-mono text-stone-300 mb-1.5">
                         {dict.rfq.form.phone} *
                       </label>
                       <input
@@ -386,13 +380,13 @@ export default function RfqClient({ lang }: RfqClientProps) {
                         value={formData.phone}
                         onChange={handleInputChange}
                         placeholder={dict.rfq.form.phonePlaceholder}
-                        className="w-full p-3 rounded-xl bg-slate-50 dark:bg-[#111111] border border-slate-300 dark:border-[#222222] text-slate-900 dark:text-white text-xs focus:outline-none focus:border-[#8bc34a]"
+                        className="w-full p-3 rounded-xl bg-[#111111] border border-[#222222] text-white text-xs focus:outline-none focus:border-[#8bc34a]"
                         dir="ltr"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono text-slate-700 dark:text-stone-300 mb-1.5">
+                      <label className="block text-xs font-mono text-stone-300 mb-1.5">
                         {dict.rfq.form.email} *
                       </label>
                       <input
@@ -402,15 +396,15 @@ export default function RfqClient({ lang }: RfqClientProps) {
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder={dict.rfq.form.emailPlaceholder}
-                        className="w-full p-3 rounded-xl bg-slate-50 dark:bg-[#111111] border border-slate-300 dark:border-[#222222] text-slate-900 dark:text-white text-xs focus:outline-none focus:border-[#8bc34a]"
+                        className="w-full p-3 rounded-xl bg-[#111111] border border-[#222222] text-white text-xs focus:outline-none focus:border-[#8bc34a]"
                         dir="ltr"
                       />
                     </div>
                   </div>
 
                   {/* Order Summary Box */}
-                  <div className="p-4 rounded-xl bg-slate-100 dark:bg-[#111111] border border-slate-200 dark:border-[#1f1f1f] text-xs font-mono space-y-1 text-slate-600 dark:text-stone-400">
-                    <div className="text-slate-900 dark:text-white font-bold mb-1">
+                  <div className="p-4 rounded-xl bg-[#111111] border border-[#1f1f1f] text-xs font-mono space-y-1 text-stone-400">
+                    <div className="text-white font-bold mb-1">
                       {isRtl ? 'ملخص نطاق الطلب الهندسي:' : 'Engineering Scope Summary:'}
                     </div>
                     <div>• {isRtl ? 'الخدمة:' : 'Service:'} {activeServiceObj.title}</div>
@@ -422,7 +416,7 @@ export default function RfqClient({ lang }: RfqClientProps) {
                     <button
                       type="button"
                       onClick={() => setCurrentStep(2)}
-                      className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-slate-100 dark:bg-[#111111] text-slate-700 dark:text-stone-300 font-medium text-xs border border-slate-200 dark:border-[#1f1f1f]"
+                      className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#111111] text-stone-300 font-medium text-xs border border-[#1f1f1f]"
                     >
                       <BackIcon className="w-4 h-4" />
                       <span>{isRtl ? 'السابق' : 'Back'}</span>
@@ -442,16 +436,16 @@ export default function RfqClient({ lang }: RfqClientProps) {
 
             </div>
           ) : (
-            <div className="bg-white dark:bg-[#0a0a0a] rounded-2xl border border-slate-200 dark:border-[#1f1f1f] p-8 sm:p-12 text-center shadow-xl space-y-6">
+            <div className="bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f] p-8 sm:p-12 text-center shadow-xl space-y-6">
               <div className="w-16 h-16 rounded-full bg-[#8bc34a]/20 text-[#8bc34a] flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-10 h-10" />
               </div>
 
               <div>
-                <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-white mb-2">
+                <h2 className="text-2xl font-display font-bold text-white mb-2">
                   {dict.rfq.form.successTitle}
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-300 max-w-md mx-auto leading-relaxed">
+                <p className="text-xs sm:text-sm text-stone-300 max-w-md mx-auto leading-relaxed">
                   {dict.rfq.form.successDesc}
                 </p>
               </div>
@@ -475,7 +469,7 @@ export default function RfqClient({ lang }: RfqClientProps) {
                     setIsSuccess(false);
                     setCurrentStep(1);
                   }}
-                  className="inline-flex items-center px-6 py-3 rounded-xl bg-slate-100 dark:bg-[#111111] text-slate-800 dark:text-stone-300 font-medium text-xs sm:text-sm border border-slate-200 dark:border-[#1f1f1f]"
+                  className="inline-flex items-center px-6 py-3 rounded-xl bg-[#111111] text-stone-300 font-medium text-xs sm:text-sm border border-[#1f1f1f]"
                 >
                   <span>{dict.rfq.form.newRequestBtn}</span>
                 </button>

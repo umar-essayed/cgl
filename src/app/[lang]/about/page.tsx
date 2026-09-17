@@ -121,22 +121,22 @@ export default async function AboutPage({
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#000000] text-slate-900 dark:text-stone-100 flex flex-col font-sans selection:bg-[#8bc34a] selection:text-black transition-colors">
+    <div className="min-h-screen bg-[#000000] text-stone-100 flex flex-col font-sans selection:bg-[#8bc34a] selection:text-black">
       <Navbar lang={lang} />
 
       {/* 1. Cinematic Hero Header */}
-      <section className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 border-b border-slate-200 dark:border-[#1f1f1f] overflow-hidden bg-slate-50 dark:bg-black transition-colors">
+      <section className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 border-b border-[#1f1f1f] overflow-hidden bg-black">
         <div className="absolute inset-0 z-0">
           <Image
             src="/uploads/projects_images/project_688d0f1061e875.99060450.jpg"
             alt="CGL Field Operations"
             fill
             priority
-            className="object-cover object-center filter contrast-105 opacity-100 dark:opacity-50 dark:brightness-40 transition-opacity"
+            className="object-cover object-center filter contrast-105 opacity-50 brightness-40"
           />
-          {/* Clean Vertical Vignette (Zero side haze) */}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-50/50 via-transparent to-black/20 dark:from-black dark:via-transparent dark:to-black/70 pointer-events-none transition-colors duration-300" />
-          <div className="absolute inset-0 bg-black/5 dark:bg-black/30 pointer-events-none transition-colors duration-300" />
+          {/* Clean Vertical Vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/70 pointer-events-none" />
+          <div className="absolute inset-0 bg-black/30 pointer-events-none" />
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -144,7 +144,7 @@ export default async function AboutPage({
           <div className="mb-6">
             <Link
               href={`/${lang}`}
-              className="inline-flex items-center text-xs sm:text-sm font-medium text-slate-600 hover:text-[#689f38] dark:text-stone-300 dark:hover:text-[#8bc34a] transition-colors group gap-2"
+              className="inline-flex items-center text-xs sm:text-sm font-medium text-stone-300 hover:text-[#8bc34a] transition-colors group gap-2"
             >
               <BackIcon className="w-4 h-4 text-[#8bc34a] group-hover:-translate-x-0.5 transition-transform" />
               <span>{dict.aboutPage.breadcrumbHome}</span>
@@ -153,15 +153,15 @@ export default async function AboutPage({
 
           {/* Title & Subtitle */}
           <div className="max-w-3xl">
-            <div className="text-xs sm:text-sm font-mono text-[#689f38] dark:text-[#8bc34a] font-bold mb-3">
+            <div className="text-xs sm:text-sm font-mono text-[#8bc34a] font-bold mb-3">
               {dict.aboutPage.affiliation}
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold text-slate-900 dark:text-white tracking-tight leading-tight mb-4">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold text-white tracking-tight leading-tight mb-4">
               {dict.aboutPage.heroTitle}
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-700 dark:text-stone-200 font-sans leading-relaxed">
+            <p className="text-base sm:text-lg text-stone-200 font-sans leading-relaxed">
               {dict.aboutPage.heroSubtitle}
             </p>
           </div>
@@ -177,64 +177,64 @@ export default async function AboutPage({
           {/* Text & 4 Stats */}
           <div className="lg:col-span-7 space-y-6">
             <div>
-              <span className="text-xs font-mono text-[#689f38] dark:text-[#8bc34a] font-bold block mb-2">
+              <span className="text-xs font-mono text-[#8bc34a] font-bold block mb-2">
                 {dict.aboutPage.identityBadge}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white leading-snug">
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-white leading-snug">
                 {dict.aboutPage.identityTitle}
               </h2>
             </div>
 
-            <p className="text-base sm:text-lg text-slate-700 dark:text-stone-200 leading-relaxed font-sans font-medium">
+            <p className="text-base sm:text-lg text-stone-200 leading-relaxed font-sans font-medium">
               {isRtl ? CGL_COMPANY_INFO.aboutAr : CGL_COMPANY_INFO.aboutEn}
             </p>
 
             {/* 4 Stats Cards Grid */}
             <div className="grid grid-cols-2 gap-3 pt-2">
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#0a0a0a] border border-slate-200 dark:border-[#1f1f1f] shadow-sm">
-                <div className="text-2xl sm:text-3xl font-bold font-mono text-slate-900 dark:text-white tracking-tight">
+              <div className="p-4 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] shadow-sm">
+                <div className="text-2xl sm:text-3xl font-bold font-mono text-white tracking-tight">
                   650<span className="text-[#8bc34a]">+</span>
                 </div>
-                <div className="text-xs sm:text-sm font-bold text-slate-800 dark:text-stone-200 mt-1">
+                <div className="text-xs sm:text-sm font-bold text-stone-200 mt-1">
                   {dict.aboutPage.stats.partners}
                 </div>
-                <div className="text-[11px] text-slate-500 dark:text-stone-400">
+                <div className="text-[11px] text-stone-400">
                   {dict.aboutPage.stats.partnersSub}
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#0a0a0a] border border-slate-200 dark:border-[#1f1f1f] shadow-sm">
-                <div className="text-2xl sm:text-3xl font-bold font-mono text-slate-900 dark:text-white tracking-tight">
+              <div className="p-4 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] shadow-sm">
+                <div className="text-2xl sm:text-3xl font-bold font-mono text-white tracking-tight">
                   300<span className="text-[#8bc34a]">+</span>
                 </div>
-                <div className="text-xs sm:text-sm font-bold text-slate-800 dark:text-stone-200 mt-1">
+                <div className="text-xs sm:text-sm font-bold text-stone-200 mt-1">
                   {dict.aboutPage.stats.solutions}
                 </div>
-                <div className="text-[11px] text-slate-500 dark:text-stone-400">
+                <div className="text-[11px] text-stone-400">
                   {dict.aboutPage.stats.solutionsSub}
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#0a0a0a] border border-slate-200 dark:border-[#1f1f1f] shadow-sm">
-                <div className="text-2xl sm:text-3xl font-bold font-mono text-slate-900 dark:text-white tracking-tight">
+              <div className="p-4 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] shadow-sm">
+                <div className="text-2xl sm:text-3xl font-bold font-mono text-white tracking-tight">
                   20<span className="text-[#8bc34a]">+</span>
                 </div>
-                <div className="text-xs sm:text-sm font-bold text-slate-800 dark:text-stone-200 mt-1">
+                <div className="text-xs sm:text-sm font-bold text-stone-200 mt-1">
                   {dict.aboutPage.stats.experience}
                 </div>
-                <div className="text-[11px] text-slate-500 dark:text-stone-400">
+                <div className="text-[11px] text-stone-400">
                   {dict.aboutPage.stats.experienceSub}
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#0a0a0a] border border-slate-200 dark:border-[#1f1f1f] shadow-sm">
-                <div className="text-2xl sm:text-3xl font-bold font-mono text-slate-900 dark:text-white tracking-tight">
+              <div className="p-4 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] shadow-sm">
+                <div className="text-2xl sm:text-3xl font-bold font-mono text-white tracking-tight">
                   {isRtl ? 'فرعان' : '2 Branches'}<span className="text-[#8bc34a] ml-1">🇸🇦🇺🇸</span>
                 </div>
-                <div className="text-xs sm:text-sm font-bold text-slate-800 dark:text-stone-200 mt-1">
+                <div className="text-xs sm:text-sm font-bold text-stone-200 mt-1">
                   {dict.aboutPage.stats.branches}
                 </div>
-                <div className="text-[11px] text-slate-500 dark:text-stone-400">
+                <div className="text-[11px] text-stone-400">
                   {dict.aboutPage.stats.branchesSub}
                 </div>
               </div>
@@ -242,7 +242,7 @@ export default async function AboutPage({
           </div>
 
           {/* High-Quality Engineering Image */}
-          <div className="lg:col-span-5 relative h-[360px] sm:h-[440px] rounded-2xl overflow-hidden border border-slate-200 dark:border-[#1f1f1f] shadow-xl bg-slate-100 dark:bg-[#0a0a0a]">
+          <div className="lg:col-span-5 relative h-[360px] sm:h-[440px] rounded-2xl overflow-hidden border border-[#1f1f1f] shadow-xl bg-[#0a0a0a]">
             <Image
               src="/uploads/user_provided/materials_testing.jpeg"
               alt="Engineering Team at CGL"
@@ -254,17 +254,17 @@ export default async function AboutPage({
         </section>
 
         {/* 3. Progress Roadmap Section */}
-        <section className="p-6 sm:p-10 rounded-2xl bg-slate-50 dark:bg-[#0a0a0a] border border-slate-200 dark:border-[#1f1f1f] shadow-sm transition-colors">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-10 pb-4 border-b border-slate-200 dark:border-[#1f1f1f]">
+        <section className="p-6 sm:p-10 rounded-2xl bg-[#0a0a0a] border border-[#1f1f1f] shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-10 pb-4 border-b border-[#1f1f1f]">
             <div>
-              <span className="text-xs font-mono text-[#689f38] dark:text-[#8bc34a] font-bold block mb-1">
+              <span className="text-xs font-mono text-[#8bc34a] font-bold block mb-1">
                 {dict.aboutPage.roadmapBadge}
               </span>
-              <h2 className="text-xl sm:text-2xl font-display font-bold text-slate-900 dark:text-white">
+              <h2 className="text-xl sm:text-2xl font-display font-bold text-white">
                 {dict.aboutPage.roadmapTitle}
               </h2>
             </div>
-            <div className="inline-flex items-center text-xs font-mono text-slate-500 dark:text-stone-400 gap-1.5">
+            <div className="inline-flex items-center text-xs font-mono text-stone-400 gap-1.5">
               <Milestone className="w-4 h-4 text-[#8bc34a]" />
               <span>{dict.aboutPage.roadmapSub}</span>
             </div>
@@ -275,25 +275,25 @@ export default async function AboutPage({
             {dict.aboutPage.roadmapSteps.map((step, idx) => (
               <div 
                 key={idx} 
-                className="relative flex flex-col justify-between p-5 rounded-xl bg-white dark:bg-[#111111] border border-slate-200 dark:border-[#1f1f1f] hover:border-[#8bc34a]/60 dark:hover:border-[#8bc34a]/40 shadow-sm transition-all group"
+                className="relative flex flex-col justify-between p-5 rounded-xl bg-[#111111] border border-[#1f1f1f] hover:border-[#8bc34a]/40 shadow-sm transition-all group"
               >
                 <div>
                   <div className="mb-3">
-                    <span className="text-2xl font-bold font-mono text-slate-900 dark:text-white group-hover:text-[#689f38] dark:group-hover:text-[#8bc34a] transition-colors">
+                    <span className="text-2xl font-bold font-mono text-white group-hover:text-[#8bc34a] transition-colors">
                       {step.year}
                     </span>
                   </div>
 
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white font-display mb-2">
+                  <h3 className="text-base font-bold text-white font-display mb-2">
                     {step.title}
                   </h3>
 
-                  <p className="text-xs text-slate-600 dark:text-stone-400 leading-relaxed font-sans">
+                  <p className="text-xs text-stone-400 leading-relaxed font-sans">
                     {step.desc}
                   </p>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-slate-100 dark:border-[#1f1f1f] flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-stone-500">
+                <div className="pt-4 mt-4 border-t border-[#1f1f1f] flex items-center justify-between text-[11px] font-mono text-stone-500">
                   <span>{dict.aboutPage.roadmapStage} 0{idx + 1}</span>
                   <span className="w-2 h-2 rounded-full bg-[#8bc34a]/40 group-hover:bg-[#8bc34a] transition-colors" />
                 </div>
@@ -306,27 +306,27 @@ export default async function AboutPage({
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* OUR MISSION */}
-          <div className="p-8 sm:p-10 rounded-2xl bg-slate-50 dark:bg-[#0a0a0a] border border-slate-200 dark:border-[#1f1f1f] flex flex-col justify-between hover:border-[#8bc34a]/60 dark:hover:border-[#8bc34a]/40 transition-all relative overflow-hidden shadow-sm">
+          <div className="p-8 sm:p-10 rounded-2xl bg-[#0a0a0a] border border-[#1f1f1f] flex flex-col justify-between hover:border-[#8bc34a]/40 transition-all relative overflow-hidden shadow-sm">
             <div className={`absolute top-0 ${isRtl ? 'right-0' : 'left-0'} w-28 h-1 bg-[#8bc34a]`} />
             
             <div>
               <div className="flex items-center gap-3.5 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-white dark:bg-[#111111] border border-slate-200 dark:border-[#1f1f1f] flex items-center justify-center text-[#8bc34a] flex-shrink-0 shadow-sm">
+                <div className="w-12 h-12 rounded-xl bg-[#111111] border border-[#1f1f1f] flex items-center justify-center text-[#8bc34a] flex-shrink-0 shadow-sm">
                   <Target className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-xs font-mono text-[#689f38] dark:text-[#8bc34a] font-bold">{dict.aboutPage.missionBadge}</span>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white font-display">{dict.aboutPage.missionTitle}</h3>
+                  <span className="text-xs font-mono text-[#8bc34a] font-bold">{dict.aboutPage.missionBadge}</span>
+                  <h3 className="text-xl font-bold text-white font-display">{dict.aboutPage.missionTitle}</h3>
                 </div>
               </div>
 
-              <blockquote className={`text-lg sm:text-xl font-medium text-slate-900 dark:text-white leading-relaxed mb-6 ${isRtl ? 'border-r-4 pr-4' : 'border-l-4 pl-4'} border-[#8bc34a] bg-white/80 dark:bg-[#111111]/50 p-4 rounded-xl shadow-sm`}>
+              <blockquote className={`text-lg sm:text-xl font-medium text-white leading-relaxed mb-6 ${isRtl ? 'border-r-4 pr-4' : 'border-l-4 pl-4'} border-[#8bc34a] bg-[#111111]/50 p-4 rounded-xl shadow-sm`}>
                 "{isRtl ? CGL_COMPANY_INFO.missionAr : CGL_COMPANY_INFO.missionEn}"
               </blockquote>
 
               <div className="space-y-3 pt-2">
                 {dict.aboutPage.missionPillars.map((pillar, pIdx) => (
-                  <div key={pIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-stone-300">
+                  <div key={pIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-300">
                     <CheckCircle2 className="w-4 h-4 text-[#8bc34a] flex-shrink-0 mt-0.5" />
                     <span>{pillar}</span>
                   </div>
@@ -336,27 +336,27 @@ export default async function AboutPage({
           </div>
 
           {/* OUR VISION */}
-          <div className="p-8 sm:p-10 rounded-2xl bg-slate-50 dark:bg-[#0a0a0a] border border-slate-200 dark:border-[#1f1f1f] flex flex-col justify-between hover:border-[#8bc34a]/60 dark:hover:border-[#8bc34a]/40 transition-all relative overflow-hidden shadow-sm">
+          <div className="p-8 sm:p-10 rounded-2xl bg-[#0a0a0a] border border-[#1f1f1f] flex flex-col justify-between hover:border-[#8bc34a]/40 transition-all relative overflow-hidden shadow-sm">
             <div className={`absolute top-0 ${isRtl ? 'right-0' : 'left-0'} w-28 h-1 bg-[#8bc34a]`} />
             
             <div>
               <div className="flex items-center gap-3.5 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-white dark:bg-[#111111] border border-slate-200 dark:border-[#1f1f1f] flex items-center justify-center text-[#8bc34a] flex-shrink-0 shadow-sm">
+                <div className="w-12 h-12 rounded-xl bg-[#111111] border border-[#1f1f1f] flex items-center justify-center text-[#8bc34a] flex-shrink-0 shadow-sm">
                   <Compass className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-xs font-mono text-[#689f38] dark:text-[#8bc34a] font-bold">{dict.aboutPage.visionBadge}</span>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white font-display">{dict.aboutPage.visionTitle}</h3>
+                  <span className="text-xs font-mono text-[#8bc34a] font-bold">{dict.aboutPage.visionBadge}</span>
+                  <h3 className="text-xl font-bold text-white font-display">{dict.aboutPage.visionTitle}</h3>
                 </div>
               </div>
 
-              <div className={`text-base sm:text-lg font-medium text-slate-900 dark:text-white leading-relaxed mb-6 ${isRtl ? 'border-r-4 pr-4' : 'border-l-4 pl-4'} border-[#8bc34a] bg-white/80 dark:bg-[#111111]/50 p-4 rounded-xl shadow-sm`}>
+              <div className={`text-base sm:text-lg font-medium text-white leading-relaxed mb-6 ${isRtl ? 'border-r-4 pr-4' : 'border-l-4 pl-4'} border-[#8bc34a] bg-[#111111]/50 p-4 rounded-xl shadow-sm`}>
                 {isRtl ? CGL_COMPANY_INFO.visionAr.lead : CGL_COMPANY_INFO.visionEn.lead}
               </div>
 
               <div className="space-y-3 pt-2">
                 {(isRtl ? CGL_COMPANY_INFO.visionAr.points : CGL_COMPANY_INFO.visionEn.points).map((point, ptIdx) => (
-                  <div key={ptIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-stone-300">
+                  <div key={ptIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-300">
                     <CheckCircle2 className="w-4 h-4 text-[#8bc34a] flex-shrink-0 mt-0.5" />
                     <span>{point}</span>
                   </div>
@@ -370,13 +370,13 @@ export default async function AboutPage({
         {/* 5. Values Grid (4x2 Clean Layout) */}
         <section className="space-y-8">
           <div className="text-center max-w-2xl mx-auto">
-            <span className="text-xs font-mono text-[#689f38] dark:text-[#8bc34a] font-bold block mb-2">
+            <span className="text-xs font-mono text-[#8bc34a] font-bold block mb-2">
               {dict.aboutPage.valuesBadge}
             </span>
-            <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl font-display font-bold text-white">
               {dict.aboutPage.valuesTitle}
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-stone-400 font-sans mt-2">
+            <p className="text-xs sm:text-sm text-stone-400 font-sans mt-2">
               {dict.aboutPage.valuesSubtitle}
             </p>
           </div>
@@ -387,23 +387,23 @@ export default async function AboutPage({
               return (
                 <div
                   key={idx}
-                  className="p-5 rounded-xl bg-slate-50 dark:bg-[#0a0a0a] border border-slate-200 dark:border-[#1f1f1f] hover:border-[#8bc34a]/60 dark:hover:border-[#8bc34a]/40 shadow-sm transition-all group flex flex-col justify-between"
+                  className="p-5 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] hover:border-[#8bc34a]/40 shadow-sm transition-all group flex flex-col justify-between"
                 >
                   <div>
-                    <div className="w-10 h-10 rounded-lg bg-white dark:bg-[#111111] border border-slate-200 dark:border-[#1f1f1f] flex items-center justify-center text-[#8bc34a] mb-4 group-hover:scale-105 transition-transform shadow-sm">
+                    <div className="w-10 h-10 rounded-lg bg-[#111111] border border-[#1f1f1f] flex items-center justify-center text-[#8bc34a] mb-4 group-hover:scale-105 transition-transform shadow-sm">
                       <IconComp className="w-5 h-5" />
                     </div>
 
-                    <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white font-display mb-1.5 group-hover:text-[#689f38] dark:group-hover:text-[#8bc34a] transition-colors">
+                    <h3 className="text-sm sm:text-base font-bold text-white font-display mb-1.5 group-hover:text-[#8bc34a] transition-colors">
                       {val.title}
                     </h3>
 
-                    <p className="text-xs text-slate-600 dark:text-stone-400 leading-relaxed font-sans">
+                    <p className="text-xs text-stone-400 leading-relaxed font-sans">
                       {val.desc}
                     </p>
                   </div>
 
-                  <div className="pt-4 mt-4 border-t border-slate-100 dark:border-[#1f1f1f] text-[10px] font-mono text-slate-400 dark:text-stone-600">
+                  <div className="pt-4 mt-4 border-t border-[#1f1f1f] text-[10px] font-mono text-stone-600">
                     0{idx + 1}
                   </div>
                 </div>
@@ -413,7 +413,7 @@ export default async function AboutPage({
         </section>
 
         {/* 6. Bottom Direct CTA Banner */}
-        <section className="p-8 sm:p-12 rounded-2xl bg-slate-900 dark:bg-[#0a0a0a] text-white border border-slate-800 dark:border-[#1f1f1f] relative overflow-hidden shadow-xl">
+        <section className="p-8 sm:p-12 rounded-2xl bg-[#0a0a0a] text-white border border-[#1f1f1f] relative overflow-hidden shadow-xl">
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="text-xl sm:text-3xl font-display font-bold text-white mb-2">
