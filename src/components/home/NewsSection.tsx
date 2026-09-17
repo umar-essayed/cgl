@@ -42,7 +42,7 @@ export default function NewsSection({ lang = 'ar' }: NewsSectionProps) {
           </div>
 
           <div className="text-xs font-mono text-stone-400 bg-[#111111] px-3.5 py-1.5 rounded-xl border border-[#1f1f1f] self-start sm:self-auto shadow-sm">
-            <span>{isRtl ? 'المقالات والتقارير: ' : 'Technical Stories: '}</span>
+            <span>{isRtl ? 'الأخبار:' : 'Stories:'}</span>
             <span className="text-[#8bc34a] font-bold">0{CGL_LATEST_NEWS.length}</span>
           </div>
         </div>

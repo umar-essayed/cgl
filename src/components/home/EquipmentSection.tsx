@@ -68,7 +68,7 @@ export default function EquipmentSection({ lang = 'ar' }: EquipmentSectionProps)
           </div>
 
           <div className="text-xs font-mono text-stone-400 bg-[#111111] px-4 py-2 rounded-xl border border-[#1f1f1f] self-start md:self-auto flex items-center gap-2">
-            <span>{isRtl ? 'المعدات المعروضة: ' : 'Showing: '}</span>
+            <span>{isRtl ? 'المعروض:' : 'Showing:'}</span>
             <span className="text-[#8bc34a] font-bold">0{displayedEquipment.length} / 0{filteredEquipment.length}</span>
           </div>
         </div>
@@ -204,8 +204,8 @@ export default function EquipmentSection({ lang = 'ar' }: EquipmentSectionProps)
             >
               <span>
                 {showAll
-                  ? (isRtl ? 'طي قائمة المعدات (عرض 3 فقط)' : 'Collapse Equipment (Show 3 only)')
-                  : (isRtl ? `عرض كافة تجهيزات الأسطول (${filteredEquipment.length} معدات)` : `View All Fleet Equipment (${filteredEquipment.length} units)`)
+                  ? (isRtl ? 'عرض أقل' : 'Show Less')
+                  : (isRtl ? `عرض كل المعدات (${filteredEquipment.length})` : `View All (${filteredEquipment.length})`)
                 }
               </span>
               <ChevronIcon className={`w-4 h-4 text-[#8bc34a] transition-transform duration-300 ${showAll ? '-rotate-90' : 'rotate-0'}`} />
