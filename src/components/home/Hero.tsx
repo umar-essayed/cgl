@@ -1,15 +1,22 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Shield } from 'lucide-react';
 import { CGL_COMPANY_INFO } from '@/lib/data';
 import { Locale, getDictionary } from '@/lib/i18n';
+import { HeroSlide } from '@/lib/types';
 
 interface HeroProps {
   lang?: Locale;
+  slides?: HeroSlide[];
+  stats?: {
+    globalPartners?: number;
+    innovativeSolutions?: number;
+    yearsOfGrowth?: number;
+  };
 }
 
 function AnimatedCounter({ target, duration = 2200 }: { target: number; duration?: number }) {
@@ -39,21 +46,54 @@ function AnimatedCounter({ target, duration = 2200 }: { target: number; duration
   return <>{count.toLocaleString('en-US')}</>;
 }
 
-export default function Hero({ lang = 'ar' }: HeroProps) {
+export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const dict = getDictionary(lang);
   const isRtl = lang === 'ar';
 
+  const partnersCount = stats?.globalPartners ?? dict.hero.stats.partners.num;
+  const solutionsCount = stats?.innovativeSolutions ?? dict.hero.stats.solutions.num;
+  const experienceCount = stats?.yearsOfGrowth ?? dict.hero.stats.experience.num;
+
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
-  const slideImages = [
+  const fallbackImages = [
     '/assets/sliders/slider1.jpg',
     '/uploads/projects_images/project_688d08b6e73ee4.36242119.jpg',
     '/uploads/projects_images/project_688d0f1061e875.99060450.jpg'
   ];
 
-  const totalSlides = dict.hero.slides.length;
+  // Normalized dynamic slides (accepts arbitrary count, image or video, custom duration)
+  const normalizedSlides = useMemo(() => {
+    if (slides && slides.length > 0) {
+      return slides.map((s, idx) => ({
+        id: s.id || `slide-${idx}`,
+        tag: (isRtl ? s.tagAr : s.tagEn) || (isRtl ? 'دراسات جيوتقنية' : 'Geotechnical'),
+        title: (isRtl ? s.titleAr : s.titleEn) || '',
+        subtitle: (isRtl ? s.subtitleAr : s.subtitleEn) || '',
+        metrics: (isRtl ? s.metricsAr : s.metricsEn) || '',
+        mediaUrl: s.mediaUrl || fallbackImages[idx % fallbackImages.length],
+        type: s.type || ((s.mediaUrl?.endsWith('.mp4') || s.mediaUrl?.endsWith('.webm')) ? 'video' : 'image'),
+        duration: s.duration || 6,
+      }));
+    }
+
+    // Default dictionary slides fallback
+    return dict.hero.slides.map((s, idx) => ({
+      id: `dict-${s.id || idx}`,
+      tag: s.tag,
+      title: s.title,
+      subtitle: s.subtitle,
+      metrics: s.metrics,
+      mediaUrl: fallbackImages[idx % fallbackImages.length],
+      type: 'image' as const,
+      duration: 6,
+    }));
+  }, [slides, isRtl, dict.hero.slides]);
+
+  const totalSlides = normalizedSlides.length;
+  const activeSlide = normalizedSlides[currentSlide] || normalizedSlides[0];
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides);
@@ -63,13 +103,24 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
     setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
   };
 
-  // Auto slide advance every 6 seconds
+  // Keep current slide within bounds if slides count changes dynamically
   useEffect(() => {
-    const timer = setInterval(() => {
+    if (currentSlide >= totalSlides) {
+      setCurrentSlide(0);
+    }
+  }, [totalSlides, currentSlide]);
+
+  // Dynamic per-slide timer based on each slide's individual duration
+  useEffect(() => {
+    if (totalSlides <= 1) return;
+    const slideDuration = Number(activeSlide.duration) > 0 ? Number(activeSlide.duration) : 6;
+    const durationMs = slideDuration * 1000;
+    const timer = setTimeout(() => {
       setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, [totalSlides]);
+    }, durationMs);
+
+    return () => clearTimeout(timer);
+  }, [currentSlide, activeSlide.id, activeSlide.duration, totalSlides]);
 
   // Touch Swipe Handlers for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -107,8 +158,6 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
     touchEndX.current = null;
   };
 
-  const slideData = dict.hero.slides[currentSlide] || dict.hero.slides[0];
-  const slideImage = slideImages[currentSlide] || slideImages[0];
   const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
 
   return (
@@ -118,24 +167,36 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
       onTouchEnd={handleTouchEnd}
       className="relative min-h-[100svh] sm:min-h-[700px] max-h-[1050px] flex flex-col justify-between pt-24 pb-4 sm:pt-28 sm:pb-8 engineering-canvas overflow-hidden bg-[#000000] select-none"
     >
-      {/* Background Image Carousel with Smooth AnimatePresence */}
+      {/* Background Image/Video Carousel with Smooth AnimatePresence */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <AnimatePresence mode="wait">
           <motion.div
-            key={slideData.id}
+            key={activeSlide.id + activeSlide.mediaUrl}
             initial={{ opacity: 0, scale: 1.03 }}
             animate={{ opacity: 0.65, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
             className="absolute inset-0"
           >
-            <Image
-              src={slideImage}
-              alt={slideData.title}
-              fill
-              priority
-              className="object-cover object-center filter contrast-105 brightness-95"
-            />
+            {activeSlide.type === 'video' ? (
+              <video
+                key={activeSlide.mediaUrl}
+                src={activeSlide.mediaUrl}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover object-center filter contrast-105 brightness-95"
+              />
+            ) : (
+              <Image
+                src={activeSlide.mediaUrl}
+                alt={activeSlide.title}
+                fill
+                priority
+                className="object-cover object-center filter contrast-105 brightness-95"
+              />
+            )}
           </motion.div>
         </AnimatePresence>
 
@@ -151,7 +212,7 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
           <div className="min-h-[170px] sm:min-h-[280px] flex flex-col justify-center">
             <AnimatePresence mode="wait">
               <motion.div
-                key={slideData.id}
+                key={activeSlide.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -161,19 +222,23 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
                 {/* Tag Pill */}
                 <div className="inline-flex items-center gap-2 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-[#111111]/90 border border-[#1f1f1f] text-[11px] sm:text-xs font-sans text-[#8bc34a] shadow-sm w-fit">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#8bc34a] animate-pulse" />
-                  <span className="font-semibold">{slideData.tag}</span>
-                  <span className="text-stone-600">|</span>
-                  <span className="text-stone-300 font-mono text-[10px] sm:text-xs">{slideData.metrics}</span>
+                  <span className="font-semibold">{activeSlide.tag}</span>
+                  {activeSlide.metrics && (
+                    <>
+                      <span className="text-stone-600">|</span>
+                      <span className="text-stone-300 font-mono text-[10px] sm:text-xs">{activeSlide.metrics}</span>
+                    </>
+                  )}
                 </div>
 
                 {/* Headline */}
                 <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-snug tracking-tight">
-                  {slideData.title}
+                  {activeSlide.title}
                 </h1>
 
                 {/* Subtitle */}
                 <p className="text-xs sm:text-base md:text-lg text-stone-200 font-sans leading-relaxed max-w-2xl font-normal line-clamp-2 sm:line-clamp-none">
-                  {slideData.subtitle}
+                  {activeSlide.subtitle}
                 </p>
               </motion.div>
             </AnimatePresence>
@@ -206,13 +271,13 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
                     <>
                       <span className="text-[#8bc34a] font-bold text-base">+</span>
                       <span className="text-base font-bold text-white tracking-tight">
-                        <AnimatedCounter target={dict.hero.stats.partners.num} />
+                        <AnimatedCounter target={partnersCount} />
                       </span>
                     </>
                   ) : (
                     <>
                       <span className="text-base font-bold text-white tracking-tight">
-                        <AnimatedCounter target={dict.hero.stats.partners.num} />
+                        <AnimatedCounter target={partnersCount} />
                       </span>
                       <span className="text-[#8bc34a] font-bold text-base">+</span>
                     </>
@@ -229,13 +294,13 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
                     <>
                       <span className="text-[#8bc34a] font-bold text-base">+</span>
                       <span className="text-base font-bold text-white tracking-tight">
-                        <AnimatedCounter target={dict.hero.stats.solutions.num} />
+                        <AnimatedCounter target={solutionsCount} />
                       </span>
                     </>
                   ) : (
                     <>
                       <span className="text-base font-bold text-white tracking-tight">
-                        <AnimatedCounter target={dict.hero.stats.solutions.num} />
+                        <AnimatedCounter target={solutionsCount} />
                       </span>
                       <span className="text-[#8bc34a] font-bold text-base">+</span>
                     </>
@@ -252,13 +317,13 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
                     <>
                       <span className="text-[#8bc34a] font-bold text-base">+</span>
                       <span className="text-base font-bold text-white tracking-tight">
-                        <AnimatedCounter target={dict.hero.stats.experience.num} />
+                        <AnimatedCounter target={experienceCount} />
                       </span>
                     </>
                   ) : (
                     <>
                       <span className="text-base font-bold text-white tracking-tight">
-                        <AnimatedCounter target={dict.hero.stats.experience.num} />
+                        <AnimatedCounter target={experienceCount} />
                       </span>
                       <span className="text-[#8bc34a] font-bold text-base">+</span>
                     </>
@@ -280,13 +345,13 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
                 <>
                   <span className="text-[#8bc34a] font-bold text-xl">+</span>
                   <span className="text-xl font-bold text-white tracking-tight">
-                    <AnimatedCounter target={dict.hero.stats.partners.num} />
+                    <AnimatedCounter target={partnersCount} />
                   </span>
                 </>
               ) : (
                 <>
                   <span className="text-xl font-bold text-white tracking-tight">
-                    <AnimatedCounter target={dict.hero.stats.partners.num} />
+                    <AnimatedCounter target={partnersCount} />
                   </span>
                   <span className="text-[#8bc34a] font-bold text-xl">+</span>
                 </>
@@ -303,13 +368,13 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
                 <>
                   <span className="text-[#8bc34a] font-bold text-xl">+</span>
                   <span className="text-xl font-bold text-white tracking-tight">
-                    <AnimatedCounter target={dict.hero.stats.solutions.num} />
+                    <AnimatedCounter target={solutionsCount} />
                   </span>
                 </>
               ) : (
                 <>
                   <span className="text-xl font-bold text-white tracking-tight">
-                    <AnimatedCounter target={dict.hero.stats.solutions.num} />
+                    <AnimatedCounter target={solutionsCount} />
                   </span>
                   <span className="text-[#8bc34a] font-bold text-xl">+</span>
                 </>
@@ -326,13 +391,13 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
                 <>
                   <span className="text-[#8bc34a] font-bold text-xl">+</span>
                   <span className="text-xl font-bold text-white tracking-tight">
-                    <AnimatedCounter target={dict.hero.stats.experience.num} />
+                    <AnimatedCounter target={experienceCount} />
                   </span>
                 </>
               ) : (
                 <>
                   <span className="text-xl font-bold text-white tracking-tight">
-                    <AnimatedCounter target={dict.hero.stats.experience.num} />
+                    <AnimatedCounter target={experienceCount} />
                   </span>
                   <span className="text-[#8bc34a] font-bold text-xl">+</span>
                 </>
@@ -343,31 +408,40 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
         </div>
       </div>
 
-      {/* Bottom Controls Bar */}
+      {/* Bottom Controls Bar (Dynamic Tabs: Scrollable on mobile, flex on desktop) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-20 w-full pt-3 sm:pt-4 border-t border-white/10">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
           
-          {/* Slide Switcher Tabs: Fixed No-Scroll Grid on Mobile, Flex Row on Desktop */}
+          {/* Slide Switcher Tabs: Strictly NO SCROLL on mobile, fits 100% width evenly */}
           <div className="w-full sm:w-auto">
-            <div className="grid grid-cols-3 gap-1.5 sm:flex sm:items-center sm:gap-2 w-full">
-              {dict.hero.slides.map((s, idx) => {
+            <div className="flex items-center gap-1.5 sm:gap-2 w-full">
+              {normalizedSlides.map((s, idx) => {
                 const isActive = currentSlide === idx;
                 return (
                   <button
                     key={s.id}
                     type="button"
                     onClick={() => setCurrentSlide(idx)}
-                    className={`px-1.5 py-2 sm:px-3.5 sm:py-1.5 rounded-xl text-[10px] sm:text-xs font-sans transition-all flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 active:scale-95 text-center sm:text-start ${
+                    className={`relative overflow-hidden flex-1 sm:flex-initial min-w-0 px-2.5 py-2 sm:px-4 sm:py-2 rounded-xl text-[10px] sm:text-xs font-sans transition-all flex items-center justify-center sm:justify-start gap-1.5 sm:gap-2 active:scale-95 backdrop-blur-md ${
                       isActive
-                        ? 'bg-white text-black font-bold shadow-lg ring-1 ring-white/50'
-                        : 'bg-black/70 text-stone-300 hover:text-white border border-white/15 hover:bg-black/90'
+                        ? 'bg-black/80 text-white font-bold border border-[#8bc34a]/70 shadow-lg shadow-[#8bc34a]/15 ring-1 ring-[#8bc34a]/30'
+                        : 'bg-black/40 text-stone-400 hover:text-white border border-white/10 hover:bg-black/60 hover:border-white/20'
                     }`}
                   >
-                    <div className="flex items-center gap-1 flex-shrink-0">
-                      <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isActive ? 'bg-[#8bc34a]' : 'bg-stone-600'}`} />
-                      <span className="font-mono font-bold text-[10px] sm:text-xs">0{idx + 1}.</span>
+                    {isActive && (
+                      <motion.div
+                        key={`prog-${s.id}-${currentSlide}`}
+                        initial={{ width: '0%' }}
+                        animate={{ width: '100%' }}
+                        transition={{ duration: Number(s.duration) > 0 ? Number(s.duration) : 6, ease: 'linear' }}
+                        className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#8bc34a]"
+                      />
+                    )}
+                    <div className="flex items-center gap-1.5 flex-shrink-0 relative z-10">
+                      <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isActive ? 'bg-[#8bc34a] shadow-[0_0_8px_#8bc34a]' : 'bg-stone-600'}`} />
+                      <span className={`font-mono font-bold text-[10px] sm:text-xs ${isActive ? 'text-[#8bc34a]' : 'text-stone-500'}`}>0{idx + 1}.</span>
                     </div>
-                    <span className="line-clamp-2 leading-tight text-[10px] sm:text-xs sm:whitespace-nowrap">{s.tag}</span>
+                    <span className={`text-[10px] sm:text-xs truncate relative z-10 ${isActive ? 'text-white' : 'text-stone-300'}`}>{s.tag}</span>
                   </button>
                 );
               })}

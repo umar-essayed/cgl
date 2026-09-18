@@ -137,6 +137,14 @@ export const dictionaries = {
         successTitle: 'تم استلام طلبكم بنجاح!',
         successDesc: 'شكراً لتواصلكم مع CGL. سيقوم فريقنا الهندسي بالاطلاع على تفاصيل المشروع والتواصل معكم خلال 24 ساعة.',
         newRequestBtn: 'إرسال طلب آخر',
+        refNumberLabel: 'الرقم المرجعي للطلب:',
+        savedLocallyNotice: 'تم حفظ رقم الطلب وتفاصيله على جهازك بنجاح للرجوع إليه ومتابعته في أي وقت.',
+        copyRefBtn: 'نسخ الرقم المرجعي',
+        copiedSuccess: 'تم نسخ الرقم!',
+        savedRequestsTitle: 'طلباتك المحفوظة على هذا الجهاز',
+        noSavedRequests: 'لا توجد طلبات سابقة مسجلة على هذا المتصفح.',
+        clearHistory: 'مسح السجل',
+        whatsappDirect: 'متابعة الطلب عبر واتساب',
       }
     },
     aboutPage: {
@@ -347,6 +355,14 @@ export const dictionaries = {
         successTitle: 'Request Received Successfully!',
         successDesc: 'Thank you for reaching out to CGL. Our engineering team will review your project details and contact you within 24 hours.',
         newRequestBtn: 'Submit Another Request',
+        refNumberLabel: 'Proposal Reference Number:',
+        savedLocallyNotice: 'Your proposal reference number and details are saved on this device for tracking.',
+        copyRefBtn: 'Copy Reference',
+        copiedSuccess: 'Copied to Clipboard!',
+        savedRequestsTitle: 'Your Saved Requests on this Device',
+        noSavedRequests: 'No previous requests saved on this browser.',
+        clearHistory: 'Clear History',
+        whatsappDirect: 'Follow-up via WhatsApp',
       }
     },
     aboutPage: {

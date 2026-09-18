@@ -272,9 +272,11 @@ export const CGL_PROJECTS_EVIDENCE: ProjectEvidence[] = [
       'Calibrated Precision Dial Indicators (0.01mm)',
       'Heavy Steel Reaction Beam Frame & Concrete Kentledge'
     ],
-    coverImage: '/uploads/projects_images/project_688d08b6e73ee4.36242119.jpg',
+    coverImage: '/api/media/projects/pile_load_testing_reaction.jpg',
     gallery: [
-      '/uploads/projects_images/project_688d08b6e73ee4.36242119.jpg'
+      '/api/media/projects/pile_load_testing_reaction.jpg',
+      '/api/media/projects/pile_load_testing_jack.jpg',
+      '/api/media/projects/pile_load_testing_frame.jpg'
     ],
     relevantStandards: ['ASTM D1143 / D1143M', 'SBC 303 Requirements'],
     relatedServiceId: 'geotechnical-investigation'
@@ -306,10 +308,11 @@ export const CGL_PROJECTS_EVIDENCE: ProjectEvidence[] = [
       'Precision Tripods & Prism Assemblies',
       'Digital Surveying Controllers'
     ],
-    coverImage: '/uploads/curated/surveyor_total_station.jpg',
+    coverImage: '/api/media/projects/geodetic_survey_total_station.jpg',
     gallery: [
-      '/uploads/curated/surveyor_total_station.jpg',
-      '/uploads/projects_images/project_688d0f1061e875.99060450.jpg'
+      '/api/media/projects/geodetic_survey_total_station.jpg',
+      '/api/media/projects/geodetic_survey_digital_instrument.jpg',
+      '/api/media/projects/geodetic_survey_site_layout.jpg'
     ],
     relevantStandards: ['National Geodetic Guidelines', 'MOMRA Topographic Standards'],
     relatedServiceId: 'engineering-surveying'
@@ -341,10 +344,11 @@ export const CGL_PROJECTS_EVIDENCE: ProjectEvidence[] = [
       'Double-Tube Wireline Diamond Core Barrels',
       'Field Point Load Testing Apparatus'
     ],
-    coverImage: '/uploads/user_provided/mining_core_drilling.jpeg',
+    coverImage: '/api/media/projects/mining_rotary_core_drilling_rig.jpg',
     gallery: [
-      '/uploads/user_provided/mining_core_drilling.jpeg',
-      '/uploads/projects_images/mining_rig.jpeg'
+      '/api/media/projects/mining_rotary_core_drilling_rig.jpg',
+      '/api/media/projects/mining_quarry_rock_drilling.jpg',
+      '/api/media/projects/mining_subsurface_exploration.jpg'
     ],
     relevantStandards: ['ASTM D7012', 'ASTM D6032', 'ISRM Suggested Methods'],
     relatedServiceId: 'mining-testing'
@@ -376,10 +380,11 @@ export const CGL_PROJECTS_EVIDENCE: ProjectEvidence[] = [
       'High-Precision Prisms & Invar Leveling Rods',
       'CAD / GIS Terrain Modeling Software'
     ],
-    coverImage: '/uploads/projects_images/quarry_survey.jpeg',
+    coverImage: '/api/media/projects/quarry_deformation_monitoring_station.jpg',
     gallery: [
-      '/uploads/projects_images/quarry_survey.jpeg',
-      '/uploads/curated/surveyor_total_station.jpg'
+      '/api/media/projects/quarry_deformation_monitoring_station.jpg',
+      '/api/media/projects/quarry_precision_field_survey.jpg',
+      '/api/media/projects/quarry_geodetic_tripod.jpg'
     ],
     relevantStandards: ['FGDC Geodetic Standards', 'MOMRA Topographic Specifications'],
     relatedServiceId: 'engineering-surveying'
@@ -411,13 +416,50 @@ export const CGL_PROJECTS_EVIDENCE: ProjectEvidence[] = [
       'Nuclear Density Gauge (Calibrated Troxler)',
       'Submersible Deep Well Dewatering Pumps'
     ],
-    coverImage: '/uploads/projects_images/excavation_shoring.jpeg',
+    coverImage: '/api/media/projects/deep_excavation_shoring_piles.jpg',
     gallery: [
-      '/uploads/projects_images/excavation_shoring.jpeg',
-      '/uploads/curated/foundation_drilling_site.jpg'
+      '/api/media/projects/deep_excavation_shoring_piles.jpg',
+      '/api/media/projects/trench_shoring_dewatering_system.jpg',
+      '/api/media/projects/excavation_foundation_site.jpg'
     ],
     relevantStandards: ['OSHA Subpart P (Excavations)', 'CIRIA C760', 'SBC 303'],
     relatedServiceId: 'shoring-dewatering'
+  },
+  {
+    id: 'cgl-proj-006',
+    nameAr: 'تقييم السلامة الإنشائية والفحوص غير المتلفة للأبراج القائمة',
+    nameEn: 'Structural Integrity Assessment & Non-Destructive Testing for High-Rise Towers',
+    sectorAr: 'تقييم المنشآت وضبط الجودة الإنشائية',
+    sectorEn: 'Building Integrity & Structural Health',
+    locationAr: 'جدة، المملكة العربية السعودية',
+    locationEn: 'Jeddah, Saudi Arabia',
+    scopeOfWorkAr: 'تنفيذ الفحوصات الإنشائية غير الإتلافيّة (NDT)، واختبارات الموجات فوق الصوتية، ومسح حديد التسليح بالرادار الخرساني لتقييم السلامة الإنشائية وتحديد مطابقة العناصر الحاملة.',
+    scopeOfWorkEn: 'Executing non-destructive testing (NDT), ultrasonic pulse velocity, and GPR concrete radar scanning to evaluate structural integrity and assess load-bearing elements.',
+    servicesPerformedAr: [
+      'مسح وتحديد كثافة وتغطية حديد التسليح بالرادار ثلاثي الأبعاد',
+      'تقييم التجانس الإنشائي واكتشاف التعشيش والشروخ الداخلية',
+      'إصدار تقارير هندسية متكاملة مدعمة بنماذج المطابقة الإنشائية'
+    ],
+    technicalChallengesAr: 'فحص وتحديد مواقع التسليح والعيوب الداخلية في العناصر الخرسانية الكثيفة دون الإضرار بالسلامة الإنشائية للبرج القائم.',
+    engineeringApproachAr: 'استخدام أحدث أجهزة المسح الكهرومغناطيسي وفوق الصوتي المعايرة، مع عمل نمذجة ثلاثية الأبعاد لتوزيع التسليح ومطابقتها مع المخططات الإنشائية المعتمدة.',
+    testsPerformedAr: [
+      'Ultrasonic Pulse Velocity Test (ASTM C597)',
+      'High-Frequency GPR Rebar & Void Mapping',
+      'Concrete Core Compressive Strength Verification'
+    ],
+    equipmentUsed: [
+      'Proceq Ultrasonic Pulse Velocity Tester (Pundit PL-200)',
+      'Hilti PS 1000 X-Scan 3D Concrete Radar',
+      'Calibrated Rebound Schmidt Test Hammer'
+    ],
+    coverImage: '/api/media/projects/structural_integrity_ultrasonic_ndt.jpg',
+    gallery: [
+      '/api/media/projects/structural_integrity_ultrasonic_ndt.jpg',
+      '/api/media/projects/structural_concrete_core_sampling.jpg',
+      '/api/media/projects/structural_rebar_radar_scanner.jpg'
+    ],
+    relevantStandards: ['ASTM C597', 'BS 1881-204', 'ACI 228.1R', 'SBC 304'],
+    relatedServiceId: 'building-integrity'
   }
 ];
 
@@ -582,26 +624,114 @@ export const CGL_OPERATIONAL_CAPABILITIES: OperationalCapability[] = [
 
 export const CGL_AUTHORIZED_PARTNERS: AuthorizedPartner[] = [
   {
-    id: 'aramco',
-    nameAr: 'أرامكو السعودية',
-    nameEn: 'Saudi Aramco',
-    category: 'development',
-    sectorAr: 'مشاريع الطاقة والصناعة الكبرى',
-    collaborationScopeAr: 'الفحوصات الجيوتقنية المعقدة للمنشآت الصناعية الثقيلة وتحديد استقرار المنحدرات.',
-    badge: 'عميل استراتيجي',
-    logo: '/assets/partners/aramco.svg',
-    logoLight: '/assets/partners/aramco-light.svg'
+    id: 'proceq',
+    nameAr: 'بروسيك السويسرية',
+    nameEn: 'Proceq Switzerland',
+    category: 'consultant',
+    sectorAr: 'تقنيات وفحوصات لاإتلافية',
+    collaborationScopeAr: 'أنظمة الفحص غير المتلف واختبارات رادار الخرسانة والموجات فوق الصوتية.',
+    badge: 'شريك تقني عالمي',
+    logo: '/api/media/partners/proceq.png',
   },
   {
-    id: 'roshn',
-    nameAr: 'شركة روشن العقارية',
-    nameEn: 'ROSHN Real Estate (PIF)',
+    id: 'weber',
+    nameAr: 'ويبر سان جوبان',
+    nameEn: 'Weber Saint-Gobain',
+    category: 'materials',
+    sectorAr: 'مواد البناء المتطورة',
+    collaborationScopeAr: 'تطوير وفحص المواد الإنشائية المتطورة والخلطات الصناعية.',
+    badge: 'شريك مواد بناء',
+    logo: '/api/media/partners/weber.png',
+  },
+  {
+    id: 'hilti',
+    nameAr: 'هيلتي العالمية',
+    nameEn: 'Hilti Group',
+    category: 'consultant',
+    sectorAr: 'أنظمة التثبيت والهندسة الميكانيكية',
+    collaborationScopeAr: 'فحوصات التثبيت الإنشائي والحلول الهندسية المعتمدة.',
+    badge: 'شريك أنظمة هندسية',
+    logo: '/api/media/partners/hilti.png',
+  },
+  {
+    id: 'levels',
+    nameAr: 'شركة ليفلز للمقاولات',
+    nameEn: 'LEVELS Contracting',
+    category: 'contractor',
+    sectorAr: 'المقاولات العامة والأبراج',
+    collaborationScopeAr: 'مشروع برج سيسيان القابضة والدراسات الجيوتقنية الشاملة.',
+    badge: 'مقاول رئيسي',
+    logo: '/api/media/partners/levels.png',
+  },
+  {
+    id: 'hesco',
+    nameAr: 'شركة هيسكو للإنشاءات',
+    nameEn: 'Hesco Construction Partner',
+    category: 'contractor',
+    sectorAr: 'المقاولات المتخصصة والإنشاءات',
+    collaborationScopeAr: 'تنفيذ المشاريع الإنشائية ودراسات الأساسات العميقة.',
+    badge: 'شريك تنفيذي',
+    logo: '/api/media/partners/hesco.png',
+  },
+  {
+    id: 'mbl',
+    nameAr: 'شركة قادة البناء الحديث (MBL)',
+    nameEn: 'Modern Building Leaders (MBL)',
+    category: 'contractor',
+    sectorAr: 'البنية التحتية الكبرى والمشاريع الحيوية',
+    collaborationScopeAr: 'فحوصات الخرسانة والأسفلت وتصميم نظم سند جوانب الحفر.',
+    badge: 'مقاول رئيسي Tier-1',
+    logo: '/api/media/partners/mbl.png',
+  },
+  {
+    id: 'orient_weavers',
+    nameAr: 'شركة الشرق للإنشاءات - ويفرز',
+    nameEn: 'Orient Construction - Weavers Ltd',
+    category: 'contractor',
+    sectorAr: 'الإنشاءات الصناعية والمصانع',
+    collaborationScopeAr: 'دراسات ميكانيكا التربة وفحوصات الأساسات الثقيلة للمنشآت الصناعية.',
+    badge: 'مقاول منشآت صناعية',
+    logo: '/api/media/partners/orient_weavers.png',
+  },
+  {
+    id: 'abuljadayel',
+    nameAr: 'شركة أبو الجدايل للمقاولات والصيانة',
+    nameEn: 'Abuljadayel Co.',
+    category: 'contractor',
+    sectorAr: 'المقاولات العامة والخدمات',
+    collaborationScopeAr: 'أعمال المسح الطبوغرافي الرقمي وحفر الجسات وفحوصات المواد.',
+    badge: 'مقاول بنية تحتية',
+    logo: '/api/media/partners/abuljadayel.png',
+  },
+  {
+    id: 'shec',
+    nameAr: 'شركة شيراك للاستشارات الهندسية',
+    nameEn: 'SHEC Engineering Consulting',
+    category: 'consultant',
+    sectorAr: 'الاستشارات والتصميم الهندسي',
+    collaborationScopeAr: 'التنسيق الاستشاري والدراسات الجيوتقنية الإنشائية المشتركة.',
+    badge: 'شريك استشاري',
+    logo: '/api/media/partners/shec.png',
+  },
+  {
+    id: 'sky_jeddah',
+    nameAr: 'شركة نجب جدة للمقاولات (سكاي)',
+    nameEn: 'Sky Jeddah Construction',
+    category: 'contractor',
+    sectorAr: 'الإنشاءات والمباني السكنية والتجارية',
+    collaborationScopeAr: 'فحوصات التربة وضبط جودة المواد الخرسانية.',
+    badge: 'مقاول إنشاءات',
+    logo: '/api/media/partners/sky_jeddah.png',
+  },
+  {
+    id: 'albalad',
+    nameAr: 'برنامج جدة التاريخية (البلد)',
+    nameEn: 'Jeddah Historic District (Al Balad)',
     category: 'development',
-    sectorAr: 'التطوير العقاري والمجتمعات العمرانية الكبرى',
-    collaborationScopeAr: 'حفر الجسات الاستكشافية وفحوصات التربة لتأسيس الأحياء السكنية المتكاملة.',
-    badge: 'مطور وطني',
-    logo: '/assets/partners/roshn.svg',
-    logoLight: '/assets/partners/roshn-light.svg'
+    sectorAr: 'التطوير والتأهيل التراثي والعمراني',
+    collaborationScopeAr: 'دراسات السلامة الإنشائية للمباني التاريخية وفحوصات الرادار (GPR).',
+    badge: 'مشروع تراثي وطني',
+    logo: '/api/media/partners/albalad.png',
   },
   {
     id: 'binladin',
@@ -609,106 +739,20 @@ export const CGL_AUTHORIZED_PARTNERS: AuthorizedPartner[] = [
     nameEn: 'Saudi Binladin Group',
     category: 'contractor',
     sectorAr: 'الإنشاءات الكبرى والمطارات والبنية التحتية',
-    collaborationScopeAr: 'فحوصات استكشاف التربة، اختبارات التحميل الاستاتيكي للخوازيق، ومطابقة المواد الإنشائية.',
+    collaborationScopeAr: 'فحوصات استكشاف التربة، اختبارات الخوازيق ومطابقة المواد الإنشائية.',
     badge: 'مقاول معتمد Tier-1',
-    logo: '/assets/partners/Saudi_Binladin.png',
-    logoLight: '/assets/partners/Saudi_Binladin-light.png'
+    logo: '/api/media/partners/binladin.png',
   },
   {
-    id: 'albalad',
-    nameAr: 'مشروع جدة التاريخية (البلد)',
-    nameEn: 'Al Balad Heritage Project',
+    id: 'abdul_latif_jameel',
+    nameAr: 'مجموعة عبد اللطيف جميل',
+    nameEn: 'Abdul Latif Jameel Commercial',
     category: 'development',
-    sectorAr: 'التطوير والتأهيل التراثي والعمراني',
-    collaborationScopeAr: 'دراسات السلامة الإنشائية للمباني التاريخية، وفحوصات الرادار الأرضي (GPR)، ومراقبة الهبوط.',
-    badge: 'مشروع تنموي استراتيجي',
-    logo: '/assets/partners/albalad.png'
+    sectorAr: 'التطوير التجاري والاستثماري',
+    collaborationScopeAr: 'دراسات تقارير التربة وتوصيات الأساسات للمراكز التجارية والمعارض.',
+    badge: 'مطور تجاري',
+    logo: '/api/media/partners/abdul_latif_jameel.png',
   },
-  {
-    id: 'elseif',
-    nameAr: 'شركة السيف مهندسون ومقاولون',
-    nameEn: 'El Seif Engineering Contracting',
-    category: 'contractor',
-    sectorAr: 'المقاولات العامة والأبراج الشاهقة',
-    collaborationScopeAr: 'اختبارات الخوازيق العميقة وفحوصات الخرسانة عالية المقاومة للأبراج والمنشآت.',
-    badge: 'مقاول رئيسي',
-    logo: '/assets/partners/elseif.svg',
-    logoLight: '/assets/partners/elseif-light.svg'
-  },
-  {
-    id: 'nesma',
-    nameAr: 'شركة نسما وشركاهم للمقاولات',
-    nameEn: 'Nesma & Partners',
-    category: 'contractor',
-    sectorAr: 'مشاريع البنية التحتية والمحطات الكبرى',
-    collaborationScopeAr: 'أعمال المسح الطبوغرافي ونزح المياه الجوفية وفحص دك التربة للبنية التحتية.',
-    badge: 'مقاول بنية تحتية',
-    logo: '/assets/partners/nesma.svg',
-    logoLight: '/assets/partners/nesma-light.svg'
-  },
-  {
-    id: 'albawani',
-    nameAr: 'مجموعة البواني القابضة',
-    nameEn: 'Al Bawani Holding Group',
-    category: 'contractor',
-    sectorAr: 'المجمعات الطبية والتعليمية والإنشاءات الكبرى',
-    collaborationScopeAr: 'فحص التربة الميداني، وضبط جودة الخرسانة والصلب للمشاريع الحيوية.',
-    badge: 'مقاول رئيسي',
-    logo: '/assets/partners/albawani.svg',
-    logoLight: '/assets/partners/albawani-light.svg'
-  },
-  {
-    id: 'mbl',
-    nameAr: 'شركة إم بي إل للإنشاءات',
-    nameEn: 'MBL Construction',
-    category: 'contractor',
-    sectorAr: 'المشاريع الحيوية والتجارية',
-    collaborationScopeAr: 'ضبط جودة الخرسانة والأسفلت، وتصميم نظم سند جوانب الحفر العميقة ونزح المياه.',
-    badge: 'مقاول رئيسي',
-    logo: '/assets/partners/mbl.png'
-  },
-  {
-    id: 'levels',
-    nameAr: 'شركة ليفلز للتطوير العقاري',
-    nameEn: 'Levels Real Estate Development',
-    category: 'development',
-    sectorAr: 'التطوير والاستثمار العقاري والمكتبي',
-    collaborationScopeAr: 'دراسات ميكانيكا التربة وفحوصات الأساسات للأبراج والمباني الاستثمارية.',
-    badge: 'مطور عقاري',
-    logo: '/assets/partners/levels.png',
-    logoLight: '/assets/partners/levels-light.png'
-  },
-  {
-    id: 'abuljadayel',
-    nameAr: 'شركة أبوالجدايل للمقاولات',
-    nameEn: 'Abuljadayel Co.',
-    category: 'contractor',
-    sectorAr: 'شبكات المياه ومحطات المعالجة',
-    collaborationScopeAr: 'أعمال المسح الطبوغرافي الرقمي، حفر الجسات لخطوط الأنابيب، وفحوصات دمك التربة.',
-    badge: 'مقاول بنية تحتية',
-    logo: '/assets/partners/abuljadayel_co.png'
-  },
-  {
-    id: 'abdullatif',
-    nameAr: 'مجموعة عبد اللطيف للاستثمار',
-    nameEn: 'Abdullatif Group',
-    category: 'development',
-    sectorAr: 'التطوير العقاري والمجمعات التجارية',
-    collaborationScopeAr: 'دراسات تقرير ميكانيكا التربة وتوصيات الأساسات للمجمعات السكنية والتجارية.',
-    badge: 'مطور عقاري',
-    logo: '/assets/partners/abdullatif.png'
-  },
-  {
-    id: 'occ',
-    nameAr: 'شركة أو سي سي للمقاولات',
-    nameEn: 'OCC Construction',
-    category: 'contractor',
-    sectorAr: 'أعمال الطرق والجسور والبنية التحتية',
-    collaborationScopeAr: 'فحوصات الخلطات الإسفلتية والركام واختبارات الكثافة الحقلية المستمرة.',
-    badge: 'مقاول طرق وإنشاءات',
-    logo: '/assets/partners/occ.png',
-    logoLight: '/assets/partners/occ-light.png'
-  }
 ];
 
 // Note: Strict Data Integrity Rule applied. Certifications reflect standard compliance frameworks until official certificate files are verified.
@@ -900,7 +944,7 @@ export const CGL_LATEST_NEWS: NewsArticle[] = [
     dateEn: 'September 15, 2026',
     readTimeAr: '3 دقائق قراءة',
     readTimeEn: '3 min read',
-    image: '/uploads/news_images/0f84f5e97c3a0b73151ac499b71da813.jpg',
+    image: '/api/media/news/news_saudi_building_code_lab.jpg',
     featured: true
   },
   {
@@ -916,7 +960,7 @@ export const CGL_LATEST_NEWS: NewsArticle[] = [
     dateEn: 'September 02, 2026',
     readTimeAr: '4 دقائق قراءة',
     readTimeEn: '4 min read',
-    image: '/uploads/news_images/3c0fd973afa1024f0df21a09eb65a03c.jpg'
+    image: '/api/media/news/news_rotary_drilling_rig.jpg'
   },
   {
     id: 'news-03',
@@ -931,7 +975,168 @@ export const CGL_LATEST_NEWS: NewsArticle[] = [
     dateEn: 'August 18, 2026',
     readTimeAr: '3 دقائق قراءة',
     readTimeEn: '3 min read',
-    image: '/uploads/news_images/af29d27795468d9bc0807b6d58115908.jpg'
+    image: '/api/media/news/news_3d_gpr_radar_scanner.jpg'
   }
+];
+
+export interface KeyPerson {
+  id: string;
+  nameAr: string;
+  nameEn: string;
+  roleAr: string;
+  roleEn: string;
+  bioAr: string;
+  bioEn: string;
+  experience: string;
+  email?: string;
+  locationAr: string;
+  locationEn: string;
+}
+
+export const CGL_KEY_PERSONS: KeyPerson[] = [
+  {
+    id: 'raymond-haddad',
+    nameAr: 'م. ريمون م. حداد',
+    nameEn: 'Eng. Raymond M. Haddad',
+    roleAr: 'المدير العام - المقر الرئيسي',
+    roleEn: 'General Manager, Headquarters',
+    bioAr: 'يشغل منصب المدير العام للمقر الرئيسي بكاليفورنيا، الولايات المتحدة الأمريكية، مع أكثر من 25 عاماً من الخبرة الواسعة في الهندسة الجيوتقنية، تحريات المواقع، تصميم الأساسات وتحليل استقرار التربة.',
+    bioEn: 'General Manager of headquarters in California, USA, bringing over 25 years of extensive experience in geotechnical engineering, site investigations, foundation design, and soil stability analysis.',
+    experience: '+25 سنة خبرة',
+    locationAr: 'كاليفورنيا، الولايات المتحدة الأمريكية',
+    locationEn: 'California, USA',
+  },
+  {
+    id: 'abdul-manan-jamal',
+    nameAr: 'م. عبد المنان جمال الدين',
+    nameEn: 'Eng. Abdul Manan Jamal Eddin',
+    roleAr: 'المدير العام للمملكة العربية السعودية',
+    roleEn: 'General Manager, Saudi Arabia',
+    bioAr: 'المدير العام للشركة بالمملكة، يتمتع بخبرة تتجاوز 30 عاماً في الهندسة الجيوتقنية وأعمال استكشاف التربة، تصميم الأساسات العميقة، وتقنيات تحسين التربة بالمملكة.',
+    bioEn: 'General Manager of the company, bringing over 30 years of experience in geotechnical engineering in Saudi Arabia, focusing on soil investigation, foundation design, and ground improvement techniques.',
+    experience: '+30 سنة خبرة',
+    email: 'abdulmanan.Jamal@creativegeotechnical.com.sa',
+    locationAr: 'المملكة العربية السعودية',
+    locationEn: 'Saudi Arabia',
+  },
+  {
+    id: 'mostafa-el-sherif',
+    nameAr: 'م. مصطفى الشريف',
+    nameEn: 'Eng. Mostafa M. El Sherif',
+    roleAr: 'المدير التقني',
+    roleEn: 'Technical Manager',
+    bioAr: 'خبير ومهندس تقني أول بخبرة تزيد عن 30 عاماً في ميكانيكا التربة، تصميم الأساسات، منظومات الخوازيق العميقة، وتقنيات تثبيت وتحسين خواص الأرض.',
+    bioEn: 'Seasoned technical engineer with over 30 years of experience in soil mechanics, foundation design, pile systems, and soil improvement techniques.',
+    experience: '+30 سنة خبرة',
+    email: 'mostafa.elsherif@creativegeotechnical.com.sa',
+    locationAr: 'المملكة العربية السعودية',
+    locationEn: 'Saudi Arabia',
+  },
+  {
+    id: 'samir-bakfalouni',
+    nameAr: 'م. سمير بقفلوني',
+    nameEn: 'Eng. Samir Bakfalouni',
+    roleAr: 'مدير المشاريع وتقييم المنشآت',
+    roleEn: 'Projects Manager - Structural Assessment',
+    bioAr: 'مهندس متخصص في تقييم السلامة الإنشائية بخبرة تتجاوز 15 عاماً في تقييم وتدقيق المباني القائمة بالمملكة، الفحوصات اللاإتلافية (NDT)، وضبط جودة المشاريع الإنشائية.',
+    bioEn: 'Structural Assessment Engineer with over 15 years of experience specializing in evaluation of existing buildings, non-destructive testing (NDT), and construction quality control.',
+    experience: '+15 سنة خبرة',
+    email: 'Samir.bakfalouni@creativegeotechnical.com.sa',
+    locationAr: 'المملكة العربية السعودية',
+    locationEn: 'Saudi Arabia',
+  },
+  {
+    id: 'hussam-alkadi',
+    nameAr: 'م. حسام القاضي',
+    nameEn: 'Eng. Hussam Alkadi',
+    roleAr: 'مهندس جيوتقني أول',
+    roleEn: 'Senior Geotechnical Engineer',
+    bioAr: 'مهندس جيوتقني متمرس بخبرة تزيد عن 10 سنوات في دراسات التحريات الجيوتقنية، الحفر الميداني، وتحليلات وفحوصات التربة المخبرية في المملكة العربية السعودية.',
+    bioEn: 'Skilled Geotechnical Engineer with over 10 years of experience in geotechnical investigation studies, field exploration, and soil analysis/testing in Saudi Arabia.',
+    experience: '+10 سنوات خبرة',
+    locationAr: 'المملكة العربية السعودية',
+    locationEn: 'Saudi Arabia',
+  },
+  {
+    id: 'karim-fattouh',
+    nameAr: 'م. كريم محمد فتوح',
+    nameEn: 'Eng. Karim Mohamed Fattouh',
+    roleAr: 'مهندس جيوتقني وتقني',
+    roleEn: 'Technical Geotechnical Engineer',
+    bioAr: 'مهندس جيوتقني وإنشائي بخبرة تزيد عن 12 عاماً في ميكانيكا التربة وهندسة الأساسات، متخصص في الإشراف الفني الميداني على المشاريع الجيوتقنية الكبرى.',
+    bioEn: 'Geo-structural engineer with over 12 years of experience in soil mechanics and foundation engineering, specializing in supervising major geotechnical field projects.',
+    experience: '+12 سنة خبرة',
+    locationAr: 'المملكة العربية السعودية',
+    locationEn: 'Saudi Arabia',
+  },
+];
+
+export const CGL_PROFILE_EQUIPMENT = [
+  {
+    id: 'okm-geoseeker',
+    nameAr: 'OKM GeoSeeker (ألمانيا)',
+    nameEn: 'OKM GeoSeeker (Germany)',
+    descAr: 'كاشف المياه والتجويفات والكهوف الجيولوجية الكهربائي بتقنية التصوير ثلاثي الأبعاد 3D المباشر حتى عمق 250 متراً.',
+    descEn: 'Geoelectric water and void detector measuring ground resistance down to 250m depth with live 3D visualization.',
+    depth: '250m',
+    badgeAr: 'تصوير ثلاثي الأبعاد 3D',
+    badgeEn: '3D Visualization',
+  },
+  {
+    id: 'abem-terraloc',
+    nameAr: 'ABEM Terraloc Pro السويدي',
+    nameEn: 'ABEM Terraloc Pro Seismograph',
+    descAr: 'منظومة السيزموجراف العالمية الرائدة في المسوحات الجيوفيزيائية السطحية والانكسارية، ورسم خرائط المياه والمعادن واهتزازات التربة.',
+    descEn: 'Global leader in geophysical seismic surveys, soil vibration monitoring, subsurface refraction, and bedrock mapping.',
+    depth: 'High Precision',
+    badgeAr: 'مسح زلزالي متقدم',
+    badgeEn: 'Seismic Refraction',
+  },
+  {
+    id: 'gssi-sir4000',
+    nameAr: 'GSSI SIR 4000 GPR (أمريكا)',
+    nameEn: 'GSSI SIR 4000 GPR System',
+    descAr: 'رادار اختراق الأرض عالي الأداء مع هوائي 350 HS وعربة المسح للكشف الدقيق عن المرافق التحتية، الفراغات، وشبكات التسليح.',
+    descEn: 'Industry-leading GPR data acquisition unit with 350 HS antenna and survey cart for utility detection and structural scanning.',
+    depth: 'Multi-Depth',
+    badgeAr: 'رادار اختراق الأرض',
+    badgeEn: 'Ground Penetrating Radar',
+  },
+  {
+    id: 'ajax-omega',
+    nameAr: 'Ajax Detection OMEGA',
+    nameEn: 'Ajax Detection OMEGA System',
+    descAr: 'نظام الاستشعار بعيد المدى للكشف عن المياه الجوفية والتكهفات حتى عمق 500 متر ومدى أمامي يصل إلى 2850 متراً.',
+    descEn: 'Long-range geophysical prospecting system detecting groundwater and deep cavities down to 500m depth and 2,850m front range.',
+    depth: '500m / 2850m',
+    badgeAr: 'استشعار بعيد المدى',
+    badgeEn: 'Long Range Detection',
+  },
+  {
+    id: 'pqwt-l2000',
+    nameAr: 'PQWT-L2000 Multi-Sensor',
+    nameEn: 'PQWT-L2000 Pipeline Leak Detector',
+    descAr: 'كاشف تسربات شبكات وخطوط الأنابيب متعدد الحساسات للتحقق الدقيق وتفادي انهيارات التربة الناتجة عن تدفقات المياه.',
+    descEn: 'Advanced multi-sensor pipeline leak detector designed for municipal networks and subterranean leakage monitoring.',
+    depth: 'High Precision',
+    badgeAr: 'كشف تسربات متقدم',
+    badgeEn: 'Multi-Sensor Detection',
+  },
+];
+
+export const CGL_PROFILE_PARTNERS_GRID = [
+  { id: 'proceq', nameAr: 'بروسيك', nameEn: 'Proceq', logo: '/api/media/partners/proceq.png', roleAr: 'تقنيات الفحص والقياس', roleEn: 'NDT & Measurement' },
+  { id: 'weber', nameAr: 'ويبر سان جوبان', nameEn: 'Weber Saint-Gobain', logo: '/api/media/partners/weber.png', roleAr: 'مواد البناء المتطورة', roleEn: 'Construction Materials' },
+  { id: 'hilti', nameAr: 'هيلتي', nameEn: 'Hilti', logo: '/api/media/partners/hilti.png', roleAr: 'أنظمة التثبيت والتخريم', roleEn: 'Fastening Systems' },
+  { id: 'levels', nameAr: 'ليفلز للمقاولات', nameEn: 'LEVELS Contracting', logo: '/api/media/partners/levels.png', roleAr: 'مقاولات وأبراج', roleEn: 'Contracting & Towers' },
+  { id: 'hesco', nameAr: 'هيسكو للإنشاءات', nameEn: 'Hesco Construction', logo: '/api/media/partners/hesco.png', roleAr: 'شريك إنشائي', roleEn: 'Construction Partner' },
+  { id: 'mbl', nameAr: 'قادة البناء الحديث (MBL)', nameEn: 'MBL Leaders', logo: '/api/media/partners/mbl.png', roleAr: 'بنية تحتية كبرى', roleEn: 'Mega Infrastructure' },
+  { id: 'orient_weavers', nameAr: 'الشرق للإنشاءات (ويفرز)', nameEn: 'Orient Weavers Ltd', logo: '/api/media/partners/orient_weavers.png', roleAr: 'منشآت صناعية', roleEn: 'Industrial Plants' },
+  { id: 'abuljadayel', nameAr: 'أبو الجدايل للمقاولات', nameEn: 'Abuljadayel Co.', logo: '/api/media/partners/abuljadayel.png', roleAr: 'مقاولات وصيانة', roleEn: 'Contracting & Maintenance' },
+  { id: 'shec', nameAr: 'شيراك للاستشارات الهندسية', nameEn: 'SHEC Consulting', logo: '/api/media/partners/shec.png', roleAr: 'استشارات وتصميم', roleEn: 'Engineering Consulting' },
+  { id: 'sky_jeddah', nameAr: 'نجب جدة (سكاي)', nameEn: 'Sky Jeddah Construction', logo: '/api/media/partners/sky_jeddah.png', roleAr: 'إنشاءات وأبراج', roleEn: 'Towers & Construction' },
+  { id: 'albalad', nameAr: 'جدة التاريخية (البلد)', nameEn: 'Jeddah Historic District', logo: '/api/media/partners/albalad.png', roleAr: 'تراث وتقييم إنشائي', roleEn: 'Heritage Assessment' },
+  { id: 'binladin', nameAr: 'مجموعة بن لادن السعودية', nameEn: 'Saudi Binladin Group', logo: '/api/media/partners/binladin.png', roleAr: 'مشاريع ضخمة وأبراج', roleEn: 'Mega Infrastructure' },
+  { id: 'abdul_latif_jameel', nameAr: 'عبد اللطيف جميل', nameEn: 'Abdul Latif Jameel', logo: '/api/media/partners/abdul_latif_jameel.png', roleAr: 'مراكز تجارية وتطوير', roleEn: 'Commercial Development' },
 ];
 

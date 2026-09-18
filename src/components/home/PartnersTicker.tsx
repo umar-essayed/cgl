@@ -4,13 +4,18 @@ import React from 'react';
 import Image from 'next/image';
 import { CGL_AUTHORIZED_PARTNERS } from '@/lib/data';
 import { Locale } from '@/lib/i18n';
+import { AuthorizedPartner } from '@/lib/types';
 
 interface PartnersTickerProps {
   lang?: Locale;
+  partners?: AuthorizedPartner[];
 }
 
-export default function PartnersTicker({ lang = 'ar' }: PartnersTickerProps) {
-  const partners = CGL_AUTHORIZED_PARTNERS;
+export default function PartnersTicker({ 
+  lang = 'ar',
+  partners = CGL_AUTHORIZED_PARTNERS 
+}: PartnersTickerProps) {
+  const currentPartners = partners && partners.length > 0 ? partners : CGL_AUTHORIZED_PARTNERS;
   const isRtl = lang === 'ar';
 
   return (
@@ -30,22 +35,22 @@ export default function PartnersTicker({ lang = 'ar' }: PartnersTickerProps) {
       >
         <div className="flex w-max animate-marquee-seamless items-center cursor-pointer select-none">
           {/* Track 1 */}
-          <div className="flex shrink-0 items-center gap-4 sm:gap-8 pr-4 sm:pr-8">
-            {partners.map((partner, index) => {
+          <div className="flex shrink-0 items-center gap-4 sm:gap-6 pr-4 sm:pr-6">
+            {currentPartners.map((partner, index) => {
               const name = isRtl ? partner.nameAr : partner.nameEn;
               return (
                 <div
                   key={`t1-${partner.id}-${index}`}
-                  className="h-16 sm:h-20 w-44 sm:w-52 flex-shrink-0 flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-[#0a0a0a] hover:bg-[#111111] border border-[#1f1f1f] hover:border-[#8bc34a]/40 transition-all duration-300 group shadow-sm"
-                  title={`${name} • ${partner.sectorAr}`}
+                  className="h-16 sm:h-20 w-44 sm:w-52 flex-shrink-0 flex items-center justify-center p-3 rounded-xl bg-[#0a0a0a] hover:bg-[#121212] border border-[#1f1f1f] hover:border-[#8bc34a]/40 transition-all duration-300 group shadow-sm"
+                  title={`${name} • ${partner.sectorAr || ''}`}
                 >
-                  <div className="relative w-full h-9 sm:h-11">
+                  <div className="relative w-full h-full flex items-center justify-center">
                     <Image
                       src={partner.logo}
                       alt={name}
                       fill
                       sizes="(max-width: 768px) 176px, 208px"
-                      className="object-contain filter grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+                      className="object-contain p-1 group-hover:scale-105 transition-all duration-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                     />
                   </div>
                 </div>
@@ -54,22 +59,22 @@ export default function PartnersTicker({ lang = 'ar' }: PartnersTickerProps) {
           </div>
 
           {/* Track 2 */}
-          <div className="flex shrink-0 items-center gap-4 sm:gap-8 pr-4 sm:pr-8" aria-hidden="true">
-            {partners.map((partner, index) => {
+          <div className="flex shrink-0 items-center gap-4 sm:gap-6 pr-4 sm:pr-6" aria-hidden="true">
+            {currentPartners.map((partner, index) => {
               const name = isRtl ? partner.nameAr : partner.nameEn;
               return (
                 <div
                   key={`t2-${partner.id}-${index}`}
-                  className="h-16 sm:h-20 w-44 sm:w-52 flex-shrink-0 flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-[#0a0a0a] hover:bg-[#111111] border border-[#1f1f1f] hover:border-[#8bc34a]/40 transition-all duration-300 group shadow-sm"
-                  title={`${name} • ${partner.sectorAr}`}
+                  className="h-16 sm:h-20 w-44 sm:w-52 flex-shrink-0 flex items-center justify-center p-3 rounded-xl bg-[#0a0a0a] hover:bg-[#121212] border border-[#1f1f1f] hover:border-[#8bc34a]/40 transition-all duration-300 group shadow-sm"
+                  title={`${name} • ${partner.sectorAr || ''}`}
                 >
-                  <div className="relative w-full h-9 sm:h-11">
+                  <div className="relative w-full h-full flex items-center justify-center">
                     <Image
                       src={partner.logo}
                       alt={name}
                       fill
                       sizes="(max-width: 768px) 176px, 208px"
-                      className="object-contain filter grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+                      className="object-contain p-1 group-hover:scale-105 transition-all duration-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                     />
                   </div>
                 </div>

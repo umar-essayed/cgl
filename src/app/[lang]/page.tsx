@@ -12,6 +12,10 @@ import NewsSection from '@/components/home/NewsSection';
 import CompanyLocationSection from '@/components/home/CompanyLocationSection';
 import RfqSection from '@/components/home/RfqSection';
 import Footer from '@/components/footer/Footer';
+import { getDynamicSiteData } from '@/lib/dynamicData';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export async function generateMetadata({
   params,
@@ -45,18 +49,21 @@ export default async function HomePage({
     notFound();
   }
 
+  // Fetch dynamic collections from Firestore (with ISR cache)
+  const siteData = await getDynamicSiteData();
+
   return (
     <main className="min-h-screen flex flex-col bg-[#000000] text-white selection:bg-[#8bc34a] selection:text-black">
       <Navbar lang={lang} />
-      <Hero lang={lang} />
-      <PartnersTicker lang={lang} />
+      <Hero lang={lang} slides={siteData.heroSlides} stats={siteData.settings?.stats} />
+      <PartnersTicker lang={lang} partners={siteData.partners} />
       <ServicesSection lang={lang} />
-      <ProjectsEvidenceSection lang={lang} />
-      <EquipmentSection lang={lang} />
-      <NewsSection lang={lang} />
+      <ProjectsEvidenceSection lang={lang} projects={siteData.projects} />
+      <EquipmentSection lang={lang} equipment={siteData.equipment} />
+      <NewsSection lang={lang} news={siteData.news} />
       <RfqSection lang={lang} />
       <CompanyLocationSection lang={lang} />
-      <Footer lang={lang} />
+      <Footer lang={lang} companyInfo={siteData.settings} />
     </main>
   );
 }

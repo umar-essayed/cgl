@@ -35,9 +35,9 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
   const navLinks = [
     { label: dict.nav.about, href: `/${lang}/about` },
     { label: dict.nav.services, href: `/${lang}#services` },
-    { label: dict.nav.projects, href: `/${lang}#projects` },
+    { label: dict.nav.projects, href: `/${lang}/projects` },
     { label: dict.nav.equipment, href: `/${lang}#equipment` },
-    { label: dict.nav.news, href: `/${lang}#news` },
+    { label: dict.nav.news, href: `/${lang}/news` },
     { label: dict.nav.contact, href: `/${lang}#location` },
   ];
 

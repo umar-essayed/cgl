@@ -8,10 +8,13 @@ import { CGL_PROJECTS_EVIDENCE, CGL_COMPANY_INFO } from '@/lib/data';
 import { Locale, isValidLocale, locales, getDictionary } from '@/lib/i18n';
 import Navbar from '@/components/navbar/Navbar';
 import Footer from '@/components/footer/Footer';
+import { getDynamicProject } from '@/lib/dynamicData';
 
 interface ProjectPageProps {
   params: Promise<{ lang: string; id: string }>;
 }
+
+export const revalidate = 60;
 
 export async function generateStaticParams() {
   const paths: { lang: string; id: string }[] = [];
@@ -25,7 +28,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { lang, id } = await params;
-  const project = CGL_PROJECTS_EVIDENCE.find((p) => p.id === id);
+  const project = await getDynamicProject(id);
   if (!project) return { title: 'Project Not Found | CGL' };
 
   const isRtl = lang === 'ar';
@@ -42,7 +45,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  const project = CGL_PROJECTS_EVIDENCE.find((p) => p.id === id);
+  const project = await getDynamicProject(id);
 
   if (!project) {
     notFound();
@@ -71,7 +74,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           {/* Breadcrumbs & Back Link */}
           <div className="mb-6 flex items-center justify-between">
             <Link
-              href={`/${lang}#projects`}
+              href={`/${lang}/projects`}
               className="inline-flex items-center text-xs sm:text-sm font-medium text-stone-400 hover:text-[#8bc34a] transition-colors group gap-2"
             >
               <BackIcon className="w-4 h-4 text-[#8bc34a] group-hover:-translate-x-0.5 transition-transform" />
@@ -125,7 +128,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
             {/* Side Gallery & Quick Specs */}
             <div className="lg:col-span-4 flex flex-col justify-between space-y-4">
-              {project.gallery.slice(1, 2).map((img, idx) => (
+              {(project.gallery || []).slice(1, 2).map((img, idx) => (
                 <div key={idx} className="relative h-44 sm:h-52 rounded-xl overflow-hidden border border-white/10 shadow-lg bg-black">
                   <Image
                     src={img}
@@ -144,7 +147,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                     <span>{dict.projectDetailPage.standardsTitle}</span>
                   </div>
                   <div className="space-y-1.5">
-                    {project.relevantStandards.map((std, sIdx) => (
+                    {(project.relevantStandards || []).map((std, sIdx) => (
                       <div key={sIdx} className="text-xs font-mono text-stone-300 flex items-center gap-1.5">
                         <Check className="w-3.5 h-3.5 text-[#8bc34a] flex-shrink-0" />
                         <span>{std}</span>
@@ -176,22 +179,22 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 <h2 className="text-lg sm:text-xl font-display font-bold text-white mb-4">
                   {dict.projectDetailPage.overviewTitle}
                 </h2>
-                <p className="text-sm sm:text-base text-stone-300 font-sans leading-relaxed">
+                <p className="text-xs sm:text-sm text-stone-300 font-sans leading-relaxed">
                   {scope}
                 </p>
+              </section>
 
                 <div className="mt-6 pt-6 border-t border-white/10 space-y-2.5">
                   <span className="text-xs font-mono text-stone-400 block mb-2">
                     {dict.projectDetailPage.testsTitle}:
                   </span>
-                  {project.servicesPerformedAr.map((srv, idx) => (
+                  {(project.servicesPerformedAr || []).map((srv: string, idx: number) => (
                     <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-300">
-                      <CheckCircle2 className="w-4 h-4 text-[#8bc34a] flex-shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-[#8bc34a] flex-shrink-0 mt-0.5" />
                       <span>{srv}</span>
                     </div>
                   ))}
                 </div>
-              </section>
 
               {/* Engineering Approach */}
               <section className="p-6 sm:p-8 rounded-2xl bg-[#0a0a0a] border border-white/10 shadow-sm">
@@ -226,7 +229,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                   <span>{dict.projectDetailPage.equipmentTitle}</span>
                 </div>
                 <div className="space-y-2">
-                  {project.equipmentUsed.map((eq, eIdx) => (
+                  {(project.equipmentUsed || []).map((eq, eIdx) => (
                     <div key={eIdx} className="text-xs text-stone-300 font-sans bg-white/5 p-2.5 rounded-lg border border-white/5">
                       {eq}
                     </div>

@@ -6,15 +6,21 @@ import Link from 'next/link';
 import { ArrowUpLeft, ArrowUpRight } from 'lucide-react';
 import { CGL_LATEST_NEWS } from '@/lib/data';
 import { Locale, getDictionary } from '@/lib/i18n';
+import { NewsArticle } from '@/lib/types';
 
 interface NewsSectionProps {
   lang?: Locale;
+  news?: NewsArticle[];
 }
 
-export default function NewsSection({ lang = 'ar' }: NewsSectionProps) {
+export default function NewsSection({ 
+  lang = 'ar',
+  news = CGL_LATEST_NEWS 
+}: NewsSectionProps) {
   const dict = getDictionary(lang);
   const isRtl = lang === 'ar';
   const ArrowIcon = isRtl ? ArrowUpLeft : ArrowUpRight;
+  const currentNews = news && news.length > 0 ? news : CGL_LATEST_NEWS;
 
   return (
     <section id="news" className="py-16 sm:py-24 bg-[#080808] border-b border-[#1f1f1f] text-white">
@@ -37,7 +43,7 @@ export default function NewsSection({ lang = 'ar' }: NewsSectionProps) {
 
         {/* Mobile: Horizontal scroll slider | Desktop: Exact same 3-column grid */}
         <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 pb-4 md:pb-0">
-          {CGL_LATEST_NEWS.map((article) => {
+          {currentNews.map((article) => {
             const title = isRtl ? article.titleAr : article.titleEn;
             const excerpt = isRtl ? article.excerptAr : article.excerptEn;
             const category = isRtl ? article.categoryAr : article.categoryEn;
@@ -50,15 +56,15 @@ export default function NewsSection({ lang = 'ar' }: NewsSectionProps) {
               >
                 <div>
                   {/* Clean Image */}
-                  <div className="relative h-56 sm:h-64 w-full rounded-2xl overflow-hidden bg-[#141414] border border-[#1e1e1e] mb-4">
+                  <Link href={`/${lang}/news/${article.id}`} className="block relative h-56 sm:h-64 w-full rounded-2xl overflow-hidden bg-[#141414] border border-[#1e1e1e] mb-4">
                     <Image
-                      src={article.image}
+                      src={article.image || article.coverImage || '/assets/sliders/slider1.jpg'}
                       alt={title}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                     />
-                  </div>
+                  </Link>
 
                   {/* Category & Date */}
                   <div className="flex items-center gap-2 text-xs font-mono text-stone-400 mb-2">
@@ -69,7 +75,9 @@ export default function NewsSection({ lang = 'ar' }: NewsSectionProps) {
 
                   {/* Headline */}
                   <h3 className="font-display font-semibold text-lg text-white group-hover:text-[#8bc34a] transition-colors leading-snug mb-3">
-                    {title}
+                    <Link href={`/${lang}/news/${article.id}`}>
+                      {title}
+                    </Link>
                   </h3>
 
                   {/* Excerpt */}
@@ -81,7 +89,7 @@ export default function NewsSection({ lang = 'ar' }: NewsSectionProps) {
                 {/* Read More Link */}
                 <div className="pt-2">
                   <Link
-                    href={`/${lang}/rfq`}
+                    href={`/${lang}/news/${article.id}`}
                     className="inline-flex items-center gap-1 text-xs font-semibold text-stone-300 group-hover:text-[#8bc34a] transition-colors"
                   >
                     <span>{dict.news.readArticle}</span>
@@ -91,6 +99,22 @@ export default function NewsSection({ lang = 'ar' }: NewsSectionProps) {
               </article>
             );
           })}
+        </div>
+
+        {/* Link to Dedicated News Page */}
+        <div className="mt-10 sm:mt-12 flex justify-center">
+          <Link
+            href={`/${lang}/news`}
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#111111] hover:bg-[#1a1a1a] border border-[#1f1f1f] text-stone-200 hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-sm group hover:border-[#8bc34a]/50"
+          >
+            <span>
+              {isRtl 
+                ? `استعراض كافة المقالات والبيانات الهندسية (${currentNews.length})`
+                : `Explore All Engineering Articles & Insights (${currentNews.length})`
+              }
+            </span>
+            <ArrowIcon className="w-4 h-4 text-[#8bc34a] group-hover:-translate-x-1 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
         </div>
 
       </div>

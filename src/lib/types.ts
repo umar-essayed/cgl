@@ -5,7 +5,8 @@ export type ServiceId =
   | 'engineering-surveying'
   | 'mining-testing'
   | 'shoring-dewatering'
-  | 'environmental-testing';
+  | 'environmental-testing'
+  | 'building-integrity';
 
 export interface ServiceItem {
   id: ServiceId;
@@ -98,7 +99,7 @@ export interface AuthorizedPartner {
   id: string;
   nameAr: string;
   nameEn: string;
-  category: 'contractor' | 'development' | 'technical';
+  category: 'contractor' | 'development' | 'technical' | 'consultant' | 'materials' | 'government';
   sectorAr: string;
   collaborationScopeAr: string;
   badge: string;
@@ -136,9 +137,32 @@ export interface NewsArticle {
   date: string;
   dateAr?: string;
   dateEn?: string;
+  readMinutes?: number;
   readTimeAr: string;
   readTimeEn: string;
   image: string;
+  coverImage?: string;
   featured?: boolean;
+  contentAr?: string;
+  contentEn?: string;
+  authorAr?: string;
+  authorEn?: string;
+  tags?: string[];
 }
 
+export interface HeroSlide {
+  id: string;
+  order: number;
+  isActive: boolean;
+  type: 'image' | 'video';
+  mediaUrl: string;
+  tagAr: string;
+  tagEn: string;
+  metricsAr: string;
+  metricsEn: string;
+  titleAr: string;
+  titleEn: string;
+  subtitleAr: string;
+  subtitleEn: string;
+  duration: number;
+}

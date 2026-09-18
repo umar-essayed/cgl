@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { 
   Check, 
@@ -15,11 +15,31 @@ import {
   Crosshair, 
   Waves, 
   Mountain,
+  Copy,
+  History,
+  Trash2,
+  ExternalLink,
+  ChevronDown,
+  ChevronUp,
+  FileCheck2,
+  Sparkles
 } from 'lucide-react';
 import Navbar from '@/components/navbar/Navbar';
 import Footer from '@/components/footer/Footer';
 import { CGL_COMPANY_INFO } from '@/lib/data';
 import { Locale, getDictionary } from '@/lib/i18n';
+
+interface SavedProposal {
+  id: string;
+  refNumber: string;
+  fullName: string;
+  service: string;
+  sector: string;
+  city: string;
+  samples: string;
+  date: string;
+  status: string;
+}
 
 interface RfqClientProps {
   lang: Locale;
@@ -98,67 +118,176 @@ export default function RfqClient({ lang }: RfqClientProps) {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [lastRefNumber, setLastRefNumber] = useState<string>('');
+  const [copied, setCopied] = useState(false);
+  const [savedProposals, setSavedProposals] = useState<SavedProposal[]>([]);
+  const [showHistory, setShowHistory] = useState(false);
+
+  // Load saved proposals from localStorage on mount
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('cgl_saved_proposals');
+      if (stored) {
+        setSavedProposals(JSON.parse(stored));
+      }
+    } catch (err) {
+      console.error('Error reading saved proposals from localStorage:', err);
+    }
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    await new Promise((res) => setTimeout(res, 800));
-    setIsSubmitting(false);
-    setIsSuccess(true);
+  const handleCopyRef = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      // Fallback
+    }
+  };
+
+  const handleRemoveSavedProposal = (ref: string) => {
+    const updated = savedProposals.filter(p => p.refNumber !== ref);
+    setSavedProposals(updated);
+    try {
+      localStorage.setItem('cgl_saved_proposals', JSON.stringify(updated));
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleClearHistory = () => {
+    setSavedProposals([]);
+    try {
+      localStorage.removeItem('cgl_saved_proposals');
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const activeServiceObj = services.find((s) => s.id === selectedService) || services[0];
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('/api/rfq', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          companyName: formData.company,
+          phone: formData.phone,
+          email: formData.email,
+          projectType: selectedSector,
+          location: selectedCity,
+          selectedServices: [activeServiceObj.title],
+          estimatedAreaDepth: selectedSamples,
+          notes: formData.notes,
+          lang
+        })
+      });
+
+      const data = await res.json();
+      const generatedRef = data.refNumber || `CGL-RFQ-${new Date().getFullYear()}-${Math.floor(10000 + Math.random() * 90000)}`;
+      setLastRefNumber(generatedRef);
+
+      // Save proposal into device's localStorage
+      const newProposalItem: SavedProposal = {
+        id: data.id || Date.now().toString(),
+        refNumber: generatedRef,
+        fullName: formData.fullName,
+        service: activeServiceObj.title,
+        sector: selectedSector,
+        city: selectedCity,
+        samples: selectedSamples,
+        date: new Date().toISOString(),
+        status: 'new'
+      };
+
+      try {
+        const storedStr = localStorage.getItem('cgl_saved_proposals');
+        const list: SavedProposal[] = storedStr ? JSON.parse(storedStr) : [];
+        const updatedList = [newProposalItem, ...list.filter(p => p.refNumber !== generatedRef)];
+        localStorage.setItem('cgl_saved_proposals', JSON.stringify(updatedList));
+        localStorage.setItem('cgl_last_proposal_ref', generatedRef);
+        setSavedProposals(updatedList);
+      } catch (err) {
+        console.error('LocalStorage write error:', err);
+      }
+
+      setIsSuccess(true);
+    } catch (err) {
+      console.error('Failed to submit RFQ:', err);
+      // Fallback proposal ref
+      const fallbackRef = `CGL-RFQ-${new Date().getFullYear()}-${Math.floor(10000 + Math.random() * 90000)}`;
+      setLastRefNumber(fallbackRef);
+      setIsSuccess(true);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const whatsappMsg = encodeURIComponent(
+    isRtl
+      ? `مرحباً مهندسي CGL، أرسلت للتو طلب تسعير فني لمشروع (${activeServiceObj.title}) في ${selectedCity}.\nالرقم المرجعي للطلب: ${lastRefNumber}\nالاسم: ${formData.fullName}`
+      : `Hello CGL Engineering team, I have just submitted a technical proposal request for (${activeServiceObj.title}) in ${selectedCity}.\nReference: ${lastRefNumber}\nName: ${formData.fullName}`
+  );
 
   return (
     <div className="min-h-screen bg-[#000000] text-stone-100 flex flex-col font-sans">
       <Navbar lang={lang} />
 
-      <main className="flex-grow pt-28 sm:pt-36 pb-20">
+      <main className="flex-grow pt-24 sm:pt-32 pb-16 sm:pb-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Header */}
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#111111] border border-[#1f1f1f] text-xs font-sans text-[#8bc34a] mb-3 shadow-sm">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#111111] border border-[#1f1f1f] text-xs font-sans text-[#8bc34a] mb-3.5 shadow-sm">
               <span className="w-2 h-2 bg-[#8bc34a] rounded-full animate-pulse" />
               <span>{dict.rfq.badge}</span>
             </div>
-            <h1 className="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight mb-2">
+            <h1 className="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight mb-2.5">
               {dict.rfq.title}
             </h1>
-            <p className="text-xs sm:text-sm text-stone-400 font-sans">
+            <p className="text-xs sm:text-sm text-stone-400 font-sans leading-relaxed">
               {dict.rfq.subtitle}
             </p>
           </div>
 
           {!isSuccess ? (
-            <div className="bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f] p-6 sm:p-10 shadow-xl">
+            <div className="bg-[#0a0a0a] rounded-2xl sm:rounded-3xl border border-[#1f1f1f] p-4 sm:p-8 lg:p-10 shadow-2xl">
               
-              {/* 3-Step Progress Indicator */}
-              <div className="relative mb-10">
-                <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-[#1f1f1f] -translate-y-1/2 z-0" />
+              {/* 3-Step Progress Indicator (Mobile-optimized) */}
+              <div className="relative mb-8 sm:mb-10 px-2 sm:px-6">
+                <div className="absolute top-4 sm:top-5 left-8 right-8 h-[2px] bg-[#1f1f1f] -translate-y-1/2 z-0" />
                 <div className="relative z-10 flex justify-between">
                   {[1, 2, 3].map((step) => {
                     const isPassed = currentStep > step;
                     const isCurrent = currentStep === step;
                     return (
                       <div key={step} className="flex flex-col items-center">
-                        <div
-                          className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-mono text-xs sm:text-sm font-bold transition-all ${
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (isPassed) setCurrentStep(step);
+                          }}
+                          disabled={!isPassed && !isCurrent}
+                          className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-mono text-xs sm:text-sm font-bold transition-all ${
                             isCurrent
-                              ? 'bg-[#8bc34a] text-black ring-4 ring-[#8bc34a]/20 shadow-md'
+                              ? 'bg-[#8bc34a] text-black ring-4 ring-[#8bc34a]/20 shadow-lg shadow-[#8bc34a]/30 scale-105'
                               : isPassed
-                              ? 'bg-[#8bc34a]/20 text-[#8bc34a] border border-[#8bc34a]'
+                              ? 'bg-[#8bc34a]/20 text-[#8bc34a] border border-[#8bc34a] cursor-pointer'
                               : 'bg-[#111111] text-stone-500 border border-[#222222]'
                           }`}
                         >
                           {isPassed ? <Check className="w-4 h-4" /> : `0${step}`}
-                        </div>
-                        <span className={`text-[10px] sm:text-xs font-sans mt-2 ${isCurrent ? 'text-white font-bold' : 'text-stone-400'}`}>
+                        </button>
+                        <span className={`text-[11px] sm:text-xs font-sans mt-2 whitespace-nowrap ${isCurrent ? 'text-white font-bold' : 'text-stone-400'}`}>
                           {step === 1 && (isRtl ? 'الخدمة' : 'Service')}
                           {step === 2 && (isRtl ? 'الموقع والنطاق' : 'Scope')}
                           {step === 3 && (isRtl ? 'بيانات التواصل' : 'Contact')}
@@ -169,13 +298,20 @@ export default function RfqClient({ lang }: RfqClientProps) {
                 </div>
               </div>
 
-              {/* Step 1 */}
+              {/* Step 1: Services & Sector */}
               {currentStep === 1 && (
-                <div className="space-y-6">
+                <div className="space-y-6 sm:space-y-8">
                   <div>
-                    <h3 className="text-base font-bold text-white mb-3">
-                      {isRtl ? '1. اختر نوع الفحص أو الخدمة الهندسية المطلوبة' : '1. Select Required Engineering Service'}
-                    </h3>
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                        <span className="w-1.5 h-4 rounded-full bg-[#8bc34a]" />
+                        <span>{isRtl ? '1. نوع الفحص أو الخدمة الهندسية المطلوبة' : '1. Select Required Engineering Service'}</span>
+                      </h3>
+                      <span className="text-[11px] text-stone-500 hidden sm:inline-block font-mono">
+                        {services.length} {isRtl ? 'خدمات معتمدة' : 'Accredited Services'}
+                      </span>
+                    </div>
+
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {services.map((srv) => {
                         const isSelected = selectedService === srv.id;
@@ -184,21 +320,30 @@ export default function RfqClient({ lang }: RfqClientProps) {
                           <div
                             key={srv.id}
                             onClick={() => setSelectedService(srv.id)}
-                            className={`p-4 rounded-xl border cursor-pointer transition-all ${
+                            className={`p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border cursor-pointer transition-all active:scale-[0.99] select-none ${
                               isSelected
-                                ? 'bg-[#8bc34a]/10 border-[#8bc34a] shadow-sm'
-                                : 'bg-[#111111] border-[#1f1f1f] hover:border-stone-700'
+                                ? 'bg-[#8bc34a]/10 border-[#8bc34a] ring-1 ring-[#8bc34a]/30 shadow-md'
+                                : 'bg-[#111111] border-[#1f1f1f] hover:border-stone-700 hover:bg-[#151515]'
                             }`}
                           >
                             <div className="flex items-start gap-3">
-                              <div className={`p-2 rounded-lg ${isSelected ? 'bg-[#8bc34a] text-black' : 'bg-white/5 text-stone-400'}`}>
+                              <div className={`p-2.5 rounded-xl flex-shrink-0 transition-colors ${
+                                isSelected ? 'bg-[#8bc34a] text-black' : 'bg-white/5 text-stone-400'
+                              }`}>
                                 <IconComponent className="w-5 h-5" />
                               </div>
-                              <div className="min-w-0">
-                                <h4 className={`text-sm font-bold leading-snug ${isSelected ? 'text-white' : 'text-stone-200'}`}>
-                                  {srv.title}
-                                </h4>
-                                <p className="text-xs text-stone-400 mt-1 line-clamp-2">
+                              <div className="min-w-0 flex-1">
+                                <div className="flex items-center justify-between gap-1">
+                                  <h4 className={`text-xs sm:text-sm font-bold leading-snug ${isSelected ? 'text-[#8bc34a]' : 'text-white'}`}>
+                                    {srv.title}
+                                  </h4>
+                                  {isSelected && (
+                                    <div className="w-4 h-4 rounded-full bg-[#8bc34a] text-black flex items-center justify-center flex-shrink-0">
+                                      <Check className="w-2.5 h-2.5" />
+                                    </div>
+                                  )}
+                                </div>
+                                <p className="text-[11px] sm:text-xs text-stone-400 mt-1 leading-relaxed line-clamp-2">
                                   {srv.desc}
                                 </p>
                               </div>
@@ -210,10 +355,11 @@ export default function RfqClient({ lang }: RfqClientProps) {
                   </div>
 
                   <div>
-                    <h3 className="text-base font-bold text-white mb-3">
-                      {isRtl ? '2. قطاع ونوع المشروع' : '2. Project Sector / Classification'}
+                    <h3 className="text-sm sm:text-base font-bold text-white mb-3 flex items-center gap-2">
+                      <span className="w-1.5 h-4 rounded-full bg-[#8bc34a]" />
+                      <span>{isRtl ? '2. تصنيف وقطاع المشروع' : '2. Project Classification / Sector'}</span>
                     </h3>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
                       {sectors.map((sec, sIdx) => {
                         const isSelected = selectedSector === sec;
                         return (
@@ -221,40 +367,41 @@ export default function RfqClient({ lang }: RfqClientProps) {
                             key={sIdx}
                             type="button"
                             onClick={() => setSelectedSector(sec)}
-                            className={`p-3 rounded-lg text-xs font-medium border text-center transition-all ${
+                            className={`p-3 rounded-xl text-xs font-medium border text-center transition-all active:scale-95 min-h-[44px] flex items-center justify-center ${
                               isSelected
-                                ? 'bg-[#8bc34a]/15 border-[#8bc34a] text-[#8bc34a] font-bold'
+                                ? 'bg-[#8bc34a]/15 border-[#8bc34a] text-[#8bc34a] font-bold shadow-sm'
                                 : 'bg-[#111111] border-[#1f1f1f] text-stone-300 hover:bg-white/5'
                             }`}
                           >
-                            {sec}
+                            <span>{sec}</span>
                           </button>
                         );
                       })}
                     </div>
                   </div>
 
-                  <div className="pt-4 flex justify-end">
+                  <div className="pt-3 sm:pt-4 flex justify-end">
                     <button
                       type="button"
                       onClick={() => setCurrentStep(2)}
-                      className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-xs sm:text-sm shadow-md transition-all"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-xs sm:text-sm shadow-lg shadow-[#8bc34a]/20 transition-all active:scale-[0.98]"
                     >
-                      <span>{isRtl ? 'التالي: الموقع والنطاق' : 'Next: Location & Scope'}</span>
+                      <span>{isRtl ? 'المتابعة: الموقع وحجم العمل' : 'Next: Location & Scope'}</span>
                       <NextIcon className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
               )}
 
-              {/* Step 2 */}
+              {/* Step 2: Location & Work Scope */}
               {currentStep === 2 && (
-                <div className="space-y-6">
+                <div className="space-y-6 sm:space-y-8">
                   <div>
-                    <h3 className="text-base font-bold text-slate-900 dark:text-white mb-3">
-                      {isRtl ? '1. موقع المشروع الجغرافي / المدينة' : '1. Project Location / City'}
+                    <h3 className="text-sm sm:text-base font-bold text-white mb-3 flex items-center gap-2">
+                      <span className="w-1.5 h-4 rounded-full bg-[#8bc34a]" />
+                      <span>{isRtl ? '1. موقع المشروع الجغرافي / المدينة' : '1. Project City / Location'}</span>
                     </h3>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
                       {cities.map((city, cIdx) => {
                         const isSelected = selectedCity === city;
                         return (
@@ -262,13 +409,13 @@ export default function RfqClient({ lang }: RfqClientProps) {
                             key={cIdx}
                             type="button"
                             onClick={() => setSelectedCity(city)}
-                            className={`p-3 rounded-lg text-xs font-medium border text-center transition-all ${
+                            className={`p-3 rounded-xl text-xs font-medium border text-center transition-all active:scale-95 min-h-[44px] flex items-center justify-center ${
                               isSelected
-                                ? 'bg-[#8bc34a]/15 border-[#8bc34a] text-[#8bc34a] font-bold'
+                                ? 'bg-[#8bc34a]/15 border-[#8bc34a] text-[#8bc34a] font-bold shadow-sm'
                                 : 'bg-[#111111] border-[#1f1f1f] text-stone-300 hover:bg-white/5'
                             }`}
                           >
-                            {city}
+                            <span>{city}</span>
                           </button>
                         );
                       })}
@@ -276,10 +423,11 @@ export default function RfqClient({ lang }: RfqClientProps) {
                   </div>
 
                   <div>
-                    <h3 className="text-base font-bold text-white mb-3">
-                      {isRtl ? '2. حجم العمل التقديري أو عدد الجسات' : '2. Estimated Scope or Boreholes'}
+                    <h3 className="text-sm sm:text-base font-bold text-white mb-3 flex items-center gap-2">
+                      <span className="w-1.5 h-4 rounded-full bg-[#8bc34a]" />
+                      <span>{isRtl ? '2. حجم العمل التقديري أو عدد الجسات' : '2. Estimated Boreholes / Investigation Scope'}</span>
                     </h3>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
                       {sampleRanges.map((range, rIdx) => {
                         const isSelected = selectedSamples === range;
                         return (
@@ -287,13 +435,13 @@ export default function RfqClient({ lang }: RfqClientProps) {
                             key={rIdx}
                             type="button"
                             onClick={() => setSelectedSamples(range)}
-                            className={`p-3 rounded-lg text-xs font-medium border text-center transition-all ${
+                            className={`p-3 rounded-xl text-xs font-medium border text-center transition-all active:scale-95 min-h-[44px] flex items-center justify-center ${
                               isSelected
-                                ? 'bg-[#8bc34a]/15 border-[#8bc34a] text-[#8bc34a] font-bold'
+                                ? 'bg-[#8bc34a]/15 border-[#8bc34a] text-[#8bc34a] font-bold shadow-sm'
                                 : 'bg-[#111111] border-[#1f1f1f] text-stone-300 hover:bg-white/5'
                             }`}
                           >
-                            {range}
+                            <span>{range}</span>
                           </button>
                         );
                       })}
@@ -301,7 +449,7 @@ export default function RfqClient({ lang }: RfqClientProps) {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono text-stone-300 mb-2">
+                    <label className="block text-xs font-medium text-stone-300 mb-2">
                       {dict.rfq.form.notes}
                     </label>
                     <textarea
@@ -310,15 +458,15 @@ export default function RfqClient({ lang }: RfqClientProps) {
                       value={formData.notes}
                       onChange={handleInputChange}
                       placeholder={dict.rfq.form.notesPlaceholder}
-                      className="w-full p-3 rounded-xl bg-[#111111] border border-[#222222] text-white text-xs focus:outline-none focus:border-[#8bc34a]"
+                      className="w-full p-3.5 rounded-xl bg-[#111111] border border-[#222222] text-white text-xs sm:text-sm focus:outline-none focus:border-[#8bc34a] transition-colors resize-none"
                     />
                   </div>
 
-                  <div className="pt-4 flex justify-between">
+                  <div className="pt-3 sm:pt-4 flex items-center justify-between gap-3">
                     <button
                       type="button"
                       onClick={() => setCurrentStep(1)}
-                      className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#111111] text-stone-300 font-medium text-xs border border-[#1f1f1f]"
+                      className="inline-flex items-center gap-1.5 px-5 py-3 rounded-xl bg-[#111111] hover:bg-[#181818] text-stone-300 font-medium text-xs sm:text-sm border border-[#1f1f1f] transition-all active:scale-95"
                     >
                       <BackIcon className="w-4 h-4" />
                       <span>{isRtl ? 'السابق' : 'Back'}</span>
@@ -327,21 +475,21 @@ export default function RfqClient({ lang }: RfqClientProps) {
                     <button
                       type="button"
                       onClick={() => setCurrentStep(3)}
-                      className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-xs sm:text-sm shadow-md transition-all"
+                      className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-xs sm:text-sm shadow-lg shadow-[#8bc34a]/20 transition-all active:scale-95"
                     >
-                      <span>{isRtl ? 'التالي: بيانات التواصل' : 'Next: Contact Details'}</span>
+                      <span>{isRtl ? 'التالي: بيانات التواصل' : 'Next: Contact'}</span>
                       <NextIcon className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
               )}
 
-              {/* Step 3 */}
+              {/* Step 3: Contact Details & Submit */}
               {currentStep === 3 && (
-                <form onSubmit={handleFormSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form onSubmit={handleFormSubmit} className="space-y-6 sm:space-y-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
                     <div>
-                      <label className="block text-xs font-mono text-stone-300 mb-1.5">
+                      <label className="block text-xs font-medium text-stone-300 mb-1.5">
                         {dict.rfq.form.fullName} *
                       </label>
                       <input
@@ -351,12 +499,12 @@ export default function RfqClient({ lang }: RfqClientProps) {
                         value={formData.fullName}
                         onChange={handleInputChange}
                         placeholder={dict.rfq.form.fullNamePlaceholder}
-                        className="w-full p-3 rounded-xl bg-[#111111] border border-[#222222] text-white text-xs focus:outline-none focus:border-[#8bc34a]"
+                        className="w-full p-3.5 rounded-xl bg-[#111111] border border-[#222222] text-white text-xs sm:text-sm focus:outline-none focus:border-[#8bc34a] transition-colors"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono text-stone-300 mb-1.5">
+                      <label className="block text-xs font-medium text-stone-300 mb-1.5">
                         {dict.rfq.form.company}
                       </label>
                       <input
@@ -365,12 +513,12 @@ export default function RfqClient({ lang }: RfqClientProps) {
                         value={formData.company}
                         onChange={handleInputChange}
                         placeholder={dict.rfq.form.companyPlaceholder}
-                        className="w-full p-3 rounded-xl bg-[#111111] border border-[#222222] text-white text-xs focus:outline-none focus:border-[#8bc34a]"
+                        className="w-full p-3.5 rounded-xl bg-[#111111] border border-[#222222] text-white text-xs sm:text-sm focus:outline-none focus:border-[#8bc34a] transition-colors"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono text-stone-300 mb-1.5">
+                      <label className="block text-xs font-medium text-stone-300 mb-1.5">
                         {dict.rfq.form.phone} *
                       </label>
                       <input
@@ -380,43 +528,46 @@ export default function RfqClient({ lang }: RfqClientProps) {
                         value={formData.phone}
                         onChange={handleInputChange}
                         placeholder={dict.rfq.form.phonePlaceholder}
-                        className="w-full p-3 rounded-xl bg-[#111111] border border-[#222222] text-white text-xs focus:outline-none focus:border-[#8bc34a]"
+                        className="w-full p-3.5 rounded-xl bg-[#111111] border border-[#222222] text-white text-xs sm:text-sm focus:outline-none focus:border-[#8bc34a] transition-colors"
                         dir="ltr"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-mono text-stone-300 mb-1.5">
-                        {dict.rfq.form.email} *
+                      <label className="block text-xs font-medium text-stone-300 mb-1.5">
+                        {dict.rfq.form.email}
                       </label>
                       <input
                         type="email"
                         name="email"
-                        required
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder={dict.rfq.form.emailPlaceholder}
-                        className="w-full p-3 rounded-xl bg-[#111111] border border-[#222222] text-white text-xs focus:outline-none focus:border-[#8bc34a]"
+                        className="w-full p-3.5 rounded-xl bg-[#111111] border border-[#222222] text-white text-xs sm:text-sm focus:outline-none focus:border-[#8bc34a] transition-colors"
                         dir="ltr"
                       />
                     </div>
                   </div>
 
                   {/* Order Summary Box */}
-                  <div className="p-4 rounded-xl bg-[#111111] border border-[#1f1f1f] text-xs font-mono space-y-1 text-stone-400">
-                    <div className="text-white font-bold mb-1">
-                      {isRtl ? 'ملخص نطاق الطلب الهندسي:' : 'Engineering Scope Summary:'}
+                  <div className="p-4 sm:p-5 rounded-2xl bg-[#111111] border border-[#1f1f1f] text-xs space-y-2">
+                    <div className="text-white font-bold flex items-center gap-1.5 mb-2">
+                      <Sparkles className="w-4 h-4 text-[#8bc34a]" />
+                      <span>{isRtl ? 'ملخص نطاق الطلب الهندسي:' : 'Engineering Scope Summary:'}</span>
                     </div>
-                    <div>• {isRtl ? 'الخدمة:' : 'Service:'} {activeServiceObj.title}</div>
-                    <div>• {isRtl ? 'القطاع:' : 'Sector:'} {selectedSector}</div>
-                    <div>• {isRtl ? 'المدينة:' : 'City:'} {selectedCity} ({selectedSamples})</div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-stone-400">
+                      <div><strong className="text-stone-300">{isRtl ? 'الخدمة:' : 'Service:'}</strong> {activeServiceObj.title}</div>
+                      <div><strong className="text-stone-300">{isRtl ? 'القطاع:' : 'Sector:'}</strong> {selectedSector}</div>
+                      <div><strong className="text-stone-300">{isRtl ? 'المدينة:' : 'City:'}</strong> {selectedCity}</div>
+                      <div><strong className="text-stone-300">{isRtl ? 'حجم العمل:' : 'Scope:'}</strong> {selectedSamples}</div>
+                    </div>
                   </div>
 
-                  <div className="pt-4 flex justify-between">
+                  <div className="pt-3 sm:pt-4 flex items-center justify-between gap-3">
                     <button
                       type="button"
                       onClick={() => setCurrentStep(2)}
-                      className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#111111] text-stone-300 font-medium text-xs border border-[#1f1f1f]"
+                      className="inline-flex items-center gap-1.5 px-5 py-3 rounded-xl bg-[#111111] hover:bg-[#181818] text-stone-300 font-medium text-xs sm:text-sm border border-[#1f1f1f] transition-all active:scale-95"
                     >
                       <BackIcon className="w-4 h-4" />
                       <span>{isRtl ? 'السابق' : 'Back'}</span>
@@ -425,10 +576,19 @@ export default function RfqClient({ lang }: RfqClientProps) {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-xs sm:text-sm shadow-md transition-all disabled:opacity-50"
+                      className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-xs sm:text-sm shadow-lg shadow-[#8bc34a]/20 transition-all active:scale-95 disabled:opacity-50"
                     >
-                      <Send className="w-4 h-4" />
-                      <span>{isSubmitting ? dict.rfq.form.submitting : dict.rfq.form.submitBtn}</span>
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                          <span>{dict.rfq.form.submitting}</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4" />
+                          <span>{dict.rfq.form.submitBtn}</span>
+                        </>
+                      )}
                     </button>
                   </div>
                 </form>
@@ -436,31 +596,64 @@ export default function RfqClient({ lang }: RfqClientProps) {
 
             </div>
           ) : (
-            <div className="bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f] p-8 sm:p-12 text-center shadow-xl space-y-6">
-              <div className="w-16 h-16 rounded-full bg-[#8bc34a]/20 text-[#8bc34a] flex items-center justify-center mx-auto">
-                <CheckCircle2 className="w-10 h-10" />
+            /* Success Screen with Reference Number & LocalStorage Notice */
+            <div className="bg-[#0a0a0a] rounded-2xl sm:rounded-3xl border border-[#1f1f1f] p-6 sm:p-12 text-center shadow-2xl space-y-6">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#8bc34a]/15 text-[#8bc34a] flex items-center justify-center mx-auto ring-8 ring-[#8bc34a]/10 shadow-lg shadow-[#8bc34a]/20">
+                <CheckCircle2 className="w-10 h-10 sm:w-12 sm:h-12" />
               </div>
 
               <div>
-                <h2 className="text-2xl font-display font-bold text-white mb-2">
+                <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-2">
                   {dict.rfq.form.successTitle}
                 </h2>
-                <p className="text-xs sm:text-sm text-stone-300 max-w-md mx-auto leading-relaxed">
+                <p className="text-xs sm:text-sm text-stone-300 max-w-lg mx-auto leading-relaxed">
                   {dict.rfq.form.successDesc}
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
+              {/* Highlighted Proposal Reference Number Box */}
+              {lastRefNumber && (
+                <div className="max-w-md mx-auto p-4 sm:p-5 rounded-2xl bg-[#111317] border border-[#8bc34a]/30 shadow-inner">
+                  <span className="text-xs font-mono text-stone-400 block mb-1">
+                    {dict.rfq.form.refNumberLabel}
+                  </span>
+                  
+                  <div className="flex items-center justify-center gap-3 my-2">
+                    <span className="text-xl sm:text-2xl font-mono font-bold text-[#8bc34a] tracking-wider select-all" dir="ltr">
+                      {lastRefNumber}
+                    </span>
+                    <button
+                      onClick={() => handleCopyRef(lastRefNumber)}
+                      className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-stone-300 hover:text-white border border-white/10 transition-all active:scale-95"
+                      title={dict.rfq.form.copyRefBtn}
+                    >
+                      {copied ? <Check className="w-4 h-4 text-[#8bc34a]" /> : <Copy className="w-4 h-4" />}
+                    </button>
+                  </div>
+
+                  {copied && (
+                    <span className="text-[11px] font-bold text-[#8bc34a] block animate-fade-in">
+                      {dict.rfq.form.copiedSuccess}
+                    </span>
+                  )}
+
+                  <div className="mt-3 pt-3 border-t border-white/5 text-[11px] text-stone-400 flex items-center justify-center gap-1.5">
+                    <FileCheck2 className="w-3.5 h-3.5 text-[#8bc34a] flex-shrink-0" />
+                    <span>{dict.rfq.form.savedLocallyNotice}</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
                 <a
-                  href={`https://wa.me/${CGL_COMPANY_INFO.whatsapp1Raw}?text=${encodeURIComponent(
-                    `مرحباً، أرسلت للتو طلب تسعير فني لمشروع (${activeServiceObj.title}) في ${selectedCity}. الاسم: ${formData.fullName}`
-                  )}`}
+                  href={`https://wa.me/${CGL_COMPANY_INFO.whatsapp1Raw}?text=${whatsappMsg}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] text-black font-bold text-xs sm:text-sm shadow"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-black font-bold text-xs sm:text-sm shadow-md transition-all active:scale-95"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>{isRtl ? 'متابعة سريعة عبر واتساب' : 'Quick Follow-up via WhatsApp'}</span>
+                  <span>{isRtl ? 'متابعة فورية عبر واتساب' : 'Direct Follow-up via WhatsApp'}</span>
                 </a>
 
                 <button
@@ -468,12 +661,122 @@ export default function RfqClient({ lang }: RfqClientProps) {
                   onClick={() => {
                     setIsSuccess(false);
                     setCurrentStep(1);
+                    setFormData({ fullName: '', company: '', phone: '', email: '', notes: '' });
                   }}
-                  className="inline-flex items-center px-6 py-3 rounded-xl bg-[#111111] text-stone-300 font-medium text-xs sm:text-sm border border-[#1f1f1f]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-[#111111] hover:bg-[#181818] text-stone-300 font-medium text-xs sm:text-sm border border-[#1f1f1f] transition-all active:scale-95"
                 >
                   <span>{dict.rfq.form.newRequestBtn}</span>
                 </button>
               </div>
+            </div>
+          )}
+
+          {/* Saved Proposals on this Device Section */}
+          {savedProposals.length > 0 && (
+            <div className="mt-10 bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f] overflow-hidden shadow-lg">
+              <button
+                type="button"
+                onClick={() => setShowHistory(!showHistory)}
+                className="w-full p-4 sm:p-5 flex items-center justify-between text-right hover:bg-[#111111] transition-colors"
+              >
+                <div className="flex items-center gap-2.5">
+                  <div className="p-2 rounded-xl bg-[#8bc34a]/10 text-[#8bc34a]">
+                    <History className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-bold text-white">
+                      {dict.rfq.form.savedRequestsTitle}
+                    </h4>
+                    <p className="text-[10px] sm:text-xs text-stone-400">
+                      {isRtl ? `لديك (${savedProposals.length}) طلبات محفوظة على هذا الجهاز` : `You have ${savedProposals.length} proposal(s) on this device`}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="px-2 py-0.5 rounded-md bg-[#161616] text-[#8bc34a] font-mono text-xs font-bold border border-[#222]">
+                    {savedProposals.length}
+                  </span>
+                  {showHistory ? <ChevronUp className="w-4 h-4 text-stone-400" /> : <ChevronDown className="w-4 h-4 text-stone-400" />}
+                </div>
+              </button>
+
+              {showHistory && (
+                <div className="p-4 sm:p-5 border-t border-[#1f1f1f] space-y-3">
+                  <div className="flex items-center justify-between pb-2 text-[11px] text-stone-400">
+                    <span>{isRtl ? 'سجل الطلبات المحلية' : 'Device Proposal Log'}</span>
+                    <button
+                      onClick={handleClearHistory}
+                      className="text-rose-400 hover:text-rose-300 inline-flex items-center gap-1 text-[10px]"
+                    >
+                      <Trash2 className="w-3 h-3" />
+                      <span>{dict.rfq.form.clearHistory}</span>
+                    </button>
+                  </div>
+
+                  <div className="space-y-2.5">
+                    {savedProposals.map((item) => (
+                      <div
+                        key={item.refNumber}
+                        className="p-3.5 rounded-xl bg-[#111111] border border-[#1f1f1f] flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                      >
+                        <div>
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="font-mono text-xs font-bold text-[#8bc34a]" dir="ltr">
+                              {item.refNumber}
+                            </span>
+                            <span className="px-2 py-0.5 rounded-md bg-white/5 text-stone-300 text-[10px]">
+                              {item.service}
+                            </span>
+                          </div>
+                          <div className="text-[11px] text-stone-400 mt-1 flex items-center gap-2">
+                            <span>{item.city}</span>
+                            <span>•</span>
+                            <span>{item.sector}</span>
+                            <span>•</span>
+                            <span className="font-mono text-[10px]">
+                              {new Date(item.date).toLocaleDateString(isRtl ? 'ar-SA' : 'en-US')}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 self-end sm:self-center">
+                          <button
+                            onClick={() => handleCopyRef(item.refNumber)}
+                            className="px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-stone-300 text-[11px] inline-flex items-center gap-1 border border-white/5"
+                            title="نسخ الرقم المرجعي"
+                          >
+                            <Copy className="w-3 h-3" />
+                            <span>{isRtl ? 'نسخ' : 'Copy'}</span>
+                          </button>
+
+                          <a
+                            href={`https://wa.me/${CGL_COMPANY_INFO.whatsapp1Raw}?text=${encodeURIComponent(
+                              isRtl 
+                                ? `مرحباً، أود الاستفسار عن طلبي رقم (${item.refNumber}) الخاص بـ ${item.service} في ${item.city}.`
+                                : `Hello, I'd like to check on my proposal #${item.refNumber} for ${item.service} in ${item.city}.`
+                            )}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-2.5 py-1.5 rounded-lg bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366]/20 text-[11px] inline-flex items-center gap-1 border border-[#25D366]/20 font-bold"
+                          >
+                            <MessageCircle className="w-3 h-3" />
+                            <span>{isRtl ? 'واتساب' : 'WhatsApp'}</span>
+                          </a>
+
+                          <button
+                            onClick={() => handleRemoveSavedProposal(item.refNumber)}
+                            className="p-1.5 rounded-lg text-stone-500 hover:text-rose-400 transition-colors"
+                            title="حذف من السجل المحلي"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
 

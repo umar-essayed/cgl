@@ -6,19 +6,25 @@ import Link from 'next/link';
 import { ArrowUpLeft, ArrowUpRight, ChevronDown, Check } from 'lucide-react';
 import { CGL_EQUIPMENT_FLEET } from '@/lib/data';
 import { Locale, getDictionary } from '@/lib/i18n';
-import { EquipmentCategory } from '@/lib/types';
+import { EquipmentCategory, EquipmentItem } from '@/lib/types';
 
 interface EquipmentSectionProps {
   lang?: Locale;
+  equipment?: EquipmentItem[];
 }
 
-export default function EquipmentSection({ lang = 'ar' }: EquipmentSectionProps) {
+export default function EquipmentSection({ 
+  lang = 'ar',
+  equipment = CGL_EQUIPMENT_FLEET 
+}: EquipmentSectionProps) {
   const [selectedCategory, setSelectedCategory] = useState<EquipmentCategory>('all');
   const [showAll, setShowAll] = useState(false);
 
   const dict = getDictionary(lang);
   const isRtl = lang === 'ar';
   const ArrowIcon = isRtl ? ArrowUpLeft : ArrowUpRight;
+
+  const currentEquipment = equipment && equipment.length > 0 ? equipment : CGL_EQUIPMENT_FLEET;
 
   const categories: { id: EquipmentCategory; label: string }[] = [
     { id: 'all', label: dict.equipment.filterAll },
@@ -29,8 +35,8 @@ export default function EquipmentSection({ lang = 'ar' }: EquipmentSectionProps)
   ];
 
   const filteredEquipment = selectedCategory === 'all'
-    ? CGL_EQUIPMENT_FLEET
-    : CGL_EQUIPMENT_FLEET.filter((item) => item.category === selectedCategory);
+    ? currentEquipment
+    : currentEquipment.filter((item) => item.category === selectedCategory);
 
   const displayedEquipment = showAll ? filteredEquipment : filteredEquipment.slice(0, 3);
 

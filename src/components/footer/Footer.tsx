@@ -9,9 +9,11 @@ import { Locale, getDictionary } from '@/lib/i18n';
 
 interface FooterProps {
   lang?: Locale;
+  companyInfo?: any;
 }
 
-export default function Footer({ lang = 'ar' }: FooterProps) {
+export default function Footer({ lang = 'ar', companyInfo }: FooterProps) {
+  const info = companyInfo || CGL_COMPANY_INFO;
   const currentYear = new Date().getFullYear();
   const dict = getDictionary(lang);
   const isRtl = lang === 'ar';
@@ -59,35 +61,35 @@ export default function Footer({ lang = 'ar' }: FooterProps) {
             <div className="flex items-center gap-2" dir="ltr">
               <Phone className="w-3.5 h-3.5 text-[#8bc34a]" />
               <a
-                href={`https://wa.me/${CGL_COMPANY_INFO.whatsapp1Raw}`}
+                href={`https://wa.me/${info.whatsapp1Raw || (info.whatsapp1 || '').replace(/[^0-9]/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-[#8bc34a] transition-colors font-bold"
               >
-                {CGL_COMPANY_INFO.phone1}
+                {info.phone1 || info.phone}
               </a>
               <span className="text-stone-700">|</span>
               <a
-                href={`https://wa.me/${CGL_COMPANY_INFO.whatsapp2Raw}`}
+                href={`https://wa.me/${info.whatsapp2Raw || (info.whatsapp2 || '').replace(/[^0-9]/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-[#8bc34a] transition-colors font-bold"
               >
-                {CGL_COMPANY_INFO.phone2}
+                {info.phone2}
               </a>
             </div>
 
             <a
-              href={`mailto:${CGL_COMPANY_INFO.email}`}
+              href={`mailto:${info.email}`}
               className="inline-flex items-center gap-1.5 text-stone-300 hover:text-white transition-colors"
               dir="ltr"
             >
               <Mail className="w-3.5 h-3.5 text-[#508ECB]" />
-              <span>{CGL_COMPANY_INFO.email}</span>
+              <span>{info.email}</span>
             </a>
 
             <a
-              href={CGL_COMPANY_INFO.googleMapsUrl}
+              href={info.googleMapsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-stone-300 hover:text-[#8bc34a] transition-colors font-sans text-xs"

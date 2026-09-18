@@ -5,23 +5,24 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/navbar/Navbar';
 import Footer from '@/components/footer/Footer';
-import { CGL_COMPANY_INFO } from '@/lib/data';
+import { 
+  CGL_COMPANY_INFO, 
+  CGL_PROFILE_PARTNERS_GRID 
+} from '@/lib/data';
 import { Locale, isValidLocale, getDictionary } from '@/lib/i18n';
 import { 
   ArrowRight, 
   ArrowLeft,
-  Target, 
-  Compass, 
   ShieldCheck, 
-  TrendingUp, 
-  Scale, 
-  Users, 
-  Briefcase, 
-  Award, 
-  Lightbulb, 
-  Trophy,
-  CheckCircle2,
-  Milestone
+  Globe, 
+  Sparkles,
+  Layers,
+  Activity,
+  Waves,
+  Building,
+  Check,
+  Phone,
+  FileDown
 } from 'lucide-react';
 
 export async function generateMetadata({
@@ -34,14 +35,14 @@ export async function generateMetadata({
 
   if (isRtl) {
     return {
-      title: 'عن CGL | مسيرة الريادة، الرؤية والقيم الهندسية',
-      description: 'تعرف على مختبرات CGL، فرع معتمد لمجموعة CGI العالمية، ورسالتنا ورؤيتنا وميثاق قيمنا في الهندسة الجيوتقنية وفحص المواد.',
+      title: 'عن CGL | مسيرة الريادة الجيوتقنية والاعتماد الدولي',
+      description: 'تعرف على مختبرات CGL، الامتياز المعتمد لمجموعة CGI العالمية، ورسالتنا الهندسية، معايير كود البناء السعودي، وشركاء نجاحنا.',
     };
   }
 
   return {
-    title: 'About CGL | Engineering Heritage, Vision & Values',
-    description: 'Learn about CGL Laboratories, an authorized franchise of CGI Group, our technical mission, strategic vision, and values in geotechnical engineering.',
+    title: 'About CGL | Geotechnical Heritage & Global Accreditation',
+    description: 'Discover CGL Laboratories, an authorized franchise of CGI Group, our technical capabilities, Saudi Building Code compliance, and strategic partners.',
   };
 }
 
@@ -61,382 +62,499 @@ export default async function AboutPage({
   const BackIcon = isRtl ? ArrowRight : ArrowLeft;
   const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
 
-  const valuesList = [
+  const capabilities = [
     {
-      icon: Scale,
-      title: isRtl ? 'جودة مهنية بتكلفة عادلة' : 'Professional Quality & Fair Pricing',
-      desc: isRtl 
-        ? 'تقديم أعلى معايير الجودة الهندسية والفحص المخبري المعتمد بأسعار مدروسة وتنافسية.'
-        : 'Delivering highest engineering standards and accredited testing at optimized, fair costs.'
+      num: '01',
+      icon: Layers,
+      titleAr: 'استكشاف باطن الأرض والهندسة الجيوتقنية',
+      titleEn: 'Subsurface Exploration & Geotechnical Engineering',
+      descAr: 'حفر الجسات الآلية المستمرة لأعماق تصل إلى 80 متراً، استخراج العينات الصخرية والترابية (SPT & Shelby Tubes)، دراسات استقرار المنحدرات وهبوط المنشآت وتوصيات التأسيس وفق SBC 303.',
+      descEn: 'Continuous rotary borehole drilling to 80m depths, undisturbed soil/rock sampling, slope stability analysis, and deep foundation engineering strictly compliant with SBC 303.',
+      standards: 'SBC 303 • ASTM D1586 • ASTM D4220'
     },
     {
-      icon: TrendingUp,
-      title: isRtl ? 'عائد استثماري متفوق' : 'Superior Return on Investment',
-      desc: isRtl
-        ? 'حماية أصول ومشاريع عملائنا بتقديم توصيات تأسيس دقيقة تقلل التكاليف غير الضرورية.'
-        : 'Protecting client assets through precise foundation engineering that eliminates redundant costs.'
+      num: '02',
+      icon: Activity,
+      titleAr: 'تقييم السلامة الإنشائية والفحوصات غير الإتلافية (NDT)',
+      titleEn: 'Structural Integrity & Non-Destructive Testing',
+      descAr: 'تشخيص الهياكل الخرسانية القائمة بالأمواج فوق الصوتية، المسح الراداري (GPR) للكشف عن حديد التسليح والفجوات، واختبارات التحميل الساكن والديناميكي للجسور والأسقف.',
+      descEn: 'High-precision concrete diagnostic scanning via Ultrasonic Pulse Velocity, GPR rebar mapping, cavity detection, and static/dynamic load testing on critical structures.',
+      standards: 'ACI 228.1R • ASTM C805 • BS 1881'
     },
     {
-      icon: ShieldCheck,
-      title: isRtl ? 'الالتزام بأخلاقيات المهنة' : 'Uncompromising Professional Ethics',
-      desc: isRtl
-        ? 'تطبيق أقصى درجات النزاهة والحيادية في الفحوصات والمسؤولية الكاملة عن كافة التقارير.'
-        : 'Upholding absolute integrity, technical impartiality, and full accountability for all issued reports.'
+      num: '03',
+      icon: Building,
+      titleAr: 'أنظمة سند جوانب الحفر وتخفيض المياه الجوفية',
+      titleEn: 'Shoring Systems & Groundwater Dewatering',
+      descAr: 'تصميم جدران الخوازيق المتداخلة (Secant) والستائر اللوحية وجدران برلين ومسامير التربة باستخدام نمذجة DC PIT، بجانب شبكات الآبار العميقة والنزح السطحي.',
+      descEn: 'Design and execution of secant pile walls, soldier beams, soil nailing, and tie-back anchors modeled with DC PIT, integrated with deep well dewatering networks.',
+      standards: 'DIN 1054 • BS 8002 • SIA 267'
     },
     {
-      icon: Users,
-      title: isRtl ? 'المشاركة المؤسسية الموسعة' : 'Broad Institutional Ownership',
-      desc: isRtl
-        ? 'ترسيخ مبدأ الملكية والتقدير المتبادل والشراكة المؤسسية لفريق العمل والخبراء.'
-        : 'Fostering ownership, mutual respect, and collaborative growth across our multidisciplinary teams.'
+      num: '04',
+      icon: Waves,
+      titleAr: 'الجيوفيزياء المتقدمة وهندسة الهيدرولوجيا',
+      titleEn: 'Advanced Geophysics & Hydrological Engineering',
+      descAr: 'المسوحات الزلزالية الانكسارية (MASW) وكشف الكهوف برادار OKM GeoSeeker ثلاثي الأبعاد، ودراسات مخرات السيول وأنظمة مآخذ مياه البحر للمحطات والمنتجعات.',
+      descEn: 'Multi-channel surface wave analysis (MASW), OKM GeoSeeker 3D subterranean resistivity scanning, watershed hydrological modeling, and seawater intake/outfall systems.',
+      standards: 'ASTM D5777 • ERT / GPR Protocol'
+    }
+  ];
+
+  const milestones = [
+    {
+      year: '2000',
+      titleAr: 'الانطلاقة والامتياز الدولي',
+      titleEn: 'Global Inception & CGI Franchise',
+      textAr: 'تأسيس المعامل بنظام الامتياز الرسمي من CGI العالمية، ونقل أحدث بروتوكولات الفحص والتقييم من كاليفورنيا إلى المملكة.',
+      textEn: 'Establishment under official CGI global franchise, transferring cutting-edge geotechnical assessment protocols from California to Saudi Arabia.'
     },
     {
-      icon: Briefcase,
-      title: isRtl ? 'بيئة عمل محفزة ومجزية' : 'Stimulating & Rewarding Workplace',
-      desc: isRtl
-        ? 'توفير بيئة تشغيلية آمنة ومريحة تتيح مساراً وظيفياً متقدماً وتحديات مهنية مثمرة.'
-        : 'Providing safe, modern operational environments enabling progressive technical career paths.'
+      year: '2012',
+      titleAr: 'توسيع البنية المخبرية والميدانية',
+      titleEn: 'Laboratory & Field Expansion',
+      textAr: 'افتتاح المختبرات المركزية المجهزة بماكينات الفحص الآلية المعتمدة لمواد البناء واستقدام أحدث أجهزة السيزموجراف والرادار.',
+      textEn: 'Commissioning of advanced central laboratories with automated materials testing frames, deep seismographs, and ground penetrating radars.'
     },
     {
-      icon: Award,
-      title: isRtl ? 'تمكين الكوادر الطموحة' : 'Empowering Engineering Talent',
-      desc: isRtl
-        ? 'مظلة داعمة للمهندسين لتوسيع قاعدة خبراتهم وبناء سمعتهم المهنية في الميدان والمختبر.'
-        : 'Providing an empowering platform for engineers to broaden their field and laboratory expertise.'
+      year: '2019',
+      titleAr: 'الاعتماد الكامل لكود البناء السعودي',
+      titleEn: 'Full SBC Code Alignment',
+      textAr: 'تطوير كافة آليات العمل لتطابق متطلبات كود البناء السعودي الإلزامي للمباني السكنية والتجارية والبنية التحتية.',
+      textEn: 'Full structural adaptation and operational certification adhering to mandatory Saudi Building Code (SBC) standards across all sectors.'
     },
     {
-      icon: Lightbulb,
-      title: isRtl ? 'التفكير الهندسي المبتكر' : 'Innovative Engineering Thinking',
-      desc: isRtl
-        ? 'تبني أحدث الحلول الرقمية والتقنيات غير الإتلافية لمعالجة التحديات الجيوتقنية المعقدة.'
-        : 'Adopting digital innovations and NDT methods to solve complex subsurface engineering challenges.'
-    },
-    {
-      icon: Trophy,
-      title: isRtl ? 'مكافأة التميز والإنجاز' : 'Rewarding Excellence & Impact',
-      desc: isRtl
-        ? 'الاعتراف الدائم بالنجاحات النوعية ومكافأة الأداء الاستثنائي في كافة المراحل التشغيلية.'
-        : 'Continually recognizing qualitative breakthroughs and exceptional operational performance.'
+      year: '2026',
+      titleAr: 'الريادة الرقمية والمسح ثلاثي الأبعاد',
+      titleEn: '3D Subsurface Innovation',
+      textAr: 'دمج تقنيات الذكاء الجيوتقني والتمثيل ثلاثي الأبعاد للتكهفات والمياه الجوفية لخدمة كبرى مشاريع الرؤية في المملكة.',
+      textEn: 'Pioneering AI-driven geotechnical modeling, 3D cavity mapping, and hydrogeological diagnostics for Saudi Vision mega-projects.'
     }
   ];
 
   return (
-    <div className="min-h-screen bg-[#000000] text-stone-100 flex flex-col font-sans selection:bg-[#8bc34a] selection:text-black">
+    <div className="min-h-screen bg-[#030303] text-stone-100 flex flex-col font-sans selection:bg-[#8bc34a] selection:text-black">
       <Navbar lang={lang} />
 
-      {/* 1. Cinematic Hero Header */}
-      <section className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 border-b border-[#1f1f1f] overflow-hidden bg-black">
-        <div className="absolute inset-0 z-0">
+      {/* 1. Architectural Narrative Hero */}
+      <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-28 overflow-hidden min-h-[550px] sm:min-h-[640px] flex flex-col justify-between">
+        {/* Background Image with Engineering Atmosphere */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
-            src="/uploads/projects_images/project_688d0f1061e875.99060450.jpg"
-            alt="CGL Field Operations"
+            src="/assets/sliders/slider1.jpg"
+            alt="CGL Geotechnical Site Operations"
             fill
             priority
-            className="object-cover object-center filter contrast-105 opacity-50 brightness-40"
+            className="object-cover object-center filter contrast-110 brightness-[0.28] scale-105"
           />
-          {/* Clean Vertical Vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/70 pointer-events-none" />
-          <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+          {/* Dual Vignette & Depth Gradients */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/85 to-[#030303]/60" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-[#030303]/40 to-[#030303]/90" />
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#8bc34a]/10 rounded-full blur-3xl" />
         </div>
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Breadcrumb Navigation */}
-          <div className="mb-6">
-            <Link
-              href={`/${lang}`}
-              className="inline-flex items-center text-xs sm:text-sm font-medium text-stone-300 hover:text-[#8bc34a] transition-colors group gap-2"
-            >
-              <BackIcon className="w-4 h-4 text-[#8bc34a] group-hover:-translate-x-0.5 transition-transform" />
-              <span>{dict.aboutPage.breadcrumbHome}</span>
-            </Link>
-          </div>
-
-          {/* Title & Subtitle */}
-          <div className="max-w-3xl">
-            <div className="text-xs sm:text-sm font-mono text-[#8bc34a] font-bold mb-3">
-              {dict.aboutPage.affiliation}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+          
+          {/* Top Metadata Strip */}
+          <div className="flex flex-wrap items-center justify-between gap-4 pb-8 mb-12 border-b border-white/10">
+            <div className="flex items-center gap-2.5">
+              <Link
+                href={`/${lang}`}
+                className="inline-flex items-center text-xs font-mono text-stone-400 hover:text-[#8bc34a] transition-colors gap-1.5"
+              >
+                <BackIcon className="w-3.5 h-3.5 text-[#8bc34a]" />
+                <span>{dict.aboutPage.breadcrumbHome}</span>
+              </Link>
+              <span className="text-stone-600">/</span>
+              <span className="text-xs font-mono text-stone-300">
+                {isRtl ? 'ملف الشركة' : 'Company Profile'}
+              </span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold text-white tracking-tight leading-tight mb-4">
-              {dict.aboutPage.heroTitle}
+            <div className="flex items-center gap-3 text-xs font-mono">
+              <span className="inline-flex items-center gap-1.5 text-stone-300">
+                <Globe className="w-3.5 h-3.5 text-[#8bc34a]" />
+                <span>USA • KSA</span>
+              </span>
+              <span className="text-stone-700">•</span>
+              <span className="text-stone-400">
+                {isRtl ? 'امتياز رسمي لـ CGI' : 'Official CGI Franchise'}
+              </span>
+            </div>
+          </div>
+
+          {/* Bold Editorial Headline */}
+          <div className="max-w-4xl space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-[#8bc34a]">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>{isRtl ? 'المعامل الإبداعية للجيوتقنية CGL' : 'Creative Geotechnical Laboratories'}</span>
+            </div>
+
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-bold text-white tracking-tight leading-[1.08]">
+              {isRtl ? (
+                <>
+                  نبني الأمان من أعماق الأرض، <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-stone-200 to-[#8bc34a]">
+                    بدقة هندسية لا تقبل المساومة.
+                  </span>
+                </>
+              ) : (
+                <>
+                  Engineering safety from the ground up, <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-stone-200 to-[#8bc34a]">
+                    with uncompromised precision.
+                  </span>
+                </>
+              )}
             </h1>
 
-            <p className="text-base sm:text-lg text-stone-200 font-sans leading-relaxed">
-              {dict.aboutPage.heroSubtitle}
+            <p className="text-lg sm:text-xl text-stone-300 font-sans leading-relaxed max-w-3xl font-light">
+              {isRtl 
+                ? 'تأسست CGL كامتياز فخور لمجموعة CGI بالولايات المتحدة الأمريكية، لتنقل أرقى بروتوكولات الفحص المخبري والاستكشاف الجيوتقني إلى مشاريع المملكة، موفرة أساسات صلبة ودراسات معتمدة تضمن ديمومة وسلامة المنشآت.'
+                : 'Creative Geotechnical Laboratories (CGL) is a proud franchise of CGI, bringing trusted global standards to infrastructure in Saudi Arabia through rigorous subsurface investigations and materials testing.'}
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 2. Editorial Narrative & Real Metrics (No rigid boxes) */}
+      <section className="py-16 sm:py-24 border-t border-white/10 bg-[#060606]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            {/* Story Paragraphs */}
+            <div className="lg:col-span-7 space-y-8">
+              <div className="space-y-3">
+                <span className="text-xs font-mono text-[#8bc34a] uppercase tracking-wider font-semibold">
+                  {isRtl ? 'الهوية والرسالة الهندسية' : 'Our Engineering Identity'}
+                </span>
+                <h2 className="text-2xl sm:text-4xl font-display font-bold text-white leading-tight">
+                  {isRtl ? 'حيث يلتقي عمق الخبرة العالمية بمتطلبات البيئة المحلية' : 'Where Global Precision Meets Local Ground Conditions'}
+                </h2>
+              </div>
+
+              <div className="space-y-6 text-stone-300 font-sans leading-relaxed text-base sm:text-lg font-light">
+                <p>
+                  {isRtl 
+                    ? 'في كل مشروع تشييد، تبدأ المعادلة من النقطة الأكثر حساسية: باطن الأرض. تعمل مختبرات CGL كذراع استشاري وتقني مستقل يزود المطورين والمقاولين بالحقائق الميدانية القاطعة عبر أسطول من الحفارات الهيدروليكية ومختبرات الفحص الكيميائي والميكانيكي.'
+                    : 'On every construction site, success begins at the most critical juncture: the ground. CGL operates as an independent technical authority, providing developers and contractors with definitive subsurface intelligence through heavy drilling rigs and advanced materials testing.'}
+                </p>
+
+                <p>
+                  {isRtl 
+                    ? 'نمتلك مقرات رئيسية في كاليفورنيا بالولايات المتحدة والمملكة العربية السعودية (جدة، الرياض، والمنطقة الشرقية)، مما يمنحنا مرونة استثنائية لتوظيف أحدث الابتكارات الجيوفيزيائية مثل التصوير المقطعي ثلاثي الأبعاد وتقنيات NDT غير الإتلافية لدعم المشاريع الكبرى بما يتطابق بالكامل مع كود البناء السعودي (SBC).'
+                    : 'With headquarters in California and key hubs across Saudi Arabia (Jeddah, Riyadh, Eastern Province), we seamlessly merge international engineering breakthroughs with local compliance, ensuring full adherence to Saudi Building Code mandates.'}
+                </p>
+              </div>
+
+              {/* Styled Quote */}
+              <div className={`p-6 rounded-2xl bg-white/[0.02] border ${isRtl ? 'border-r-4 border-r-[#8bc34a]' : 'border-l-4 border-l-[#8bc34a]'} border-white/10 space-y-2`}>
+                <p className="text-base sm:text-lg font-display italic text-white leading-snug">
+                  "{isRtl ? CGL_COMPANY_INFO.missionAr : CGL_COMPANY_INFO.missionEn}"
+                </p>
+                <span className="text-xs font-mono text-stone-400 block">
+                  — {isRtl ? 'ميثاق الجودة في مختبرات CGL' : 'CGL Quality Charter'}
+                </span>
+              </div>
+            </div>
+
+            {/* Typographic Numbers Strip (Vertical Flow, No repetitive cards) */}
+            <div className="lg:col-span-5 lg:ps-8 lg:border-s lg:border-white/10 space-y-10">
+              <div className="space-y-2">
+                <span className="text-xs font-mono text-stone-400 uppercase tracking-wider">
+                  {isRtl ? 'أثرنا في الميدان بالأرقام' : 'Our Measured Impact'}
+                </span>
+                <h3 className="text-xl font-display font-semibold text-white">
+                  {isRtl ? 'سجل موثق من الإنجازات' : 'Documented Track Record'}
+                </h3>
+              </div>
+
+              <div className="space-y-8 divide-y divide-white/10">
+                <div className="pt-2">
+                  <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight">
+                    650<span className="text-[#8bc34a]">+</span>
+                  </div>
+                  <div className="text-sm font-semibold text-stone-200 mt-1">
+                    {isRtl ? 'عميل ومشروع منجز بالمملكة' : 'Delivered Projects & Clients'}
+                  </div>
+                  <p className="text-xs text-stone-400 mt-1 font-light">
+                    {isRtl ? 'يشمل مشاريع الأبراج والقصور ومصانع التحلية ومجمعات الإسكان.' : 'Encompassing commercial towers, palaces, RO plants, and master-planned communities.'}
+                  </p>
+                </div>
+
+                <div className="pt-6">
+                  <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight">
+                    300<span className="text-[#8bc34a]">+</span>
+                  </div>
+                  <div className="text-sm font-semibold text-stone-200 mt-1">
+                    {isRtl ? 'دراسة جيوتقنية وهيدرولوجية تخصصية' : 'Advanced Engineering Studies'}
+                  </div>
+                  <p className="text-xs text-stone-400 mt-1 font-light">
+                    {isRtl ? 'حلول معتمدة لسند الحفر العميق والنزح الجوفي واستكشاف التكهفات.' : 'Certified deep shoring designs, dewatering networks, and cavity detection models.'}
+                  </p>
+                </div>
+
+                <div className="pt-6">
+                  <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight">
+                    30<span className="text-[#8bc34a]">+</span>
+                  </div>
+                  <div className="text-sm font-semibold text-stone-200 mt-1">
+                    {isRtl ? 'عاماً من الخبرة الجيوتقنية المركزة' : 'Years of Field Mastery'}
+                  </div>
+                  <p className="text-xs text-stone-400 mt-1 font-light">
+                    {isRtl ? 'تاريخ ممتد في التعامل مع أكثر تضاريس وتربات المنطقة تعقيداً.' : 'Continuous practice across Saudi complex coastal and geological terrains.'}
+                  </p>
+                </div>
+
+                <div className="pt-6">
+                  <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight flex items-baseline gap-2">
+                    <span>2</span>
+                    <span className="text-lg font-mono text-[#8bc34a] font-normal">HQs (USA • KSA)</span>
+                  </div>
+                  <div className="text-sm font-semibold text-stone-200 mt-1">
+                    {isRtl ? 'حضور استراتيجي عابر للقارات' : 'Intercontinental Footprint'}
+                  </div>
+                  <p className="text-xs text-stone-400 mt-1 font-light">
+                    {isRtl ? 'المقر الرئيسي بكاليفورنيا والمقر الإقليمي بجدة وفروع التغطية بالمملكة.' : 'California Headquarters and regional operation hubs across Saudi Arabia.'}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* 3. Full-Bleed Architectural Image Showcase */}
+      <section className="relative w-full h-[400px] sm:h-[520px] overflow-hidden">
+        <Image
+          src="/uploads/projects_images/project_688d08b6e73ee4.36242119.jpg"
+          alt="CGL Drilling and Field Testing Rig"
+          fill
+          className="object-cover object-center filter contrast-110 brightness-75"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-black/40 to-black/60" />
+        
+        <div className="absolute bottom-8 sm:bottom-12 inset-x-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="max-w-2xl p-6 sm:p-8 rounded-2xl bg-black/70 backdrop-blur-xl border border-white/15 text-white">
+            <div className="text-[11px] font-mono text-[#8bc34a] font-bold mb-1">
+              FIELD CAPABILITIES • أسطول العمليات الميدانية
+            </div>
+            <div className="text-lg sm:text-xl font-display font-bold mb-2">
+              {isRtl ? 'تجهيزات ميدانية مصممة لأقسى الظروف الجيولوجية' : 'Purpose-Built Rigs for Challenging Geological Terrains'}
+            </div>
+            <p className="text-xs sm:text-sm text-stone-300 font-light leading-relaxed">
+              {isRtl 
+                ? 'حفارات آلية هيدروليكية، ماكينات ضغط وكسر معملية، ورادارات مسح أرضي متطورة تديرها كوادر هندسية مرخصة من الهيئة السعودية للمهندسين.'
+                : 'Advanced hydraulic rotary drill rigs, automated compressive testing presses, and 3D radar systems operated by licensed geotechnical engineers.'}
             </p>
           </div>
         </div>
       </section>
 
-      {/* Main Content Area */}
-      <main className="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-20 w-full">
-        
-        {/* 2. Intro & Stats Section */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      {/* 4. Engineering Specializations (Editorial 2x2 with clear hierarchy, no repetitive cards) */}
+      <section className="py-20 sm:py-28 border-b border-white/10 bg-[#030303]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           
-          {/* Text & 4 Stats */}
-          <div className="lg:col-span-7 space-y-6">
-            <div>
-              <span className="text-xs font-mono text-[#8bc34a] font-bold block mb-2">
-                {dict.aboutPage.identityBadge}
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-display font-bold text-white leading-snug">
-                {dict.aboutPage.identityTitle}
-              </h2>
-            </div>
-
-            <p className="text-base sm:text-lg text-stone-200 leading-relaxed font-sans font-medium">
-              {isRtl ? CGL_COMPANY_INFO.aboutAr : CGL_COMPANY_INFO.aboutEn}
-            </p>
-
-            {/* 4 Stats Cards Grid */}
-            <div className="grid grid-cols-2 gap-3 pt-2">
-              <div className="p-4 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] shadow-sm">
-                <div className="text-2xl sm:text-3xl font-bold font-mono text-white tracking-tight">
-                  650<span className="text-[#8bc34a]">+</span>
-                </div>
-                <div className="text-xs sm:text-sm font-bold text-stone-200 mt-1">
-                  {dict.aboutPage.stats.partners}
-                </div>
-                <div className="text-[11px] text-stone-400">
-                  {dict.aboutPage.stats.partnersSub}
-                </div>
-              </div>
-
-              <div className="p-4 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] shadow-sm">
-                <div className="text-2xl sm:text-3xl font-bold font-mono text-white tracking-tight">
-                  300<span className="text-[#8bc34a]">+</span>
-                </div>
-                <div className="text-xs sm:text-sm font-bold text-stone-200 mt-1">
-                  {dict.aboutPage.stats.solutions}
-                </div>
-                <div className="text-[11px] text-stone-400">
-                  {dict.aboutPage.stats.solutionsSub}
-                </div>
-              </div>
-
-              <div className="p-4 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] shadow-sm">
-                <div className="text-2xl sm:text-3xl font-bold font-mono text-white tracking-tight">
-                  20<span className="text-[#8bc34a]">+</span>
-                </div>
-                <div className="text-xs sm:text-sm font-bold text-stone-200 mt-1">
-                  {dict.aboutPage.stats.experience}
-                </div>
-                <div className="text-[11px] text-stone-400">
-                  {dict.aboutPage.stats.experienceSub}
-                </div>
-              </div>
-
-              <div className="p-4 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] shadow-sm">
-                <div className="text-2xl sm:text-3xl font-bold font-mono text-white tracking-tight">
-                  {isRtl ? 'فرعان' : '2 Branches'}<span className="text-[#8bc34a] ml-1">🇸🇦🇺🇸</span>
-                </div>
-                <div className="text-xs sm:text-sm font-bold text-stone-200 mt-1">
-                  {dict.aboutPage.stats.branches}
-                </div>
-                <div className="text-[11px] text-stone-400">
-                  {dict.aboutPage.stats.branchesSub}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* High-Quality Engineering Image */}
-          <div className="lg:col-span-5 relative h-[360px] sm:h-[440px] rounded-2xl overflow-hidden border border-[#1f1f1f] shadow-xl bg-[#0a0a0a]">
-            <Image
-              src="/uploads/user_provided/materials_testing.jpeg"
-              alt="Engineering Team at CGL"
-              fill
-              className="object-cover object-center filter contrast-105"
-            />
-          </div>
-
-        </section>
-
-        {/* 3. Progress Roadmap Section */}
-        <section className="p-6 sm:p-10 rounded-2xl bg-[#0a0a0a] border border-[#1f1f1f] shadow-sm">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-10 pb-4 border-b border-[#1f1f1f]">
-            <div>
-              <span className="text-xs font-mono text-[#8bc34a] font-bold block mb-1">
-                {dict.aboutPage.roadmapBadge}
-              </span>
-              <h2 className="text-xl sm:text-2xl font-display font-bold text-white">
-                {dict.aboutPage.roadmapTitle}
-              </h2>
-            </div>
-            <div className="inline-flex items-center text-xs font-mono text-stone-400 gap-1.5">
-              <Milestone className="w-4 h-4 text-[#8bc34a]" />
-              <span>{dict.aboutPage.roadmapSub}</span>
-            </div>
-          </div>
-
-          {/* Roadmap Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-            {dict.aboutPage.roadmapSteps.map((step, idx) => (
-              <div 
-                key={idx} 
-                className="relative flex flex-col justify-between p-5 rounded-xl bg-[#111111] border border-[#1f1f1f] hover:border-[#8bc34a]/40 shadow-sm transition-all group"
-              >
-                <div>
-                  <div className="mb-3">
-                    <span className="text-2xl font-bold font-mono text-white group-hover:text-[#8bc34a] transition-colors">
-                      {step.year}
-                    </span>
-                  </div>
-
-                  <h3 className="text-base font-bold text-white font-display mb-2">
-                    {step.title}
-                  </h3>
-
-                  <p className="text-xs text-stone-400 leading-relaxed font-sans">
-                    {step.desc}
-                  </p>
-                </div>
-
-                <div className="pt-4 mt-4 border-t border-[#1f1f1f] flex items-center justify-between text-[11px] font-mono text-stone-500">
-                  <span>{dict.aboutPage.roadmapStage} 0{idx + 1}</span>
-                  <span className="w-2 h-2 rounded-full bg-[#8bc34a]/40 group-hover:bg-[#8bc34a] transition-colors" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 4. Vision & Mission Section */}
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          
-          {/* OUR MISSION */}
-          <div className="p-8 sm:p-10 rounded-2xl bg-[#0a0a0a] border border-[#1f1f1f] flex flex-col justify-between hover:border-[#8bc34a]/40 transition-all relative overflow-hidden shadow-sm">
-            <div className={`absolute top-0 ${isRtl ? 'right-0' : 'left-0'} w-28 h-1 bg-[#8bc34a]`} />
-            
-            <div>
-              <div className="flex items-center gap-3.5 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-[#111111] border border-[#1f1f1f] flex items-center justify-center text-[#8bc34a] flex-shrink-0 shadow-sm">
-                  <Target className="w-6 h-6" />
-                </div>
-                <div>
-                  <span className="text-xs font-mono text-[#8bc34a] font-bold">{dict.aboutPage.missionBadge}</span>
-                  <h3 className="text-xl font-bold text-white font-display">{dict.aboutPage.missionTitle}</h3>
-                </div>
-              </div>
-
-              <blockquote className={`text-lg sm:text-xl font-medium text-white leading-relaxed mb-6 ${isRtl ? 'border-r-4 pr-4' : 'border-l-4 pl-4'} border-[#8bc34a] bg-[#111111]/50 p-4 rounded-xl shadow-sm`}>
-                "{isRtl ? CGL_COMPANY_INFO.missionAr : CGL_COMPANY_INFO.missionEn}"
-              </blockquote>
-
-              <div className="space-y-3 pt-2">
-                {dict.aboutPage.missionPillars.map((pillar, pIdx) => (
-                  <div key={pIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-300">
-                    <CheckCircle2 className="w-4 h-4 text-[#8bc34a] flex-shrink-0 mt-0.5" />
-                    <span>{pillar}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* OUR VISION */}
-          <div className="p-8 sm:p-10 rounded-2xl bg-[#0a0a0a] border border-[#1f1f1f] flex flex-col justify-between hover:border-[#8bc34a]/40 transition-all relative overflow-hidden shadow-sm">
-            <div className={`absolute top-0 ${isRtl ? 'right-0' : 'left-0'} w-28 h-1 bg-[#8bc34a]`} />
-            
-            <div>
-              <div className="flex items-center gap-3.5 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-[#111111] border border-[#1f1f1f] flex items-center justify-center text-[#8bc34a] flex-shrink-0 shadow-sm">
-                  <Compass className="w-6 h-6" />
-                </div>
-                <div>
-                  <span className="text-xs font-mono text-[#8bc34a] font-bold">{dict.aboutPage.visionBadge}</span>
-                  <h3 className="text-xl font-bold text-white font-display">{dict.aboutPage.visionTitle}</h3>
-                </div>
-              </div>
-
-              <div className={`text-base sm:text-lg font-medium text-white leading-relaxed mb-6 ${isRtl ? 'border-r-4 pr-4' : 'border-l-4 pl-4'} border-[#8bc34a] bg-[#111111]/50 p-4 rounded-xl shadow-sm`}>
-                {isRtl ? CGL_COMPANY_INFO.visionAr.lead : CGL_COMPANY_INFO.visionEn.lead}
-              </div>
-
-              <div className="space-y-3 pt-2">
-                {(isRtl ? CGL_COMPANY_INFO.visionAr.points : CGL_COMPANY_INFO.visionEn.points).map((point, ptIdx) => (
-                  <div key={ptIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-300">
-                    <CheckCircle2 className="w-4 h-4 text-[#8bc34a] flex-shrink-0 mt-0.5" />
-                    <span>{point}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-        </section>
-
-        {/* 5. Values Grid (4x2 Clean Layout) */}
-        <section className="space-y-8">
-          <div className="text-center max-w-2xl mx-auto">
-            <span className="text-xs font-mono text-[#8bc34a] font-bold block mb-2">
-              {dict.aboutPage.valuesBadge}
+          <div className="max-w-3xl mb-16 space-y-3">
+            <span className="text-xs font-mono text-[#8bc34a] uppercase tracking-wider font-semibold">
+              CORE DISCIPLINES • التخصصات الهندسية المحورية
             </span>
-            <h2 className="text-2xl sm:text-3xl font-display font-bold text-white">
-              {dict.aboutPage.valuesTitle}
+            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight">
+              {isRtl ? 'منظومة حلول جيوتقنية متكاملة' : 'Integrated Geotechnical & Testing Capabilities'}
             </h2>
-            <p className="text-xs sm:text-sm text-stone-400 font-sans mt-2">
-              {dict.aboutPage.valuesSubtitle}
+            <p className="text-base text-stone-400 font-light">
+              {isRtl 
+                ? 'تغطي خدماتنا دورة حياة المشروع الإنشائي بالكامل من الاستكشاف المبدئي وحتى الفحص النهائي لسلامة الهيكل.'
+                : 'Covering the full project lifecycle from preliminary subsurface exploration to structural health auditing.'}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-            {valuesList.map((val, idx) => {
-              const IconComp = val.icon;
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
+            {capabilities.map((cap) => {
+              const Icon = cap.icon;
               return (
-                <div
-                  key={idx}
-                  className="p-5 rounded-xl bg-[#0a0a0a] border border-[#1f1f1f] hover:border-[#8bc34a]/40 shadow-sm transition-all group flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="w-10 h-10 rounded-lg bg-[#111111] border border-[#1f1f1f] flex items-center justify-center text-[#8bc34a] mb-4 group-hover:scale-105 transition-transform shadow-sm">
-                      <IconComp className="w-5 h-5" />
+                <div key={cap.num} className="group flex flex-col justify-between space-y-6 pb-8 border-b border-white/10">
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-3xl sm:text-4xl font-mono font-bold text-stone-700 group-hover:text-[#8bc34a] transition-colors">
+                        {cap.num}
+                      </span>
+                      <div className="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#8bc34a]">
+                        <Icon className="w-5 h-5" />
+                      </div>
                     </div>
 
-                    <h3 className="text-sm sm:text-base font-bold text-white font-display mb-1.5 group-hover:text-[#8bc34a] transition-colors">
-                      {val.title}
+                    <h3 className="text-xl sm:text-2xl font-display font-bold text-white group-hover:text-stone-100 transition-colors">
+                      {isRtl ? cap.titleAr : cap.titleEn}
                     </h3>
 
-                    <p className="text-xs text-stone-400 leading-relaxed font-sans">
-                      {val.desc}
+                    <p className="text-sm sm:text-base text-stone-300 font-light leading-relaxed">
+                      {isRtl ? cap.descAr : cap.descEn}
                     </p>
                   </div>
 
-                  <div className="pt-4 mt-4 border-t border-[#1f1f1f] text-[10px] font-mono text-stone-600">
-                    0{idx + 1}
+                  <div className="pt-2 flex items-center justify-between text-xs font-mono text-stone-500">
+                    <span>{cap.standards}</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#8bc34a]/50" />
                   </div>
                 </div>
               );
             })}
           </div>
-        </section>
 
-        {/* 6. Bottom Direct CTA Banner */}
-        <section className="p-8 sm:p-12 rounded-2xl bg-[#0a0a0a] text-white border border-[#1f1f1f] relative overflow-hidden shadow-xl">
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="text-xl sm:text-3xl font-display font-bold text-white mb-2">
-                {isRtl ? 'هل لديك مشروع يحتاج استشارة أو فحص جيوتقني؟' : 'Have a Project Requiring Soil Testing or Advisory?'}
+        </div>
+      </section>
+
+      {/* 5. Verified Success Partners (Real logos from CGL Profile) */}
+      <section className="py-20 sm:py-28 bg-[#060606] border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+            <div className="space-y-3">
+              <span className="text-xs font-mono text-[#8bc34a] uppercase tracking-wider font-semibold">
+                TRUSTED BY INDUSTRY LEADERS • شركاء النجاح
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-display font-bold text-white tracking-tight">
+                {isRtl ? 'الشركاء والعملاء المعتمدون في سجل CGL' : 'Verified Strategic Partners & Clients'}
+              </h2>
+            </div>
+            <p className="text-sm text-stone-400 font-light max-w-md">
+              {isRtl 
+                ? 'لوجوهات وشركاء حقيقيون من واقع بروفايل الشركة الرسمي، يمثلون كبرى مشاريع البنية التحتية والإنشاءات.'
+                : 'Official partner logos extracted directly from the verified CGL corporate profile.'}
+            </p>
+          </div>
+
+          {/* Clean Partner Logo Gallery with Crisp Presentation */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-5">
+            {CGL_PROFILE_PARTNERS_GRID.map((partner) => (
+              <div 
+                key={partner.id}
+                className="p-4 sm:p-5 rounded-2xl bg-[#0a0a0a] hover:bg-[#121212] border border-white/[0.08] hover:border-[#8bc34a]/40 transition-all flex flex-col items-center justify-between min-h-[140px] group shadow-sm"
+              >
+                <div className="relative w-full h-14 flex items-center justify-center my-auto">
+                  <Image
+                    src={partner.logo}
+                    alt={partner.nameEn}
+                    fill
+                    className="object-contain p-1 group-hover:scale-105 transition-transform drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+                  />
+                </div>
+                <div className="text-center w-full pt-2 border-t border-white/5 mt-2">
+                  <span className="text-[11px] font-bold text-stone-200 block truncate">
+                    {isRtl ? partner.nameAr : partner.nameEn}
+                  </span>
+                  <span className="text-[10px] text-stone-500 block truncate">
+                    {isRtl ? partner.roleAr : partner.roleEn}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* 6. Chronological Growth & Roadmap (Minimalist timeline, no nested cards) */}
+      <section className="py-20 sm:py-28 bg-[#030303] border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          
+          <div className="max-w-3xl mb-16 space-y-3">
+            <span className="text-xs font-mono text-[#8bc34a] uppercase tracking-wider font-semibold">
+              TRAJECTORY & GROWTH • مسيرة التطور
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight">
+              {isRtl ? 'محطات شكلت ريادتنا في فحص التربة' : 'Milestones Shaping Our Technical Leadership'}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            {milestones.map((m, idx) => (
+              <div key={idx} className="relative space-y-3 pt-6 border-t-2 border-stone-800 hover:border-[#8bc34a] transition-colors group">
+                <div className="text-3xl sm:text-4xl font-mono font-bold text-white group-hover:text-[#8bc34a] transition-colors">
+                  {m.year}
+                </div>
+                <h3 className="text-lg font-display font-bold text-stone-100">
+                  {isRtl ? m.titleAr : m.titleEn}
+                </h3>
+                <p className="text-xs sm:text-sm text-stone-400 font-light leading-relaxed">
+                  {isRtl ? m.textAr : m.textEn}
+                </p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* 7. Institutional Accreditations Trust Bar (Clean horizontal strip) */}
+      <section className="py-12 bg-[#080808] border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="flex flex-wrap items-center justify-between gap-6 text-xs font-mono text-stone-400">
+            <div className="flex items-center gap-2 text-stone-200">
+              <ShieldCheck className="w-4 h-4 text-[#8bc34a]" />
+              <span className="font-bold">{isRtl ? 'الاعتمادات والمعايير المطبقة:' : 'Governing Standards & Accreditations:'}</span>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-6 text-stone-300">
+              <span className="hover:text-white transition-colors">Saudi Building Code (SBC 303/304/305)</span>
+              <span>•</span>
+              <span className="hover:text-white transition-colors">ASTM International Standards</span>
+              <span>•</span>
+              <span className="hover:text-white transition-colors">AASHTO Highway Standards</span>
+              <span>•</span>
+              <span className="hover:text-white transition-colors">DIN 1054 / BS 8002 Shoring</span>
+              <span>•</span>
+              <span className="hover:text-white transition-colors">Saudi Council of Engineers (SCE)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Minimalist High-Contrast Action Banner */}
+      <section className="py-16 sm:py-20 bg-[#030303]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          
+          <div className="p-8 sm:p-14 rounded-3xl bg-gradient-to-b from-[#0e0e0e] to-[#070707] border border-white/15 flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="space-y-3 text-center lg:text-start max-w-2xl">
+              <span className="text-xs font-mono text-[#8bc34a] font-bold uppercase tracking-wider block">
+                {isRtl ? 'المقر الرئيسي: جدة • حي الرويس 23215' : 'Headquarters: 23215 Al-Ruwais, Jeddah KSA'}
+              </span>
+              <h3 className="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight">
+                {isRtl ? 'هل تخطط لمشروع يحتاج فحصاً جيوتقنياً معتمداً؟' : 'Planning a Project Requiring Accredited Geotechnical Testing?'}
               </h3>
-              <p className="text-xs sm:text-sm text-stone-300 font-sans max-w-xl">
+              <p className="text-sm text-stone-300 font-light leading-relaxed">
                 {isRtl 
-                  ? 'فريقنا الاستشاري متواجد لدراسة متطلبات التربة وتقديم خطة فحص معتمدة لكود البناء السعودي.'
-                  : 'Our advisory team is ready to review site conditions and deliver compliant investigation plans.'}
+                  ? 'مهندسونا الاستشاريون جاهزون لدراسة موقعك، تحديد عدد وأعماق الجسات المطلوبة، وتقديم عرض سعر مطابق لكود البناء السعودي.'
+                  : 'Our consultant engineers are available to review site data, specify borehole depths, and provide SBC-compliant proposals.'}
               </p>
             </div>
 
-            <Link
-              href={`/${lang}/rfq`}
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-sm shadow-lg transition-all flex-shrink-0"
-            >
-              <span>{dict.nav.rfq}</span>
-              <ArrowIcon className="w-4 h-4" />
-            </Link>
-          </div>
-        </section>
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto flex-shrink-0">
+              <a
+                href={`tel:${CGL_COMPANY_INFO.phone2}`}
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white/[0.05] hover:bg-white/10 text-stone-200 border border-white/15 text-xs font-mono transition-all"
+              >
+                <Phone className="w-4 h-4 text-[#8bc34a]" />
+                <span>+966 50 369 1609</span>
+              </a>
 
-      </main>
+              <Link
+                href={`/${lang}/rfq`}
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-sm shadow-lg shadow-[#8bc34a]/20 transition-all"
+              >
+                <span>{dict.nav.rfq}</span>
+                <ArrowIcon className="w-4 h-4 text-black" />
+              </Link>
+            </div>
+          </div>
+
+        </div>
+      </section>
 
       <Footer lang={lang} />
     </div>

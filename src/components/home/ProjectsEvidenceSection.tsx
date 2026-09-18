@@ -7,19 +7,29 @@ import { motion } from 'framer-motion';
 import { MapPin, ArrowUpLeft, ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { CGL_PROJECTS_EVIDENCE } from '@/lib/data';
 import { Locale, getDictionary } from '@/lib/i18n';
+import { ProjectEvidence } from '@/lib/types';
 
 interface ProjectsEvidenceSectionProps {
   lang?: Locale;
+  projects?: ProjectEvidence[];
 }
 
-export default function ProjectsEvidenceSection({ lang = 'ar' }: ProjectsEvidenceSectionProps) {
+export default function ProjectsEvidenceSection({ 
+  lang = 'ar',
+  projects = CGL_PROJECTS_EVIDENCE 
+}: ProjectsEvidenceSectionProps) {
   const [showAllProjects, setShowAllProjects] = useState(false);
   const dict = getDictionary(lang);
   const isRtl = lang === 'ar';
   const ArrowIcon = isRtl ? ArrowUpLeft : ArrowUpRight;
   const ChevronIcon = isRtl ? ChevronLeft : ChevronRight;
 
-  const visibleProjects = showAllProjects ? CGL_PROJECTS_EVIDENCE : CGL_PROJECTS_EVIDENCE.slice(0, 3);
+  const currentProjects = projects && projects.length > 0 ? projects : CGL_PROJECTS_EVIDENCE;
+  const visibleProjects = showAllProjects ? currentProjects : currentProjects.slice(0, 3);
+  const totalCount = currentProjects.length;
+  const visibleCount = visibleProjects.length;
+  const formattedVisible = String(visibleCount).padStart(2, '0');
+  const formattedTotal = String(totalCount).padStart(2, '0');
 
   return (
     <section id="projects" className="py-14 sm:py-24 bg-black border-b border-[#1f1f1f] text-white relative">
@@ -41,7 +51,7 @@ export default function ProjectsEvidenceSection({ lang = 'ar' }: ProjectsEvidenc
 
           <div className="flex-shrink-0 text-xs font-mono text-stone-400 bg-[#111111] px-3.5 py-1.5 rounded-xl border border-[#1f1f1f] self-start sm:self-auto shadow-sm">
             <span>{isRtl ? 'المشاريع: ' : 'Projects: '}</span>
-            <span className="text-[#8bc34a] font-bold">0{visibleProjects.length} / 0{CGL_PROJECTS_EVIDENCE.length}</span>
+            <span className="text-[#8bc34a] font-bold">{formattedVisible} / {formattedTotal}</span>
           </div>
         </div>
 
@@ -120,21 +130,20 @@ export default function ProjectsEvidenceSection({ lang = 'ar' }: ProjectsEvidenc
           })}
         </div>
 
-        {/* Expand / Collapse Button */}
+        {/* Link to Dedicated Projects Page */}
         <div className="mt-10 sm:mt-12 flex justify-center">
-          <button
-            type="button"
-            onClick={() => setShowAllProjects(!showAllProjects)}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#1a1a1a] border border-[#1f1f1f] text-stone-200 hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-sm group hover:border-[#8bc34a]/40"
+          <Link
+            href={`/${lang}/projects`}
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#111111] hover:bg-[#1a1a1a] border border-[#1f1f1f] text-stone-200 hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-sm group hover:border-[#8bc34a]/50"
           >
             <span>
-              {showAllProjects 
-                ? (isRtl ? 'طي قائمة المشاريع' : 'Collapse Projects')
-                : (isRtl ? `عرض كافة دراسات المشاريع (${CGL_PROJECTS_EVIDENCE.length} مشاريع)` : `View All Case Studies (${CGL_PROJECTS_EVIDENCE.length} Projects)`)
+              {isRtl 
+                ? `استعراض كافة دراسات المشاريع الهندسية (${totalCount} مشاريع)`
+                : `Explore All Case Studies & Projects (${totalCount} Projects)`
               }
             </span>
-            <ChevronIcon className={`w-4 h-4 text-[#8bc34a] transition-transform duration-300 ${showAllProjects ? '-rotate-90' : 'rotate-0'}`} />
-          </button>
+            <ArrowIcon className="w-4 h-4 text-[#8bc34a] group-hover:-translate-x-1 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
         </div>
 
       </div>
