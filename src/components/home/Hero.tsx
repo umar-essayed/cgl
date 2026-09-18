@@ -200,31 +200,70 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
           {/* Mobile-Only Analytics Counter */}
           <div className="sm:hidden mt-4 pt-3 border-t border-white/10 w-full">
             <div className="flex items-center justify-between gap-1 text-xs font-mono">
-              <div className="flex items-baseline gap-0.5">
-                <span className="text-base font-bold text-white tracking-tight">
-                  <AnimatedCounter target={dict.hero.stats.partners.num} />
-                </span>
-                <span className="text-[#8bc34a] font-bold text-xs">+</span>
+              <div className="flex items-baseline gap-1">
+                <div className="flex items-baseline gap-0.5">
+                  {isRtl ? (
+                    <>
+                      <span className="text-[#8bc34a] font-bold text-base">+</span>
+                      <span className="text-base font-bold text-white tracking-tight">
+                        <AnimatedCounter target={dict.hero.stats.partners.num} />
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-base font-bold text-white tracking-tight">
+                        <AnimatedCounter target={dict.hero.stats.partners.num} />
+                      </span>
+                      <span className="text-[#8bc34a] font-bold text-base">+</span>
+                    </>
+                  )}
+                </div>
                 <span className="text-[10px] text-stone-300 font-sans font-medium">{dict.hero.stats.partners.label}</span>
               </div>
 
               <span className="text-stone-700">•</span>
 
-              <div className="flex items-baseline gap-0.5">
-                <span className="text-base font-bold text-white tracking-tight">
-                  <AnimatedCounter target={dict.hero.stats.solutions.num} />
-                </span>
-                <span className="text-[#8bc34a] font-bold text-xs">+</span>
+              <div className="flex items-baseline gap-1">
+                <div className="flex items-baseline gap-0.5">
+                  {isRtl ? (
+                    <>
+                      <span className="text-[#8bc34a] font-bold text-base">+</span>
+                      <span className="text-base font-bold text-white tracking-tight">
+                        <AnimatedCounter target={dict.hero.stats.solutions.num} />
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-base font-bold text-white tracking-tight">
+                        <AnimatedCounter target={dict.hero.stats.solutions.num} />
+                      </span>
+                      <span className="text-[#8bc34a] font-bold text-base">+</span>
+                    </>
+                  )}
+                </div>
                 <span className="text-[10px] text-stone-300 font-sans font-medium">{dict.hero.stats.solutions.label}</span>
               </div>
 
               <span className="text-stone-700">•</span>
 
-              <div className="flex items-baseline gap-0.5">
-                <span className="text-base font-bold text-white tracking-tight">
-                  <AnimatedCounter target={dict.hero.stats.experience.num} />
-                </span>
-                <span className="text-[#8bc34a] font-bold text-xs">+</span>
+              <div className="flex items-baseline gap-1">
+                <div className="flex items-baseline gap-0.5">
+                  {isRtl ? (
+                    <>
+                      <span className="text-[#8bc34a] font-bold text-base">+</span>
+                      <span className="text-base font-bold text-white tracking-tight">
+                        <AnimatedCounter target={dict.hero.stats.experience.num} />
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-base font-bold text-white tracking-tight">
+                        <AnimatedCounter target={dict.hero.stats.experience.num} />
+                      </span>
+                      <span className="text-[#8bc34a] font-bold text-base">+</span>
+                    </>
+                  )}
+                </div>
                 <span className="text-[10px] text-stone-300 font-sans font-medium">{dict.hero.stats.experience.label}</span>
               </div>
             </div>
@@ -235,31 +274,70 @@ export default function Hero({ lang = 'ar' }: HeroProps) {
       {/* Desktop-Only Metrics Counter */}
       <div className="hidden sm:block max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 w-full mb-3">
         <div className="flex items-center justify-start gap-7 text-xs font-mono">
-          <div className="flex items-baseline gap-1">
-            <span className="text-xl font-bold text-white tracking-tight">
-              <AnimatedCounter target={dict.hero.stats.partners.num} />
-            </span>
-            <span className="text-[#8bc34a] font-bold text-sm">+</span>
+          <div className="flex items-baseline gap-1.5">
+            <div className="flex items-baseline gap-0.5">
+              {isRtl ? (
+                <>
+                  <span className="text-[#8bc34a] font-bold text-xl">+</span>
+                  <span className="text-xl font-bold text-white tracking-tight">
+                    <AnimatedCounter target={dict.hero.stats.partners.num} />
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="text-xl font-bold text-white tracking-tight">
+                    <AnimatedCounter target={dict.hero.stats.partners.num} />
+                  </span>
+                  <span className="text-[#8bc34a] font-bold text-xl">+</span>
+                </>
+              )}
+            </div>
             <span className="text-xs text-stone-300 font-sans font-medium">{dict.hero.stats.partners.label}</span>
           </div>
 
           <span className="text-stone-700">•</span>
 
-          <div className="flex items-baseline gap-1">
-            <span className="text-xl font-bold text-white tracking-tight">
-              <AnimatedCounter target={dict.hero.stats.solutions.num} />
-            </span>
-            <span className="text-[#8bc34a] font-bold text-sm">+</span>
+          <div className="flex items-baseline gap-1.5">
+            <div className="flex items-baseline gap-0.5">
+              {isRtl ? (
+                <>
+                  <span className="text-[#8bc34a] font-bold text-xl">+</span>
+                  <span className="text-xl font-bold text-white tracking-tight">
+                    <AnimatedCounter target={dict.hero.stats.solutions.num} />
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="text-xl font-bold text-white tracking-tight">
+                    <AnimatedCounter target={dict.hero.stats.solutions.num} />
+                  </span>
+                  <span className="text-[#8bc34a] font-bold text-xl">+</span>
+                </>
+              )}
+            </div>
             <span className="text-xs text-stone-300 font-sans font-medium">{dict.hero.stats.solutions.label}</span>
           </div>
 
           <span className="text-stone-700">•</span>
 
-          <div className="flex items-baseline gap-1">
-            <span className="text-xl font-bold text-white tracking-tight">
-              <AnimatedCounter target={dict.hero.stats.experience.num} />
-            </span>
-            <span className="text-[#8bc34a] font-bold text-sm">+</span>
+          <div className="flex items-baseline gap-1.5">
+            <div className="flex items-baseline gap-0.5">
+              {isRtl ? (
+                <>
+                  <span className="text-[#8bc34a] font-bold text-xl">+</span>
+                  <span className="text-xl font-bold text-white tracking-tight">
+                    <AnimatedCounter target={dict.hero.stats.experience.num} />
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="text-xl font-bold text-white tracking-tight">
+                    <AnimatedCounter target={dict.hero.stats.experience.num} />
+                  </span>
+                  <span className="text-[#8bc34a] font-bold text-xl">+</span>
+                </>
+              )}
+            </div>
             <span className="text-xs text-stone-300 font-sans font-medium">{dict.hero.stats.experience.label}</span>
           </div>
         </div>
