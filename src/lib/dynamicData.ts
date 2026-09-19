@@ -76,7 +76,7 @@ export interface DynamicSiteData {
 // ---------------------------------------------------------
 let memoryCachedData: DynamicSiteData | null = null;
 let memoryCacheTimestamp = 0;
-const CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutes TTL
+const CACHE_TTL_MS = 60 * 1000; // 60 seconds TTL for fast updates
 let inFlightFetch: Promise<DynamicSiteData> | null = null;
 
 /**
