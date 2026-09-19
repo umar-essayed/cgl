@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { 
   Menu, 
   X, 
@@ -17,13 +18,27 @@ import ThemeToggle from '@/components/theme/ThemeToggle';
 
 interface NavbarProps {
   lang?: Locale;
+  variant?: 'auto' | 'dark-hero' | 'solid';
 }
 
-export default function Navbar({ lang = 'ar' }: NavbarProps) {
+export default function Navbar({ lang = 'ar', variant = 'auto' }: NavbarProps) {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dict = getDictionary(lang);
   const isRtl = lang === 'ar';
+
+  // Determine if current page has a dark cinematic hero at the top
+  const isDarkHeroPage = variant === 'dark-hero' || (variant === 'auto' && (
+    !pathname ||
+    pathname === '/' ||
+    pathname === `/${lang}` ||
+    pathname === `/${lang}/` ||
+    pathname.endsWith('/about')
+  ));
+
+  // Solid navbar mode is active on pages without dark hero OR when scrolled / mobile menu open
+  const isSolid = !isDarkHeroPage || isScrolled || mobileMenuOpen;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,12 +71,12 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
       )}
 
       <header className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${
-        (isScrolled || mobileMenuOpen) 
+        isSolid
           ? 'bg-[#FBF9F5]/95 dark:bg-[#0a0a0a]/95 backdrop-blur-xl py-2.5 shadow-sm dark:shadow-2xl border-b border-[#E6DFD3] dark:border-[#1f1f1f]' 
           : 'bg-transparent py-2.5 sm:py-3.5 border-b border-transparent'
       }`}>
         {/* Straight Accent Edge Line */}
-        {isScrolled && (
+        {isSolid && (
           <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#3b76b3] shadow-[0_1px_8px_rgba(59,118,179,0.45)] pointer-events-none" />
         )}
 
@@ -90,7 +105,7 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
                 key={idx}
                 href={link.href}
                 className={`text-xs xl:text-sm font-medium transition-colors whitespace-nowrap ${
-                  (isScrolled || mobileMenuOpen)
+                  isSolid
                     ? 'text-[#18181B] dark:text-stone-300 hover:text-[#3b76b3] dark:hover:text-[#3b76b3]'
                     : 'text-white/90 hover:text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]'
                 }`}
@@ -108,8 +123,8 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
               target="_blank"
               rel="noopener noreferrer"
               className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg font-mono text-xs transition-colors border ${
-                (isScrolled || mobileMenuOpen)
-                  ? 'bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-[#18181B] dark:text-stone-300 border-[#E6DFD3] dark:border-[#1f1f1f]'
+                isSolid
+                  ? 'bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-[#18181B] dark:text-stone-300 border-[#E6DFD3] dark:border-[#1f1f1f] shadow-sm'
                   : 'bg-white/10 hover:bg-white/20 text-white border-white/20 backdrop-blur-md shadow-sm'
               }`}
               dir="ltr"
@@ -120,10 +135,10 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
             </a>
 
             {/* Language Switcher */}
-            <LanguageSwitcher currentLang={lang} isScrolled={isScrolled || mobileMenuOpen} />
+            <LanguageSwitcher currentLang={lang} isScrolled={isSolid} />
 
             {/* Theme Toggle (Dark / Light) */}
-            <ThemeToggle isScrolled={isScrolled || mobileMenuOpen} />
+            <ThemeToggle isScrolled={isSolid} />
 
             {/* RFQ CTA Button */}
             <Link
@@ -137,8 +152,8 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
 
           {/* Mobile & Tablet Actions Bar */}
           <div className="lg:hidden flex items-center gap-1.5 sm:gap-2">
-            <LanguageSwitcher currentLang={lang} isScrolled={isScrolled || mobileMenuOpen} />
-            <ThemeToggle isScrolled={isScrolled || mobileMenuOpen} />
+            <LanguageSwitcher currentLang={lang} isScrolled={isSolid} />
+            <ThemeToggle isScrolled={isSolid} />
 
             <Link
               href={`/${lang}/rfq`}
@@ -150,8 +165,8 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={`p-2 rounded-lg border transition-colors ${
-                (isScrolled || mobileMenuOpen)
-                  ? 'text-[#18181B] dark:text-stone-300 border-[#E6DFD3] dark:border-[#1f1f1f] bg-white dark:bg-[#111111]'
+                isSolid
+                  ? 'text-[#18181B] dark:text-stone-300 border-[#E6DFD3] dark:border-[#1f1f1f] bg-white dark:bg-[#111111] shadow-sm'
                   : 'text-white bg-white/10 hover:bg-white/20 border-white/20 backdrop-blur-md shadow-sm'
               }`}
               aria-label="Toggle navigation menu"
