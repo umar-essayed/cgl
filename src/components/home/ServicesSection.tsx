@@ -68,6 +68,88 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
   const remainingCount = servicesList.length - visibleCount;
   const progressPercent = Math.min(100, Math.round((visibleServices.length / servicesList.length) * 100));
 
+  const col1 = visibleServices.filter((_, i) => i % 3 === 0);
+  const col2 = visibleServices.filter((_, i) => i % 3 === 1);
+  const col3 = visibleServices.filter((_, i) => i % 3 === 2);
+
+  const renderCard = (service: ServiceItem, index: number, isTall = false) => {
+    const styling = serviceColorMap[service.id] || serviceColorMap['geotechnical-investigation'];
+    const icon = serviceIconMap[service.id] || <Layers className="w-5 h-5 text-[#3b76b3]" />;
+    const imageSrc = service.image || '/assets/sliders/slider1.jpg';
+    const originalIndex = servicesList.findIndex(s => s.id === service.id);
+    const title = isRtl ? service.titleAr : service.titleEn;
+    const desc = isRtl ? service.shortDescAr : service.shortDescEn;
+
+    return (
+      <motion.div
+        key={service.id}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.4, delay: index * 0.06 }}
+        className={`group relative rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1f1f1f] ${styling.border} transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-black/80 flex flex-col justify-between`}
+      >
+        {/* Ambient Top Glow */}
+        <div className={`absolute top-0 right-0 left-0 h-32 bg-gradient-to-b ${styling.glow} to-transparent opacity-20 pointer-events-none`} />
+
+        {/* Photography Header / Banner (كارت طالع وكارت نازل حسب isTall) */}
+        <div className={`relative w-full overflow-hidden ${isTall ? 'h-52 sm:h-60' : 'h-40 sm:h-44'}`}>
+          <Image
+            src={imageSrc}
+            alt={title}
+            fill
+            className="object-cover object-center transform group-hover:scale-105 transition-transform duration-700 filter brightness-95 group-hover:brightness-100"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
+        </div>
+
+        {/* Content Body */}
+        <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between relative z-10">
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-mono font-bold text-[#3b76b3]">
+                {originalIndex < 9 ? `0${originalIndex + 1}` : originalIndex + 1}
+              </span>
+              <div className="text-stone-400 group-hover:text-white transition-colors">
+                {icon}
+              </div>
+            </div>
+
+            <h3 className="font-display font-bold text-base sm:text-lg text-white group-hover:text-[#3b76b3] transition-colors mb-2 leading-snug">
+              {title}
+            </h3>
+
+            <p className="text-xs sm:text-sm text-stone-300 font-sans leading-relaxed line-clamp-3 mb-4">
+              {desc}
+            </p>
+          </div>
+
+          {/* Footer: Standards & Link */}
+          <div className="pt-3 border-t border-white/5 flex items-center justify-between gap-2 mt-auto">
+            <div className="flex flex-wrap gap-1.5">
+              {(service.standards || []).slice(0, 2).map((std, sIdx) => (
+                <span 
+                  key={sIdx}
+                  className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-stone-300 border border-white/10"
+                >
+                  {std}
+                </span>
+              ))}
+            </div>
+
+            <Link
+              href={`/${lang}/rfq`}
+              className="inline-flex items-center text-xs font-bold text-[#3b76b3] hover:text-white transition-colors gap-1 group/link"
+            >
+              <span>{dict.services.requestPricing}</span>
+              <ArrowIcon className="w-3.5 h-3.5 transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform" />
+            </Link>
+          </div>
+        </div>
+      </motion.div>
+    );
+  };
+
   return (
     <section id="services" className="py-16 sm:py-24 bg-[#000000] border-b border-[#1f1f1f] relative overflow-hidden">
       {/* Background Geotechnical Ambient Glow */}
@@ -92,9 +174,9 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
           </p>
         </div>
 
-        {/* Services Responsive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 items-stretch">
-          {visibleServices.map((service, index) => {
+        {/* Mobile View: Clean Vertical Stack */}
+        <div className="flex md:hidden flex-col gap-4">
+          {visibleServices.map((service, idx) => {
             const styling = serviceColorMap[service.id] || serviceColorMap['geotechnical-investigation'];
             const icon = serviceIconMap[service.id] || <Layers className="w-5 h-5 text-[#3b76b3]" />;
             const imageSrc = service.image || '/assets/sliders/slider1.jpg';
@@ -103,74 +185,64 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
             const desc = isRtl ? service.shortDescAr : service.shortDescEn;
 
             return (
-              <motion.div
+              <div
                 key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.35, delay: (index % 3) * 0.08 }}
-                className={`group relative rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1f1f1f] ${styling.border} transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-black/80 flex flex-col justify-between`}
+                className={`rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1f1f1f] ${styling.border} flex flex-col shadow-sm`}
               >
-                {/* Ambient Top Glow */}
-                <div className={`absolute top-0 right-0 left-0 h-32 bg-gradient-to-b ${styling.glow} to-transparent opacity-20 pointer-events-none`} />
-
-                {/* Photography Banner */}
-                <div className="relative w-full h-44 sm:h-48 overflow-hidden">
+                <div className="relative w-full h-40 overflow-hidden">
                   <Image
                     src={imageSrc}
                     alt={title}
                     fill
-                    className="object-cover object-center transform group-hover:scale-105 transition-transform duration-700 filter brightness-95 group-hover:brightness-100"
+                    className="object-cover object-center"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
                 </div>
 
-                {/* Content Body */}
-                <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between relative z-10">
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs font-mono font-bold text-[#3b76b3]">
-                        {originalIndex < 9 ? `0${originalIndex + 1}` : originalIndex + 1}
-                      </span>
-                      <div className="text-stone-400 group-hover:text-white transition-colors">
-                        {icon}
-                      </div>
+                <div className="p-4 flex flex-col justify-between">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-mono font-bold text-[#3b76b3]">
+                      {originalIndex < 9 ? `0${originalIndex + 1}` : originalIndex + 1}
+                    </span>
+                    <div className="text-stone-400">
+                      {icon}
                     </div>
-
-                    <h3 className="font-display font-bold text-base sm:text-lg text-white group-hover:text-[#3b76b3] transition-colors mb-2 leading-snug">
-                      {title}
-                    </h3>
-
-                    <p className="text-xs sm:text-sm text-stone-300 font-sans leading-relaxed line-clamp-3 mb-4">
-                      {desc}
-                    </p>
                   </div>
-
-                  {/* Footer: Standards & Link */}
-                  <div className="pt-3 border-t border-white/5 flex items-center justify-between gap-2 mt-auto">
-                    <div className="flex flex-wrap gap-1.5">
-                      {(service.standards || []).slice(0, 2).map((std, sIdx) => (
-                        <span 
-                          key={sIdx}
-                          className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-stone-300 border border-white/10"
-                        >
-                          {std}
-                        </span>
-                      ))}
-                    </div>
-
+                  <h3 className="font-display font-bold text-base text-white mb-1">
+                    {title}
+                  </h3>
+                  <p className="text-xs text-stone-300 font-sans leading-relaxed line-clamp-2 mb-3">
+                    {desc}
+                  </p>
+                  <div className="pt-2.5 border-t border-[#1f1f1f] flex items-center justify-between">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-stone-400 border border-[#1f1f1f]">
+                      {(service.standards || [])[0] || 'SBC'}
+                    </span>
                     <Link
                       href={`/${lang}/rfq`}
-                      className="inline-flex items-center text-xs font-bold text-[#3b76b3] hover:text-white transition-colors gap-1 group/link"
+                      className="inline-flex items-center text-xs font-bold text-[#3b76b3] gap-1"
                     >
                       <span>{dict.services.requestPricing}</span>
-                      <ArrowIcon className="w-3.5 h-3.5 transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform" />
+                      <ArrowIcon className="w-3.5 h-3.5" />
                     </Link>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
+        </div>
+
+        {/* Desktop View: Staggered Masonry (كارت طالع وكارت نازل) */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 items-start">
+          <div className="space-y-6 sm:space-y-7 flex flex-col">
+            {col1.map((service, idx) => renderCard(service, idx, idx % 2 === 0))}
+          </div>
+          <div className="space-y-6 sm:space-y-7 flex flex-col lg:pt-8">
+            {col2.map((service, idx) => renderCard(service, idx + 2, idx % 2 === 1))}
+          </div>
+          <div className="space-y-6 sm:space-y-7 flex flex-col lg:pt-14 md:col-span-2 lg:col-span-1">
+            {col3.map((service, idx) => renderCard(service, idx + 4, idx % 2 === 0))}
+          </div>
         </div>
 
         {/* Progressive Pagination Controls */}
