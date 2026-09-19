@@ -200,12 +200,16 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
           </motion.div>
         </AnimatePresence>
 
-        {/* Dual Vignette & Smooth Blend into next section:
-            In Dark Mode: blends to pure #000000
-            In Light Mode: creates a gorgeous smooth architectural gradient fade to #FBF9F5 at the bottom
+        {/* Top/Overall Cinematic Dark Vignette - preserves rich media contrast and white text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#000000]/85 via-black/45 to-black/30 pointer-events-none" />
+        <div className="absolute inset-0 bg-black/25 pointer-events-none" />
+
+        {/* Soft Controlled Architectural Bottom Blend:
+            Confined strictly to the lower edge (h-28 sm:h-36 lg:h-44) so on desktop computers
+            it NEVER washes out the hero image or headline, providing a smooth transition into #FBF9F5
+            in light mode and pure #000000 in dark mode.
         */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#FBF9F5] via-transparent to-[#000000]/80 dark:from-[#000000] dark:via-transparent dark:to-[#000000]/70 pointer-events-none" />
-        <div className="absolute inset-0 bg-[#000000]/40 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-28 sm:h-36 lg:h-44 bg-gradient-to-t from-[#FBF9F5] via-[#FBF9F5]/35 to-transparent dark:from-[#000000] dark:via-[#000000]/60 dark:to-transparent pointer-events-none z-10" />
       </div>
 
       {/* Main Content Area */}

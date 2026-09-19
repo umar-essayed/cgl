@@ -152,11 +152,12 @@ export default async function AboutPage({
             className="object-cover object-center filter contrast-105 brightness-95 opacity-55 scale-105"
           />
           {/* Dual Vignette & Smooth Bottom Blend:
-              Fades seamlessly to #F3ECE2 (next section) in light mode, and #060606 in dark mode
+              Confined strictly to lower edge (h-28 sm:h-36 lg:h-44) so desktop view is razor-sharp
           */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#F3ECE2] via-transparent to-[#000000]/80 dark:from-[#060606] dark:via-transparent dark:to-[#000000]/70" />
-          <div className="absolute inset-0 bg-[#000000]/40" />
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#3b76b3]/15 rounded-full blur-3xl" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#000000]/85 via-black/45 to-black/30 pointer-events-none" />
+          <div className="absolute inset-0 bg-[#000000]/25 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 right-0 h-28 sm:h-36 lg:h-44 bg-gradient-to-t from-[#F3ECE2] via-[#F3ECE2]/35 to-transparent dark:from-[#060606] dark:via-[#060606]/60 dark:to-transparent pointer-events-none z-10" />
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#3b76b3]/15 rounded-full blur-3xl pointer-events-none" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">

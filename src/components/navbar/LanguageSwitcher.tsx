@@ -44,19 +44,19 @@ export default function LanguageSwitcher({ currentLang, className = '', isScroll
     }
   };
 
+  const buttonStyle = !isScrolled
+    ? 'bg-white/10 hover:bg-white/20 border-white/20 text-white backdrop-blur-md shadow-sm'
+    : 'bg-white dark:bg-[#111111] hover:bg-slate-50 dark:hover:bg-[#1a1a1a] border-[#E6DFD3] dark:border-[#222222] text-[#18181B] dark:text-stone-200 shadow-sm';
+
   return (
     <button
       type="button"
       onClick={handleSwitch}
       aria-label={`Switch to ${label}`}
-      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-200 border ${
-        isScrolled
-          ? 'bg-white dark:bg-[#111111] hover:bg-slate-50 dark:hover:bg-[#1a1a1a] border-[#E6DFD3] dark:border-[#222222] text-[#18181B] dark:text-stone-200 shadow-sm'
-          : 'bg-white/80 hover:bg-white text-[#18181B] border-[#E6DFD3] dark:bg-black/40 dark:hover:bg-black/60 dark:text-white dark:border-white/20 backdrop-blur-sm'
-      } ${className}`}
+      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-200 border ${buttonStyle} ${className}`}
     >
-      <Globe className="w-3.5 h-3.5 text-[#3b76b3]" />
-      <span>{label}</span>
+      <Globe className="w-3.5 h-3.5 text-[#60a5fa]" />
+      <span className="font-sans font-semibold">{label}</span>
     </button>
   );
 }
