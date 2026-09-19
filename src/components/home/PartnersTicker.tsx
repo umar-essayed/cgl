@@ -35,7 +35,7 @@ export default function PartnersTicker({
         className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
         dir="ltr"
       >
-        <div className="flex w-max animate-marquee-seamless items-center cursor-pointer select-none">
+        <div className="flex w-max animate-marquee-seamless items-center cursor-pointer select-none py-1">
           {/* Track 1 */}
           <div className="flex shrink-0 items-center gap-4 sm:gap-6 pr-4 sm:pr-6">
             {currentPartners.map((partner, index) => {
@@ -43,18 +43,21 @@ export default function PartnersTicker({
               return (
                 <div
                   key={`t1-${partner.id}-${index}`}
-                  className="h-16 sm:h-20 w-44 sm:w-52 flex-shrink-0 flex items-center justify-center p-3 rounded-xl bg-white dark:bg-[#0a0a0a] hover:bg-slate-50 dark:hover:bg-[#121212] border border-[#E6DFD3] dark:border-[#1f1f1f] hover:border-[#3b76b3]/40 transition-all duration-300 group shadow-sm"
+                  className="h-20 sm:h-22 w-48 sm:w-56 flex-shrink-0 flex flex-col items-center justify-center p-3 rounded-xl bg-[#11141a] dark:bg-[#0a0a0a] hover:bg-[#161a22] dark:hover:bg-[#121212] border border-stone-300/40 dark:border-[#1f1f1f] hover:border-[#3b76b3]/60 transition-all duration-300 group shadow-sm hover:shadow-md"
                   title={`${name} • ${partner.sectorAr || ''}`}
                 >
-                  <div className="relative w-full h-full flex items-center justify-center">
+                  <div className="relative w-full h-10 sm:h-11 flex items-center justify-center">
                     <Image
                       src={partner.logo}
                       alt={name}
                       fill
-                      sizes="(max-width: 768px) 176px, 208px"
-                      className="object-contain p-1 group-hover:scale-105 transition-all duration-300 dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+                      sizes="(max-width: 768px) 192px, 224px"
+                      className="object-contain p-0.5 group-hover:scale-105 transition-all duration-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
                     />
                   </div>
+                  <span className="mt-1 text-[11px] font-sans font-medium text-stone-300/90 dark:text-stone-400 group-hover:text-white transition-colors truncate max-w-full px-1 text-center">
+                    {name}
+                  </span>
                 </div>
               );
             })}
@@ -67,18 +70,21 @@ export default function PartnersTicker({
               return (
                 <div
                   key={`t2-${partner.id}-${index}`}
-                  className="h-16 sm:h-20 w-44 sm:w-52 flex-shrink-0 flex items-center justify-center p-3 rounded-xl bg-white dark:bg-[#0a0a0a] hover:bg-slate-50 dark:hover:bg-[#121212] border border-[#E6DFD3] dark:border-[#1f1f1f] hover:border-[#3b76b3]/40 transition-all duration-300 group shadow-sm"
+                  className="h-20 sm:h-22 w-48 sm:w-56 flex-shrink-0 flex flex-col items-center justify-center p-3 rounded-xl bg-[#11141a] dark:bg-[#0a0a0a] hover:bg-[#161a22] dark:hover:bg-[#121212] border border-stone-300/40 dark:border-[#1f1f1f] hover:border-[#3b76b3]/60 transition-all duration-300 group shadow-sm hover:shadow-md"
                   title={`${name} • ${partner.sectorAr || ''}`}
                 >
-                  <div className="relative w-full h-full flex items-center justify-center">
+                  <div className="relative w-full h-10 sm:h-11 flex items-center justify-center">
                     <Image
                       src={partner.logo}
                       alt={name}
                       fill
-                      sizes="(max-width: 768px) 176px, 208px"
-                      className="object-contain p-1 group-hover:scale-105 transition-all duration-300 dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+                      sizes="(max-width: 768px) 192px, 224px"
+                      className="object-contain p-0.5 group-hover:scale-105 transition-all duration-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
                     />
                   </div>
+                  <span className="mt-1 text-[11px] font-sans font-medium text-stone-300/90 dark:text-stone-400 group-hover:text-white transition-colors truncate max-w-full px-1 text-center">
+                    {name}
+                  </span>
                 </div>
               );
             })}

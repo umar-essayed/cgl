@@ -8,6 +8,7 @@ import {
   CGL_SERVICES
 } from '@/lib/data';
 import { ProjectEvidence, EquipmentItem, NewsArticle, AuthorizedPartner, HeroSlide, ServiceItem } from '@/lib/types';
+import { cache } from 'react';
 
 export const DEFAULT_HERO_SLIDES: HeroSlide[] = [
   {
@@ -70,10 +71,28 @@ export interface DynamicSiteData {
   settings: typeof CGL_COMPANY_INFO;
 }
 
+// ---------------------------------------------------------
+// Global In-Memory Cache (Protects Firestore from excess reads)
+// ---------------------------------------------------------
+let memoryCachedData: DynamicSiteData | null = null;
+let memoryCacheTimestamp = 0;
+const CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutes TTL
+let inFlightFetch: Promise<DynamicSiteData> | null = null;
+
 /**
- * Fetch fresh dynamic site data directly from Firestore
+ * Clear the in-memory cache on demand (called by /api/revalidate)
  */
-export async function getDynamicSiteData(): Promise<DynamicSiteData> {
+export function invalidateSiteDataCache(): void {
+  memoryCachedData = null;
+  memoryCacheTimestamp = 0;
+  inFlightFetch = null;
+  console.log('[dynamicData] In-memory cache invalidated successfully.');
+}
+
+/**
+ * Internal worker to read from Firestore once
+ */
+async function fetchFreshSiteData(): Promise<DynamicSiteData> {
   try {
     const db = getAdminFirestore();
     if (!db) {
@@ -168,7 +187,40 @@ export async function getDynamicSiteData(): Promise<DynamicSiteData> {
 }
 
 /**
- * Fetch a single service by ID
+ * Fetch dynamic site data with automatic in-memory caching and request deduplication.
+ * Eliminates redundant Firestore reads and protects against quota exhaustion.
+ */
+export const getDynamicSiteData = cache(async function getDynamicSiteData(): Promise<DynamicSiteData> {
+  const now = Date.now();
+
+  // 1. Return fresh memory cached data if within TTL
+  if (memoryCachedData && (now - memoryCacheTimestamp < CACHE_TTL_MS)) {
+    return memoryCachedData;
+  }
+
+  // 2. Deduplicate concurrent requests (Thundering Herd shield)
+  if (inFlightFetch) {
+    return inFlightFetch;
+  }
+
+  inFlightFetch = fetchFreshSiteData()
+    .then((data) => {
+      memoryCachedData = data;
+      memoryCacheTimestamp = Date.now();
+      inFlightFetch = null;
+      return data;
+    })
+    .catch((err) => {
+      inFlightFetch = null;
+      if (memoryCachedData) return memoryCachedData;
+      throw err;
+    });
+
+  return inFlightFetch;
+});
+
+/**
+ * Fetch a single service by ID (Uses cached data first)
  */
 export async function getDynamicService(id: string): Promise<ServiceItem | undefined> {
   const data = await getDynamicSiteData();
@@ -178,7 +230,7 @@ export async function getDynamicService(id: string): Promise<ServiceItem | undef
 }
 
 /**
- * Fetch a single project by ID
+ * Fetch a single project by ID (Uses cached data first, single document fallback)
  */
 export async function getDynamicProject(id: string): Promise<ProjectEvidence | undefined> {
   const data = await getDynamicSiteData();
@@ -201,7 +253,7 @@ export async function getDynamicProject(id: string): Promise<ProjectEvidence | u
 }
 
 /**
- * Fetch a single news article by ID
+ * Fetch a single news article by ID (Uses cached data first, single document fallback)
  */
 export async function getDynamicNewsArticle(id: string): Promise<NewsArticle | undefined> {
   const data = await getDynamicSiteData();
