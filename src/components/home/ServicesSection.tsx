@@ -89,9 +89,6 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
         transition={{ duration: 0.4, delay: index * 0.06 }}
         className={`group relative rounded-2xl overflow-hidden bg-white dark:bg-[#0a0a0a] border border-[#E6DFD3] dark:border-[#1f1f1f] ${styling.border} transition-all duration-300 shadow-sm hover:shadow-xl dark:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-black/80 flex flex-col justify-between`}
       >
-        {/* Ambient Top Glow */}
-        <div className={`absolute top-0 right-0 left-0 h-32 bg-gradient-to-b ${styling.glow} to-transparent opacity-10 dark:opacity-20 pointer-events-none`} />
-
         {/* Photography Header / Banner (كارت طالع وكارت نازل حسب isTall) */}
         <div className={`relative w-full overflow-hidden ${isTall ? 'h-52 sm:h-60' : 'h-40 sm:h-44'}`}>
           <Image
@@ -152,10 +149,6 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
 
   return (
     <section id="services" className="py-16 sm:py-24 bg-[#F3ECE2] dark:bg-[#000000] border-b border-[#E6DFD3] dark:border-[#1f1f1f] relative overflow-hidden">
-      {/* Background Geotechnical Ambient Glow */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#3b76b3]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 left-0 w-96 h-96 bg-[#3b76b3]/5 rounded-full blur-3xl pointer-events-none" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         
         {/* Section Header */}
