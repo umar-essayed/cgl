@@ -165,7 +165,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className="relative min-h-[100svh] sm:min-h-[700px] max-h-[1050px] flex flex-col justify-between pt-24 pb-4 sm:pt-28 sm:pb-8 engineering-canvas overflow-hidden bg-[#000000] select-none"
+      className="relative min-h-[100svh] sm:min-h-[700px] max-h-[1050px] flex flex-col justify-between pt-24 pb-4 sm:pt-28 sm:pb-8 engineering-canvas overflow-hidden bg-[#FBF9F5] dark:bg-[#000000] text-[#18181B] dark:text-white select-none transition-colors duration-300"
     >
       {/* Background Image/Video Carousel with Smooth AnimatePresence */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -173,10 +173,10 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
           <motion.div
             key={activeSlide.id + activeSlide.mediaUrl}
             initial={{ opacity: 0, scale: 1.03 }}
-            animate={{ opacity: 0.65, scale: 1 }}
+            animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
-            className="absolute inset-0"
+            className="absolute inset-0 opacity-75 dark:opacity-65"
           >
             {activeSlide.type === 'video' ? (
               <video
@@ -200,9 +200,9 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
           </motion.div>
         </AnimatePresence>
 
-        {/* Dual Vignette */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-[#000000]/70 pointer-events-none" />
-        <div className="absolute inset-0 bg-[#000000]/30 pointer-events-none" />
+        {/* Overlays: Dark mode keeps the exact pure pitch-black dual vignette. Light mode has subtle edge-only gradients (bottom and top) keeping the center completely open and crisp */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#FBF9F5] via-transparent to-[#FBF9F5]/40 dark:from-[#000000] dark:via-transparent dark:to-[#000000]/70 pointer-events-none" />
+        <div className="absolute inset-0 hidden dark:block bg-[#000000]/30 pointer-events-none" />
       </div>
 
       {/* Main Content Area */}
@@ -220,24 +220,24 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                 className="space-y-2.5 sm:space-y-4"
               >
                 {/* Tag Pill */}
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-[#111111]/90 border border-[#1f1f1f] text-[11px] sm:text-xs font-sans text-[#3b76b3] shadow-sm w-fit">
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white/95 dark:bg-[#111111]/90 border border-[#E6DFD3] dark:border-[#1f1f1f] text-[11px] sm:text-xs font-sans text-[#3b76b3] shadow-sm w-fit">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#3b76b3] animate-pulse" />
                   <span className="font-semibold">{activeSlide.tag}</span>
                   {activeSlide.metrics && (
                     <>
-                      <span className="text-stone-600">|</span>
-                      <span className="text-stone-300 font-mono text-[10px] sm:text-xs">{activeSlide.metrics}</span>
+                      <span className="text-stone-400 dark:text-stone-600">|</span>
+                      <span className="text-[#3F3F46] dark:text-stone-300 font-mono text-[10px] sm:text-xs">{activeSlide.metrics}</span>
                     </>
                   )}
                 </div>
 
                 {/* Headline */}
-                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-snug tracking-tight">
+                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-[#18181B] dark:text-white leading-snug tracking-tight">
                   {activeSlide.title}
                 </h1>
 
                 {/* Subtitle */}
-                <p className="text-xs sm:text-base md:text-lg text-stone-200 font-sans leading-relaxed max-w-2xl font-normal line-clamp-2 sm:line-clamp-none">
+                <p className="text-xs sm:text-base md:text-lg text-[#3F3F46] dark:text-stone-200 font-sans leading-relaxed max-w-2xl font-normal line-clamp-2 sm:line-clamp-none">
                   {activeSlide.subtitle}
                 </p>
               </motion.div>
@@ -251,85 +251,85 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
               className="inline-flex items-center justify-center flex-1 sm:flex-initial px-4 sm:px-7 py-2.5 sm:py-3 bg-[#3b76b3] hover:bg-[#2a5b8c] text-white font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-[#3b76b3]/20 active:scale-[0.98] transition-all text-center gap-1.5"
             >
               <span>{dict.hero.ctaRfq}</span>
-              <ArrowIcon className="w-3.5 h-3.5 text-black" />
+              <ArrowIcon className="w-3.5 h-3.5 text-white" />
             </Link>
 
             <a
               href={`/${lang}#services`}
-              className="inline-flex items-center justify-center flex-1 sm:flex-initial px-4 sm:px-5 py-2.5 sm:py-3 bg-black/60 hover:bg-black/80 backdrop-blur-md text-white font-medium text-xs sm:text-sm rounded-xl border border-white/20 transition-all text-center"
+              className="inline-flex items-center justify-center flex-1 sm:flex-initial px-4 sm:px-5 py-2.5 sm:py-3 bg-white hover:bg-stone-50 text-[#18181B] border border-[#E6DFD3] shadow-sm dark:bg-black/60 dark:hover:bg-black/80 dark:backdrop-blur-md dark:text-white dark:border-white/20 font-medium text-xs sm:text-sm rounded-xl transition-all text-center"
             >
               <span>{dict.hero.ctaServices}</span>
             </a>
           </div>
 
           {/* Mobile-Only Analytics Counter */}
-          <div className="sm:hidden mt-4 pt-3 border-t border-white/10 w-full">
+          <div className="sm:hidden mt-4 pt-3 border-t border-[#E6DFD3] dark:border-white/10 w-full">
             <div className="flex items-center justify-between gap-1 text-xs font-mono">
               <div className="flex items-baseline gap-1">
                 <div className="flex items-baseline gap-0.5">
                   {isRtl ? (
                     <>
                       <span className="text-[#3b76b3] font-bold text-base">+</span>
-                      <span className="text-base font-bold text-white tracking-tight">
+                      <span className="text-base font-bold text-[#18181B] dark:text-white tracking-tight">
                         <AnimatedCounter target={partnersCount} />
                       </span>
                     </>
                   ) : (
                     <>
-                      <span className="text-base font-bold text-white tracking-tight">
+                      <span className="text-base font-bold text-[#18181B] dark:text-white tracking-tight">
                         <AnimatedCounter target={partnersCount} />
                       </span>
                       <span className="text-[#3b76b3] font-bold text-base">+</span>
                     </>
                   )}
                 </div>
-                <span className="text-[10px] text-stone-300 font-sans font-medium">{dict.hero.stats.partners.label}</span>
+                <span className="text-[10px] text-[#52525B] dark:text-stone-300 font-sans font-medium">{dict.hero.stats.partners.label}</span>
               </div>
 
-              <span className="text-stone-700">•</span>
+              <span className="text-stone-300 dark:text-stone-700">•</span>
 
               <div className="flex items-baseline gap-1">
                 <div className="flex items-baseline gap-0.5">
                   {isRtl ? (
                     <>
                       <span className="text-[#3b76b3] font-bold text-base">+</span>
-                      <span className="text-base font-bold text-white tracking-tight">
+                      <span className="text-base font-bold text-[#18181B] dark:text-white tracking-tight">
                         <AnimatedCounter target={solutionsCount} />
                       </span>
                     </>
                   ) : (
                     <>
-                      <span className="text-base font-bold text-white tracking-tight">
+                      <span className="text-base font-bold text-[#18181B] dark:text-white tracking-tight">
                         <AnimatedCounter target={solutionsCount} />
                       </span>
                       <span className="text-[#3b76b3] font-bold text-base">+</span>
                     </>
                   )}
                 </div>
-                <span className="text-[10px] text-stone-300 font-sans font-medium">{dict.hero.stats.solutions.label}</span>
+                <span className="text-[10px] text-[#52525B] dark:text-stone-300 font-sans font-medium">{dict.hero.stats.solutions.label}</span>
               </div>
 
-              <span className="text-stone-700">•</span>
+              <span className="text-stone-300 dark:text-stone-700">•</span>
 
               <div className="flex items-baseline gap-1">
                 <div className="flex items-baseline gap-0.5">
                   {isRtl ? (
                     <>
                       <span className="text-[#3b76b3] font-bold text-base">+</span>
-                      <span className="text-base font-bold text-white tracking-tight">
+                      <span className="text-base font-bold text-[#18181B] dark:text-white tracking-tight">
                         <AnimatedCounter target={experienceCount} />
                       </span>
                     </>
                   ) : (
                     <>
-                      <span className="text-base font-bold text-white tracking-tight">
+                      <span className="text-base font-bold text-[#18181B] dark:text-white tracking-tight">
                         <AnimatedCounter target={experienceCount} />
                       </span>
                       <span className="text-[#3b76b3] font-bold text-base">+</span>
                     </>
                   )}
                 </div>
-                <span className="text-[10px] text-stone-300 font-sans font-medium">{dict.hero.stats.experience.label}</span>
+                <span className="text-[10px] text-[#52525B] dark:text-stone-300 font-sans font-medium">{dict.hero.stats.experience.label}</span>
               </div>
             </div>
           </div>
@@ -344,77 +344,77 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
               {isRtl ? (
                 <>
                   <span className="text-[#3b76b3] font-bold text-xl">+</span>
-                  <span className="text-xl font-bold text-white tracking-tight">
+                  <span className="text-xl font-bold text-[#18181B] dark:text-white tracking-tight">
                     <AnimatedCounter target={partnersCount} />
                   </span>
                 </>
               ) : (
                 <>
-                  <span className="text-xl font-bold text-white tracking-tight">
+                  <span className="text-xl font-bold text-[#18181B] dark:text-white tracking-tight">
                     <AnimatedCounter target={partnersCount} />
                   </span>
                   <span className="text-[#3b76b3] font-bold text-xl">+</span>
                 </>
               )}
             </div>
-            <span className="text-xs text-stone-300 font-sans font-medium">{dict.hero.stats.partners.label}</span>
+            <span className="text-xs text-[#52525B] dark:text-stone-300 font-sans font-medium">{dict.hero.stats.partners.label}</span>
           </div>
 
-          <span className="text-stone-700">•</span>
+          <span className="text-stone-300 dark:text-stone-700">•</span>
 
           <div className="flex items-baseline gap-1.5">
             <div className="flex items-baseline gap-0.5">
               {isRtl ? (
                 <>
                   <span className="text-[#3b76b3] font-bold text-xl">+</span>
-                  <span className="text-xl font-bold text-white tracking-tight">
+                  <span className="text-xl font-bold text-[#18181B] dark:text-white tracking-tight">
                     <AnimatedCounter target={solutionsCount} />
                   </span>
                 </>
               ) : (
                 <>
-                  <span className="text-xl font-bold text-white tracking-tight">
+                  <span className="text-xl font-bold text-[#18181B] dark:text-white tracking-tight">
                     <AnimatedCounter target={solutionsCount} />
                   </span>
                   <span className="text-[#3b76b3] font-bold text-xl">+</span>
                 </>
               )}
             </div>
-            <span className="text-xs text-stone-300 font-sans font-medium">{dict.hero.stats.solutions.label}</span>
+            <span className="text-xs text-[#52525B] dark:text-stone-300 font-sans font-medium">{dict.hero.stats.solutions.label}</span>
           </div>
 
-          <span className="text-stone-700">•</span>
+          <span className="text-stone-300 dark:text-stone-700">•</span>
 
           <div className="flex items-baseline gap-1.5">
             <div className="flex items-baseline gap-0.5">
               {isRtl ? (
                 <>
                   <span className="text-[#3b76b3] font-bold text-xl">+</span>
-                  <span className="text-xl font-bold text-white tracking-tight">
+                  <span className="text-xl font-bold text-[#18181B] dark:text-white tracking-tight">
                     <AnimatedCounter target={experienceCount} />
                   </span>
                 </>
               ) : (
                 <>
-                  <span className="text-xl font-bold text-white tracking-tight">
+                  <span className="text-xl font-bold text-[#18181B] dark:text-white tracking-tight">
                     <AnimatedCounter target={experienceCount} />
                   </span>
                   <span className="text-[#3b76b3] font-bold text-xl">+</span>
                 </>
               )}
             </div>
-            <span className="text-xs text-stone-300 font-sans font-medium">{dict.hero.stats.experience.label}</span>
+            <span className="text-xs text-[#52525B] dark:text-stone-300 font-sans font-medium">{dict.hero.stats.experience.label}</span>
           </div>
         </div>
       </div>
 
       {/* Bottom Controls Bar (Dynamic Tabs: Scrollable on mobile, flex on desktop) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-20 w-full pt-3 sm:pt-4 border-t border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-20 w-full pt-3 sm:pt-4 border-t border-[#E6DFD3] dark:border-white/10">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
           
           {/* Sleek Dot Pagination System */}
           <div className="flex items-center gap-3 w-full sm:w-auto justify-center sm:justify-start">
-            <div className="flex items-center gap-2 sm:gap-2.5 p-1.5 sm:p-2 rounded-full bg-black/60 backdrop-blur-md border border-white/10 shadow-lg">
+            <div className="flex items-center gap-2 sm:gap-2.5 p-1.5 sm:p-2 rounded-full bg-white dark:bg-black/60 shadow-sm dark:backdrop-blur-md border border-[#E6DFD3] dark:border-white/10 dark:shadow-lg">
               {normalizedSlides.map((s, idx) => {
                 const isActive = currentSlide === idx;
                 return (
@@ -426,8 +426,8 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                     title={s.tag}
                     className={`relative h-2.5 sm:h-3 rounded-full transition-all duration-300 active:scale-90 overflow-hidden flex items-center ${
                       isActive
-                        ? 'w-9 sm:w-12 bg-black border border-[#3b76b3]/80 shadow-[0_0_10px_rgba(59,118,179,0.35)]'
-                        : 'w-2.5 sm:w-3 bg-stone-600/70 hover:bg-stone-400 hover:scale-110'
+                        ? 'w-9 sm:w-12 bg-white dark:bg-black border border-[#3b76b3]/80 shadow-[0_0_10px_rgba(59,118,179,0.35)]'
+                        : 'w-2.5 sm:w-3 bg-stone-300 dark:bg-stone-600/70 hover:bg-stone-400 hover:scale-110'
                     }`}
                   >
                     {isActive && (
@@ -445,12 +445,12 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
             </div>
 
             {/* Active Slide Tag Minimal Pill */}
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] sm:text-xs font-sans text-stone-300">
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-white/5 border border-[#E6DFD3] dark:border-white/10 text-[11px] sm:text-xs font-sans text-[#52525B] dark:text-stone-300 shadow-sm dark:shadow-none">
               <span className="font-mono font-bold text-[#3b76b3]">0{currentSlide + 1}</span>
-              <span className="text-stone-600">/</span>
-              <span className="font-mono text-stone-500">0{normalizedSlides.length}</span>
-              <span className="text-stone-600">•</span>
-              <span className="font-medium text-white truncate max-w-[140px] sm:max-w-[200px]">{normalizedSlides[currentSlide]?.tag}</span>
+              <span className="text-stone-400 dark:text-stone-600">/</span>
+              <span className="font-mono text-stone-400 dark:text-stone-500">0{normalizedSlides.length}</span>
+              <span className="text-stone-400 dark:text-stone-600">•</span>
+              <span className="font-medium text-[#18181B] dark:text-white truncate max-w-[140px] sm:max-w-[200px]">{normalizedSlides[currentSlide]?.tag}</span>
             </div>
           </div>
         </div>

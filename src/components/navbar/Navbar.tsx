@@ -13,6 +13,7 @@ import {
 import { CGL_COMPANY_INFO } from '@/lib/data';
 import { Locale, getDictionary } from '@/lib/i18n';
 import LanguageSwitcher from './LanguageSwitcher';
+import ThemeToggle from '@/components/theme/ThemeToggle';
 
 interface NavbarProps {
   lang?: Locale;
@@ -56,10 +57,10 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
 
       <header className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${
         (isScrolled || mobileMenuOpen) 
-          ? 'bg-[#0a0a0a]/95 backdrop-blur-xl py-2.5 shadow-2xl border-b border-[#1f1f1f]' 
+          ? 'bg-[#FBF9F5]/95 dark:bg-[#0a0a0a]/95 backdrop-blur-xl py-2.5 shadow-sm dark:shadow-2xl border-b border-[#E6DFD3] dark:border-[#1f1f1f]' 
           : 'bg-transparent py-2.5 sm:py-3.5 border-b border-transparent'
       }`}>
-        {/* Straight Green Accent Edge Line */}
+        {/* Straight Accent Edge Line */}
         {isScrolled && (
           <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#3b76b3] shadow-[0_1px_8px_rgba(59,118,179,0.45)] pointer-events-none" />
         )}
@@ -88,7 +89,11 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
               <Link
                 key={idx}
                 href={link.href}
-                className="text-xs xl:text-sm font-medium text-stone-300 hover:text-[#3b76b3] transition-colors whitespace-nowrap"
+                className={`text-xs xl:text-sm font-medium transition-colors whitespace-nowrap ${
+                  (isScrolled || mobileMenuOpen)
+                    ? 'text-[#18181B] dark:text-stone-300 hover:text-[#3b76b3] dark:hover:text-[#3b76b3]'
+                    : 'text-[#18181B] dark:text-white/90 hover:text-[#3b76b3] dark:hover:text-white drop-shadow-none dark:drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]'
+                }`}
               >
                 {link.label}
               </Link>
@@ -102,7 +107,11 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
               href={`https://wa.me/${CGL_COMPANY_INFO.whatsapp1Raw}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-stone-300 hover:text-white font-mono text-xs transition-colors border border-[#1f1f1f]"
+              className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg font-mono text-xs transition-colors border ${
+                (isScrolled || mobileMenuOpen)
+                  ? 'bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-[#18181B] dark:text-stone-300 border-[#E6DFD3] dark:border-[#1f1f1f]'
+                  : 'bg-white/80 hover:bg-white text-[#18181B] border-[#E6DFD3] dark:bg-black/40 dark:hover:bg-black/60 dark:text-white dark:border-white/20 backdrop-blur-sm'
+              }`}
               dir="ltr"
               title={dict.nav.whatsapp}
             >
@@ -111,7 +120,10 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
             </a>
 
             {/* Language Switcher */}
-            <LanguageSwitcher currentLang={lang} />
+            <LanguageSwitcher currentLang={lang} isScrolled={isScrolled || mobileMenuOpen} />
+
+            {/* Theme Toggle (Dark / Light) */}
+            <ThemeToggle isScrolled={isScrolled || mobileMenuOpen} />
 
             {/* RFQ CTA Button */}
             <Link
@@ -124,8 +136,9 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
           </div>
 
           {/* Mobile & Tablet Actions Bar */}
-          <div className="lg:hidden flex items-center gap-2">
-            <LanguageSwitcher currentLang={lang} />
+          <div className="lg:hidden flex items-center gap-1.5 sm:gap-2">
+            <LanguageSwitcher currentLang={lang} isScrolled={isScrolled || mobileMenuOpen} />
+            <ThemeToggle isScrolled={isScrolled || mobileMenuOpen} />
 
             <Link
               href={`/${lang}/rfq`}
@@ -136,7 +149,11 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-stone-300 hover:text-white border border-[#1f1f1f] rounded-lg bg-[#111111]"
+              className={`p-2 rounded-lg border transition-colors ${
+                (isScrolled || mobileMenuOpen)
+                  ? 'text-[#18181B] dark:text-stone-300 border-[#E6DFD3] dark:border-[#1f1f1f] bg-white dark:bg-[#111111]'
+                  : 'bg-white/80 hover:bg-white text-[#18181B] border-[#E6DFD3] dark:bg-black/40 dark:hover:bg-black/60 dark:text-white dark:border-white/20 backdrop-blur-sm'
+              }`}
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -147,14 +164,14 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
 
         {/* Mobile & Tablet Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#0a0a0a] border-b border-[#1f1f1f] px-5 py-5 space-y-4 shadow-2xl backdrop-blur-xl">
-            <nav className="space-y-1 border-b border-[#1f1f1f] pb-3">
+          <div className="lg:hidden bg-[#FBF9F5] dark:bg-[#0a0a0a] border-b border-[#E6DFD3] dark:border-[#1f1f1f] px-5 py-5 space-y-4 shadow-xl dark:shadow-2xl backdrop-blur-xl">
+            <nav className="space-y-1 border-b border-[#E6DFD3] dark:border-[#1f1f1f] pb-3">
               {navLinks.map((link, idx) => (
                 <Link
                   key={idx}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block text-sm font-medium text-stone-200 hover:text-[#3b76b3] py-2 px-2 rounded-lg hover:bg-white/5 transition-colors"
+                  className="block text-sm font-medium text-[#18181B] dark:text-stone-200 hover:text-[#3b76b3] py-2 px-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -166,7 +183,7 @@ export default function Navbar({ lang = 'ar' }: NavbarProps) {
                 href={`https://wa.me/${CGL_COMPANY_INFO.whatsapp1Raw}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between p-2.5 rounded-lg bg-[#111111] border border-[#1f1f1f] text-stone-200"
+                className="flex items-center justify-between p-2.5 rounded-lg bg-white dark:bg-[#111111] border border-[#E6DFD3] dark:border-[#1f1f1f] text-[#18181B] dark:text-stone-200"
               >
                 <span dir="ltr">{CGL_COMPANY_INFO.phone1}</span>
                 <span className="text-[#25D366] font-sans font-medium flex items-center gap-1">

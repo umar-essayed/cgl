@@ -87,10 +87,10 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-40px' }}
         transition={{ duration: 0.4, delay: index * 0.06 }}
-        className={`group relative rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1f1f1f] ${styling.border} transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-black/80 flex flex-col justify-between`}
+        className={`group relative rounded-2xl overflow-hidden bg-white dark:bg-[#0a0a0a] border border-[#E6DFD3] dark:border-[#1f1f1f] ${styling.border} transition-all duration-300 shadow-sm hover:shadow-xl dark:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-black/80 flex flex-col justify-between`}
       >
         {/* Ambient Top Glow */}
-        <div className={`absolute top-0 right-0 left-0 h-32 bg-gradient-to-b ${styling.glow} to-transparent opacity-20 pointer-events-none`} />
+        <div className={`absolute top-0 right-0 left-0 h-32 bg-gradient-to-b ${styling.glow} to-transparent opacity-10 dark:opacity-20 pointer-events-none`} />
 
         {/* Photography Header / Banner (كارت طالع وكارت نازل حسب isTall) */}
         <div className={`relative w-full overflow-hidden ${isTall ? 'h-52 sm:h-60' : 'h-40 sm:h-44'}`}>
@@ -100,7 +100,7 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
             fill
             className="object-cover object-center transform group-hover:scale-105 transition-transform duration-700 filter brightness-95 group-hover:brightness-100"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent dark:from-[#0a0a0a] dark:via-[#0a0a0a]/50 dark:to-transparent" />
         </div>
 
         {/* Content Body */}
@@ -110,27 +110,27 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
               <span className="text-xs font-mono font-bold text-[#3b76b3]">
                 {originalIndex < 9 ? `0${originalIndex + 1}` : originalIndex + 1}
               </span>
-              <div className="text-stone-400 group-hover:text-white transition-colors">
+              <div className="text-[#52525B] dark:text-stone-400 group-hover:text-[#3b76b3] dark:group-hover:text-white transition-colors">
                 {icon}
               </div>
             </div>
 
-            <h3 className="font-display font-bold text-base sm:text-lg text-white group-hover:text-[#3b76b3] transition-colors mb-2 leading-snug">
+            <h3 className="font-display font-bold text-base sm:text-lg text-[#18181B] dark:text-white group-hover:text-[#3b76b3] transition-colors mb-2 leading-snug">
               {title}
             </h3>
 
-            <p className="text-xs sm:text-sm text-stone-300 font-sans leading-relaxed line-clamp-3 mb-4">
+            <p className="text-xs sm:text-sm text-[#52525B] dark:text-stone-300 font-sans leading-relaxed line-clamp-3 mb-4">
               {desc}
             </p>
           </div>
 
           {/* Footer: Standards & Link */}
-          <div className="pt-3 border-t border-white/5 flex items-center justify-between gap-2 mt-auto">
+          <div className="pt-3 border-t border-[#E6DFD3] dark:border-white/5 flex items-center justify-between gap-2 mt-auto">
             <div className="flex flex-wrap gap-1.5">
               {(service.standards || []).slice(0, 2).map((std, sIdx) => (
                 <span 
                   key={sIdx}
-                  className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-stone-300 border border-white/10"
+                  className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F3ECE2] dark:bg-white/5 text-[#52525B] dark:text-stone-300 border border-[#E6DFD3] dark:border-white/10"
                 >
                   {std}
                 </span>
@@ -139,7 +139,7 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
 
             <Link
               href={`/${lang}/rfq`}
-              className="inline-flex items-center text-xs font-bold text-[#3b76b3] hover:text-white transition-colors gap-1 group/link"
+              className="inline-flex items-center text-xs font-bold text-[#3b76b3] hover:text-[#18181B] dark:hover:text-white transition-colors gap-1 group/link"
             >
               <span>{dict.services.requestPricing}</span>
               <ArrowIcon className="w-3.5 h-3.5 transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform" />
@@ -151,7 +151,7 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
   };
 
   return (
-    <section id="services" className="py-16 sm:py-24 bg-[#000000] border-b border-[#1f1f1f] relative overflow-hidden">
+    <section id="services" className="py-16 sm:py-24 bg-[#F3ECE2] dark:bg-[#000000] border-b border-[#E6DFD3] dark:border-[#1f1f1f] relative overflow-hidden">
       {/* Background Geotechnical Ambient Glow */}
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#3b76b3]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 left-0 w-96 h-96 bg-[#3b76b3]/5 rounded-full blur-3xl pointer-events-none" />
@@ -161,15 +161,15 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-[#3b76b3] mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-white/5 border border-[#E6DFD3] dark:border-white/10 text-xs font-mono text-[#3b76b3] mb-4 shadow-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-[#3b76b3] animate-pulse" />
               <span>{dict.services.badge}</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-[#18181B] dark:text-white tracking-tight">
               {dict.services.title}
             </h2>
           </div>
-          <p className="text-stone-300 font-sans text-xs sm:text-sm max-w-xl leading-relaxed">
+          <p className="text-[#52525B] dark:text-stone-300 font-sans text-xs sm:text-sm max-w-xl leading-relaxed">
             {dict.services.subtitle}
           </p>
         </div>
@@ -187,7 +187,7 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
             return (
               <div
                 key={service.id}
-                className={`rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1f1f1f] ${styling.border} flex flex-col shadow-sm`}
+                className={`rounded-2xl overflow-hidden bg-white dark:bg-[#0a0a0a] border border-[#E6DFD3] dark:border-[#1f1f1f] ${styling.border} flex flex-col shadow-sm`}
               >
                 <div className="relative w-full h-40 overflow-hidden">
                   <Image
@@ -196,7 +196,7 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
                     fill
                     className="object-cover object-center"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent dark:from-[#0a0a0a] dark:via-[#0a0a0a]/50 dark:to-transparent" />
                 </div>
 
                 <div className="p-4 flex flex-col justify-between">
@@ -204,18 +204,18 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
                     <span className="text-xs font-mono font-bold text-[#3b76b3]">
                       {originalIndex < 9 ? `0${originalIndex + 1}` : originalIndex + 1}
                     </span>
-                    <div className="text-stone-400">
+                    <div className="text-[#52525B] dark:text-stone-400">
                       {icon}
                     </div>
                   </div>
-                  <h3 className="font-display font-bold text-base text-white mb-1">
+                  <h3 className="font-display font-bold text-base text-[#18181B] dark:text-white mb-1">
                     {title}
                   </h3>
-                  <p className="text-xs text-stone-300 font-sans leading-relaxed line-clamp-2 mb-3">
+                  <p className="text-xs text-[#52525B] dark:text-stone-300 font-sans leading-relaxed line-clamp-2 mb-3">
                     {desc}
                   </p>
-                  <div className="pt-2.5 border-t border-[#1f1f1f] flex items-center justify-between">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-stone-400 border border-[#1f1f1f]">
+                  <div className="pt-2.5 border-t border-[#E6DFD3] dark:border-[#1f1f1f] flex items-center justify-between">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F3ECE2] dark:bg-white/5 text-[#52525B] dark:text-stone-400 border border-[#E6DFD3] dark:border-[#1f1f1f]">
                       {(service.standards || [])[0] || 'SBC'}
                     </span>
                     <Link
@@ -250,17 +250,17 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
           <div className="mt-12 sm:mt-16 flex flex-col items-center gap-4">
             {/* Progress counter and bar */}
             <div className="w-full max-w-md text-center space-y-2">
-              <div className="flex items-center justify-between text-xs text-stone-400 font-mono">
+              <div className="flex items-center justify-between text-xs text-[#52525B] dark:text-stone-400 font-mono">
                 <span>
                   {isRtl ? 'عرض' : 'Showing'}{' '}
-                  <strong className="text-white font-bold">{visibleServices.length}</strong>{' '}
+                  <strong className="text-[#18181B] dark:text-white font-bold">{visibleServices.length}</strong>{' '}
                   {isRtl ? 'من أصل' : 'of'}{' '}
-                  <strong className="text-white font-bold">{servicesList.length}</strong>{' '}
+                  <strong className="text-[#18181B] dark:text-white font-bold">{servicesList.length}</strong>{' '}
                   {isRtl ? 'خدمة هندسية' : 'services'}
                 </span>
                 <span>{progressPercent}%</span>
               </div>
-              <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+              <div className="h-1.5 w-full bg-black/10 dark:bg-white/10 rounded-full overflow-hidden">
                 <motion.div
                   className="h-full bg-[#3b76b3] rounded-full"
                   initial={false}
@@ -291,7 +291,7 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
                   <button
                     type="button"
                     onClick={() => setVisibleCount(servicesList.length)}
-                    className="inline-flex items-center gap-1.5 px-5 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-stone-300 hover:text-white font-sans text-xs sm:text-sm font-medium transition-all"
+                    className="inline-flex items-center gap-1.5 px-5 py-3 rounded-full bg-white dark:bg-white/5 hover:bg-slate-50 dark:hover:bg-white/10 border border-[#E6DFD3] dark:border-white/10 text-[#18181B] dark:text-stone-300 hover:text-[#3b76b3] dark:hover:text-white font-sans text-xs sm:text-sm font-medium transition-all shadow-sm"
                   >
                     <span>{isRtl ? 'عرض الكل' : 'Show All'}</span>
                   </button>
@@ -300,7 +300,7 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
                 <button
                   type="button"
                   onClick={() => setVisibleCount(BATCH_SIZE)}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-stone-400 hover:text-white font-sans text-xs transition-all"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white dark:bg-white/5 hover:bg-slate-50 dark:hover:bg-white/10 border border-[#E6DFD3] dark:border-white/10 text-[#18181B] dark:text-stone-400 hover:text-[#3b76b3] dark:hover:text-white font-sans text-xs transition-all shadow-sm"
                 >
                   <ChevronUp className="w-4 h-4" />
                   <span>{isRtl ? 'طي القائمة (عرض 6 فقط)' : 'Collapse List (Show 6)'}</span>

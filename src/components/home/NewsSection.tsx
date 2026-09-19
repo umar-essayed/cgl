@@ -23,7 +23,7 @@ export default function NewsSection({
   const currentNews = news && news.length > 0 ? news : CGL_LATEST_NEWS;
 
   return (
-    <section id="news" className="py-16 sm:py-24 bg-[#080808] border-b border-[#1f1f1f] text-white">
+    <section id="news" className="py-16 sm:py-24 bg-[#FBF9F5] dark:bg-[#080808] border-b border-[#E6DFD3] dark:border-[#1f1f1f] text-[#18181B] dark:text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
         
         {/* Header */}
@@ -32,11 +32,11 @@ export default function NewsSection({
             <p className="text-xs sm:text-sm font-mono text-[#3b76b3] mb-2 tracking-wider">
               {dict.news.badge}
             </p>
-            <h2 className="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#18181B] dark:text-white tracking-tight">
               {dict.news.title}
             </h2>
           </div>
-          <p className="text-stone-400 text-sm max-w-lg leading-relaxed">
+          <p className="text-[#52525B] dark:text-stone-400 text-sm max-w-lg leading-relaxed">
             {dict.news.subtitle}
           </p>
         </div>
@@ -56,7 +56,7 @@ export default function NewsSection({
               >
                 <div>
                   {/* Clean Image */}
-                  <Link href={`/${lang}/news/${article.id}`} className="block relative h-56 sm:h-64 w-full rounded-2xl overflow-hidden bg-[#141414] border border-[#1e1e1e] mb-4">
+                  <Link href={`/${lang}/news/${article.id}`} className="block relative h-56 sm:h-64 w-full rounded-2xl overflow-hidden bg-slate-100 dark:bg-[#141414] border border-[#E6DFD3] dark:border-[#1e1e1e] mb-4 shadow-sm">
                     <Image
                       src={article.image || article.coverImage || '/assets/sliders/slider1.jpg'}
                       alt={title}
@@ -67,21 +67,21 @@ export default function NewsSection({
                   </Link>
 
                   {/* Category & Date */}
-                  <div className="flex items-center gap-2 text-xs font-mono text-stone-400 mb-2">
-                    <span className="text-[#3b76b3]">{category}</span>
+                  <div className="flex items-center gap-2 text-xs font-mono text-[#71717A] dark:text-stone-400 mb-2">
+                    <span className="text-[#3b76b3] font-medium">{category}</span>
                     <span>•</span>
                     <span>{date}</span>
                   </div>
 
                   {/* Headline */}
-                  <h3 className="font-display font-semibold text-lg text-white group-hover:text-[#3b76b3] transition-colors leading-snug mb-3">
+                  <h3 className="font-display font-semibold text-lg text-[#18181B] dark:text-white group-hover:text-[#3b76b3] transition-colors leading-snug mb-3">
                     <Link href={`/${lang}/news/${article.id}`}>
                       {title}
                     </Link>
                   </h3>
 
                   {/* Excerpt */}
-                  <p className="text-stone-400 text-sm leading-relaxed line-clamp-3 mb-4">
+                  <p className="text-[#52525B] dark:text-stone-400 text-sm leading-relaxed line-clamp-3 mb-4">
                     {excerpt}
                   </p>
                 </div>
@@ -90,7 +90,7 @@ export default function NewsSection({
                 <div className="pt-2">
                   <Link
                     href={`/${lang}/news/${article.id}`}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-stone-300 group-hover:text-[#3b76b3] transition-colors"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-[#18181B] dark:text-stone-300 group-hover:text-[#3b76b3] transition-colors"
                   >
                     <span>{dict.news.readArticle}</span>
                     <ArrowIcon className="w-3.5 h-3.5 text-[#3b76b3]" />
@@ -105,7 +105,7 @@ export default function NewsSection({
         <div className="mt-10 sm:mt-12 flex justify-center">
           <Link
             href={`/${lang}/news`}
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#111111] hover:bg-[#1a1a1a] border border-[#1f1f1f] text-stone-200 hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-sm group hover:border-[#3b76b3]/50"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white dark:bg-[#111111] hover:bg-slate-50 dark:hover:bg-[#1a1a1a] border border-[#E6DFD3] dark:border-[#1f1f1f] text-[#18181B] dark:text-stone-200 hover:text-[#3b76b3] dark:hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-sm group hover:border-[#3b76b3]/50"
           >
             <span>
               {isRtl 

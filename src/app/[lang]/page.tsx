@@ -53,7 +53,7 @@ export default async function HomePage({
   const siteData = await getDynamicSiteData();
 
   return (
-    <main className="min-h-screen flex flex-col bg-[#000000] text-white selection:bg-[#3b76b3] selection:text-white">
+    <main className="min-h-screen flex flex-col bg-[#FBF9F5] dark:bg-[#000000] text-[#18181B] dark:text-white selection:bg-[#3b76b3] selection:text-white">
       <Navbar lang={lang} />
       <Hero lang={lang} slides={siteData.heroSlides} stats={siteData.settings?.stats} />
       <PartnersTicker lang={lang} partners={siteData.partners} />

@@ -80,22 +80,22 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
   return (
     <div className="space-y-8">
       {/* Search and Sector Filter Controls */}
-      <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-2xl p-4 sm:p-5 shadow-xl space-y-4">
+      <div className="bg-white dark:bg-[#0a0a0a] border border-[#E6DFD3] dark:border-[#1f1f1f] rounded-2xl p-4 sm:p-5 shadow-sm dark:shadow-xl space-y-4">
         <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
           {/* Search Box */}
           <div className="relative w-full sm:max-w-md">
-            <Search className={`w-4 h-4 text-stone-400 absolute ${isRtl ? 'right-3' : 'left-3'} top-1/2 -translate-y-1/2 pointer-events-none`} />
+            <Search className={`w-4 h-4 text-[#71717A] dark:text-stone-400 absolute ${isRtl ? 'right-3' : 'left-3'} top-1/2 -translate-y-1/2 pointer-events-none`} />
             <input
               type="text"
               placeholder={isRtl ? 'البحث باسم المشروع، الموقع، أو نوع الاختبارات...' : 'Search by project name, location, or test type...'}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className={`w-full bg-[#111111] border border-[#1f1f1f] rounded-xl ${isRtl ? 'pr-9 pl-4' : 'pl-9 pr-4'} py-2.5 text-sm sm:text-sm text-stone-100 placeholder-stone-400 focus:outline-none focus:border-[#3b76b3] transition-colors`}
+              className={`w-full bg-[#FBF9F5] dark:bg-[#111111] border border-[#E6DFD3] dark:border-[#1f1f1f] rounded-xl ${isRtl ? 'pr-9 pl-4' : 'pl-9 pr-4'} py-2.5 text-sm sm:text-sm text-[#18181B] dark:text-stone-100 placeholder-[#71717A] dark:placeholder-stone-400 focus:outline-none focus:border-[#3b76b3] transition-colors`}
             />
           </div>
 
           {/* Results Count Badge */}
-          <div className="text-xs font-mono text-stone-400 bg-[#111111] px-3.5 py-2 rounded-xl border border-[#1f1f1f] w-full sm:w-auto flex items-center justify-between sm:justify-start gap-2">
+          <div className="text-xs font-mono text-[#52525B] dark:text-stone-400 bg-[#FBF9F5] dark:bg-[#111111] px-3.5 py-2 rounded-xl border border-[#E6DFD3] dark:border-[#1f1f1f] w-full sm:w-auto flex items-center justify-between sm:justify-start gap-2">
             <span>{isRtl ? 'المشاريع المعروضة:' : 'Projects Displayed:'}</span>
             <span className="text-[#3b76b3] font-bold">
               {String(Math.min(visibleCount, filteredProjects.length)).padStart(2, '0')} / {String(filteredProjects.length).padStart(2, '0')}
@@ -111,7 +111,7 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
             className={`px-3.5 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
               selectedSector === 'all'
                 ? 'bg-[#3b76b3] text-white font-bold shadow-md'
-                : 'bg-[#111111] text-stone-400 hover:text-white border border-[#1f1f1f]'
+                : 'bg-[#FBF9F5] dark:bg-[#111111] text-[#52525B] dark:text-stone-400 hover:text-[#18181B] dark:hover:text-white border border-[#E6DFD3] dark:border-[#1f1f1f]'
             }`}
           >
             {isRtl ? 'كافة القطاعات' : 'All Sectors'}
@@ -125,7 +125,7 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
               className={`px-3.5 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
                 selectedSector === sec
                   ? 'bg-[#3b76b3] text-white font-bold shadow-md'
-                  : 'bg-[#111111] text-stone-400 hover:text-white border border-[#1f1f1f]'
+                  : 'bg-[#FBF9F5] dark:bg-[#111111] text-[#52525B] dark:text-stone-400 hover:text-[#18181B] dark:hover:text-white border border-[#E6DFD3] dark:border-[#1f1f1f]'
               }`}
             >
               {sec}
@@ -136,8 +136,8 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
 
       {/* Projects Grid */}
       {filteredProjects.length === 0 ? (
-        <div className="py-20 text-center bg-[#0a0a0a] rounded-2xl border border-[#1f1f1f] p-8">
-          <p className="text-stone-400 text-sm font-sans mb-3">
+        <div className="py-20 text-center bg-white dark:bg-[#0a0a0a] rounded-2xl border border-[#E6DFD3] dark:border-[#1f1f1f] p-8">
+          <p className="text-[#52525B] dark:text-stone-400 text-sm font-sans mb-3">
             {isRtl ? 'لم يتم العثور على أي دراسات مشاريع مطابقة للبحث المحدد' : 'No engineering project case studies match your search criteria'}
           </p>
           <button
@@ -162,7 +162,7 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: Math.min((index % BATCH_SIZE) * 0.05, 0.4) }}
-                  className="group flex flex-col justify-between rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1f1f1f] hover:border-[#3b76b3]/40 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-black/80"
+                  className="group flex flex-col justify-between rounded-2xl overflow-hidden bg-white dark:bg-[#0a0a0a] border border-[#E6DFD3] dark:border-[#1f1f1f] hover:border-[#3b76b3]/40 transition-all duration-300 shadow-sm hover:shadow-md dark:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-black/80"
                 >
                   {/* Card Image */}
                   <div className="relative h-56 sm:h-60 w-full overflow-hidden bg-[#111111]">
@@ -173,13 +173,13 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-black/30" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-black/30 dark:from-[#0a0a0a] dark:to-black/30" />
                   </div>
 
                   {/* Card Content */}
                   <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between">
                     <div>
-                      <div className="flex items-center justify-between text-xs text-stone-400 mb-2.5 font-mono">
+                      <div className="flex items-center justify-between text-xs text-[#71717A] dark:text-stone-400 mb-2.5 font-mono">
                         <span className="text-[#3b76b3] font-medium">{sector}</span>
                         <span className="flex items-center gap-1">
                           <MapPin className="w-3.5 h-3.5 text-[#3b76b3]" />
@@ -187,19 +187,19 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
                         </span>
                       </div>
 
-                      <h3 className="font-display font-bold text-lg sm:text-xl text-white group-hover:text-[#3b76b3] transition-colors line-clamp-2 leading-snug mb-2">
+                      <h3 className="font-display font-bold text-lg sm:text-xl text-[#18181B] dark:text-white group-hover:text-[#3b76b3] transition-colors line-clamp-2 leading-snug mb-2">
                         {name}
                       </h3>
-                      <p className="text-xs text-stone-400 font-sans line-clamp-2 leading-relaxed mb-4">
+                      <p className="text-xs text-[#52525B] dark:text-stone-400 font-sans line-clamp-2 leading-relaxed mb-4">
                         {scope}
                       </p>
                     </div>
 
                     {/* Standards & Link */}
-                    <div className="pt-4 border-t border-[#1f1f1f] flex items-center justify-between">
-                      <div className="text-[11px] font-mono text-stone-500">
+                    <div className="pt-4 border-t border-[#E6DFD3] dark:border-[#1f1f1f] flex items-center justify-between">
+                      <div className="text-[11px] font-mono text-[#71717A] dark:text-stone-500">
                         {project.relevantStandards && project.relevantStandards[0] ? (
-                          <span className="bg-[#141414] px-2 py-0.5 rounded border border-[#1f1f1f]">
+                          <span className="bg-[#F3ECE2] dark:bg-[#141414] px-2 py-0.5 rounded border border-[#E6DFD3] dark:border-[#1f1f1f]">
                             {project.relevantStandards[0]}
                           </span>
                         ) : (
@@ -209,7 +209,7 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
 
                       <Link
                         href={`/${lang}/projects/${project.id}`}
-                        className="inline-flex items-center text-xs font-bold text-white group-hover:text-[#3b76b3] transition-colors gap-1"
+                        className="inline-flex items-center text-xs font-bold text-[#18181B] dark:text-white group-hover:text-[#3b76b3] transition-colors gap-1"
                       >
                         <span>{dict.projects.detailsBtn}</span>
                         <ArrowIcon className="w-4 h-4 text-[#3b76b3] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -225,13 +225,13 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
           {filteredProjects.length > BATCH_SIZE && (
             <div className="pt-4 pb-2 flex flex-col items-center justify-center gap-4">
               {/* Progress Indicator */}
-              <div className="flex flex-col sm:flex-row items-center gap-3 text-xs font-mono text-stone-400">
+              <div className="flex flex-col sm:flex-row items-center gap-3 text-xs font-mono text-[#52525B] dark:text-stone-400">
                 <span>
                   {isRtl
                     ? `عرض ${Math.min(visibleCount, filteredProjects.length)} من أصل ${filteredProjects.length} مشروع`
                     : `Showing ${Math.min(visibleCount, filteredProjects.length)} of ${filteredProjects.length} projects`}
                 </span>
-                <div className="w-36 sm:w-48 h-1.5 bg-[#141414] rounded-full overflow-hidden border border-[#222]">
+                <div className="w-36 sm:w-48 h-1.5 bg-[#E6DFD3] dark:bg-[#141414] rounded-full overflow-hidden border border-[#D4C8B8] dark:border-[#222]">
                   <div
                     className="h-full bg-[#3b76b3] transition-all duration-300 rounded-full"
                     style={{
@@ -248,7 +248,7 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
                     <button
                       type="button"
                       onClick={handleLoadMore}
-                      className="inline-flex items-center gap-2.5 px-7 py-3 rounded-full bg-[#111111] hover:bg-[#181818] border border-[#262626] hover:border-[#3b76b3] text-stone-100 hover:text-white font-sans text-xs sm:text-sm font-bold transition-all shadow-lg active:scale-95 group"
+                      className="inline-flex items-center gap-2.5 px-7 py-3 rounded-full bg-white dark:bg-[#111111] hover:bg-stone-50 dark:hover:bg-[#181818] border border-[#E6DFD3] dark:border-[#262626] hover:border-[#3b76b3] text-[#18181B] dark:text-stone-100 hover:text-black dark:hover:text-white font-sans text-xs sm:text-sm font-bold transition-all shadow-sm dark:shadow-lg active:scale-95 group"
                     >
                       <RefreshCw className="w-4 h-4 text-[#3b76b3] group-hover:rotate-180 transition-transform duration-500" />
                       <span>
@@ -262,7 +262,7 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
                       <button
                         type="button"
                         onClick={handleShowAll}
-                        className="text-xs font-mono text-stone-400 hover:text-[#508ecb] transition-colors underline"
+                        className="text-xs font-mono text-[#52525B] dark:text-stone-400 hover:text-[#3b76b3] dark:hover:text-[#508ecb] transition-colors underline"
                       >
                         {isRtl ? 'عرض كافة المشاريع دفعة واحدة' : 'Show All Projects'}
                       </button>
@@ -270,13 +270,13 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
                   </>
                 ) : (
                   <div className="flex items-center gap-3">
-                    <span className="text-xs font-mono text-stone-500">
+                    <span className="text-xs font-mono text-[#71717A] dark:text-stone-500">
                       {isRtl ? '✓ تم عرض كافة المشاريع بنجاح' : '✓ All projects displayed'}
                     </span>
                     <button
                       type="button"
                       onClick={handleCollapse}
-                      className="text-xs font-mono text-stone-400 hover:text-stone-200 transition-colors underline"
+                      className="text-xs font-mono text-[#52525B] dark:text-stone-400 hover:text-[#18181B] dark:hover:text-stone-200 transition-colors underline"
                     >
                       {isRtl ? 'طي القائمة' : 'Collapse list'}
                     </button>

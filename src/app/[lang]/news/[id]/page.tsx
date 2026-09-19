@@ -106,11 +106,11 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
 `);
 
   return (
-    <div className="min-h-screen bg-[#030303] text-stone-100 flex flex-col font-sans selection:bg-[#3b76b3] selection:text-white">
+    <div className="min-h-screen bg-[#FBF9F5] dark:bg-[#030303] text-[#18181B] dark:text-stone-100 flex flex-col font-sans selection:bg-[#3b76b3] selection:text-white">
       <Navbar lang={lang} />
 
       {/* Hero / Header */}
-      <header className="relative pt-32 sm:pt-40 pb-12 sm:pb-16 border-b border-white/10 bg-[#060606]">
+      <header className="relative pt-32 sm:pt-40 pb-12 sm:pb-16 border-b border-[#E6DFD3] dark:border-white/10 bg-[#F3ECE2] dark:bg-[#060606]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Breadcrumb Navigation */}
@@ -119,39 +119,39 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
               <BackToHomeButton lang={lang} />
               <Link
                 href={`/${lang}/news`}
-                className="inline-flex items-center gap-1.5 text-xs font-mono text-stone-400 hover:text-[#3b76b3] transition-colors group px-3 py-1.5 rounded-xl bg-white/5 border border-white/10"
+                className="inline-flex items-center gap-1.5 text-xs font-mono text-[#52525B] dark:text-stone-400 hover:text-[#3b76b3] transition-colors group px-3 py-1.5 rounded-xl bg-white dark:bg-white/5 border border-[#E6DFD3] dark:border-white/10 shadow-sm"
               >
                 <BackIcon className="w-3.5 h-3.5 text-[#3b76b3] group-hover:-translate-x-1 transition-transform" />
                 <span>{isRtl ? 'الأخبار والدراسات' : 'News & Insights'}</span>
               </Link>
             </div>
 
-            <span className="px-3 py-1 rounded-full bg-[#111111] border border-white/10 text-xs font-mono text-[#3b76b3]">
+            <span className="px-3 py-1 rounded-full bg-white dark:bg-[#111111] border border-[#E6DFD3] dark:border-white/10 text-xs font-mono text-[#3b76b3] shadow-sm font-semibold">
               {category}
             </span>
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white leading-tight tracking-tight mb-6">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-[#18181B] dark:text-white leading-tight tracking-tight mb-6">
             {title}
           </h1>
 
           {/* Metadata Row */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10 text-xs font-mono text-stone-400">
+          <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#E6DFD3] dark:border-white/10 text-xs font-mono text-[#52525B] dark:text-stone-400">
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-1.5 text-stone-300">
+              <div className="flex items-center gap-1.5 text-[#18181B] dark:text-stone-300">
                 <Calendar className="w-4 h-4 text-[#3b76b3]" />
                 <span>{date}</span>
               </div>
-              <span className="text-stone-700">•</span>
-              <div className="flex items-center gap-1.5 text-stone-300">
+              <span className="text-stone-400 dark:text-stone-700">•</span>
+              <div className="flex items-center gap-1.5 text-[#18181B] dark:text-stone-300">
                 <Clock className="w-4 h-4 text-[#3b76b3]" />
                 <span>{readTime}</span>
               </div>
             </div>
 
-            <div className="text-stone-400">
-              {isRtl ? 'إعداد:' : 'By:'} <span className="text-stone-200 font-semibold">{author}</span>
+            <div className="text-[#52525B] dark:text-stone-400">
+              {isRtl ? 'إعداد:' : 'By:'} <span className="text-[#18181B] dark:text-stone-200 font-semibold">{author}</span>
             </div>
           </div>
 
@@ -162,7 +162,7 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
       <main className="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12 w-full">
         
         {/* Featured Image */}
-        <div className="relative w-full h-[320px] sm:h-[480px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-[#0e0e0e]">
+        <div className="relative w-full h-[320px] sm:h-[480px] rounded-2xl overflow-hidden border border-[#E6DFD3] dark:border-white/10 shadow-md dark:shadow-2xl bg-[#0e0e0e]">
           <Image
             src={article.image || '/assets/sliders/slider1.jpg'}
             alt={title}
@@ -174,12 +174,12 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
         </div>
 
         {/* Lead Excerpt Banner */}
-        <div className={`p-6 sm:p-8 rounded-2xl bg-[#0a0a0a] border ${isRtl ? 'border-r-4 border-r-[#3b76b3]' : 'border-l-4 border-l-[#3b76b3]'} border-white/10 text-stone-200 text-base sm:text-lg leading-relaxed font-sans font-normal shadow-sm`}>
+        <div className={`p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#0a0a0a] border ${isRtl ? 'border-r-4 border-r-[#3b76b3]' : 'border-l-4 border-l-[#3b76b3]'} border-[#E6DFD3] dark:border-white/10 text-[#18181B] dark:text-stone-200 text-base sm:text-lg leading-relaxed font-sans font-normal shadow-sm`}>
           {excerpt}
         </div>
 
         {/* Article Body Typography */}
-        <article className="prose prose-invert prose-stone max-w-none text-stone-300 font-sans leading-relaxed text-base sm:text-lg font-light space-y-6">
+        <article className="prose dark:prose-invert prose-stone max-w-none text-[#3F3F46] dark:text-stone-300 font-sans leading-relaxed text-base sm:text-lg font-light space-y-6">
           {articleContent.split('\n\n').map((paragraph, pIdx) => {
             if (!paragraph.trim()) return null;
             return (
@@ -191,16 +191,16 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
         </article>
 
         {/* Technical Compliance Callout Box */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#0c0c0c] to-[#060606] border border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+        <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-gradient-to-br dark:from-[#0c0c0c] dark:to-[#060606] border border-[#E6DFD3] dark:border-white/15 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div className="space-y-1">
             <div className="flex items-center gap-2 text-[#3b76b3] text-xs font-mono font-bold">
               <ShieldCheck className="w-4 h-4" />
               <span>{isRtl ? 'الاعتماد الهندسي واللوائح' : 'ENGINEERING COMPLIANCE & STANDARDS'}</span>
             </div>
-            <h4 className="text-base font-bold text-white font-display">
+            <h4 className="text-base font-bold text-[#18181B] dark:text-white font-display">
               {isRtl ? 'مطابق لاشتراطات كود البناء السعودي ومعايير ASTM' : 'Compliant with Saudi Building Code & ASTM Protocols'}
             </h4>
-            <p className="text-xs text-stone-400 font-sans">
+            <p className="text-xs text-[#52525B] dark:text-stone-400 font-sans">
               {isRtl 
                 ? 'تقارير فحص معتمدة وموثقة تضمن قبول التراخيص الإنشائية لدى كافة الجهات البلدية والاستشارية.'
                 : 'Certified investigation deliverables recognized by municipal authorities and consultant bureaus.'}
@@ -217,17 +217,17 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
         </div>
 
         {/* Share & Inquire Bar */}
-        <div className="pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-stone-400">
-          <div className="flex items-center gap-2 text-stone-300">
+        <div className="pt-6 border-t border-[#E6DFD3] dark:border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-[#52525B] dark:text-stone-400">
+          <div className="flex items-center gap-2 text-[#18181B] dark:text-stone-300">
             <Tag className="w-3.5 h-3.5 text-[#3b76b3]" />
             <span>{isRtl ? 'التصنيف:' : 'Category:'}</span>
-            <span className="text-white font-bold">{category}</span>
+            <span className="text-[#18181B] dark:text-white font-bold">{category}</span>
           </div>
 
           <div className="flex items-center gap-3">
             <a
               href={`tel:${siteData.settings?.phone2 || CGL_COMPANY_INFO.phone2}`}
-              className="inline-flex items-center gap-1.5 text-stone-300 hover:text-white transition-colors"
+              className="inline-flex items-center gap-1.5 text-[#52525B] dark:text-stone-300 hover:text-[#18181B] dark:hover:text-white transition-colors"
             >
               <PhoneCall className="w-3.5 h-3.5 text-[#3b76b3]" />
               <span>{siteData.settings?.phone2 || CGL_COMPANY_INFO.phone2}</span>
@@ -237,14 +237,14 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
 
         {/* Other Related Articles */}
         {otherArticles.length > 0 && (
-          <section className="pt-12 border-t border-white/10 space-y-6">
+          <section className="pt-12 border-t border-[#E6DFD3] dark:border-white/10 space-y-6">
             <div className="flex items-center justify-between">
-              <h3 className="text-xl font-display font-bold text-white">
+              <h3 className="text-xl font-display font-bold text-[#18181B] dark:text-white">
                 {isRtl ? 'مقالات وأخبار ذات صلة' : 'Related Articles & Reports'}
               </h3>
               <Link
                 href={`/${lang}/news`}
-                className="text-xs font-mono text-[#3b76b3] hover:underline"
+                className="text-xs font-mono text-[#3b76b3] hover:underline font-bold"
               >
                 {isRtl ? 'عرض كافة الأخبار' : 'View All'}
               </Link>
@@ -258,7 +258,7 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
                   <Link
                     key={rel.id}
                     href={`/${lang}/news/${rel.id}`}
-                    className="p-5 rounded-xl bg-[#0a0a0a] border border-white/10 hover:border-[#3b76b3]/40 transition-all group flex flex-col justify-between"
+                    className="p-5 rounded-xl bg-white dark:bg-[#0a0a0a] border border-[#E6DFD3] dark:border-white/10 hover:border-[#3b76b3]/40 transition-all group flex flex-col justify-between shadow-sm"
                   >
                     <div>
                       <div className="relative h-40 w-full rounded-lg overflow-hidden bg-black/50 mb-3">
@@ -269,17 +269,17 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
                           className="object-cover group-hover:scale-105 transition-transform"
                         />
                       </div>
-                      <span className="text-[11px] font-mono text-[#3b76b3] block mb-1">
+                      <span className="text-[11px] font-mono text-[#3b76b3] block mb-1 font-bold">
                         {isRtl ? rel.categoryAr : rel.categoryEn}
                       </span>
-                      <h4 className="text-sm font-bold text-white group-hover:text-[#3b76b3] transition-colors line-clamp-2">
+                      <h4 className="text-sm font-bold text-[#18181B] dark:text-white group-hover:text-[#3b76b3] transition-colors line-clamp-2">
                         {relTitle}
                       </h4>
                     </div>
 
-                    <div className="pt-3 mt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-stone-500">
+                    <div className="pt-3 mt-3 border-t border-[#E6DFD3] dark:border-white/10 flex items-center justify-between text-[11px] font-mono text-[#71717A] dark:text-stone-500">
                       <span>{relDate}</span>
-                      <span className="inline-flex items-center gap-1 text-[#3b76b3]">
+                      <span className="inline-flex items-center gap-1 text-[#3b76b3] font-semibold">
                         <span>{dict.news.readArticle}</span>
                         <ArrowIcon className="w-3 h-3" />
                       </span>

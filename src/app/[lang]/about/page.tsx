@@ -137,7 +137,7 @@ export default async function AboutPage({
   ];
 
   return (
-    <div className="min-h-screen bg-[#030303] text-stone-100 flex flex-col font-sans selection:bg-[#3b76b3] selection:text-white">
+    <div className="min-h-screen bg-[#FBF9F5] dark:bg-[#030303] text-[#3F3F46] dark:text-stone-100 flex flex-col font-sans selection:bg-[#3b76b3] selection:text-white">
       <Navbar lang={lang} />
 
       {/* 1. Architectural Narrative Hero */}
@@ -188,7 +188,7 @@ export default async function AboutPage({
               <span>{isRtl ? 'المعامل الإبداعية للجيوتقنية CGL' : 'Creative Geotechnical Laboratories'}</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-bold text-white tracking-tight leading-[1.08]">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-bold !text-white tracking-tight leading-[1.08]">
               {isRtl ? (
                 <>
                   نبني الأمان من أعماق الأرض، <br />
@@ -206,7 +206,7 @@ export default async function AboutPage({
               )}
             </h1>
 
-            <p className="text-lg sm:text-xl text-stone-300 font-sans leading-relaxed max-w-3xl font-light">
+            <p className="text-lg sm:text-xl !text-stone-300 font-sans leading-relaxed max-w-3xl font-light">
               {isRtl 
                 ? 'تأسست CGL كامتياز فخور لمجموعة CGI بالولايات المتحدة الأمريكية، لتنقل أرقى بروتوكولات الفحص المخبري والاستكشاف الجيوتقني إلى مشاريع المملكة، موفرة أساسات صلبة ودراسات معتمدة تضمن ديمومة وسلامة المنشآت.'
                 : 'Creative Geotechnical Laboratories (CGL) is a proud franchise of CGI, bringing trusted global standards to infrastructure in Saudi Arabia through rigorous subsurface investigations and materials testing.'}
@@ -217,7 +217,7 @@ export default async function AboutPage({
       </section>
 
       {/* 2. Editorial Narrative & Real Metrics (No rigid boxes) */}
-      <section className="py-16 sm:py-24 border-t border-white/10 bg-[#060606]">
+      <section className="py-16 sm:py-24 border-t border-[#E6DFD3] dark:border-white/10 bg-[#F3ECE2] dark:bg-[#060606]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -228,12 +228,12 @@ export default async function AboutPage({
                 <span className="text-xs font-mono text-[#3b76b3] uppercase tracking-wider font-semibold">
                   {isRtl ? 'الهوية والرسالة الهندسية' : 'Our Engineering Identity'}
                 </span>
-                <h2 className="text-2xl sm:text-4xl font-display font-bold text-white leading-tight">
+                <h2 className="text-2xl sm:text-4xl font-display font-bold text-[#18181B] dark:text-white leading-tight">
                   {isRtl ? 'حيث يلتقي عمق الخبرة العالمية بمتطلبات البيئة المحلية' : 'Where Global Precision Meets Local Ground Conditions'}
                 </h2>
               </div>
 
-              <div className="space-y-6 text-stone-300 font-sans leading-relaxed text-base sm:text-lg font-light">
+              <div className="space-y-6 text-[#52525B] dark:text-stone-300 font-sans leading-relaxed text-base sm:text-lg font-light">
                 <p>
                   {isRtl 
                     ? 'في كل مشروع تشييد، تبدأ المعادلة من النقطة الأكثر حساسية: باطن الأرض. تعمل مختبرات CGL كذراع استشاري وتقني مستقل يزود المطورين والمقاولين بالحقائق الميدانية القاطعة عبر أسطول من الحفارات الهيدروليكية ومختبرات الفحص الكيميائي والميكانيكي.'
@@ -248,30 +248,30 @@ export default async function AboutPage({
               </div>
 
               {/* Styled Quote */}
-              <div className={`p-6 rounded-2xl bg-white/[0.02] border ${isRtl ? 'border-r-4 border-r-[#3b76b3]' : 'border-l-4 border-l-[#3b76b3]'} border-white/10 space-y-2`}>
-                <p className="text-base sm:text-lg font-display italic text-white leading-snug">
+              <div className={`p-6 rounded-2xl bg-white dark:bg-white/[0.02] border ${isRtl ? 'border-r-4 border-r-[#3b76b3]' : 'border-l-4 border-l-[#3b76b3]'} border-[#E6DFD3] dark:border-white/10 space-y-2 shadow-sm dark:shadow-none`}>
+                <p className="text-base sm:text-lg font-display italic text-[#18181B] dark:text-white leading-snug">
                   "{isRtl ? CGL_COMPANY_INFO.missionAr : CGL_COMPANY_INFO.missionEn}"
                 </p>
-                <span className="text-xs font-mono text-stone-400 block">
+                <span className="text-xs font-mono text-[#52525B] dark:text-stone-400 block">
                   — {isRtl ? 'ميثاق الجودة في مختبرات CGL' : 'CGL Quality Charter'}
                 </span>
               </div>
             </div>
 
-            {/* Typographic Numbers Strip (Vertical Flow, No repetitive cards) */}
-            <div className="lg:col-span-5 lg:ps-8 lg:border-s lg:border-white/10 space-y-10">
+            {/* Typographic Numbers Strip */}
+            <div className="lg:col-span-5 lg:ps-8 lg:border-s lg:border-[#E6DFD3] dark:lg:border-white/10 space-y-10">
               <div className="space-y-2">
-                <span className="text-xs font-mono text-stone-400 uppercase tracking-wider">
+                <span className="text-xs font-mono text-[#52525B] dark:text-stone-400 uppercase tracking-wider font-semibold">
                   {isRtl ? 'أثرنا في الميدان بالأرقام' : 'Our Measured Impact'}
                 </span>
-                <h3 className="text-xl font-display font-semibold text-white">
+                <h3 className="text-xl font-display font-semibold text-[#18181B] dark:text-white">
                   {isRtl ? 'سجل موثق من الإنجازات' : 'Documented Track Record'}
                 </h3>
               </div>
 
-              <div className="space-y-8 divide-y divide-white/10">
+              <div className="space-y-8 divide-y divide-[#E6DFD3] dark:divide-white/10">
                 <div className="pt-2">
-                  <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight flex items-baseline gap-1">
+                  <div className="text-4xl sm:text-5xl font-mono font-bold text-[#18181B] dark:text-white tracking-tight flex items-baseline gap-1">
                     {isRtl ? (
                       <>
                         <span className="text-[#3b76b3]">+</span>
@@ -284,16 +284,16 @@ export default async function AboutPage({
                       </>
                     )}
                   </div>
-                  <div className="text-sm font-semibold text-stone-200 mt-1">
+                  <div className="text-sm font-semibold text-[#18181B] dark:text-stone-200 mt-1">
                     {isRtl ? 'عميل ومشروع منجز بالمملكة' : 'Delivered Projects & Clients'}
                   </div>
-                  <p className="text-xs text-stone-400 mt-1 font-light">
+                  <p className="text-xs text-[#52525B] dark:text-stone-400 mt-1 font-light">
                     {isRtl ? 'يشمل مشاريع الأبراج والقصور ومصانع التحلية ومجمعات الإسكان.' : 'Encompassing commercial towers, palaces, RO plants, and master-planned communities.'}
                   </p>
                 </div>
 
                 <div className="pt-6">
-                  <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight flex items-baseline gap-1">
+                  <div className="text-4xl sm:text-5xl font-mono font-bold text-[#18181B] dark:text-white tracking-tight flex items-baseline gap-1">
                     {isRtl ? (
                       <>
                         <span className="text-[#3b76b3]">+</span>
@@ -306,16 +306,16 @@ export default async function AboutPage({
                       </>
                     )}
                   </div>
-                  <div className="text-sm font-semibold text-stone-200 mt-1">
+                  <div className="text-sm font-semibold text-[#18181B] dark:text-stone-200 mt-1">
                     {isRtl ? 'دراسة جيوتقنية وهيدرولوجية تخصصية' : 'Advanced Engineering Studies'}
                   </div>
-                  <p className="text-xs text-stone-400 mt-1 font-light">
+                  <p className="text-xs text-[#52525B] dark:text-stone-400 mt-1 font-light">
                     {isRtl ? 'حلول معتمدة لسند الحفر العميق والنزح الجوفي واستكشاف التكهفات.' : 'Certified deep shoring designs, dewatering networks, and cavity detection models.'}
                   </p>
                 </div>
 
                 <div className="pt-6">
-                  <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight flex items-baseline gap-1">
+                  <div className="text-4xl sm:text-5xl font-mono font-bold text-[#18181B] dark:text-white tracking-tight flex items-baseline gap-1">
                     {isRtl ? (
                       <>
                         <span className="text-[#3b76b3]">+</span>
@@ -328,23 +328,23 @@ export default async function AboutPage({
                       </>
                     )}
                   </div>
-                  <div className="text-sm font-semibold text-stone-200 mt-1">
+                  <div className="text-sm font-semibold text-[#18181B] dark:text-stone-200 mt-1">
                     {isRtl ? 'عاماً من الخبرة الجيوتقنية المركزة' : 'Years of Field Mastery'}
                   </div>
-                  <p className="text-xs text-stone-400 mt-1 font-light">
+                  <p className="text-xs text-[#52525B] dark:text-stone-400 mt-1 font-light">
                     {isRtl ? 'تاريخ ممتد في التعامل مع أكثر تضاريس وتربات المنطقة تعقيداً.' : 'Continuous practice across Saudi complex coastal and geological terrains.'}
                   </p>
                 </div>
 
                 <div className="pt-6">
-                  <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight flex items-baseline gap-2">
+                  <div className="text-4xl sm:text-5xl font-mono font-bold text-[#18181B] dark:text-white tracking-tight flex items-baseline gap-2">
                     <span>2</span>
                     <span className="text-lg font-mono text-[#3b76b3] font-normal">HQs (USA • KSA)</span>
                   </div>
-                  <div className="text-sm font-semibold text-stone-200 mt-1">
+                  <div className="text-sm font-semibold text-[#18181B] dark:text-stone-200 mt-1">
                     {isRtl ? 'حضور استراتيجي عابر للقارات' : 'Intercontinental Footprint'}
                   </div>
-                  <p className="text-xs text-stone-400 mt-1 font-light">
+                  <p className="text-xs text-[#52525B] dark:text-stone-400 mt-1 font-light">
                     {isRtl ? 'المقر الرئيسي بكاليفورنيا والمقر الإقليمي بجدة وفروع التغطية بالمملكة.' : 'California Headquarters and regional operation hubs across Saudi Arabia.'}
                   </p>
                 </div>
@@ -384,17 +384,17 @@ export default async function AboutPage({
       </section>
 
       {/* 4. Engineering Specializations (Editorial 2x2 with clear hierarchy, no repetitive cards) */}
-      <section className="py-20 sm:py-28 border-b border-white/10 bg-[#030303]">
+      <section className="py-20 sm:py-28 border-b border-[#E6DFD3] dark:border-white/10 bg-[#FBF9F5] dark:bg-[#030303]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           
           <div className="max-w-3xl mb-16 space-y-3">
             <span className="text-xs font-mono text-[#3b76b3] uppercase tracking-wider font-semibold">
               CORE DISCIPLINES • التخصصات الهندسية المحورية
             </span>
-            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-display font-bold text-[#18181B] dark:text-white tracking-tight">
               {isRtl ? 'منظومة حلول جيوتقنية متكاملة' : 'Integrated Geotechnical & Testing Capabilities'}
             </h2>
-            <p className="text-base text-stone-400 font-light">
+            <p className="text-base text-[#52525B] dark:text-stone-400 font-light">
               {isRtl 
                 ? 'تغطي خدماتنا دورة حياة المشروع الإنشائي بالكامل من الاستكشاف المبدئي وحتى الفحص النهائي لسلامة الهيكل.'
                 : 'Covering the full project lifecycle from preliminary subsurface exploration to structural health auditing.'}
@@ -405,27 +405,27 @@ export default async function AboutPage({
             {capabilities.map((cap) => {
               const Icon = cap.icon;
               return (
-                <div key={cap.num} className="group flex flex-col justify-between space-y-6 pb-8 border-b border-white/10">
+                <div key={cap.num} className="group flex flex-col justify-between space-y-6 pb-8 border-b border-[#E6DFD3] dark:border-white/10">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-3xl sm:text-4xl font-mono font-bold text-stone-700 group-hover:text-[#3b76b3] transition-colors">
+                      <span className="text-3xl sm:text-4xl font-mono font-bold text-stone-400 dark:text-stone-700 group-hover:text-[#3b76b3] transition-colors">
                         {cap.num}
                       </span>
-                      <div className="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#3b76b3]">
+                      <div className="w-11 h-11 rounded-xl bg-white dark:bg-white/[0.04] border border-[#E6DFD3] dark:border-white/10 flex items-center justify-center text-[#3b76b3] shadow-sm dark:shadow-none">
                         <Icon className="w-5 h-5" />
                       </div>
                     </div>
 
-                    <h3 className="text-xl sm:text-2xl font-display font-bold text-white group-hover:text-stone-100 transition-colors">
+                    <h3 className="text-xl sm:text-2xl font-display font-bold text-[#18181B] dark:text-white group-hover:text-[#3b76b3] dark:group-hover:text-stone-100 transition-colors">
                       {isRtl ? cap.titleAr : cap.titleEn}
                     </h3>
 
-                    <p className="text-sm sm:text-base text-stone-300 font-light leading-relaxed">
+                    <p className="text-sm sm:text-base text-[#52525B] dark:text-stone-300 font-light leading-relaxed">
                       {isRtl ? cap.descAr : cap.descEn}
                     </p>
                   </div>
 
-                  <div className="pt-2 flex items-center justify-between text-xs font-mono text-stone-500">
+                  <div className="pt-2 flex items-center justify-between text-xs font-mono text-[#71717A] dark:text-stone-500">
                     <span>{cap.standards}</span>
                     <span className="w-1.5 h-1.5 rounded-full bg-[#3b76b3]/50" />
                   </div>
@@ -438,7 +438,7 @@ export default async function AboutPage({
       </section>
 
       {/* 5. Verified Success Partners (Real logos from CGL Profile) */}
-      <section className="py-20 sm:py-28 bg-[#060606] border-b border-white/10">
+      <section className="py-20 sm:py-28 bg-[#F3ECE2] dark:bg-[#060606] border-b border-[#E6DFD3] dark:border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
@@ -446,11 +446,11 @@ export default async function AboutPage({
               <span className="text-xs font-mono text-[#3b76b3] uppercase tracking-wider font-semibold">
                 TRUSTED BY INDUSTRY LEADERS • شركاء النجاح
               </span>
-              <h2 className="text-3xl sm:text-4xl font-display font-bold text-white tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-display font-bold text-[#18181B] dark:text-white tracking-tight">
                 {isRtl ? 'الشركاء والعملاء المعتمدون في سجل CGL' : 'Verified Strategic Partners & Clients'}
               </h2>
             </div>
-            <p className="text-sm text-stone-400 font-light max-w-md">
+            <p className="text-sm text-[#52525B] dark:text-stone-400 font-light max-w-md">
               {isRtl 
                 ? 'لوجوهات وشركاء حقيقيون من واقع بروفايل الشركة الرسمي، يمثلون كبرى مشاريع البنية التحتية والإنشاءات.'
                 : 'Official partner logos extracted directly from the verified CGL corporate profile.'}
@@ -462,21 +462,21 @@ export default async function AboutPage({
             {CGL_PROFILE_PARTNERS_GRID.map((partner) => (
               <div 
                 key={partner.id}
-                className="p-4 sm:p-5 rounded-2xl bg-[#0a0a0a] hover:bg-[#121212] border border-white/[0.08] hover:border-[#3b76b3]/40 transition-all flex flex-col items-center justify-between min-h-[140px] group shadow-sm"
+                className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#0a0a0a] hover:bg-stone-50 dark:hover:bg-[#121212] border border-[#E6DFD3] dark:border-white/[0.08] hover:border-[#3b76b3]/40 transition-all flex flex-col items-center justify-between min-h-[140px] group shadow-sm"
               >
                 <div className="relative w-full h-14 flex items-center justify-center my-auto">
                   <Image
                     src={partner.logo}
                     alt={partner.nameEn}
                     fill
-                    className="object-contain p-1 group-hover:scale-105 transition-transform drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+                    className="object-contain p-1 group-hover:scale-105 transition-transform drop-shadow-[0_2px_8px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                   />
                 </div>
-                <div className="text-center w-full pt-2 border-t border-white/5 mt-2">
-                  <span className="text-[11px] font-bold text-stone-200 block truncate">
+                <div className="text-center w-full pt-2 border-t border-[#E6DFD3] dark:border-white/5 mt-2">
+                  <span className="text-[11px] font-bold text-[#18181B] dark:text-stone-200 block truncate">
                     {isRtl ? partner.nameAr : partner.nameEn}
                   </span>
-                  <span className="text-[10px] text-stone-500 block truncate">
+                  <span className="text-[10px] text-[#71717A] dark:text-stone-500 block truncate">
                     {isRtl ? partner.roleAr : partner.roleEn}
                   </span>
                 </div>
@@ -488,28 +488,28 @@ export default async function AboutPage({
       </section>
 
       {/* 6. Chronological Growth & Roadmap (Minimalist timeline, no nested cards) */}
-      <section className="py-20 sm:py-28 bg-[#030303] border-b border-white/10">
+      <section className="py-20 sm:py-28 bg-[#FBF9F5] dark:bg-[#030303] border-b border-[#E6DFD3] dark:border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           
           <div className="max-w-3xl mb-16 space-y-3">
             <span className="text-xs font-mono text-[#3b76b3] uppercase tracking-wider font-semibold">
               TRAJECTORY & GROWTH • مسيرة التطور
             </span>
-            <h2 className="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-display font-bold text-[#18181B] dark:text-white tracking-tight">
               {isRtl ? 'محطات شكلت ريادتنا في فحص التربة' : 'Milestones Shaping Our Technical Leadership'}
             </h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
             {milestones.map((m, idx) => (
-              <div key={idx} className="relative space-y-3 pt-6 border-t-2 border-stone-800 hover:border-[#3b76b3] transition-colors group">
-                <div className="text-3xl sm:text-4xl font-mono font-bold text-white group-hover:text-[#3b76b3] transition-colors">
+              <div key={idx} className="relative space-y-3 pt-6 border-t-2 border-[#E6DFD3] dark:border-stone-800 hover:border-[#3b76b3] transition-colors group">
+                <div className="text-3xl sm:text-4xl font-mono font-bold text-[#18181B] dark:text-white group-hover:text-[#3b76b3] transition-colors">
                   {m.year}
                 </div>
-                <h3 className="text-lg font-display font-bold text-stone-100">
+                <h3 className="text-lg font-display font-bold text-[#18181B] dark:text-stone-100">
                   {isRtl ? m.titleAr : m.titleEn}
                 </h3>
-                <p className="text-xs sm:text-sm text-stone-400 font-light leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#52525B] dark:text-stone-400 font-light leading-relaxed">
                   {isRtl ? m.textAr : m.textEn}
                 </p>
               </div>
@@ -520,42 +520,42 @@ export default async function AboutPage({
       </section>
 
       {/* 7. Institutional Accreditations Trust Bar (Clean horizontal strip) */}
-      <section className="py-12 bg-[#080808] border-b border-white/10">
+      <section className="py-12 bg-[#F3ECE2] dark:bg-[#080808] border-b border-[#E6DFD3] dark:border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="flex flex-wrap items-center justify-between gap-6 text-xs font-mono text-stone-400">
-            <div className="flex items-center gap-2 text-stone-200">
+          <div className="flex flex-wrap items-center justify-between gap-6 text-xs font-mono text-[#52525B] dark:text-stone-400">
+            <div className="flex items-center gap-2 text-[#18181B] dark:text-stone-200">
               <ShieldCheck className="w-4 h-4 text-[#3b76b3]" />
               <span className="font-bold">{isRtl ? 'الاعتمادات والمعايير المطبقة:' : 'Governing Standards & Accreditations:'}</span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-6 text-stone-300">
-              <span className="hover:text-white transition-colors">Saudi Building Code (SBC 303/304/305)</span>
+            <div className="flex flex-wrap items-center gap-6 text-[#52525B] dark:text-stone-300">
+              <span className="hover:text-[#18181B] dark:hover:text-white transition-colors">Saudi Building Code (SBC 303/304/305)</span>
               <span>•</span>
-              <span className="hover:text-white transition-colors">ASTM International Standards</span>
+              <span className="hover:text-[#18181B] dark:hover:text-white transition-colors">ASTM International Standards</span>
               <span>•</span>
-              <span className="hover:text-white transition-colors">AASHTO Highway Standards</span>
+              <span className="hover:text-[#18181B] dark:hover:text-white transition-colors">AASHTO Highway Standards</span>
               <span>•</span>
-              <span className="hover:text-white transition-colors">DIN 1054 / BS 8002 Shoring</span>
+              <span className="hover:text-[#18181B] dark:hover:text-white transition-colors">DIN 1054 / BS 8002 Shoring</span>
               <span>•</span>
-              <span className="hover:text-white transition-colors">Saudi Council of Engineers (SCE)</span>
+              <span className="hover:text-[#18181B] dark:hover:text-white transition-colors">Saudi Council of Engineers (SCE)</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* 8. Minimalist High-Contrast Action Banner */}
-      <section className="py-16 sm:py-20 bg-[#030303]">
+      <section className="py-16 sm:py-20 bg-[#FBF9F5] dark:bg-[#030303]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           
-          <div className="p-8 sm:p-14 rounded-3xl bg-gradient-to-b from-[#0e0e0e] to-[#070707] border border-white/15 flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="p-8 sm:p-14 rounded-3xl bg-white dark:bg-gradient-to-b dark:from-[#0e0e0e] dark:to-[#070707] border border-[#E6DFD3] dark:border-white/15 shadow-sm flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="space-y-3 text-center lg:text-start max-w-2xl">
               <span className="text-xs font-mono text-[#3b76b3] font-bold uppercase tracking-wider block">
                 {isRtl ? 'المقر الرئيسي: جدة • حي الرويس 23215' : 'Headquarters: 23215 Al-Ruwais, Jeddah KSA'}
               </span>
-              <h3 className="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight">
+              <h3 className="text-2xl sm:text-4xl font-display font-bold text-[#18181B] dark:text-white tracking-tight">
                 {isRtl ? 'هل تخطط لمشروع يحتاج فحصاً جيوتقنياً معتمداً؟' : 'Planning a Project Requiring Accredited Geotechnical Testing?'}
               </h3>
-              <p className="text-sm text-stone-300 font-light leading-relaxed">
+              <p className="text-sm text-[#52525B] dark:text-stone-300 font-light leading-relaxed">
                 {isRtl 
                   ? 'مهندسونا الاستشاريون جاهزون لدراسة موقعك، تحديد عدد وأعماق الجسات المطلوبة، وتقديم عرض سعر مطابق لكود البناء السعودي.'
                   : 'Our consultant engineers are available to review site data, specify borehole depths, and provide SBC-compliant proposals.'}
@@ -565,7 +565,7 @@ export default async function AboutPage({
             <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto flex-shrink-0">
               <a
                 href={`tel:${info.phone2}`}
-                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white/[0.05] hover:bg-white/10 text-stone-200 border border-white/15 text-xs font-mono transition-all"
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-xl bg-stone-50 dark:bg-white/[0.05] hover:bg-stone-100 dark:hover:bg-white/10 text-[#18181B] dark:text-stone-200 border border-[#E6DFD3] dark:border-white/15 text-xs font-mono transition-all"
               >
                 <Phone className="w-4 h-4 text-[#3b76b3]" />
                 <span>{info.phone2}</span>

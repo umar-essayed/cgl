@@ -31,11 +31,11 @@ export default function Footer({ lang = 'ar', companyInfo }: FooterProps) {
     : (info.workingHoursEn || info.workingHoursAr || 'Sun - Thu: 8:00 AM - 5:00 PM');
 
   return (
-    <footer className="bg-[#000000] text-stone-300 font-sans border-t border-[#1f1f1f] pt-12 pb-8 text-xs">
+    <footer className="bg-[#F3ECE2] dark:bg-[#000000] text-[#52525B] dark:text-stone-300 font-sans border-t border-[#E6DFD3] dark:border-[#1f1f1f] pt-12 pb-8 text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         
         {/* Main Clean Row */}
-        <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 pb-8 border-b border-[#1f1f1f] text-center md:text-start">
+        <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 pb-8 border-b border-[#E6DFD3] dark:border-[#1f1f1f] text-center md:text-start">
           
           {/* 1. Identity */}
           <div className="flex flex-col items-center md:items-start max-w-sm">
@@ -48,7 +48,7 @@ export default function Footer({ lang = 'ar', companyInfo }: FooterProps) {
                 className="h-9 w-auto object-contain"
               />
             </Link>
-            <p className="text-stone-400 text-xs leading-relaxed font-mono">
+            <p className="text-[#52525B] dark:text-stone-400 text-xs leading-relaxed font-mono">
               {isRtl
                 ? 'CGL - Creative Geotechnical Laboratories • فرع معتمد لمجموعة CGI العالمية (السعودية والولايات المتحدة).'
                 : 'CGL - Creative Geotechnical Laboratories • A proud franchise of CGI Group (USA & KSA).'}
@@ -56,7 +56,7 @@ export default function Footer({ lang = 'ar', companyInfo }: FooterProps) {
           </div>
 
           {/* 2. Quick Navigation Links */}
-          <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 text-stone-300 font-medium">
+          <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 text-[#52525B] dark:text-stone-300 font-medium">
             <Link href={`/${lang}`} className="hover:text-[#3b76b3] transition-colors">{dict.nav.home}</Link>
             <Link href={`/${lang}/about`} className="hover:text-[#3b76b3] transition-colors">{dict.nav.about}</Link>
             <Link href={`/${lang}#services`} className="hover:text-[#3b76b3] transition-colors">{dict.nav.services}</Link>
@@ -65,23 +65,23 @@ export default function Footer({ lang = 'ar', companyInfo }: FooterProps) {
           </div>
 
           {/* 3. Direct Contact */}
-          <div className="flex flex-col items-center md:items-end space-y-2.5 text-stone-400 font-mono text-xs">
+          <div className="flex flex-col items-center md:items-end space-y-2.5 text-[#52525B] dark:text-stone-400 font-mono text-xs">
             <div className="flex items-center gap-2" dir="ltr">
               <Phone className="w-3.5 h-3.5 text-[#3b76b3]" />
               <a
                 href={`https://wa.me/${info.whatsapp1Raw || (info.whatsapp1 || '').replace(/[^0-9]/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-[#3b76b3] transition-colors font-bold"
+                className="text-[#18181B] dark:text-white hover:text-[#3b76b3] transition-colors font-bold"
               >
                 {info.phone1 || info.phone}
               </a>
-              <span className="text-stone-700">|</span>
+              <span className="text-[#A1A1AA] dark:text-stone-700">|</span>
               <a
                 href={`https://wa.me/${info.whatsapp2Raw || (info.whatsapp2 || '').replace(/[^0-9]/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-[#3b76b3] transition-colors font-bold"
+                className="text-[#18181B] dark:text-white hover:text-[#3b76b3] transition-colors font-bold"
               >
                 {info.phone2}
               </a>
@@ -89,14 +89,14 @@ export default function Footer({ lang = 'ar', companyInfo }: FooterProps) {
 
             <a
               href={`mailto:${info.email}`}
-              className="inline-flex items-center gap-1.5 text-stone-300 hover:text-white transition-colors"
+              className="inline-flex items-center gap-1.5 text-[#52525B] dark:text-stone-300 hover:text-[#3b76b3] dark:hover:text-white transition-colors"
               dir="ltr"
             >
               <Mail className="w-3.5 h-3.5 text-[#508ECB]" />
               <span>{info.email}</span>
             </a>
 
-            <div className="inline-flex items-center gap-1.5 text-stone-300 font-sans text-xs">
+            <div className="inline-flex items-center gap-1.5 text-[#52525B] dark:text-stone-300 font-sans text-xs">
               <Clock className="w-3.5 h-3.5 text-[#3b76b3] flex-shrink-0" />
               <span>{workingHours}</span>
             </div>
@@ -105,7 +105,7 @@ export default function Footer({ lang = 'ar', companyInfo }: FooterProps) {
               href={info.googleMapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-stone-300 hover:text-[#3b76b3] transition-colors font-sans text-xs"
+              className="inline-flex items-center gap-1.5 text-[#52525B] dark:text-stone-300 hover:text-[#3b76b3] transition-colors font-sans text-xs"
             >
               <MapPin className="w-3.5 h-3.5 text-[#C45B58] flex-shrink-0" />
               <span>{address}</span>
@@ -115,18 +115,18 @@ export default function Footer({ lang = 'ar', companyInfo }: FooterProps) {
         </div>
 
         {/* Accreditations Strip & Copyright */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-stone-400 font-mono">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#71717A] dark:text-stone-400 font-mono">
           {/* Subtle Accreditations Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-stone-400">
-            <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-[#52525B] dark:text-stone-400">
+            <span className="px-2 py-0.5 rounded bg-white dark:bg-white/5 border border-[#E6DFD3] dark:border-white/10 shadow-sm">
               {isRtl ? 'كود البناء السعودي SBC 303 • SBC 304' : 'Saudi Building Code SBC 303 • SBC 304'}
             </span>
             <span>•</span>
-            <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10">ASTM International</span>
+            <span className="px-2 py-0.5 rounded bg-white dark:bg-white/5 border border-[#E6DFD3] dark:border-white/10 shadow-sm">ASTM International</span>
             <span>•</span>
-            <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10">American Concrete Institute (ACI)</span>
+            <span className="px-2 py-0.5 rounded bg-white dark:bg-white/5 border border-[#E6DFD3] dark:border-white/10 shadow-sm">American Concrete Institute (ACI)</span>
             <span>•</span>
-            <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10">ISO/IEC 17025 Ready</span>
+            <span className="px-2 py-0.5 rounded bg-white dark:bg-white/5 border border-[#E6DFD3] dark:border-white/10 shadow-sm">ISO/IEC 17025 Ready</span>
           </div>
 
           {/* Copyright & Up Button */}
@@ -134,7 +134,7 @@ export default function Footer({ lang = 'ar', companyInfo }: FooterProps) {
             <span>© {currentYear} CGL Labs. {dict.footer.rights}.</span>
             <button
               onClick={scrollToTop}
-              className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-stone-400 hover:text-white transition-colors border border-white/10"
+              className="p-1.5 rounded-lg bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/15 text-[#18181B] dark:text-stone-400 hover:text-[#3b76b3] dark:hover:text-white transition-colors border border-[#E6DFD3] dark:border-white/10 shadow-sm"
               aria-label="Scroll to top"
               title="Scroll to top"
             >

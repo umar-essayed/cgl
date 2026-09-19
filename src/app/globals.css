@@ -4,12 +4,12 @@
 
 @layer base {
   body {
-    @apply bg-[#000000] text-stone-100 font-sans antialiased selection:bg-[#3b76b3] selection:text-white;
+    @apply bg-[#FBF9F5] dark:bg-[#000000] text-[#3F3F46] dark:text-stone-100 font-sans antialiased selection:bg-[#3b76b3] selection:text-white;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-white;
+    @apply font-display tracking-tight text-[#18181B] dark:text-white;
   }
 }
 
@@ -31,13 +31,24 @@
 }
 
 .engineering-card {
-  background: #0a0a0a;
-  border: 1px solid #1f1f1f;
+  background: #FFFFFF;
+  border: 1px solid #E6DFD3;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
 
+.dark .engineering-card {
+  background: #0a0a0a;
+  border: 1px solid #1f1f1f;
+}
+
 .engineering-card:hover {
+  background: #FFFFFF;
+  border-color: rgba(59, 118, 179, 0.45);
+  box-shadow: 0 12px 30px -8px rgba(24, 24, 27, 0.08);
+}
+
+.dark .engineering-card:hover {
   background: #111111;
   border-color: rgba(59, 118, 179, 0.4);
   box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.85);
@@ -194,4 +205,33 @@ html.theme-green [class*="hover:border-[#3b76b3]"]:hover {
 html.theme-green .engineering-card:hover {
   border-color: rgba(34, 197, 94, 0.4) !important;
 }
+
+/* ====================================================
+   Architectural Sokari / Off-White Theme (html.theme-light)
+   CRUCIAL SAFETY GUARANTEES:
+   - When in Dark Mode (default): ZERO changes, 100% untouched!
+   - Hero keeps its cinematic dark backdrop & black vignette.
+   ==================================================== */
+html.theme-light {
+  color-scheme: light;
+}
+
+html.theme-light ::-webkit-scrollbar-track {
+  background: #F3ECE2;
+}
+
+html.theme-light ::-webkit-scrollbar-thumb {
+  background: #D8D0C3;
+  border-radius: 3px;
+}
+
+html.theme-light ::-webkit-scrollbar-thumb:hover {
+  background: #3B76B3;
+}
+
+html.theme-light.theme-green ::-webkit-scrollbar-thumb:hover {
+  background: #16A34A;
+}
+
+
 

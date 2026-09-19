@@ -19,9 +19,9 @@ export default function PartnersTicker({
   const isRtl = lang === 'ar';
 
   return (
-    <section id="partners" className="py-10 sm:py-12 bg-[#000000] border-b border-[#1f1f1f] relative overflow-hidden">
+    <section id="partners" className="py-10 sm:py-12 bg-[#FBF9F5] dark:bg-[#000000] border-b border-[#E6DFD3] dark:border-[#1f1f1f] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-6 text-center">
-        <p className="text-xs sm:text-sm font-sans font-medium text-stone-400">
+        <p className="text-xs sm:text-sm font-sans font-medium text-[#52525B] dark:text-stone-400">
           {isRtl
             ? 'معتمدون لدى كبرى جهات التطوير العقاري والمقاولات والجهات الاستشارية بالمملكة'
             : 'Certified and trusted by leading real estate developers and Tier-1 contractors across Saudi Arabia'}
@@ -41,7 +41,7 @@ export default function PartnersTicker({
               return (
                 <div
                   key={`t1-${partner.id}-${index}`}
-                  className="h-16 sm:h-20 w-44 sm:w-52 flex-shrink-0 flex items-center justify-center p-3 rounded-xl bg-[#0a0a0a] hover:bg-[#121212] border border-[#1f1f1f] hover:border-[#3b76b3]/40 transition-all duration-300 group shadow-sm"
+                  className="h-16 sm:h-20 w-44 sm:w-52 flex-shrink-0 flex items-center justify-center p-3 rounded-xl bg-white dark:bg-[#0a0a0a] hover:bg-slate-50 dark:hover:bg-[#121212] border border-[#E6DFD3] dark:border-[#1f1f1f] hover:border-[#3b76b3]/40 transition-all duration-300 group shadow-sm"
                   title={`${name} • ${partner.sectorAr || ''}`}
                 >
                   <div className="relative w-full h-full flex items-center justify-center">
@@ -50,7 +50,7 @@ export default function PartnersTicker({
                       alt={name}
                       fill
                       sizes="(max-width: 768px) 176px, 208px"
-                      className="object-contain p-1 group-hover:scale-105 transition-all duration-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+                      className="object-contain p-1 group-hover:scale-105 transition-all duration-300 dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                     />
                   </div>
                 </div>
@@ -65,7 +65,7 @@ export default function PartnersTicker({
               return (
                 <div
                   key={`t2-${partner.id}-${index}`}
-                  className="h-16 sm:h-20 w-44 sm:w-52 flex-shrink-0 flex items-center justify-center p-3 rounded-xl bg-[#0a0a0a] hover:bg-[#121212] border border-[#1f1f1f] hover:border-[#3b76b3]/40 transition-all duration-300 group shadow-sm"
+                  className="h-16 sm:h-20 w-44 sm:w-52 flex-shrink-0 flex items-center justify-center p-3 rounded-xl bg-white dark:bg-[#0a0a0a] hover:bg-slate-50 dark:hover:bg-[#121212] border border-[#E6DFD3] dark:border-[#1f1f1f] hover:border-[#3b76b3]/40 transition-all duration-300 group shadow-sm"
                   title={`${name} • ${partner.sectorAr || ''}`}
                 >
                   <div className="relative w-full h-full flex items-center justify-center">
@@ -74,7 +74,7 @@ export default function PartnersTicker({
                       alt={name}
                       fill
                       sizes="(max-width: 768px) 176px, 208px"
-                      className="object-contain p-1 group-hover:scale-105 transition-all duration-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+                      className="object-contain p-1 group-hover:scale-105 transition-all duration-300 dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                     />
                   </div>
                 </div>

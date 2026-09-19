@@ -8,9 +8,10 @@ import { Locale } from '@/lib/i18n';
 interface LanguageSwitcherProps {
   currentLang: Locale;
   className?: string;
+  isScrolled?: boolean;
 }
 
-export default function LanguageSwitcher({ currentLang, className = '' }: LanguageSwitcherProps) {
+export default function LanguageSwitcher({ currentLang, className = '', isScrolled = true }: LanguageSwitcherProps) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -32,9 +33,6 @@ export default function LanguageSwitcher({ currentLang, className = '' }: Langua
       return;
     }
 
-    // Replace the language segment in current URL
-    // e.g., /ar/about -> /en/about
-    // /ar -> /en
     const segments = pathname.split('/').filter(Boolean);
     if (segments.length === 0) {
       router.push(`/${targetLang}`);
@@ -48,11 +46,14 @@ export default function LanguageSwitcher({ currentLang, className = '' }: Langua
 
   return (
     <button
+      type="button"
       onClick={handleSwitch}
       aria-label={`Switch to ${label}`}
       className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-200 border ${
-        'bg-[#111111] hover:bg-[#1a1a1a] border-[#222222] text-stone-200 hover:text-white dark:bg-[#111111] dark:hover:bg-[#1a1a1a] dark:border-[#222222] dark:text-stone-200 dark:hover:text-white'
-      } bg-white hover:bg-slate-100 border-slate-200 text-slate-700 hover:text-slate-900 shadow-sm ${className}`}
+        isScrolled
+          ? 'bg-white dark:bg-[#111111] hover:bg-slate-50 dark:hover:bg-[#1a1a1a] border-[#E6DFD3] dark:border-[#222222] text-[#18181B] dark:text-stone-200 shadow-sm'
+          : 'bg-white/80 hover:bg-white text-[#18181B] border-[#E6DFD3] dark:bg-black/40 dark:hover:bg-black/60 dark:text-white dark:border-white/20 backdrop-blur-sm'
+      } ${className}`}
     >
       <Globe className="w-3.5 h-3.5 text-[#3b76b3]" />
       <span>{label}</span>

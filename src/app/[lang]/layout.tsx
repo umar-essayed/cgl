@@ -26,13 +26,14 @@ export default async function LocaleLayout({
   const isRtl = lang === 'ar';
   const data = await getDynamicSiteData();
   const themeColor = ((data.settings as any)?.themeColor || 'blue') as 'blue' | 'green';
+  const themeMode = ((data.settings as any)?.themeMode || 'dark') as 'dark' | 'light';
   const loaderColor = themeColor === 'green' ? '#16a34a' : '#3b76b3';
   const loaderGlow = themeColor === 'green' ? 'rgba(22, 163, 74, 0.45)' : 'rgba(59, 118, 179, 0.45)';
 
   return (
     <div dir={isRtl ? 'rtl' : 'ltr'} className="min-h-screen flex flex-col">
       <LangDirSync lang={lang} />
-      <ThemeSync themeColor={themeColor} />
+      <ThemeSync themeColor={themeColor} themeMode={themeMode} />
       <PageLoader color={loaderColor} glowColor={loaderGlow} />
       {children}
     </div>

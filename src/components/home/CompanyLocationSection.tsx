@@ -35,7 +35,7 @@ export default function CompanyLocationSection({ lang = 'ar', companyInfo }: Com
   const mapsUrl = info.googleMapsUrl || CGL_COMPANY_INFO.googleMapsUrl;
 
   return (
-    <section id="location" className="py-10 sm:py-16 bg-[#000000] border-b border-[#1f1f1f] text-white relative">
+    <section id="location" className="py-10 sm:py-16 bg-[#F3ECE2] dark:bg-[#000000] border-b border-[#E6DFD3] dark:border-[#1f1f1f] text-[#18181B] dark:text-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         
         {/* Minimal Clean Header */}
@@ -44,7 +44,7 @@ export default function CompanyLocationSection({ lang = 'ar', companyInfo }: Com
             <span className="text-xs font-mono text-[#3b76b3] font-bold block mb-0.5">
               {dict.location.badge}
             </span>
-            <h2 className="text-xl sm:text-2xl font-display font-bold text-white">
+            <h2 className="text-xl sm:text-2xl font-display font-bold text-[#18181B] dark:text-white">
               {dict.location.title} • {address}
             </h2>
           </div>
@@ -62,12 +62,12 @@ export default function CompanyLocationSection({ lang = 'ar', companyInfo }: Com
         </div>
 
         {/* Map Box */}
-        <div className="relative isolate z-10 w-full h-[380px] sm:h-[480px] md:h-[540px] rounded-2xl overflow-hidden border border-[#1f1f1f] shadow-2xl bg-[#000000]">
+        <div className="relative isolate z-10 w-full h-[380px] sm:h-[480px] md:h-[540px] rounded-2xl overflow-hidden border border-[#E6DFD3] dark:border-[#1f1f1f] shadow-md dark:shadow-2xl bg-white dark:bg-[#000000]">
           <DarkLocationMap lang={lang} />
 
           {/* Floating Brand Pin Badge */}
           <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 pointer-events-auto">
-            <div className="p-2.5 sm:p-3.5 rounded-xl bg-[#0a0a0a]/95 border border-[#1f1f1f] shadow-2xl backdrop-blur-md flex items-center gap-2.5 max-w-[270px] sm:max-w-sm">
+            <div className="p-2.5 sm:p-3.5 rounded-xl bg-white/95 dark:bg-[#0a0a0a]/95 border border-[#E6DFD3] dark:border-[#1f1f1f] shadow-lg dark:shadow-2xl backdrop-blur-md flex items-center gap-2.5 max-w-[270px] sm:max-w-sm">
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#3b76b3]/15 border border-[#3b76b3] flex items-center justify-center flex-shrink-0 p-1">
                 <Image
                   src="/assets/cgl-logo1.png"
@@ -78,10 +78,10 @@ export default function CompanyLocationSection({ lang = 'ar', companyInfo }: Com
                 />
               </div>
               <div className="text-start min-w-0">
-                <span className="text-xs font-bold text-white block truncate">
+                <span className="text-xs font-bold text-[#18181B] dark:text-white block truncate">
                   CGL Laboratories
                 </span>
-                <span className="text-[10px] sm:text-[11px] text-stone-300 font-mono block">
+                <span className="text-[10px] sm:text-[11px] text-[#52525B] dark:text-stone-300 font-mono block">
                   {address}
                 </span>
                 <div className="flex items-center gap-2 mt-0.5 text-[10px] sm:text-[11px] font-mono text-[#3b76b3]">
