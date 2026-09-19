@@ -8,6 +8,7 @@ import { CGL_PROJECTS_EVIDENCE, CGL_COMPANY_INFO } from '@/lib/data';
 import { Locale, isValidLocale, locales, getDictionary } from '@/lib/i18n';
 import Navbar from '@/components/navbar/Navbar';
 import Footer from '@/components/footer/Footer';
+import BackToHomeButton from '@/components/common/BackToHomeButton';
 import { getDynamicProject, getDynamicSiteData } from '@/lib/dynamicData';
 
 interface ProjectPageProps {
@@ -73,14 +74,17 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Breadcrumbs & Back Link */}
-          <div className="mb-6 flex items-center justify-between">
-            <Link
-              href={`/${lang}/projects`}
-              className="inline-flex items-center text-xs sm:text-sm font-medium text-stone-400 hover:text-[#3b76b3] transition-colors group gap-2"
-            >
-              <BackIcon className="w-4 h-4 text-[#3b76b3] group-hover:-translate-x-0.5 transition-transform" />
-              <span>{dict.projectDetailPage.backBtn}</span>
-            </Link>
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <BackToHomeButton lang={lang} />
+              <Link
+                href={`/${lang}/projects`}
+                className="inline-flex items-center text-xs sm:text-sm font-medium text-stone-400 hover:text-[#3b76b3] transition-colors group gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10"
+              >
+                <BackIcon className="w-3.5 h-3.5 text-[#3b76b3] group-hover:-translate-x-0.5 transition-transform" />
+                <span>{dict.projectDetailPage.backBtn}</span>
+              </Link>
+            </div>
 
             <span className="text-xs font-mono text-stone-400 bg-white/5 px-2.5 py-1 rounded border border-white/10">
               ID: {project.id}

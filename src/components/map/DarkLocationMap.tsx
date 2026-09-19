@@ -1,79 +1,104 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
-import 'leaflet/dist/leaflet.css';
+import React, { useState } from 'react';
+import { Layers, MapPin, Navigation, Maximize2 } from 'lucide-react';
 
-export default function DarkLocationMap() {
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<any>(null);
+interface DarkLocationMapProps {
+  lat?: number;
+  lng?: number;
+  zoom?: number;
+  lang?: 'ar' | 'en';
+}
 
-  // Initialize Map Once
-  useEffect(() => {
-    if (!mapContainerRef.current || mapInstanceRef.current) return;
+export default function DarkLocationMap({
+  lat = 21.5231047,
+  lng = 39.177774,
+  zoom = 15,
+  lang = 'ar',
+}: DarkLocationMapProps) {
+  const [mapMode, setMapMode] = useState<'themed' | 'satellite' | 'standard'>('themed');
 
-    let isMounted = true;
-
-    // Dynamically import Leaflet on client side
-    import('leaflet').then((L) => {
-      if (!isMounted || !mapContainerRef.current || mapInstanceRef.current) return;
-
-      const lat = 21.5231047;
-      const lng = 39.177774;
-
-      // Initialize map
-      const map = L.map(mapContainerRef.current, {
-        center: [lat, lng],
-        zoom: 14,
-        zoomControl: false,
-        scrollWheelZoom: false,
-        // Disable single-finger drag on mobile so user doesn't get trapped while scrolling the page!
-        dragging: !L.Browser.mobile,
-      });
-
-      mapInstanceRef.current = map;
-
-      // CartoDB Dark Matter for signature dark theme
-      const tileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png';
-
-      L.tileLayer(tileUrl, {
-        attribution: '&copy; CartoDB &copy; OpenStreetMap',
-        subdomains: 'abcd',
-        maxZoom: 19,
-      }).addTo(map);
-
-      // Custom CGL Pin with brand green pulse
-      const pinHtml = `
-        <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px;">
-          <div style="position: absolute; width: 38px; height: 38px; border-radius: 50%; background: rgba(59, 118, 179, 0.35); animation: pulse 2s cubic-bezier(0.4, 0, 1) infinite;"></div>
-          <div style="width: 24px; height: 24px; border-radius: 50%; background: #3b76b3; border: 3px solid #000000; box-shadow: 0 0 16px rgba(59, 118, 179, 0.85); display: flex; align-items: center; justify-content: center;">
-            <div style="width: 8px; height: 8px; border-radius: 50%; background: #000000;"></div>
-          </div>
-        </div>
-      `;
-
-      const customPin = L.divIcon({
-        className: 'cgl-custom-marker',
-        html: pinHtml,
-        iconSize: [42, 42],
-        iconAnchor: [21, 21],
-      });
-
-      L.marker([lat, lng], { icon: customPin }).addTo(map);
-    });
-
-    return () => {
-      isMounted = false;
-      if (mapInstanceRef.current) {
-        mapInstanceRef.current.remove();
-        mapInstanceRef.current = null;
-      }
-    };
-  }, []);
+  const isRtl = lang === 'ar';
+  const queryParam = `${lat},${lng}`;
+  const embedUrl = mapMode === 'satellite'
+    ? `https://maps.google.com/maps?q=${queryParam}&t=k&z=${zoom}&ie=UTF8&iwloc=&output=embed&hl=${lang}`
+    : `https://maps.google.com/maps?q=${queryParam}&t=m&z=${zoom}&ie=UTF8&iwloc=&output=embed&hl=${lang}`;
 
   return (
-    <div
-      ref={mapContainerRef}
-      className="w-full h-full bg-[#000000] isolate z-0"
-    />
+    <div className="relative w-full h-full bg-[#000000] overflow-hidden select-none">
+      {/* Google Maps Iframe with Website Theme Filter */}
+      <iframe
+        title="CGL Headquarters Location Map"
+        src={embedUrl}
+        width="100%"
+        height="100%"
+        loading="lazy"
+        allowFullScreen
+        referrerPolicy="no-referrer-when-downgrade"
+        className={`w-full h-full border-0 transition-all duration-500 ${
+          mapMode === 'themed'
+            ? 'filter invert-[92%] hue-rotate-[195deg] contrast-[1.05] brightness-[0.92] saturate-[0.85]'
+            : mapMode === 'satellite'
+            ? 'filter contrast-[1.1] brightness-[0.9]'
+            : 'filter contrast-[1.02]'
+        }`}
+      />
+
+      {/* Pulsing CGL Core Pin Overlay */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10">
+        <div className="relative flex items-center justify-center">
+          <div className="absolute w-12 h-12 rounded-full bg-[#3b76b3]/35 animate-ping" />
+          <div className="absolute w-8 h-8 rounded-full bg-[#3b76b3]/50 animate-pulse" />
+          <div className="w-5 h-5 rounded-full bg-[#3b76b3] border-2 border-white shadow-[0_0_14px_#3b76b3] flex items-center justify-center">
+            <div className="w-1.5 h-1.5 rounded-full bg-white" />
+          </div>
+        </div>
+      </div>
+
+      {/* Layer Mode Switcher Controls */}
+      <div className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 z-20 flex items-center gap-1.5 bg-[#0a0a0a]/90 backdrop-blur-md border border-white/10 rounded-xl p-1 shadow-2xl">
+        <button
+          type="button"
+          onClick={() => setMapMode('themed')}
+          className={`px-2.5 py-1 rounded-lg text-[11px] font-sans font-medium transition-all ${
+            mapMode === 'themed'
+              ? 'bg-[#3b76b3] text-white font-bold shadow-md'
+              : 'text-stone-400 hover:text-white hover:bg-white/5'
+          }`}
+        >
+          {isRtl ? 'النمط الهندسي' : 'Engineered Dark'}
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setMapMode('satellite')}
+          className={`px-2.5 py-1 rounded-lg text-[11px] font-sans font-medium transition-all ${
+            mapMode === 'satellite'
+              ? 'bg-[#3b76b3] text-white font-bold shadow-md'
+              : 'text-stone-400 hover:text-white hover:bg-white/5'
+          }`}
+        >
+          {isRtl ? 'قمر صناعي' : 'Satellite'}
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setMapMode('standard')}
+          className={`px-2.5 py-1 rounded-lg text-[11px] font-sans font-medium transition-all ${
+            mapMode === 'standard'
+              ? 'bg-[#3b76b3] text-white font-bold shadow-md'
+              : 'text-stone-400 hover:text-white hover:bg-white/5'
+          }`}
+        >
+          {isRtl ? 'خرائط جوجل' : 'Google Maps'}
+        </button>
+      </div>
+
+      {/* Quick Location Badge */}
+      <div className="absolute bottom-4 left-4 sm:bottom-5 sm:left-5 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#0a0a0a]/90 backdrop-blur-md border border-white/10 text-xs font-mono text-stone-300 shadow-xl">
+        <MapPin className="w-3.5 h-3.5 text-[#3b76b3]" />
+        <span>Jeddah • 21.5231° N, 39.1778° E</span>
+      </div>
+    </div>
   );
 }

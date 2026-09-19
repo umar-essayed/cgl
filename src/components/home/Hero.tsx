@@ -412,9 +412,9 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-20 w-full pt-3 sm:pt-4 border-t border-white/10">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
           
-          {/* Slide Switcher Tabs: Strictly NO SCROLL on mobile, fits 100% width evenly */}
-          <div className="w-full sm:w-auto">
-            <div className="flex items-center gap-1.5 sm:gap-2 w-full">
+          {/* Sleek Dot Pagination System */}
+          <div className="flex items-center gap-3 w-full sm:w-auto justify-center sm:justify-start">
+            <div className="flex items-center gap-2 sm:gap-2.5 p-1.5 sm:p-2 rounded-full bg-black/60 backdrop-blur-md border border-white/10 shadow-lg">
               {normalizedSlides.map((s, idx) => {
                 const isActive = currentSlide === idx;
                 return (
@@ -422,10 +422,12 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                     key={s.id}
                     type="button"
                     onClick={() => setCurrentSlide(idx)}
-                    className={`relative overflow-hidden flex-1 sm:flex-initial min-w-0 px-2.5 py-2 sm:px-4 sm:py-2 rounded-xl text-[10px] sm:text-xs font-sans transition-all flex items-center justify-center sm:justify-start gap-1.5 sm:gap-2 active:scale-95 backdrop-blur-md ${
+                    aria-label={`Slide ${idx + 1}: ${s.tag}`}
+                    title={s.tag}
+                    className={`relative h-2.5 sm:h-3 rounded-full transition-all duration-300 active:scale-90 overflow-hidden flex items-center ${
                       isActive
-                        ? 'bg-black/80 text-white font-bold border border-[#3b76b3]/70 shadow-lg shadow-[#3b76b3]/15 ring-1 ring-[#3b76b3]/30'
-                        : 'bg-black/40 text-stone-400 hover:text-white border border-white/10 hover:bg-black/60 hover:border-white/20'
+                        ? 'w-9 sm:w-12 bg-black border border-[#3b76b3]/80 shadow-[0_0_10px_rgba(59,118,179,0.35)]'
+                        : 'w-2.5 sm:w-3 bg-stone-600/70 hover:bg-stone-400 hover:scale-110'
                     }`}
                   >
                     {isActive && (
@@ -434,17 +436,21 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                         initial={{ width: '0%' }}
                         animate={{ width: '100%' }}
                         transition={{ duration: Number(s.duration) > 0 ? Number(s.duration) : 6, ease: 'linear' }}
-                        className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#3b76b3]"
+                        className="absolute inset-0 bg-[#3b76b3] rounded-full"
                       />
                     )}
-                    <div className="flex items-center gap-1.5 flex-shrink-0 relative z-10">
-                      <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isActive ? 'bg-[#3b76b3] shadow-[0_0_8px_#3b76b3]' : 'bg-stone-600'}`} />
-                      <span className={`font-mono font-bold text-[10px] sm:text-xs ${isActive ? 'text-[#3b76b3]' : 'text-stone-500'}`}>0{idx + 1}.</span>
-                    </div>
-                    <span className={`text-[10px] sm:text-xs truncate relative z-10 ${isActive ? 'text-white' : 'text-stone-300'}`}>{s.tag}</span>
                   </button>
                 );
               })}
+            </div>
+
+            {/* Active Slide Tag Minimal Pill */}
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] sm:text-xs font-sans text-stone-300">
+              <span className="font-mono font-bold text-[#3b76b3]">0{currentSlide + 1}</span>
+              <span className="text-stone-600">/</span>
+              <span className="font-mono text-stone-500">0{normalizedSlides.length}</span>
+              <span className="text-stone-600">•</span>
+              <span className="font-medium text-white truncate max-w-[140px] sm:max-w-[200px]">{normalizedSlides[currentSlide]?.tag}</span>
             </div>
           </div>
 

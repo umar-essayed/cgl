@@ -9,6 +9,7 @@ import {
 } from './types';
 
 export const CGL_COMPANY_INFO = {
+  themeColor: 'blue' as 'blue' | 'green',
   nameAr: 'CGL (Creative Geotechnical Laboratories)',
   nameEn: 'Creative Geotechnical Laboratories (CGL)',
   affiliationAr: 'فرع معتمد لمجموعة CGI العالمية (USA & KSA)',

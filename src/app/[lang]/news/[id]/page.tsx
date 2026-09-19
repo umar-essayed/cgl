@@ -23,6 +23,7 @@ import { CGL_LATEST_NEWS, CGL_COMPANY_INFO } from '@/lib/data';
 import { Locale, isValidLocale, locales, getDictionary } from '@/lib/i18n';
 import Navbar from '@/components/navbar/Navbar';
 import Footer from '@/components/footer/Footer';
+import BackToHomeButton from '@/components/common/BackToHomeButton';
 import { getDynamicNewsArticle, getDynamicSiteData } from '@/lib/dynamicData';
 
 interface NewsDetailPageProps {
@@ -113,14 +114,17 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Breadcrumb Navigation */}
-          <div className="flex items-center justify-between gap-4 mb-8">
-            <Link
-              href={`/${lang}/news`}
-              className="inline-flex items-center gap-2 text-xs font-mono text-stone-400 hover:text-[#3b76b3] transition-colors group"
-            >
-              <BackIcon className="w-3.5 h-3.5 text-[#3b76b3] group-hover:-translate-x-1 transition-transform" />
-              <span>{isRtl ? 'العودة إلى مركز الأخبار والدراسات' : 'Back to News & Insights'}</span>
-            </Link>
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+            <div className="flex items-center gap-3">
+              <BackToHomeButton lang={lang} />
+              <Link
+                href={`/${lang}/news`}
+                className="inline-flex items-center gap-1.5 text-xs font-mono text-stone-400 hover:text-[#3b76b3] transition-colors group px-3 py-1.5 rounded-xl bg-white/5 border border-white/10"
+              >
+                <BackIcon className="w-3.5 h-3.5 text-[#3b76b3] group-hover:-translate-x-1 transition-transform" />
+                <span>{isRtl ? 'الأخبار والدراسات' : 'News & Insights'}</span>
+              </Link>
+            </div>
 
             <span className="px-3 py-1 rounded-full bg-[#111111] border border-white/10 text-xs font-mono text-[#3b76b3]">
               {category}

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/navbar/Navbar';
 import Footer from '@/components/footer/Footer';
+import BackToHomeButton from '@/components/common/BackToHomeButton';
 import { 
   CGL_COMPANY_INFO, 
   CGL_PROFILE_PARTNERS_GRID 
@@ -160,14 +161,8 @@ export default async function AboutPage({
           
           {/* Top Metadata Strip */}
           <div className="flex flex-wrap items-center justify-between gap-4 pb-8 mb-12 border-b border-white/10">
-            <div className="flex items-center gap-2.5">
-              <Link
-                href={`/${lang}`}
-                className="inline-flex items-center text-xs font-mono text-stone-400 hover:text-[#3b76b3] transition-colors gap-1.5"
-              >
-                <BackIcon className="w-3.5 h-3.5 text-[#3b76b3]" />
-                <span>{dict.aboutPage.breadcrumbHome}</span>
-              </Link>
+            <div className="flex items-center gap-3">
+              <BackToHomeButton lang={lang as Locale} />
               <span className="text-stone-600">/</span>
               <span className="text-xs font-mono text-stone-300">
                 {isRtl ? 'ملف الشركة' : 'Company Profile'}
@@ -276,8 +271,18 @@ export default async function AboutPage({
 
               <div className="space-y-8 divide-y divide-white/10">
                 <div className="pt-2">
-                  <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight">
-                    650<span className="text-[#3b76b3]">+</span>
+                  <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight flex items-baseline gap-1">
+                    {isRtl ? (
+                      <>
+                        <span className="text-[#3b76b3]">+</span>
+                        <span>650</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>650</span>
+                        <span className="text-[#3b76b3]">+</span>
+                      </>
+                    )}
                   </div>
                   <div className="text-sm font-semibold text-stone-200 mt-1">
                     {isRtl ? 'عميل ومشروع منجز بالمملكة' : 'Delivered Projects & Clients'}
@@ -288,8 +293,18 @@ export default async function AboutPage({
                 </div>
 
                 <div className="pt-6">
-                  <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight">
-                    300<span className="text-[#3b76b3]">+</span>
+                  <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight flex items-baseline gap-1">
+                    {isRtl ? (
+                      <>
+                        <span className="text-[#3b76b3]">+</span>
+                        <span>300</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>300</span>
+                        <span className="text-[#3b76b3]">+</span>
+                      </>
+                    )}
                   </div>
                   <div className="text-sm font-semibold text-stone-200 mt-1">
                     {isRtl ? 'دراسة جيوتقنية وهيدرولوجية تخصصية' : 'Advanced Engineering Studies'}
@@ -300,8 +315,18 @@ export default async function AboutPage({
                 </div>
 
                 <div className="pt-6">
-                  <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight">
-                    30<span className="text-[#3b76b3]">+</span>
+                  <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight flex items-baseline gap-1">
+                    {isRtl ? (
+                      <>
+                        <span className="text-[#3b76b3]">+</span>
+                        <span>30</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>30</span>
+                        <span className="text-[#3b76b3]">+</span>
+                      </>
+                    )}
                   </div>
                   <div className="text-sm font-semibold text-stone-200 mt-1">
                     {isRtl ? 'عاماً من الخبرة الجيوتقنية المركزة' : 'Years of Field Mastery'}

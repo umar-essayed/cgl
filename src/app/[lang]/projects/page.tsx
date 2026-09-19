@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { Locale, isValidLocale, locales, getDictionary } from '@/lib/i18n';
 import Navbar from '@/components/navbar/Navbar';
 import Footer from '@/components/footer/Footer';
+import BackToHomeButton from '@/components/common/BackToHomeButton';
 import { getDynamicSiteData } from '@/lib/dynamicData';
 import ProjectsCatalogClient from './ProjectsCatalogClient';
 import { ChevronLeft, ChevronRight, FolderGit2 } from 'lucide-react';
@@ -58,10 +59,8 @@ export default async function ProjectsPage({
       <main className="flex-1 pt-24 sm:pt-28 pb-16 sm:pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
           {/* Breadcrumbs */}
-          <nav aria-label="Breadcrumbs" className="flex items-center gap-2 text-xs font-mono text-stone-400 mb-6">
-            <Link href={`/${lang}`} className="hover:text-[#3b76b3] transition-colors">
-              {isRtl ? 'الرئيسية' : 'Home'}
-            </Link>
+          <nav aria-label="Breadcrumbs" className="flex items-center gap-3 text-xs font-mono text-stone-400 mb-6">
+            <BackToHomeButton lang={lang} />
             <ChevronIcon className="w-3.5 h-3.5 text-stone-600" />
             <span className="text-white font-semibold">
               {isRtl ? 'سجل المشاريع الهندسية' : 'Projects Catalog'}

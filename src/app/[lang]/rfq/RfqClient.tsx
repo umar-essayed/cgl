@@ -26,6 +26,7 @@ import {
 } from 'lucide-react';
 import Navbar from '@/components/navbar/Navbar';
 import Footer from '@/components/footer/Footer';
+import BackToHomeButton from '@/components/common/BackToHomeButton';
 import { CGL_COMPANY_INFO } from '@/lib/data';
 import { Locale, getDictionary } from '@/lib/i18n';
 
@@ -245,7 +246,11 @@ export default function RfqClient({ lang, companyInfo }: RfqClientProps) {
 
       <main className="flex-grow pt-24 sm:pt-32 pb-16 sm:pb-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+          {/* Back to Home Button */}
+          <div className="mb-6">
+            <BackToHomeButton lang={lang} />
+          </div>
+
           {/* Header */}
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#111111] border border-[#1f1f1f] text-xs font-sans text-[#3b76b3] mb-3.5 shadow-sm">

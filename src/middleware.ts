@@ -1,6 +1,30 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { locales, defaultLocale } from '@/lib/i18n';
+import { locales, defaultLocale, Locale } from '@/lib/i18n';
+
+function detectDeviceLocale(request: NextRequest): Locale {
+  // 1. Check user cookie first if previously set
+  const cookieLang = request.cookies.get('cgl_lang')?.value;
+  if (cookieLang === 'ar' || cookieLang === 'en') {
+    return cookieLang;
+  }
+
+  // 2. Detect from client device Accept-Language header
+  const acceptLanguage = request.headers.get('accept-language') || '';
+  const primaryLang = acceptLanguage.split(',')[0].trim().toLowerCase();
+
+  if (primaryLang.startsWith('ar')) {
+    return 'ar';
+  }
+  if (primaryLang.startsWith('en')) {
+    return 'en';
+  }
+  if (acceptLanguage.toLowerCase().includes('ar')) {
+    return 'ar';
+  }
+
+  return 'en';
+}
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -10,11 +34,31 @@ export function middleware(request: NextRequest) {
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
 
-  // Redirect to default locale (/ar) if missing
+  // If missing locale (/ or any path without /ar or /en)
   if (pathnameIsMissingLocale) {
-    return NextResponse.redirect(
-      new URL(`/${defaultLocale}${pathname === '/' ? '' : pathname}`, request.url)
+    const targetLocale = detectDeviceLocale(request);
+    const response = NextResponse.redirect(
+      new URL(`/${targetLocale}${pathname === '/' ? '' : pathname}`, request.url)
     );
+    if (!request.cookies.get('cgl_lang')) {
+      response.cookies.set('cgl_lang', targetLocale, { path: '/', maxAge: 60 * 60 * 24 * 365, sameSite: 'lax' });
+    }
+    return response;
+  }
+
+  // Check if visitor opens with mismatched default locale on first visit
+  const userExplicitlySelected = request.cookies.get('cgl_lang_selected')?.value === '1';
+  const cookieLang = request.cookies.get('cgl_lang')?.value;
+
+  if (!userExplicitlySelected && !cookieLang) {
+    const deviceLocale = detectDeviceLocale(request);
+    const currentLocale = pathname.startsWith('/en') ? 'en' : 'ar';
+    if (deviceLocale !== currentLocale) {
+      const newPath = pathname.replace(`/${currentLocale}`, `/${deviceLocale}`);
+      const response = NextResponse.redirect(new URL(newPath, request.url));
+      response.cookies.set('cgl_lang', deviceLocale, { path: '/', maxAge: 60 * 60 * 24 * 365, sameSite: 'lax' });
+      return response;
+    }
   }
 
   return NextResponse.next();

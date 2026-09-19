@@ -18,6 +18,15 @@ export default function LanguageSwitcher({ currentLang, className = '' }: Langua
   const label = currentLang === 'ar' ? 'English' : 'العربية';
 
   const handleSwitch = () => {
+    try {
+      document.cookie = 'cgl_lang_selected=1; path=/; max-age=31536000; SameSite=Lax';
+      document.cookie = `cgl_lang=${targetLang}; path=/; max-age=31536000; SameSite=Lax`;
+      localStorage.setItem('cgl_lang_selected', '1');
+      localStorage.setItem('cgl_lang', targetLang);
+    } catch {
+      // Ignored
+    }
+
     if (!pathname) {
       router.push(`/${targetLang}`);
       return;
