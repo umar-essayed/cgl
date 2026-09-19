@@ -87,7 +87,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ar" dir="rtl" className={`dark ${cairo.variable} ${elMessiri.variable} scroll-smooth`}>
-      <body className="bg-[#000000] text-stone-100 font-sans min-h-screen flex flex-col selection:bg-[#8bc34a] selection:text-black">
+      <body className="bg-[#000000] text-stone-100 font-sans min-h-screen flex flex-col selection:bg-[#3b76b3] selection:text-white">
         {children}
       </body>
     </html>

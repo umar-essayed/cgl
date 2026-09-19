@@ -26,7 +26,7 @@ export default async function LocaleLayout({
   return (
     <div dir={isRtl ? 'rtl' : 'ltr'} className="min-h-screen flex flex-col">
       <LangDirSync lang={lang} />
-      <PageLoader color="#8bc34a" glowColor="rgba(139, 195, 74, 0.45)" />
+      <PageLoader color="#3b76b3" glowColor="rgba(59, 118, 179, 0.45)" />
       {children}
     </div>
   );

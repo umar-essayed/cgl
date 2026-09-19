@@ -8,7 +8,7 @@ import { CGL_PROJECTS_EVIDENCE, CGL_COMPANY_INFO } from '@/lib/data';
 import { Locale, isValidLocale, locales, getDictionary } from '@/lib/i18n';
 import Navbar from '@/components/navbar/Navbar';
 import Footer from '@/components/footer/Footer';
-import { getDynamicProject } from '@/lib/dynamicData';
+import { getDynamicProject, getDynamicSiteData } from '@/lib/dynamicData';
 
 interface ProjectPageProps {
   params: Promise<{ lang: string; id: string }>;
@@ -51,6 +51,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     notFound();
   }
 
+  const siteData = await getDynamicSiteData();
   const dict = getDictionary(lang);
   const isRtl = lang === 'ar';
   const BackIcon = isRtl ? ArrowRight : ArrowLeft;
@@ -75,9 +76,9 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           <div className="mb-6 flex items-center justify-between">
             <Link
               href={`/${lang}/projects`}
-              className="inline-flex items-center text-xs sm:text-sm font-medium text-stone-400 hover:text-[#8bc34a] transition-colors group gap-2"
+              className="inline-flex items-center text-xs sm:text-sm font-medium text-stone-400 hover:text-[#3b76b3] transition-colors group gap-2"
             >
-              <BackIcon className="w-4 h-4 text-[#8bc34a] group-hover:-translate-x-0.5 transition-transform" />
+              <BackIcon className="w-4 h-4 text-[#3b76b3] group-hover:-translate-x-0.5 transition-transform" />
               <span>{dict.projectDetailPage.backBtn}</span>
             </Link>
 
@@ -88,8 +89,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
           {/* Project Header Dossier */}
           <div className="mb-10 pb-8 border-b border-white/10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#181b22] border border-[#82B74B]/30 text-xs font-sans text-[#97C369] mb-4 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#8bc34a] animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#181b22] border border-[#3b76b3]/30 text-xs font-sans text-[#508ecb] mb-4 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#3b76b3] animate-pulse" />
               <span>{sector}</span>
             </div>
 
@@ -102,7 +103,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
             <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm text-stone-300">
               <div className="flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-lg border border-white/10">
-                <MapPin className="w-4 h-4 text-[#8bc34a]" />
+                <MapPin className="w-4 h-4 text-[#3b76b3]" />
                 <span>{location}</span>
               </div>
               <div className="flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-lg border border-white/10">
@@ -142,14 +143,14 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               {/* Standards Reference Card */}
               <div className="p-5 rounded-xl bg-[#0a0a0a] border border-white/10 flex-grow flex flex-col justify-between shadow-sm">
                 <div>
-                  <div className="flex items-center gap-2 text-xs font-mono text-[#8bc34a] mb-2">
+                  <div className="flex items-center gap-2 text-xs font-mono text-[#3b76b3] mb-2">
                     <FileText className="w-3.5 h-3.5" />
                     <span>{dict.projectDetailPage.standardsTitle}</span>
                   </div>
                   <div className="space-y-1.5">
                     {(project.relevantStandards || []).map((std, sIdx) => (
                       <div key={sIdx} className="text-xs font-mono text-stone-300 flex items-center gap-1.5">
-                        <Check className="w-3.5 h-3.5 text-[#8bc34a] flex-shrink-0" />
+                        <Check className="w-3.5 h-3.5 text-[#3b76b3] flex-shrink-0" />
                         <span>{std}</span>
                       </div>
                     ))}
@@ -159,7 +160,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 <div className="pt-4 mt-4 border-t border-white/10">
                   <Link
                     href={`/${lang}/rfq`}
-                    className="flex items-center justify-between text-xs font-bold text-[#8bc34a] hover:underline"
+                    className="flex items-center justify-between text-xs font-bold text-[#3b76b3] hover:underline"
                   >
                     <span>{dict.projectDetailPage.sidebarCta}</span>
                     <ArrowIcon className="w-3.5 h-3.5" />
@@ -190,7 +191,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                   </span>
                   {(project.servicesPerformedAr || []).map((srv: string, idx: number) => (
                     <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-300">
-                      <Check className="w-4 h-4 text-[#8bc34a] flex-shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-[#3b76b3] flex-shrink-0 mt-0.5" />
                       <span>{srv}</span>
                     </div>
                   ))}
@@ -224,7 +225,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             <div className="lg:col-span-4 space-y-6">
               {/* Equipment Used */}
               <div className="p-6 rounded-2xl bg-[#0a0a0a] border border-white/10 shadow-sm">
-                <div className="flex items-center gap-2 text-xs font-mono text-[#8bc34a] mb-3">
+                <div className="flex items-center gap-2 text-xs font-mono text-[#3b76b3] mb-3">
                   <Cpu className="w-4 h-4" />
                   <span>{dict.projectDetailPage.equipmentTitle}</span>
                 </div>
@@ -239,7 +240,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
               {/* RFQ Callout Box */}
               <div className="p-6 rounded-2xl bg-[#0a0a0a] text-white border border-[#1f1f1f] shadow-xl text-center">
-                <div className="w-12 h-12 rounded-full bg-[#8bc34a]/20 text-[#8bc34a] flex items-center justify-center mx-auto mb-4">
+                <div className="w-12 h-12 rounded-full bg-[#3b76b3]/20 text-[#3b76b3] flex items-center justify-center mx-auto mb-4">
                   <Award className="w-6 h-6" />
                 </div>
                 <h3 className="text-base font-bold text-white font-display mb-2">
@@ -250,7 +251,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 </p>
                 <Link
                   href={`/${lang}/rfq`}
-                  className="inline-flex items-center justify-center w-full py-3 bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-xs rounded-xl shadow-lg transition-all"
+                  className="inline-flex items-center justify-center w-full py-3 bg-[#3b76b3] hover:bg-[#2a5b8c] text-white font-bold text-xs rounded-xl shadow-lg transition-all"
                 >
                   <span>{dict.projectDetailPage.sidebarCta}</span>
                   <ArrowIcon className="w-4 h-4 ml-1.5" />
@@ -263,7 +264,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         </div>
       </main>
 
-      <Footer lang={lang} />
+      <Footer lang={lang} companyInfo={siteData.settings} />
     </div>
   );
 }

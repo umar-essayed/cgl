@@ -9,6 +9,7 @@ import {
   CGL_COMPANY_INFO, 
   CGL_PROFILE_PARTNERS_GRID 
 } from '@/lib/data';
+import { getDynamicSiteData } from '@/lib/dynamicData';
 import { Locale, isValidLocale, getDictionary } from '@/lib/i18n';
 import { 
   ArrowRight, 
@@ -57,6 +58,8 @@ export default async function AboutPage({
     notFound();
   }
 
+  const siteData = await getDynamicSiteData();
+  const info = siteData.settings || CGL_COMPANY_INFO;
   const dict = getDictionary(lang);
   const isRtl = lang === 'ar';
   const BackIcon = isRtl ? ArrowRight : ArrowLeft;
@@ -133,7 +136,7 @@ export default async function AboutPage({
   ];
 
   return (
-    <div className="min-h-screen bg-[#030303] text-stone-100 flex flex-col font-sans selection:bg-[#8bc34a] selection:text-black">
+    <div className="min-h-screen bg-[#030303] text-stone-100 flex flex-col font-sans selection:bg-[#3b76b3] selection:text-white">
       <Navbar lang={lang} />
 
       {/* 1. Architectural Narrative Hero */}
@@ -150,7 +153,7 @@ export default async function AboutPage({
           {/* Dual Vignette & Depth Gradients */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/85 to-[#030303]/60" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-[#030303]/40 to-[#030303]/90" />
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#8bc34a]/10 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#3b76b3]/10 rounded-full blur-3xl" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
@@ -160,9 +163,9 @@ export default async function AboutPage({
             <div className="flex items-center gap-2.5">
               <Link
                 href={`/${lang}`}
-                className="inline-flex items-center text-xs font-mono text-stone-400 hover:text-[#8bc34a] transition-colors gap-1.5"
+                className="inline-flex items-center text-xs font-mono text-stone-400 hover:text-[#3b76b3] transition-colors gap-1.5"
               >
-                <BackIcon className="w-3.5 h-3.5 text-[#8bc34a]" />
+                <BackIcon className="w-3.5 h-3.5 text-[#3b76b3]" />
                 <span>{dict.aboutPage.breadcrumbHome}</span>
               </Link>
               <span className="text-stone-600">/</span>
@@ -173,7 +176,7 @@ export default async function AboutPage({
 
             <div className="flex items-center gap-3 text-xs font-mono">
               <span className="inline-flex items-center gap-1.5 text-stone-300">
-                <Globe className="w-3.5 h-3.5 text-[#8bc34a]" />
+                <Globe className="w-3.5 h-3.5 text-[#3b76b3]" />
                 <span>USA • KSA</span>
               </span>
               <span className="text-stone-700">•</span>
@@ -185,7 +188,7 @@ export default async function AboutPage({
 
           {/* Bold Editorial Headline */}
           <div className="max-w-4xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-[#8bc34a]">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-[#3b76b3]">
               <Sparkles className="w-3.5 h-3.5" />
               <span>{isRtl ? 'المعامل الإبداعية للجيوتقنية CGL' : 'Creative Geotechnical Laboratories'}</span>
             </div>
@@ -194,14 +197,14 @@ export default async function AboutPage({
               {isRtl ? (
                 <>
                   نبني الأمان من أعماق الأرض، <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-stone-200 to-[#8bc34a]">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-stone-200 to-[#3b76b3]">
                     بدقة هندسية لا تقبل المساومة.
                   </span>
                 </>
               ) : (
                 <>
                   Engineering safety from the ground up, <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-stone-200 to-[#8bc34a]">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-stone-200 to-[#3b76b3]">
                     with uncompromised precision.
                   </span>
                 </>
@@ -227,7 +230,7 @@ export default async function AboutPage({
             {/* Story Paragraphs */}
             <div className="lg:col-span-7 space-y-8">
               <div className="space-y-3">
-                <span className="text-xs font-mono text-[#8bc34a] uppercase tracking-wider font-semibold">
+                <span className="text-xs font-mono text-[#3b76b3] uppercase tracking-wider font-semibold">
                   {isRtl ? 'الهوية والرسالة الهندسية' : 'Our Engineering Identity'}
                 </span>
                 <h2 className="text-2xl sm:text-4xl font-display font-bold text-white leading-tight">
@@ -250,7 +253,7 @@ export default async function AboutPage({
               </div>
 
               {/* Styled Quote */}
-              <div className={`p-6 rounded-2xl bg-white/[0.02] border ${isRtl ? 'border-r-4 border-r-[#8bc34a]' : 'border-l-4 border-l-[#8bc34a]'} border-white/10 space-y-2`}>
+              <div className={`p-6 rounded-2xl bg-white/[0.02] border ${isRtl ? 'border-r-4 border-r-[#3b76b3]' : 'border-l-4 border-l-[#3b76b3]'} border-white/10 space-y-2`}>
                 <p className="text-base sm:text-lg font-display italic text-white leading-snug">
                   "{isRtl ? CGL_COMPANY_INFO.missionAr : CGL_COMPANY_INFO.missionEn}"
                 </p>
@@ -274,7 +277,7 @@ export default async function AboutPage({
               <div className="space-y-8 divide-y divide-white/10">
                 <div className="pt-2">
                   <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight">
-                    650<span className="text-[#8bc34a]">+</span>
+                    650<span className="text-[#3b76b3]">+</span>
                   </div>
                   <div className="text-sm font-semibold text-stone-200 mt-1">
                     {isRtl ? 'عميل ومشروع منجز بالمملكة' : 'Delivered Projects & Clients'}
@@ -286,7 +289,7 @@ export default async function AboutPage({
 
                 <div className="pt-6">
                   <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight">
-                    300<span className="text-[#8bc34a]">+</span>
+                    300<span className="text-[#3b76b3]">+</span>
                   </div>
                   <div className="text-sm font-semibold text-stone-200 mt-1">
                     {isRtl ? 'دراسة جيوتقنية وهيدرولوجية تخصصية' : 'Advanced Engineering Studies'}
@@ -298,7 +301,7 @@ export default async function AboutPage({
 
                 <div className="pt-6">
                   <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight">
-                    30<span className="text-[#8bc34a]">+</span>
+                    30<span className="text-[#3b76b3]">+</span>
                   </div>
                   <div className="text-sm font-semibold text-stone-200 mt-1">
                     {isRtl ? 'عاماً من الخبرة الجيوتقنية المركزة' : 'Years of Field Mastery'}
@@ -311,7 +314,7 @@ export default async function AboutPage({
                 <div className="pt-6">
                   <div className="text-4xl sm:text-5xl font-mono font-bold text-white tracking-tight flex items-baseline gap-2">
                     <span>2</span>
-                    <span className="text-lg font-mono text-[#8bc34a] font-normal">HQs (USA • KSA)</span>
+                    <span className="text-lg font-mono text-[#3b76b3] font-normal">HQs (USA • KSA)</span>
                   </div>
                   <div className="text-sm font-semibold text-stone-200 mt-1">
                     {isRtl ? 'حضور استراتيجي عابر للقارات' : 'Intercontinental Footprint'}
@@ -340,7 +343,7 @@ export default async function AboutPage({
         
         <div className="absolute bottom-8 sm:bottom-12 inset-x-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <div className="max-w-2xl p-6 sm:p-8 rounded-2xl bg-black/70 backdrop-blur-xl border border-white/15 text-white">
-            <div className="text-[11px] font-mono text-[#8bc34a] font-bold mb-1">
+            <div className="text-[11px] font-mono text-[#3b76b3] font-bold mb-1">
               FIELD CAPABILITIES • أسطول العمليات الميدانية
             </div>
             <div className="text-lg sm:text-xl font-display font-bold mb-2">
@@ -360,7 +363,7 @@ export default async function AboutPage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           
           <div className="max-w-3xl mb-16 space-y-3">
-            <span className="text-xs font-mono text-[#8bc34a] uppercase tracking-wider font-semibold">
+            <span className="text-xs font-mono text-[#3b76b3] uppercase tracking-wider font-semibold">
               CORE DISCIPLINES • التخصصات الهندسية المحورية
             </span>
             <h2 className="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight">
@@ -380,10 +383,10 @@ export default async function AboutPage({
                 <div key={cap.num} className="group flex flex-col justify-between space-y-6 pb-8 border-b border-white/10">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-3xl sm:text-4xl font-mono font-bold text-stone-700 group-hover:text-[#8bc34a] transition-colors">
+                      <span className="text-3xl sm:text-4xl font-mono font-bold text-stone-700 group-hover:text-[#3b76b3] transition-colors">
                         {cap.num}
                       </span>
-                      <div className="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#8bc34a]">
+                      <div className="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#3b76b3]">
                         <Icon className="w-5 h-5" />
                       </div>
                     </div>
@@ -399,7 +402,7 @@ export default async function AboutPage({
 
                   <div className="pt-2 flex items-center justify-between text-xs font-mono text-stone-500">
                     <span>{cap.standards}</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#8bc34a]/50" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#3b76b3]/50" />
                   </div>
                 </div>
               );
@@ -415,7 +418,7 @@ export default async function AboutPage({
           
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
             <div className="space-y-3">
-              <span className="text-xs font-mono text-[#8bc34a] uppercase tracking-wider font-semibold">
+              <span className="text-xs font-mono text-[#3b76b3] uppercase tracking-wider font-semibold">
                 TRUSTED BY INDUSTRY LEADERS • شركاء النجاح
               </span>
               <h2 className="text-3xl sm:text-4xl font-display font-bold text-white tracking-tight">
@@ -434,7 +437,7 @@ export default async function AboutPage({
             {CGL_PROFILE_PARTNERS_GRID.map((partner) => (
               <div 
                 key={partner.id}
-                className="p-4 sm:p-5 rounded-2xl bg-[#0a0a0a] hover:bg-[#121212] border border-white/[0.08] hover:border-[#8bc34a]/40 transition-all flex flex-col items-center justify-between min-h-[140px] group shadow-sm"
+                className="p-4 sm:p-5 rounded-2xl bg-[#0a0a0a] hover:bg-[#121212] border border-white/[0.08] hover:border-[#3b76b3]/40 transition-all flex flex-col items-center justify-between min-h-[140px] group shadow-sm"
               >
                 <div className="relative w-full h-14 flex items-center justify-center my-auto">
                   <Image
@@ -464,7 +467,7 @@ export default async function AboutPage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           
           <div className="max-w-3xl mb-16 space-y-3">
-            <span className="text-xs font-mono text-[#8bc34a] uppercase tracking-wider font-semibold">
+            <span className="text-xs font-mono text-[#3b76b3] uppercase tracking-wider font-semibold">
               TRAJECTORY & GROWTH • مسيرة التطور
             </span>
             <h2 className="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight">
@@ -474,8 +477,8 @@ export default async function AboutPage({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
             {milestones.map((m, idx) => (
-              <div key={idx} className="relative space-y-3 pt-6 border-t-2 border-stone-800 hover:border-[#8bc34a] transition-colors group">
-                <div className="text-3xl sm:text-4xl font-mono font-bold text-white group-hover:text-[#8bc34a] transition-colors">
+              <div key={idx} className="relative space-y-3 pt-6 border-t-2 border-stone-800 hover:border-[#3b76b3] transition-colors group">
+                <div className="text-3xl sm:text-4xl font-mono font-bold text-white group-hover:text-[#3b76b3] transition-colors">
                   {m.year}
                 </div>
                 <h3 className="text-lg font-display font-bold text-stone-100">
@@ -496,7 +499,7 @@ export default async function AboutPage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <div className="flex flex-wrap items-center justify-between gap-6 text-xs font-mono text-stone-400">
             <div className="flex items-center gap-2 text-stone-200">
-              <ShieldCheck className="w-4 h-4 text-[#8bc34a]" />
+              <ShieldCheck className="w-4 h-4 text-[#3b76b3]" />
               <span className="font-bold">{isRtl ? 'الاعتمادات والمعايير المطبقة:' : 'Governing Standards & Accreditations:'}</span>
             </div>
 
@@ -521,7 +524,7 @@ export default async function AboutPage({
           
           <div className="p-8 sm:p-14 rounded-3xl bg-gradient-to-b from-[#0e0e0e] to-[#070707] border border-white/15 flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="space-y-3 text-center lg:text-start max-w-2xl">
-              <span className="text-xs font-mono text-[#8bc34a] font-bold uppercase tracking-wider block">
+              <span className="text-xs font-mono text-[#3b76b3] font-bold uppercase tracking-wider block">
                 {isRtl ? 'المقر الرئيسي: جدة • حي الرويس 23215' : 'Headquarters: 23215 Al-Ruwais, Jeddah KSA'}
               </span>
               <h3 className="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight">
@@ -536,19 +539,19 @@ export default async function AboutPage({
 
             <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto flex-shrink-0">
               <a
-                href={`tel:${CGL_COMPANY_INFO.phone2}`}
+                href={`tel:${info.phone2}`}
                 className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white/[0.05] hover:bg-white/10 text-stone-200 border border-white/15 text-xs font-mono transition-all"
               >
-                <Phone className="w-4 h-4 text-[#8bc34a]" />
-                <span>+966 50 369 1609</span>
+                <Phone className="w-4 h-4 text-[#3b76b3]" />
+                <span>{info.phone2}</span>
               </a>
 
               <Link
                 href={`/${lang}/rfq`}
-                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-sm shadow-lg shadow-[#8bc34a]/20 transition-all"
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#3b76b3] hover:bg-[#2a5b8c] text-white font-bold text-sm shadow-lg shadow-[#3b76b3]/20 transition-all"
               >
                 <span>{dict.nav.rfq}</span>
-                <ArrowIcon className="w-4 h-4 text-black" />
+                <ArrowIcon className="w-4 h-4 text-white" />
               </Link>
             </div>
           </div>
@@ -556,7 +559,7 @@ export default async function AboutPage({
         </div>
       </section>
 
-      <Footer lang={lang} />
+      <Footer lang={lang} companyInfo={info} />
     </div>
   );
 }

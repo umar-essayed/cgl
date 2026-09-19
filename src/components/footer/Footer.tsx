@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Phone, Mail, MapPin, ArrowUp } from 'lucide-react';
+import { Phone, Mail, MapPin, ArrowUp, Clock } from 'lucide-react';
 import { CGL_COMPANY_INFO } from '@/lib/data';
 import { Locale, getDictionary } from '@/lib/i18n';
 
@@ -21,6 +21,14 @@ export default function Footer({ lang = 'ar', companyInfo }: FooterProps) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const address = isRtl
+    ? (info.addressAr || CGL_COMPANY_INFO.addressAr)
+    : (info.addressEn || CGL_COMPANY_INFO.addressEn);
+
+  const workingHours = isRtl
+    ? (info.workingHoursAr || info.workingHoursEn || 'الأحد - الخميس: 8:00 ص - 5:00 م')
+    : (info.workingHoursEn || info.workingHoursAr || 'Sun - Thu: 8:00 AM - 5:00 PM');
 
   return (
     <footer className="bg-[#000000] text-stone-300 font-sans border-t border-[#1f1f1f] pt-12 pb-8 text-xs">
@@ -49,22 +57,22 @@ export default function Footer({ lang = 'ar', companyInfo }: FooterProps) {
 
           {/* 2. Quick Navigation Links */}
           <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 text-stone-300 font-medium">
-            <Link href={`/${lang}`} className="hover:text-[#8bc34a] transition-colors">{dict.nav.home}</Link>
-            <Link href={`/${lang}/about`} className="hover:text-[#8bc34a] transition-colors">{dict.nav.about}</Link>
-            <Link href={`/${lang}#services`} className="hover:text-[#8bc34a] transition-colors">{dict.nav.services}</Link>
-            <Link href={`/${lang}#projects`} className="hover:text-[#8bc34a] transition-colors">{dict.nav.projects}</Link>
-            <Link href={`/${lang}/rfq`} className="hover:text-[#8bc34a] transition-colors text-[#8bc34a] font-bold">{dict.nav.rfq}</Link>
+            <Link href={`/${lang}`} className="hover:text-[#3b76b3] transition-colors">{dict.nav.home}</Link>
+            <Link href={`/${lang}/about`} className="hover:text-[#3b76b3] transition-colors">{dict.nav.about}</Link>
+            <Link href={`/${lang}#services`} className="hover:text-[#3b76b3] transition-colors">{dict.nav.services}</Link>
+            <Link href={`/${lang}#projects`} className="hover:text-[#3b76b3] transition-colors">{dict.nav.projects}</Link>
+            <Link href={`/${lang}/rfq`} className="hover:text-[#3b76b3] transition-colors text-[#3b76b3] font-bold">{dict.nav.rfq}</Link>
           </div>
 
           {/* 3. Direct Contact */}
-          <div className="flex flex-col items-center md:items-end space-y-2 text-stone-400 font-mono text-xs">
+          <div className="flex flex-col items-center md:items-end space-y-2.5 text-stone-400 font-mono text-xs">
             <div className="flex items-center gap-2" dir="ltr">
-              <Phone className="w-3.5 h-3.5 text-[#8bc34a]" />
+              <Phone className="w-3.5 h-3.5 text-[#3b76b3]" />
               <a
                 href={`https://wa.me/${info.whatsapp1Raw || (info.whatsapp1 || '').replace(/[^0-9]/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-[#8bc34a] transition-colors font-bold"
+                className="text-white hover:text-[#3b76b3] transition-colors font-bold"
               >
                 {info.phone1 || info.phone}
               </a>
@@ -73,7 +81,7 @@ export default function Footer({ lang = 'ar', companyInfo }: FooterProps) {
                 href={`https://wa.me/${info.whatsapp2Raw || (info.whatsapp2 || '').replace(/[^0-9]/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-[#8bc34a] transition-colors font-bold"
+                className="text-white hover:text-[#3b76b3] transition-colors font-bold"
               >
                 {info.phone2}
               </a>
@@ -88,14 +96,19 @@ export default function Footer({ lang = 'ar', companyInfo }: FooterProps) {
               <span>{info.email}</span>
             </a>
 
+            <div className="inline-flex items-center gap-1.5 text-stone-300 font-sans text-xs">
+              <Clock className="w-3.5 h-3.5 text-[#3b76b3] flex-shrink-0" />
+              <span>{workingHours}</span>
+            </div>
+
             <a
               href={info.googleMapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-stone-300 hover:text-[#8bc34a] transition-colors font-sans text-xs"
+              className="inline-flex items-center gap-1.5 text-stone-300 hover:text-[#3b76b3] transition-colors font-sans text-xs"
             >
               <MapPin className="w-3.5 h-3.5 text-[#C45B58] flex-shrink-0" />
-              <span>{isRtl ? `${CGL_COMPANY_INFO.addressAr}` : `${CGL_COMPANY_INFO.addressEn}`}</span>
+              <span>{address}</span>
             </a>
           </div>
 

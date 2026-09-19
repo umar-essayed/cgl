@@ -29,7 +29,7 @@ export default function NewsSection({
         {/* Header */}
         <div className="mb-10 sm:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <p className="text-xs sm:text-sm font-mono text-[#8bc34a] mb-2 tracking-wider">
+            <p className="text-xs sm:text-sm font-mono text-[#3b76b3] mb-2 tracking-wider">
               {dict.news.badge}
             </p>
             <h2 className="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight">
@@ -68,13 +68,13 @@ export default function NewsSection({
 
                   {/* Category & Date */}
                   <div className="flex items-center gap-2 text-xs font-mono text-stone-400 mb-2">
-                    <span className="text-[#8bc34a]">{category}</span>
+                    <span className="text-[#3b76b3]">{category}</span>
                     <span>•</span>
                     <span>{date}</span>
                   </div>
 
                   {/* Headline */}
-                  <h3 className="font-display font-semibold text-lg text-white group-hover:text-[#8bc34a] transition-colors leading-snug mb-3">
+                  <h3 className="font-display font-semibold text-lg text-white group-hover:text-[#3b76b3] transition-colors leading-snug mb-3">
                     <Link href={`/${lang}/news/${article.id}`}>
                       {title}
                     </Link>
@@ -90,10 +90,10 @@ export default function NewsSection({
                 <div className="pt-2">
                   <Link
                     href={`/${lang}/news/${article.id}`}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-stone-300 group-hover:text-[#8bc34a] transition-colors"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-stone-300 group-hover:text-[#3b76b3] transition-colors"
                   >
                     <span>{dict.news.readArticle}</span>
-                    <ArrowIcon className="w-3.5 h-3.5 text-[#8bc34a]" />
+                    <ArrowIcon className="w-3.5 h-3.5 text-[#3b76b3]" />
                   </Link>
                 </div>
               </article>
@@ -105,7 +105,7 @@ export default function NewsSection({
         <div className="mt-10 sm:mt-12 flex justify-center">
           <Link
             href={`/${lang}/news`}
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#111111] hover:bg-[#1a1a1a] border border-[#1f1f1f] text-stone-200 hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-sm group hover:border-[#8bc34a]/50"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#111111] hover:bg-[#1a1a1a] border border-[#1f1f1f] text-stone-200 hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-sm group hover:border-[#3b76b3]/50"
           >
             <span>
               {isRtl 
@@ -113,7 +113,7 @@ export default function NewsSection({
                 : `Explore All Engineering Articles & Insights (${currentNews.length})`
               }
             </span>
-            <ArrowIcon className="w-4 h-4 text-[#8bc34a] group-hover:-translate-x-1 group-hover:-translate-y-0.5 transition-transform" />
+            <ArrowIcon className="w-4 h-4 text-[#3b76b3] group-hover:-translate-x-1 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
         </div>
 

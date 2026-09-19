@@ -105,7 +105,7 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
 `);
 
   return (
-    <div className="min-h-screen bg-[#030303] text-stone-100 flex flex-col font-sans selection:bg-[#8bc34a] selection:text-black">
+    <div className="min-h-screen bg-[#030303] text-stone-100 flex flex-col font-sans selection:bg-[#3b76b3] selection:text-white">
       <Navbar lang={lang} />
 
       {/* Hero / Header */}
@@ -116,13 +116,13 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
           <div className="flex items-center justify-between gap-4 mb-8">
             <Link
               href={`/${lang}/news`}
-              className="inline-flex items-center gap-2 text-xs font-mono text-stone-400 hover:text-[#8bc34a] transition-colors group"
+              className="inline-flex items-center gap-2 text-xs font-mono text-stone-400 hover:text-[#3b76b3] transition-colors group"
             >
-              <BackIcon className="w-3.5 h-3.5 text-[#8bc34a] group-hover:-translate-x-1 transition-transform" />
+              <BackIcon className="w-3.5 h-3.5 text-[#3b76b3] group-hover:-translate-x-1 transition-transform" />
               <span>{isRtl ? 'العودة إلى مركز الأخبار والدراسات' : 'Back to News & Insights'}</span>
             </Link>
 
-            <span className="px-3 py-1 rounded-full bg-[#111111] border border-white/10 text-xs font-mono text-[#8bc34a]">
+            <span className="px-3 py-1 rounded-full bg-[#111111] border border-white/10 text-xs font-mono text-[#3b76b3]">
               {category}
             </span>
           </div>
@@ -136,12 +136,12 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
           <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10 text-xs font-mono text-stone-400">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-1.5 text-stone-300">
-                <Calendar className="w-4 h-4 text-[#8bc34a]" />
+                <Calendar className="w-4 h-4 text-[#3b76b3]" />
                 <span>{date}</span>
               </div>
               <span className="text-stone-700">•</span>
               <div className="flex items-center gap-1.5 text-stone-300">
-                <Clock className="w-4 h-4 text-[#8bc34a]" />
+                <Clock className="w-4 h-4 text-[#3b76b3]" />
                 <span>{readTime}</span>
               </div>
             </div>
@@ -170,7 +170,7 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
         </div>
 
         {/* Lead Excerpt Banner */}
-        <div className={`p-6 sm:p-8 rounded-2xl bg-[#0a0a0a] border ${isRtl ? 'border-r-4 border-r-[#8bc34a]' : 'border-l-4 border-l-[#8bc34a]'} border-white/10 text-stone-200 text-base sm:text-lg leading-relaxed font-sans font-normal shadow-sm`}>
+        <div className={`p-6 sm:p-8 rounded-2xl bg-[#0a0a0a] border ${isRtl ? 'border-r-4 border-r-[#3b76b3]' : 'border-l-4 border-l-[#3b76b3]'} border-white/10 text-stone-200 text-base sm:text-lg leading-relaxed font-sans font-normal shadow-sm`}>
           {excerpt}
         </div>
 
@@ -189,7 +189,7 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
         {/* Technical Compliance Callout Box */}
         <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#0c0c0c] to-[#060606] border border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-[#8bc34a] text-xs font-mono font-bold">
+            <div className="flex items-center gap-2 text-[#3b76b3] text-xs font-mono font-bold">
               <ShieldCheck className="w-4 h-4" />
               <span>{isRtl ? 'الاعتماد الهندسي واللوائح' : 'ENGINEERING COMPLIANCE & STANDARDS'}</span>
             </div>
@@ -205,28 +205,28 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
 
           <Link
             href={`/${lang}/rfq`}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-xs shadow-lg transition-all flex-shrink-0"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#3b76b3] hover:bg-[#2a5b8c] text-white font-bold text-xs shadow-lg transition-all flex-shrink-0"
           >
             <span>{dict.nav.rfq}</span>
-            <ArrowIcon className="w-4 h-4 text-black" />
+            <ArrowIcon className="w-4 h-4 text-white" />
           </Link>
         </div>
 
         {/* Share & Inquire Bar */}
         <div className="pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-stone-400">
           <div className="flex items-center gap-2 text-stone-300">
-            <Tag className="w-3.5 h-3.5 text-[#8bc34a]" />
+            <Tag className="w-3.5 h-3.5 text-[#3b76b3]" />
             <span>{isRtl ? 'التصنيف:' : 'Category:'}</span>
             <span className="text-white font-bold">{category}</span>
           </div>
 
           <div className="flex items-center gap-3">
             <a
-              href={`tel:${CGL_COMPANY_INFO.phone2}`}
+              href={`tel:${siteData.settings?.phone2 || CGL_COMPANY_INFO.phone2}`}
               className="inline-flex items-center gap-1.5 text-stone-300 hover:text-white transition-colors"
             >
-              <PhoneCall className="w-3.5 h-3.5 text-[#8bc34a]" />
-              <span>{CGL_COMPANY_INFO.phone2}</span>
+              <PhoneCall className="w-3.5 h-3.5 text-[#3b76b3]" />
+              <span>{siteData.settings?.phone2 || CGL_COMPANY_INFO.phone2}</span>
             </a>
           </div>
         </div>
@@ -240,7 +240,7 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
               </h3>
               <Link
                 href={`/${lang}/news`}
-                className="text-xs font-mono text-[#8bc34a] hover:underline"
+                className="text-xs font-mono text-[#3b76b3] hover:underline"
               >
                 {isRtl ? 'عرض كافة الأخبار' : 'View All'}
               </Link>
@@ -254,7 +254,7 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
                   <Link
                     key={rel.id}
                     href={`/${lang}/news/${rel.id}`}
-                    className="p-5 rounded-xl bg-[#0a0a0a] border border-white/10 hover:border-[#8bc34a]/40 transition-all group flex flex-col justify-between"
+                    className="p-5 rounded-xl bg-[#0a0a0a] border border-white/10 hover:border-[#3b76b3]/40 transition-all group flex flex-col justify-between"
                   >
                     <div>
                       <div className="relative h-40 w-full rounded-lg overflow-hidden bg-black/50 mb-3">
@@ -265,17 +265,17 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
                           className="object-cover group-hover:scale-105 transition-transform"
                         />
                       </div>
-                      <span className="text-[11px] font-mono text-[#8bc34a] block mb-1">
+                      <span className="text-[11px] font-mono text-[#3b76b3] block mb-1">
                         {isRtl ? rel.categoryAr : rel.categoryEn}
                       </span>
-                      <h4 className="text-sm font-bold text-white group-hover:text-[#8bc34a] transition-colors line-clamp-2">
+                      <h4 className="text-sm font-bold text-white group-hover:text-[#3b76b3] transition-colors line-clamp-2">
                         {relTitle}
                       </h4>
                     </div>
 
                     <div className="pt-3 mt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-stone-500">
                       <span>{relDate}</span>
-                      <span className="inline-flex items-center gap-1 text-[#8bc34a]">
+                      <span className="inline-flex items-center gap-1 text-[#3b76b3]">
                         <span>{dict.news.readArticle}</span>
                         <ArrowIcon className="w-3 h-3" />
                       </span>
@@ -289,7 +289,7 @@ Furthermore, our deployment of advanced Non-Destructive Testing (NDT) and 3D Gro
 
       </main>
 
-      <Footer lang={lang} />
+      <Footer lang={lang} companyInfo={siteData.settings} />
     </div>
   );
 }

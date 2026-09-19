@@ -10,9 +10,9 @@ interface PageLoaderProps {
 }
 
 export default function PageLoader({
-  color = '#8bc34a',
-  coreColor = '#dcedc8',
-  glowColor = 'rgba(139, 195, 74, 0.5)',
+  color = '#3b76b3',
+  coreColor = '#bbdefb',
+  glowColor = 'rgba(59, 118, 179, 0.5)',
 }: PageLoaderProps) {
   const [visible, setVisible] = useState(true);
 

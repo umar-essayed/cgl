@@ -41,7 +41,7 @@ export default function PartnersTicker({
               return (
                 <div
                   key={`t1-${partner.id}-${index}`}
-                  className="h-16 sm:h-20 w-44 sm:w-52 flex-shrink-0 flex items-center justify-center p-3 rounded-xl bg-[#0a0a0a] hover:bg-[#121212] border border-[#1f1f1f] hover:border-[#8bc34a]/40 transition-all duration-300 group shadow-sm"
+                  className="h-16 sm:h-20 w-44 sm:w-52 flex-shrink-0 flex items-center justify-center p-3 rounded-xl bg-[#0a0a0a] hover:bg-[#121212] border border-[#1f1f1f] hover:border-[#3b76b3]/40 transition-all duration-300 group shadow-sm"
                   title={`${name} • ${partner.sectorAr || ''}`}
                 >
                   <div className="relative w-full h-full flex items-center justify-center">
@@ -65,7 +65,7 @@ export default function PartnersTicker({
               return (
                 <div
                   key={`t2-${partner.id}-${index}`}
-                  className="h-16 sm:h-20 w-44 sm:w-52 flex-shrink-0 flex items-center justify-center p-3 rounded-xl bg-[#0a0a0a] hover:bg-[#121212] border border-[#1f1f1f] hover:border-[#8bc34a]/40 transition-all duration-300 group shadow-sm"
+                  className="h-16 sm:h-20 w-44 sm:w-52 flex-shrink-0 flex items-center justify-center p-3 rounded-xl bg-[#0a0a0a] hover:bg-[#121212] border border-[#1f1f1f] hover:border-[#3b76b3]/40 transition-all duration-300 group shadow-sm"
                   title={`${name} • ${partner.sectorAr || ''}`}
                 >
                   <div className="relative w-full h-full flex items-center justify-center">

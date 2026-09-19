@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Locale, isValidLocale } from '@/lib/i18n';
 import { notFound } from 'next/navigation';
+import { getDynamicSiteData } from '@/lib/dynamicData';
 import RfqClient from './RfqClient';
 
 export async function generateMetadata({
@@ -36,5 +37,7 @@ export default async function RfqPage({
     notFound();
   }
 
-  return <RfqClient lang={lang} />;
+  const siteData = await getDynamicSiteData();
+
+  return <RfqClient lang={lang} companyInfo={siteData.settings} />;
 }

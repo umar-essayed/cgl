@@ -61,14 +61,14 @@ export default function NewsCatalogClient({ lang, initialNews }: NewsCatalogClie
               placeholder={isRtl ? 'البحث بالعنوان، الكلمات المفتاحية، أو كود البناء...' : 'Search articles by title, keywords, or codes...'}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className={`w-full bg-[#111111] border border-[#1f1f1f] rounded-xl ${isRtl ? 'pr-9 pl-4' : 'pl-9 pr-4'} py-2.5 text-sm sm:text-sm text-stone-100 placeholder-stone-400 focus:outline-none focus:border-[#8bc34a] transition-colors`}
+              className={`w-full bg-[#111111] border border-[#1f1f1f] rounded-xl ${isRtl ? 'pr-9 pl-4' : 'pl-9 pr-4'} py-2.5 text-sm sm:text-sm text-stone-100 placeholder-stone-400 focus:outline-none focus:border-[#3b76b3] transition-colors`}
             />
           </div>
 
           {/* Results Counter */}
           <div className="text-xs font-mono text-stone-400 bg-[#111111] px-3.5 py-2 rounded-xl border border-[#1f1f1f] w-full sm:w-auto flex items-center justify-between sm:justify-start gap-2">
             <span>{isRtl ? 'المقالات المتوفرة:' : 'Articles Found:'}</span>
-            <span className="text-[#8bc34a] font-bold">
+            <span className="text-[#3b76b3] font-bold">
               {String(filteredNews.length).padStart(2, '0')} / {String(initialNews.length).padStart(2, '0')}
             </span>
           </div>
@@ -81,7 +81,7 @@ export default function NewsCatalogClient({ lang, initialNews }: NewsCatalogClie
             onClick={() => setSelectedCategory('all')}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
               selectedCategory === 'all'
-                ? 'bg-[#8bc34a] text-black font-bold shadow-md'
+                ? 'bg-[#3b76b3] text-white font-bold shadow-md'
                 : 'bg-[#111111] text-stone-400 hover:text-white border border-[#1f1f1f]'
             }`}
           >
@@ -95,7 +95,7 @@ export default function NewsCatalogClient({ lang, initialNews }: NewsCatalogClie
               onClick={() => setSelectedCategory(cat)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
                 selectedCategory === cat
-                  ? 'bg-[#8bc34a] text-black font-bold shadow-md'
+                  ? 'bg-[#3b76b3] text-white font-bold shadow-md'
                   : 'bg-[#111111] text-stone-400 hover:text-white border border-[#1f1f1f]'
               }`}
             >
@@ -113,7 +113,7 @@ export default function NewsCatalogClient({ lang, initialNews }: NewsCatalogClie
           </p>
           <button
             onClick={() => { setSearchQuery(''); setSelectedCategory('all'); }}
-            className="text-xs text-[#8bc34a] hover:underline font-bold"
+            className="text-xs text-[#3b76b3] hover:underline font-bold"
           >
             {isRtl ? 'إعادة ضبط الفلاتر' : 'Reset Filters'}
           </button>
@@ -137,7 +137,7 @@ export default function NewsCatalogClient({ lang, initialNews }: NewsCatalogClie
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: Math.min(index * 0.05, 0.4) }}
-                className="group flex flex-col justify-between rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1f1f1f] hover:border-[#8bc34a]/40 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-black/80"
+                className="group flex flex-col justify-between rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1f1f1f] hover:border-[#3b76b3]/40 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-black/80"
               >
                 {/* Image */}
                 <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-[#111111]">
@@ -182,7 +182,7 @@ export default function NewsCatalogClient({ lang, initialNews }: NewsCatalogClie
                       </span>
                     </div>
 
-                    <h3 className="font-display font-semibold text-lg sm:text-xl text-white group-hover:text-[#8bc34a] transition-colors leading-snug mb-3">
+                    <h3 className="font-display font-semibold text-lg sm:text-xl text-white group-hover:text-[#3b76b3] transition-colors leading-snug mb-3">
                       <Link href={`/${lang}/news/${article.id}`}>
                         {title}
                       </Link>
@@ -197,10 +197,10 @@ export default function NewsCatalogClient({ lang, initialNews }: NewsCatalogClie
                   <div className="pt-4 border-t border-[#1f1f1f] flex items-center justify-between">
                     <Link
                       href={`/${lang}/news/${article.id}`}
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-stone-300 group-hover:text-[#8bc34a] transition-colors"
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-stone-300 group-hover:text-[#3b76b3] transition-colors"
                     >
                       <span>{dict.news.readArticle}</span>
-                      <ArrowIcon className="w-3.5 h-3.5 text-[#8bc34a]" />
+                      <ArrowIcon className="w-3.5 h-3.5 text-[#3b76b3]" />
                     </Link>
 
                     <span className="text-[10px] font-mono text-stone-500">CGL Insights</span>

@@ -63,14 +63,14 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
               placeholder={isRtl ? 'البحث باسم المشروع، الموقع، أو نوع الاختبارات...' : 'Search by project name, location, or test type...'}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className={`w-full bg-[#111111] border border-[#1f1f1f] rounded-xl ${isRtl ? 'pr-9 pl-4' : 'pl-9 pr-4'} py-2.5 text-sm sm:text-sm text-stone-100 placeholder-stone-400 focus:outline-none focus:border-[#8bc34a] transition-colors`}
+              className={`w-full bg-[#111111] border border-[#1f1f1f] rounded-xl ${isRtl ? 'pr-9 pl-4' : 'pl-9 pr-4'} py-2.5 text-sm sm:text-sm text-stone-100 placeholder-stone-400 focus:outline-none focus:border-[#3b76b3] transition-colors`}
             />
           </div>
 
           {/* Results Count Badge */}
           <div className="text-xs font-mono text-stone-400 bg-[#111111] px-3.5 py-2 rounded-xl border border-[#1f1f1f] w-full sm:w-auto flex items-center justify-between sm:justify-start gap-2">
             <span>{isRtl ? 'المشاريع المطابقة:' : 'Matching Projects:'}</span>
-            <span className="text-[#8bc34a] font-bold">
+            <span className="text-[#3b76b3] font-bold">
               {String(filteredProjects.length).padStart(2, '0')} / {String(initialProjects.length).padStart(2, '0')}
             </span>
           </div>
@@ -83,7 +83,7 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
             onClick={() => setSelectedSector('all')}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
               selectedSector === 'all'
-                ? 'bg-[#8bc34a] text-black font-bold shadow-md'
+                ? 'bg-[#3b76b3] text-white font-bold shadow-md'
                 : 'bg-[#111111] text-stone-400 hover:text-white border border-[#1f1f1f]'
             }`}
           >
@@ -97,7 +97,7 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
               onClick={() => setSelectedSector(sec)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
                 selectedSector === sec
-                  ? 'bg-[#8bc34a] text-black font-bold shadow-md'
+                  ? 'bg-[#3b76b3] text-white font-bold shadow-md'
                   : 'bg-[#111111] text-stone-400 hover:text-white border border-[#1f1f1f]'
               }`}
             >
@@ -115,7 +115,7 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
           </p>
           <button
             onClick={() => { setSearchQuery(''); setSelectedSector('all'); }}
-            className="text-xs text-[#8bc34a] hover:underline font-bold"
+            className="text-xs text-[#3b76b3] hover:underline font-bold"
           >
             {isRtl ? 'إعادة ضبط الفلاتر' : 'Reset Filters'}
           </button>
@@ -134,7 +134,7 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: Math.min(index * 0.05, 0.4) }}
-                className="group flex flex-col justify-between rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1f1f1f] hover:border-[#8bc34a]/40 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-black/80"
+                className="group flex flex-col justify-between rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1f1f1f] hover:border-[#3b76b3]/40 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-black/80"
               >
                 {/* Card Image */}
                 <div className="relative h-56 sm:h-60 w-full overflow-hidden bg-[#111111]">
@@ -152,14 +152,14 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
                 <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between">
                   <div>
                     <div className="flex items-center justify-between text-xs text-stone-400 mb-2.5 font-mono">
-                      <span className="text-[#8bc34a] font-medium">{sector}</span>
+                      <span className="text-[#3b76b3] font-medium">{sector}</span>
                       <span className="flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5 text-[#8bc34a]" />
+                        <MapPin className="w-3.5 h-3.5 text-[#3b76b3]" />
                         {location}
                       </span>
                     </div>
 
-                    <h3 className="font-display font-bold text-lg sm:text-xl text-white group-hover:text-[#8bc34a] transition-colors line-clamp-2 leading-snug mb-2">
+                    <h3 className="font-display font-bold text-lg sm:text-xl text-white group-hover:text-[#3b76b3] transition-colors line-clamp-2 leading-snug mb-2">
                       {name}
                     </h3>
                     <p className="text-xs text-stone-400 font-sans line-clamp-2 leading-relaxed mb-4">
@@ -181,10 +181,10 @@ export default function ProjectsCatalogClient({ lang, initialProjects }: Project
 
                     <Link
                       href={`/${lang}/projects/${project.id}`}
-                      className="inline-flex items-center text-xs font-bold text-white group-hover:text-[#8bc34a] transition-colors gap-1"
+                      className="inline-flex items-center text-xs font-bold text-white group-hover:text-[#3b76b3] transition-colors gap-1"
                     >
                       <span>{dict.projects.detailsBtn}</span>
-                      <ArrowIcon className="w-4 h-4 text-[#8bc34a] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      <ArrowIcon className="w-4 h-4 text-[#3b76b3] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </Link>
                   </div>
                 </div>

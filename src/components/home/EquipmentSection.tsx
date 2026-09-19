@@ -46,7 +46,7 @@ export default function EquipmentSection({
         
         {/* Header */}
         <div className="mb-10 sm:mb-12">
-          <p className="text-xs sm:text-sm font-mono text-[#8bc34a] mb-2 tracking-wider">
+          <p className="text-xs sm:text-sm font-mono text-[#3b76b3] mb-2 tracking-wider">
             {dict.equipment.badge}
           </p>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -109,11 +109,11 @@ export default function EquipmentSection({
                 {/* Body Content */}
                 <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between">
                   <div>
-                    <span className="text-xs font-mono text-[#8bc34a] block mb-2">
+                    <span className="text-xs font-mono text-[#3b76b3] block mb-2">
                       {categoryName}
                     </span>
 
-                    <h3 className="font-display font-semibold text-lg text-white leading-snug mb-4 group-hover:text-[#8bc34a] transition-colors">
+                    <h3 className="font-display font-semibold text-lg text-white leading-snug mb-4 group-hover:text-[#3b76b3] transition-colors">
                       {name}
                     </h3>
 
@@ -121,7 +121,7 @@ export default function EquipmentSection({
                     <div className="space-y-2 mb-6 pt-2 border-t border-[#1a1a1a]">
                       {specs.map((spec, sIdx) => (
                         <div key={sIdx} className="flex items-start gap-2 text-xs text-stone-300">
-                          <Check className="w-3.5 h-3.5 text-[#8bc34a] flex-shrink-0 mt-0.5" />
+                          <Check className="w-3.5 h-3.5 text-[#3b76b3] flex-shrink-0 mt-0.5" />
                           <span className="leading-relaxed">{spec}</span>
                         </div>
                       ))}
@@ -143,10 +143,10 @@ export default function EquipmentSection({
 
                     <Link
                       href={`/${lang}/rfq`}
-                      className="inline-flex items-center text-xs font-semibold text-stone-200 hover:text-[#8bc34a] transition-colors gap-1"
+                      className="inline-flex items-center text-xs font-semibold text-stone-200 hover:text-[#3b76b3] transition-colors gap-1"
                     >
                       <span>{dict.equipment.requestRfq}</span>
-                      <ArrowIcon className="w-3.5 h-3.5 text-[#8bc34a]" />
+                      <ArrowIcon className="w-3.5 h-3.5 text-[#3b76b3]" />
                     </Link>
                   </div>
                 </div>

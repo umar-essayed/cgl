@@ -220,8 +220,8 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                 className="space-y-2.5 sm:space-y-4"
               >
                 {/* Tag Pill */}
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-[#111111]/90 border border-[#1f1f1f] text-[11px] sm:text-xs font-sans text-[#8bc34a] shadow-sm w-fit">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#8bc34a] animate-pulse" />
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-[#111111]/90 border border-[#1f1f1f] text-[11px] sm:text-xs font-sans text-[#3b76b3] shadow-sm w-fit">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#3b76b3] animate-pulse" />
                   <span className="font-semibold">{activeSlide.tag}</span>
                   {activeSlide.metrics && (
                     <>
@@ -248,7 +248,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
           <div className="flex flex-row gap-2.5 sm:gap-4 items-center mt-4 sm:mt-6">
             <Link
               href={`/${lang}/rfq`}
-              className="inline-flex items-center justify-center flex-1 sm:flex-initial px-4 sm:px-7 py-2.5 sm:py-3 bg-[#8bc34a] hover:bg-[#7cb342] text-black font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-[#8bc34a]/20 active:scale-[0.98] transition-all text-center gap-1.5"
+              className="inline-flex items-center justify-center flex-1 sm:flex-initial px-4 sm:px-7 py-2.5 sm:py-3 bg-[#3b76b3] hover:bg-[#2a5b8c] text-white font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-[#3b76b3]/20 active:scale-[0.98] transition-all text-center gap-1.5"
             >
               <span>{dict.hero.ctaRfq}</span>
               <ArrowIcon className="w-3.5 h-3.5 text-black" />
@@ -269,7 +269,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                 <div className="flex items-baseline gap-0.5">
                   {isRtl ? (
                     <>
-                      <span className="text-[#8bc34a] font-bold text-base">+</span>
+                      <span className="text-[#3b76b3] font-bold text-base">+</span>
                       <span className="text-base font-bold text-white tracking-tight">
                         <AnimatedCounter target={partnersCount} />
                       </span>
@@ -279,7 +279,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                       <span className="text-base font-bold text-white tracking-tight">
                         <AnimatedCounter target={partnersCount} />
                       </span>
-                      <span className="text-[#8bc34a] font-bold text-base">+</span>
+                      <span className="text-[#3b76b3] font-bold text-base">+</span>
                     </>
                   )}
                 </div>
@@ -292,7 +292,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                 <div className="flex items-baseline gap-0.5">
                   {isRtl ? (
                     <>
-                      <span className="text-[#8bc34a] font-bold text-base">+</span>
+                      <span className="text-[#3b76b3] font-bold text-base">+</span>
                       <span className="text-base font-bold text-white tracking-tight">
                         <AnimatedCounter target={solutionsCount} />
                       </span>
@@ -302,7 +302,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                       <span className="text-base font-bold text-white tracking-tight">
                         <AnimatedCounter target={solutionsCount} />
                       </span>
-                      <span className="text-[#8bc34a] font-bold text-base">+</span>
+                      <span className="text-[#3b76b3] font-bold text-base">+</span>
                     </>
                   )}
                 </div>
@@ -315,7 +315,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                 <div className="flex items-baseline gap-0.5">
                   {isRtl ? (
                     <>
-                      <span className="text-[#8bc34a] font-bold text-base">+</span>
+                      <span className="text-[#3b76b3] font-bold text-base">+</span>
                       <span className="text-base font-bold text-white tracking-tight">
                         <AnimatedCounter target={experienceCount} />
                       </span>
@@ -325,7 +325,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                       <span className="text-base font-bold text-white tracking-tight">
                         <AnimatedCounter target={experienceCount} />
                       </span>
-                      <span className="text-[#8bc34a] font-bold text-base">+</span>
+                      <span className="text-[#3b76b3] font-bold text-base">+</span>
                     </>
                   )}
                 </div>
@@ -343,7 +343,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
             <div className="flex items-baseline gap-0.5">
               {isRtl ? (
                 <>
-                  <span className="text-[#8bc34a] font-bold text-xl">+</span>
+                  <span className="text-[#3b76b3] font-bold text-xl">+</span>
                   <span className="text-xl font-bold text-white tracking-tight">
                     <AnimatedCounter target={partnersCount} />
                   </span>
@@ -353,7 +353,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                   <span className="text-xl font-bold text-white tracking-tight">
                     <AnimatedCounter target={partnersCount} />
                   </span>
-                  <span className="text-[#8bc34a] font-bold text-xl">+</span>
+                  <span className="text-[#3b76b3] font-bold text-xl">+</span>
                 </>
               )}
             </div>
@@ -366,7 +366,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
             <div className="flex items-baseline gap-0.5">
               {isRtl ? (
                 <>
-                  <span className="text-[#8bc34a] font-bold text-xl">+</span>
+                  <span className="text-[#3b76b3] font-bold text-xl">+</span>
                   <span className="text-xl font-bold text-white tracking-tight">
                     <AnimatedCounter target={solutionsCount} />
                   </span>
@@ -376,7 +376,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                   <span className="text-xl font-bold text-white tracking-tight">
                     <AnimatedCounter target={solutionsCount} />
                   </span>
-                  <span className="text-[#8bc34a] font-bold text-xl">+</span>
+                  <span className="text-[#3b76b3] font-bold text-xl">+</span>
                 </>
               )}
             </div>
@@ -389,7 +389,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
             <div className="flex items-baseline gap-0.5">
               {isRtl ? (
                 <>
-                  <span className="text-[#8bc34a] font-bold text-xl">+</span>
+                  <span className="text-[#3b76b3] font-bold text-xl">+</span>
                   <span className="text-xl font-bold text-white tracking-tight">
                     <AnimatedCounter target={experienceCount} />
                   </span>
@@ -399,7 +399,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                   <span className="text-xl font-bold text-white tracking-tight">
                     <AnimatedCounter target={experienceCount} />
                   </span>
-                  <span className="text-[#8bc34a] font-bold text-xl">+</span>
+                  <span className="text-[#3b76b3] font-bold text-xl">+</span>
                 </>
               )}
             </div>
@@ -424,7 +424,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                     onClick={() => setCurrentSlide(idx)}
                     className={`relative overflow-hidden flex-1 sm:flex-initial min-w-0 px-2.5 py-2 sm:px-4 sm:py-2 rounded-xl text-[10px] sm:text-xs font-sans transition-all flex items-center justify-center sm:justify-start gap-1.5 sm:gap-2 active:scale-95 backdrop-blur-md ${
                       isActive
-                        ? 'bg-black/80 text-white font-bold border border-[#8bc34a]/70 shadow-lg shadow-[#8bc34a]/15 ring-1 ring-[#8bc34a]/30'
+                        ? 'bg-black/80 text-white font-bold border border-[#3b76b3]/70 shadow-lg shadow-[#3b76b3]/15 ring-1 ring-[#3b76b3]/30'
                         : 'bg-black/40 text-stone-400 hover:text-white border border-white/10 hover:bg-black/60 hover:border-white/20'
                     }`}
                   >
@@ -434,12 +434,12 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                         initial={{ width: '0%' }}
                         animate={{ width: '100%' }}
                         transition={{ duration: Number(s.duration) > 0 ? Number(s.duration) : 6, ease: 'linear' }}
-                        className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#8bc34a]"
+                        className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#3b76b3]"
                       />
                     )}
                     <div className="flex items-center gap-1.5 flex-shrink-0 relative z-10">
-                      <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isActive ? 'bg-[#8bc34a] shadow-[0_0_8px_#8bc34a]' : 'bg-stone-600'}`} />
-                      <span className={`font-mono font-bold text-[10px] sm:text-xs ${isActive ? 'text-[#8bc34a]' : 'text-stone-500'}`}>0{idx + 1}.</span>
+                      <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${isActive ? 'bg-[#3b76b3] shadow-[0_0_8px_#3b76b3]' : 'bg-stone-600'}`} />
+                      <span className={`font-mono font-bold text-[10px] sm:text-xs ${isActive ? 'text-[#3b76b3]' : 'text-stone-500'}`}>0{idx + 1}.</span>
                     </div>
                     <span className={`text-[10px] sm:text-xs truncate relative z-10 ${isActive ? 'text-white' : 'text-stone-300'}`}>{s.tag}</span>
                   </button>
@@ -451,7 +451,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
           {/* Quick Affiliation Info */}
           <div className="hidden lg:flex items-center gap-3 text-xs text-stone-300 font-sans flex-shrink-0">
             <span className="flex items-center gap-1.5 text-stone-200">
-              <Shield className="w-3.5 h-3.5 text-[#8bc34a]" />
+              <Shield className="w-3.5 h-3.5 text-[#3b76b3]" />
               {isRtl ? CGL_COMPANY_INFO.affiliationAr : CGL_COMPANY_INFO.affiliationEn}
             </span>
             <span className="text-stone-600">•</span>

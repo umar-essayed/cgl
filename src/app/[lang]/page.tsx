@@ -53,16 +53,16 @@ export default async function HomePage({
   const siteData = await getDynamicSiteData();
 
   return (
-    <main className="min-h-screen flex flex-col bg-[#000000] text-white selection:bg-[#8bc34a] selection:text-black">
+    <main className="min-h-screen flex flex-col bg-[#000000] text-white selection:bg-[#3b76b3] selection:text-white">
       <Navbar lang={lang} />
       <Hero lang={lang} slides={siteData.heroSlides} stats={siteData.settings?.stats} />
       <PartnersTicker lang={lang} partners={siteData.partners} />
-      <ServicesSection lang={lang} />
+      <ServicesSection lang={lang} services={siteData.services} />
       <ProjectsEvidenceSection lang={lang} projects={siteData.projects} />
       <EquipmentSection lang={lang} equipment={siteData.equipment} />
       <NewsSection lang={lang} news={siteData.news} />
       <RfqSection lang={lang} />
-      <CompanyLocationSection lang={lang} />
+      <CompanyLocationSection lang={lang} companyInfo={siteData.settings} />
       <Footer lang={lang} companyInfo={siteData.settings} />
     </main>
   );

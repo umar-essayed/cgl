@@ -52,14 +52,14 @@ export default async function ProjectsPage({
   const siteData = await getDynamicSiteData();
 
   return (
-    <div className="min-h-screen flex flex-col bg-black text-white selection:bg-[#8bc34a] selection:text-black">
+    <div className="min-h-screen flex flex-col bg-black text-white selection:bg-[#3b76b3] selection:text-white">
       <Navbar lang={lang} />
 
       <main className="flex-1 pt-24 sm:pt-28 pb-16 sm:pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
           {/* Breadcrumbs */}
           <nav aria-label="Breadcrumbs" className="flex items-center gap-2 text-xs font-mono text-stone-400 mb-6">
-            <Link href={`/${lang}`} className="hover:text-[#8bc34a] transition-colors">
+            <Link href={`/${lang}`} className="hover:text-[#3b76b3] transition-colors">
               {isRtl ? 'الرئيسية' : 'Home'}
             </Link>
             <ChevronIcon className="w-3.5 h-3.5 text-stone-600" />
@@ -70,8 +70,8 @@ export default async function ProjectsPage({
 
           {/* Page Header */}
           <div className="mb-10 sm:mb-12 pb-6 border-b border-[#1f1f1f]">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#111111] border border-[#1f1f1f] text-xs font-sans text-[#8bc34a] mb-3 shadow-sm">
-              <span className="w-2 h-2 bg-[#8bc34a] rounded-full animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#111111] border border-[#1f1f1f] text-xs font-sans text-[#3b76b3] mb-3 shadow-sm">
+              <span className="w-2 h-2 bg-[#3b76b3] rounded-full animate-pulse" />
               <span className="font-semibold">{isRtl ? 'دراسات الحالة المعتمدة' : 'Verified Case Studies'}</span>
             </div>
 

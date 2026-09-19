@@ -44,8 +44,8 @@ export default function DarkLocationMap() {
       // Custom CGL Pin with brand green pulse
       const pinHtml = `
         <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px;">
-          <div style="position: absolute; width: 38px; height: 38px; border-radius: 50%; background: rgba(139, 195, 74, 0.35); animation: pulse 2s cubic-bezier(0.4, 0, 1) infinite;"></div>
-          <div style="width: 24px; height: 24px; border-radius: 50%; background: #8bc34a; border: 3px solid #000000; box-shadow: 0 0 16px rgba(139, 195, 74, 0.85); display: flex; align-items: center; justify-content: center;">
+          <div style="position: absolute; width: 38px; height: 38px; border-radius: 50%; background: rgba(59, 118, 179, 0.35); animation: pulse 2s cubic-bezier(0.4, 0, 1) infinite;"></div>
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #3b76b3; border: 3px solid #000000; box-shadow: 0 0 16px rgba(59, 118, 179, 0.85); display: flex; align-items: center; justify-content: center;">
             <div style="width: 8px; height: 8px; border-radius: 50%; background: #000000;"></div>
           </div>
         </div>

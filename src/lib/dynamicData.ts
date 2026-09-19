@@ -4,9 +4,10 @@ import {
   CGL_EQUIPMENT_FLEET, 
   CGL_LATEST_NEWS, 
   CGL_AUTHORIZED_PARTNERS, 
-  CGL_COMPANY_INFO 
+  CGL_COMPANY_INFO,
+  CGL_SERVICES
 } from '@/lib/data';
-import { ProjectEvidence, EquipmentItem, NewsArticle, AuthorizedPartner, HeroSlide } from '@/lib/types';
+import { ProjectEvidence, EquipmentItem, NewsArticle, AuthorizedPartner, HeroSlide, ServiceItem } from '@/lib/types';
 
 export const DEFAULT_HERO_SLIDES: HeroSlide[] = [
   {
@@ -64,6 +65,7 @@ export interface DynamicSiteData {
   equipment: EquipmentItem[];
   news: NewsArticle[];
   partners: AuthorizedPartner[];
+  services: ServiceItem[];
   heroSlides: HeroSlide[];
   settings: typeof CGL_COMPANY_INFO;
 }
@@ -80,16 +82,18 @@ export async function getDynamicSiteData(): Promise<DynamicSiteData> {
         equipment: CGL_EQUIPMENT_FLEET,
         news: CGL_LATEST_NEWS,
         partners: CGL_AUTHORIZED_PARTNERS,
+        services: CGL_SERVICES,
         heroSlides: DEFAULT_HERO_SLIDES,
         settings: CGL_COMPANY_INFO
       };
     }
 
-    const [projectsSnap, equipmentSnap, newsSnap, partnersSnap, heroSlidesSnap, settingsDoc] = await Promise.all([
+    const [projectsSnap, equipmentSnap, newsSnap, partnersSnap, servicesSnap, heroSlidesSnap, settingsDoc] = await Promise.all([
       db.collection('projects').get().catch(() => null),
       db.collection('equipment').get().catch(() => null),
       db.collection('news').get().catch(() => null),
       db.collection('partners').get().catch(() => null),
+      db.collection('services').get().catch(() => null),
       db.collection('hero_slides').get().catch(() => null),
       db.collection('settings').doc('company_info').get().catch(() => null)
     ]);
@@ -109,6 +113,10 @@ export async function getDynamicSiteData(): Promise<DynamicSiteData> {
     const partners: AuthorizedPartner[] = partnersSnap && !partnersSnap.empty
       ? (partnersSnap.docs.map(d => ({ id: d.id, ...d.data() })) as any)
       : CGL_AUTHORIZED_PARTNERS;
+
+    const services: ServiceItem[] = servicesSnap && !servicesSnap.empty
+      ? (servicesSnap.docs.map(d => ({ id: d.id, ...d.data() })) as any)
+      : CGL_SERVICES;
 
     // Filter active slides strictly, and sort by order ascending
     let heroSlides: HeroSlide[] = [];
@@ -141,6 +149,7 @@ export async function getDynamicSiteData(): Promise<DynamicSiteData> {
       equipment,
       news,
       partners,
+      services,
       heroSlides,
       settings
     };
@@ -151,10 +160,21 @@ export async function getDynamicSiteData(): Promise<DynamicSiteData> {
       equipment: CGL_EQUIPMENT_FLEET,
       news: CGL_LATEST_NEWS,
       partners: CGL_AUTHORIZED_PARTNERS,
+      services: CGL_SERVICES,
       heroSlides: DEFAULT_HERO_SLIDES,
       settings: CGL_COMPANY_INFO
     };
   }
+}
+
+/**
+ * Fetch a single service by ID
+ */
+export async function getDynamicService(id: string): Promise<ServiceItem | undefined> {
+  const data = await getDynamicSiteData();
+  const found = data.services.find(s => s.id === id);
+  if (found) return found;
+  return CGL_SERVICES.find(s => s.id === id);
 }
 
 /**

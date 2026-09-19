@@ -6,69 +6,73 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowUpLeft, ArrowUpRight, ShieldCheck, Layers, Beaker, Crosshair, Pickaxe, Compass, Trees, ChevronLeft, ChevronRight } from 'lucide-react';
 import { CGL_SERVICES } from '@/lib/data';
+import { ServiceItem } from '@/lib/types';
 import { Locale, getDictionary } from '@/lib/i18n';
 
 interface ServicesSectionProps {
   lang?: Locale;
+  services?: ServiceItem[];
 }
 
 const serviceIconMap: Record<string, React.ReactNode> = {
-  'geotechnical-investigation': <Layers className="w-5 h-5 text-[#82B74B]" />,
-  'structural-integrity': <ShieldCheck className="w-5 h-5 text-[#3B76B3]" />,
+  'geotechnical-investigation': <Layers className="w-5 h-5 text-[#3b76b3]" />,
+  'structural-integrity': <ShieldCheck className="w-5 h-5 text-[#3b76b3]" />,
   'materials-testing': <Beaker className="w-5 h-5 text-[#D4A359]" />,
-  'engineering-surveying': <Crosshair className="w-5 h-5 text-[#82B74B]" />,
+  'engineering-surveying': <Crosshair className="w-5 h-5 text-[#3b76b3]" />,
   'mining-testing': <Pickaxe className="w-5 h-5 text-[#A94845]" />,
-  'shoring-dewatering': <Compass className="w-5 h-5 text-[#3B76B3]" />,
-  'environmental-testing': <Trees className="w-5 h-5 text-[#82B74B]" />,
+  'shoring-dewatering': <Compass className="w-5 h-5 text-[#3b76b3]" />,
+  'environmental-testing': <Trees className="w-5 h-5 text-[#3b76b3]" />,
 };
 
 const serviceColorMap: Record<string, { border: string; glow: string }> = {
   'geotechnical-investigation': {
-    border: 'hover:border-[#82B74B]/60 dark:hover:border-[#82B74B]/50',
-    glow: 'from-[#82B74B]/15',
+    border: 'hover:border-[#3b76b3]/60 dark:hover:border-[#3b76b3]/50',
+    glow: 'from-[#3b76b3]/15',
   },
   'structural-integrity': {
-    border: 'hover:border-[#3B76B3]/60 dark:hover:border-[#3B76B3]/50',
-    glow: 'from-[#3B76B3]/15',
+    border: 'hover:border-[#3b76b3]/60 dark:hover:border-[#3b76b3]/50',
+    glow: 'from-[#3b76b3]/15',
   },
   'materials-testing': {
     border: 'hover:border-[#D4A359]/60 dark:hover:border-[#D4A359]/50',
     glow: 'from-[#D4A359]/15',
   },
   'engineering-surveying': {
-    border: 'hover:border-[#82B74B]/60 dark:hover:border-[#82B74B]/50',
-    glow: 'from-[#82B74B]/15',
+    border: 'hover:border-[#3b76b3]/60 dark:hover:border-[#3b76b3]/50',
+    glow: 'from-[#3b76b3]/15',
   },
   'mining-testing': {
     border: 'hover:border-[#A94845]/60 dark:hover:border-[#A94845]/50',
     glow: 'from-[#A94845]/15',
   },
   'shoring-dewatering': {
-    border: 'hover:border-[#3B76B3]/60 dark:hover:border-[#3B76B3]/50',
-    glow: 'from-[#3B76B3]/15',
+    border: 'hover:border-[#3b76b3]/60 dark:hover:border-[#3b76b3]/50',
+    glow: 'from-[#3b76b3]/15',
   },
   'environmental-testing': {
-    border: 'hover:border-[#82B74B]/60 dark:hover:border-[#82B74B]/50',
-    glow: 'from-[#82B74B]/15',
+    border: 'hover:border-[#3b76b3]/60 dark:hover:border-[#3b76b3]/50',
+    glow: 'from-[#3b76b3]/15',
   },
 };
 
-export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
+export default function ServicesSection({ lang = 'ar', services }: ServicesSectionProps) {
   const [showAll, setShowAll] = useState(false);
   const dict = getDictionary(lang);
   const isRtl = lang === 'ar';
   const ArrowIcon = isRtl ? ArrowUpLeft : ArrowUpRight;
   const ChevronIcon = isRtl ? ChevronLeft : ChevronRight;
 
-  const col1 = [CGL_SERVICES[0], CGL_SERVICES[3]];
-  const col2 = [CGL_SERVICES[1], CGL_SERVICES[4], CGL_SERVICES[6]];
-  const col3 = [CGL_SERVICES[2], CGL_SERVICES[5]];
+  const servicesList = services && services.length > 0 ? services : CGL_SERVICES;
 
-  const renderCard = (service: typeof CGL_SERVICES[0], index: number, isTall = false) => {
+  const col1 = servicesList.filter((_, i) => i % 3 === 0);
+  const col2 = servicesList.filter((_, i) => i % 3 === 1);
+  const col3 = servicesList.filter((_, i) => i % 3 === 2);
+
+  const renderCard = (service: ServiceItem, index: number, isTall = false) => {
     const styling = serviceColorMap[service.id] || serviceColorMap['geotechnical-investigation'];
-    const icon = serviceIconMap[service.id];
+    const icon = serviceIconMap[service.id] || <Layers className="w-5 h-5 text-[#3b76b3]" />;
     const imageSrc = service.image || '/assets/sliders/slider1.jpg';
-    const originalIndex = CGL_SERVICES.findIndex(s => s.id === service.id);
+    const originalIndex = servicesList.findIndex(s => s.id === service.id);
 
     const isHiddenOnMobile = !showAll && originalIndex >= 3;
     const isHiddenOnDesktop = !showAll && originalIndex >= 6;
@@ -108,7 +112,7 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
         <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between relative z-10">
           <div>
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-mono font-bold text-[#8bc34a]">
+              <span className="text-xs font-mono font-bold text-[#3b76b3]">
                 0{originalIndex + 1}
               </span>
               <div className="text-stone-400">
@@ -126,7 +130,7 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
           {/* Footer: Standards & Link */}
           <div className="pt-3 border-t border-white/5 flex items-center justify-between gap-2 mt-auto">
             <div className="flex flex-wrap gap-1.5">
-              {service.standards.slice(0, 2).map((std, sIdx) => (
+              {(service.standards || []).slice(0, 2).map((std, sIdx) => (
                 <span 
                   key={sIdx}
                   className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-stone-300 border border-white/10"
@@ -141,7 +145,7 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
               className="inline-flex items-center text-xs font-medium text-stone-300 hover:text-white transition-colors gap-1"
             >
               <span>{dict.services.requestPricing}</span>
-              <ArrowIcon className="w-3.5 h-3.5 text-[#8bc34a]" />
+              <ArrowIcon className="w-3.5 h-3.5 text-[#3b76b3]" />
             </Link>
           </div>
         </div>
@@ -154,8 +158,8 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
         {/* Section Header */}
         <div className="mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#181b22] border border-[#82B74B]/30 text-xs font-sans text-[#97C369] shadow-sm mb-3">
-            <span className="w-2 h-2 bg-[#8bc34a] rounded-full animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#181b22] border border-[#3b76b3]/30 text-xs font-sans text-[#508ecb] shadow-sm mb-3">
+            <span className="w-2 h-2 bg-[#3b76b3] rounded-full animate-pulse" />
             <span className="font-semibold">{dict.services.badge}</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight">
@@ -168,9 +172,9 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
 
         {/* Mobile View */}
         <div className="flex md:hidden flex-col gap-4">
-          {(showAll ? CGL_SERVICES : CGL_SERVICES.slice(0, 3)).map((service, idx) => {
+          {(showAll ? servicesList : servicesList.slice(0, 3)).map((service, idx) => {
             const styling = serviceColorMap[service.id] || serviceColorMap['geotechnical-investigation'];
-            const icon = serviceIconMap[service.id];
+            const icon = serviceIconMap[service.id] || <Layers className="w-5 h-5 text-[#3b76b3]" />;
             const imageSrc = service.image || '/assets/sliders/slider1.jpg';
             const title = isRtl ? service.titleAr : service.titleEn;
             const desc = isRtl ? service.shortDescAr : service.shortDescEn;
@@ -193,7 +197,7 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
 
                 <div className="p-4 flex flex-col justify-between">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-mono font-bold text-[#8bc34a]">
+                    <span className="text-xs font-mono font-bold text-[#3b76b3]">
                       0{idx + 1}
                     </span>
                     <div className="text-stone-400">
@@ -208,11 +212,11 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
                   </p>
                   <div className="pt-2.5 border-t border-[#1f1f1f] flex items-center justify-between">
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-stone-400 border border-[#1f1f1f]">
-                      {service.standards[0]}
+                      {(service.standards || [])[0] || 'SBC'}
                     </span>
                     <Link
                       href={`/${lang}/rfq`}
-                      className="inline-flex items-center text-xs font-bold text-[#8bc34a] gap-1"
+                      className="inline-flex items-center text-xs font-bold text-[#3b76b3] gap-1"
                     >
                       <span>{dict.services.requestPricing}</span>
                       <ArrowIcon className="w-3.5 h-3.5" />
@@ -242,15 +246,15 @@ export default function ServicesSection({ lang = 'ar' }: ServicesSectionProps) {
           <button
             type="button"
             onClick={() => setShowAll(!showAll)}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#1a1a1a] border border-[#1f1f1f] text-stone-200 hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-sm group hover:border-[#8bc34a]/40"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#111111] hover:bg-[#1a1a1a] border border-[#1f1f1f] text-stone-200 hover:text-white font-sans text-xs sm:text-sm font-semibold transition-all shadow-sm group hover:border-[#3b76b3]/40"
           >
             <span>
               {showAll 
                 ? (isRtl ? 'طي قائمة الخدمات' : 'Collapse Services')
-                : (isRtl ? 'عرض كافة الخدمات الهندسية (7 خدمات)' : 'Explore All Engineering Services (7 Services)')
+                : (isRtl ? `عرض كافة الخدمات الهندسية (${servicesList.length} خدمات)` : `Explore All Engineering Services (${servicesList.length} Services)`)
               }
             </span>
-            <ChevronIcon className={`w-4 h-4 text-[#8bc34a] transition-transform duration-300 ${showAll ? '-rotate-90' : 'rotate-0'}`} />
+            <ChevronIcon className={`w-4 h-4 text-[#3b76b3] transition-transform duration-300 ${showAll ? '-rotate-90' : 'rotate-0'}`} />
           </button>
         </div>
 

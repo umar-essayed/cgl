@@ -45,7 +45,7 @@ export default function LanguageSwitcher({ currentLang, className = '' }: Langua
         'bg-[#111111] hover:bg-[#1a1a1a] border-[#222222] text-stone-200 hover:text-white dark:bg-[#111111] dark:hover:bg-[#1a1a1a] dark:border-[#222222] dark:text-stone-200 dark:hover:text-white'
       } bg-white hover:bg-slate-100 border-slate-200 text-slate-700 hover:text-slate-900 shadow-sm ${className}`}
     >
-      <Globe className="w-3.5 h-3.5 text-[#8bc34a]" />
+      <Globe className="w-3.5 h-3.5 text-[#3b76b3]" />
       <span>{label}</span>
     </button>
   );
