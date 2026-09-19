@@ -181,32 +181,32 @@ export default async function AboutPage({
             </div>
           </div>
 
-          {/* Bold Editorial Headline with Frosted Glass Protection in Light Mode */}
-          <div className="max-w-4xl space-y-6 p-6 sm:p-9 rounded-2xl sm:rounded-3xl bg-white/75 dark:bg-transparent backdrop-blur-md dark:backdrop-blur-none border border-[#E6DFD3] dark:border-transparent shadow-sm dark:shadow-none">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-white/[0.04] border border-[#E6DFD3] dark:border-white/10 text-xs font-mono text-[#3b76b3] shadow-sm w-fit">
+          {/* Bold Editorial Headline */}
+          <div className="max-w-4xl space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/95 dark:bg-white/[0.04] border border-[#E6DFD3] dark:border-white/10 text-xs font-mono text-[#3b76b3] shadow-sm w-fit">
               <Sparkles className="w-3.5 h-3.5" />
               <span>{isRtl ? 'المعامل الإبداعية للجيوتقنية CGL' : 'Creative Geotechnical Laboratories'}</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-bold text-[#111317] dark:text-white tracking-tight leading-[1.08]">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-bold text-[#0284c7] dark:text-white tracking-tight leading-[1.08] drop-shadow-[0_2px_8px_rgba(255,255,255,0.95)] dark:drop-shadow-none">
               {isRtl ? (
                 <>
                   نبني الأمان من أعماق الأرض، <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#18181B] via-[#3b76b3] to-[#2a5b8c] dark:from-white dark:via-stone-200 dark:to-[#3b76b3]">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284c7] via-[#0369a1] to-[#3b76b3] dark:from-white dark:via-stone-200 dark:to-[#3b76b3]">
                     بدقة هندسية لا تقبل المساومة.
                   </span>
                 </>
               ) : (
                 <>
                   Engineering safety from the ground up, <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#18181B] via-[#3b76b3] to-[#2a5b8c] dark:from-white dark:via-stone-200 dark:to-[#3b76b3]">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284c7] via-[#0369a1] to-[#3b76b3] dark:from-white dark:via-stone-200 dark:to-[#3b76b3]">
                     with uncompromised precision.
                   </span>
                 </>
               )}
             </h1>
 
-            <p className="text-base sm:text-xl text-[#3F3F46] dark:text-stone-300 font-sans leading-relaxed max-w-3xl font-light">
+            <p className="text-base sm:text-xl text-[#0369a1] dark:text-stone-300 font-sans leading-relaxed max-w-3xl font-medium drop-shadow-[0_1px_4px_rgba(255,255,255,0.9)] dark:drop-shadow-none">
               {isRtl 
                 ? 'تأسست CGL كامتياز فخور لمجموعة CGI بالولايات المتحدة الأمريكية، لتنقل أرقى بروتوكولات الفحص المخبري والاستكشاف الجيوتقني إلى مشاريع المملكة، موفرة أساسات صلبة ودراسات معتمدة تضمن ديمومة وسلامة المنشآت.'
                 : 'Creative Geotechnical Laboratories (CGL) is a proud franchise of CGI, bringing trusted global standards to infrastructure in Saudi Arabia through rigorous subsurface investigations and materials testing.'}
