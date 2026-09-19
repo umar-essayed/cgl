@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Search, Calendar, Clock, ArrowUpLeft, ArrowUpRight, Star } from 'lucide-react';
+import { Search, Calendar, Clock, ArrowUpLeft, ArrowUpRight, Star, RefreshCw } from 'lucide-react';
 import { NewsArticle } from '@/lib/types';
 import { Locale, getDictionary } from '@/lib/i18n';
 
@@ -13,9 +13,12 @@ interface NewsCatalogClientProps {
   initialNews: NewsArticle[];
 }
 
+const BATCH_SIZE = 10;
+
 export default function NewsCatalogClient({ lang, initialNews }: NewsCatalogClientProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [visibleCount, setVisibleCount] = useState(BATCH_SIZE);
 
   const dict = getDictionary(lang);
   const isRtl = lang === 'ar';
@@ -48,6 +51,30 @@ export default function NewsCatalogClient({ lang, initialNews }: NewsCatalogClie
     });
   }, [initialNews, searchQuery, selectedCategory, isRtl]);
 
+  // Reset visible count when search query or category filter changes
+  useEffect(() => {
+    setVisibleCount(BATCH_SIZE);
+  }, [searchQuery, selectedCategory]);
+
+  const visibleNews = useMemo(() => {
+    return filteredNews.slice(0, visibleCount);
+  }, [filteredNews, visibleCount]);
+
+  const hasMore = visibleCount < filteredNews.length;
+  const remainingCount = filteredNews.length - visibleCount;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + BATCH_SIZE, filteredNews.length));
+  };
+
+  const handleShowAll = () => {
+    setVisibleCount(filteredNews.length);
+  };
+
+  const handleCollapse = () => {
+    setVisibleCount(BATCH_SIZE);
+  };
+
   return (
     <div className="space-y-8">
       {/* Search & Category Filter Bar */}
@@ -67,9 +94,9 @@ export default function NewsCatalogClient({ lang, initialNews }: NewsCatalogClie
 
           {/* Results Counter */}
           <div className="text-xs font-mono text-stone-400 bg-[#111111] px-3.5 py-2 rounded-xl border border-[#1f1f1f] w-full sm:w-auto flex items-center justify-between sm:justify-start gap-2">
-            <span>{isRtl ? 'المقالات المتوفرة:' : 'Articles Found:'}</span>
+            <span>{isRtl ? 'المقالات المعروضة:' : 'Articles Displayed:'}</span>
             <span className="text-[#3b76b3] font-bold">
-              {String(filteredNews.length).padStart(2, '0')} / {String(initialNews.length).padStart(2, '0')}
+              {String(Math.min(visibleCount, filteredNews.length)).padStart(2, '0')} / {String(filteredNews.length).padStart(2, '0')}
             </span>
           </div>
         </div>
@@ -119,96 +146,163 @@ export default function NewsCatalogClient({ lang, initialNews }: NewsCatalogClie
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {filteredNews.map((article, index) => {
-            const title = isRtl ? article.titleAr : article.titleEn;
-            const excerpt = isRtl ? article.excerptAr : article.excerptEn;
-            const category = isRtl ? article.categoryAr : article.categoryEn;
-            const date = (isRtl ? article.dateAr : article.dateEn) || article.date;
-            const readTime = isRtl
-              ? (article.readTimeAr || `${article.readMinutes || 3} دقائق قراءة`)
-              : (article.readTimeEn && !/[\u0600-\u06FF]/.test(article.readTimeEn)
-                  ? article.readTimeEn
-                  : `${article.readMinutes || 3} min read`);
+        <div className="space-y-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {visibleNews.map((article, index) => {
+              const title = isRtl ? article.titleAr : article.titleEn;
+              const excerpt = isRtl ? article.excerptAr : article.excerptEn;
+              const category = isRtl ? article.categoryAr : article.categoryEn;
+              const date = (isRtl ? article.dateAr : article.dateEn) || article.date;
+              const readTime = isRtl
+                ? (article.readTimeAr || `${article.readMinutes || 3} دقائق قراءة`)
+                : (article.readTimeEn && !/[\u0600-\u06FF]/.test(article.readTimeEn)
+                    ? article.readTimeEn
+                    : `${article.readMinutes || 3} min read`);
 
-            return (
-              <motion.article
-                key={article.id}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: Math.min(index * 0.05, 0.4) }}
-                className="group flex flex-col justify-between rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1f1f1f] hover:border-[#3b76b3]/40 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-black/80"
-              >
-                {/* Image */}
-                <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-[#111111]">
-                  <Image
-                    src={article.image || '/assets/sliders/slider1.jpg'}
-                    alt={title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-black/30" />
+              return (
+                <motion.article
+                  key={article.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: Math.min((index % BATCH_SIZE) * 0.05, 0.4) }}
+                  className="group flex flex-col justify-between rounded-2xl overflow-hidden bg-[#0a0a0a] border border-[#1f1f1f] hover:border-[#3b76b3]/40 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-black/80"
+                >
+                  {/* Image */}
+                  <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-[#111111]">
+                    <Image
+                      src={article.image || '/assets/sliders/slider1.jpg'}
+                      alt={title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-black/30" />
 
-                  {/* Category Badge */}
-                  <div className="absolute top-3.5 right-3.5">
-                    <span className="px-2.5 py-1 rounded-lg bg-black/85 backdrop-blur-md border border-white/10 text-[10px] font-mono text-stone-200 font-semibold">
-                      {category}
-                    </span>
+                    {/* Category Badge */}
+                    <div className="absolute top-3.5 right-3.5">
+                      <span className="px-2.5 py-1 rounded-lg bg-black/85 backdrop-blur-md border border-white/10 text-[10px] font-mono text-stone-200 font-semibold">
+                        {category}
+                      </span>
+                    </div>
+
+                    {article.featured && (
+                      <div className="absolute top-3.5 left-3.5">
+                        <span className="p-1.5 rounded-lg bg-amber-500/20 border border-amber-500/50 text-amber-400 flex items-center justify-center backdrop-blur-md">
+                          <Star className="w-3 h-3 fill-amber-400" />
+                        </span>
+                      </div>
+                    )}
                   </div>
 
-                  {article.featured && (
-                    <div className="absolute top-3.5 left-3.5">
-                      <span className="p-1.5 rounded-lg bg-amber-500/20 border border-amber-500/50 text-amber-400 flex items-center justify-center backdrop-blur-md">
-                        <Star className="w-3 h-3 fill-amber-400" />
-                      </span>
-                    </div>
-                  )}
-                </div>
+                  {/* Body */}
+                  <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between">
+                    <div>
+                      {/* Meta Row */}
+                      <div className="flex items-center gap-3 text-xs text-stone-400 mb-2.5 font-mono">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="w-3.5 h-3.5 text-stone-500" />
+                          <span>{date}</span>
+                        </span>
+                        <span className="text-stone-700">•</span>
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3.5 h-3.5 text-stone-500" />
+                          <span>{readTime}</span>
+                        </span>
+                      </div>
 
-                {/* Body */}
-                <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between">
-                  <div>
-                    {/* Meta Row */}
-                    <div className="flex items-center gap-3 text-xs text-stone-400 mb-2.5 font-mono">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-3.5 h-3.5 text-stone-500" />
-                        <span>{date}</span>
-                      </span>
-                      <span className="text-stone-700">•</span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5 text-stone-500" />
-                        <span>{readTime}</span>
-                      </span>
+                      <h3 className="font-display font-semibold text-lg sm:text-xl text-white group-hover:text-[#3b76b3] transition-colors leading-snug mb-3">
+                        <Link href={`/${lang}/news/${article.id}`}>
+                          {title}
+                        </Link>
+                      </h3>
+
+                      <p className="text-stone-400 text-xs sm:text-sm leading-relaxed line-clamp-3 mb-4 font-sans">
+                        {excerpt}
+                      </p>
                     </div>
 
-                    <h3 className="font-display font-semibold text-lg sm:text-xl text-white group-hover:text-[#3b76b3] transition-colors leading-snug mb-3">
-                      <Link href={`/${lang}/news/${article.id}`}>
-                        {title}
+                    {/* Read More Link */}
+                    <div className="pt-4 border-t border-[#1f1f1f] flex items-center justify-between">
+                      <Link
+                        href={`/${lang}/news/${article.id}`}
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-stone-300 group-hover:text-[#3b76b3] transition-colors"
+                      >
+                        <span>{dict.news.readArticle}</span>
+                        <ArrowIcon className="w-3.5 h-3.5 text-[#3b76b3]" />
                       </Link>
-                    </h3>
 
-                    <p className="text-stone-400 text-xs sm:text-sm leading-relaxed line-clamp-3 mb-4 font-sans">
-                      {excerpt}
-                    </p>
+                      <span className="text-[10px] font-mono text-stone-500">CGL Insights</span>
+                    </div>
                   </div>
+                </motion.article>
+              );
+            })}
+          </div>
 
-                  {/* Read More Link */}
-                  <div className="pt-4 border-t border-[#1f1f1f] flex items-center justify-between">
-                    <Link
-                      href={`/${lang}/news/${article.id}`}
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-stone-300 group-hover:text-[#3b76b3] transition-colors"
-                    >
-                      <span>{dict.news.readArticle}</span>
-                      <ArrowIcon className="w-3.5 h-3.5 text-[#3b76b3]" />
-                    </Link>
-
-                    <span className="text-[10px] font-mono text-stone-500">CGL Insights</span>
-                  </div>
+          {/* Pagination & Load More Controls */}
+          {filteredNews.length > BATCH_SIZE && (
+            <div className="pt-4 pb-2 flex flex-col items-center justify-center gap-4">
+              {/* Progress Indicator */}
+              <div className="flex flex-col sm:flex-row items-center gap-3 text-xs font-mono text-stone-400">
+                <span>
+                  {isRtl
+                    ? `عرض ${Math.min(visibleCount, filteredNews.length)} من أصل ${filteredNews.length} مقال`
+                    : `Showing ${Math.min(visibleCount, filteredNews.length)} of ${filteredNews.length} articles`}
+                </span>
+                <div className="w-36 sm:w-48 h-1.5 bg-[#141414] rounded-full overflow-hidden border border-[#222]">
+                  <div
+                    className="h-full bg-[#3b76b3] transition-all duration-300 rounded-full"
+                    style={{
+                      width: `${Math.min(100, (visibleCount / filteredNews.length) * 100)}%`
+                    }}
+                  />
                 </div>
-              </motion.article>
-            );
-          })}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                {hasMore ? (
+                  <>
+                    <button
+                      type="button"
+                      onClick={handleLoadMore}
+                      className="inline-flex items-center gap-2.5 px-7 py-3 rounded-full bg-[#111111] hover:bg-[#181818] border border-[#262626] hover:border-[#3b76b3] text-stone-100 hover:text-white font-sans text-xs sm:text-sm font-bold transition-all shadow-lg active:scale-95 group"
+                    >
+                      <RefreshCw className="w-4 h-4 text-[#3b76b3] group-hover:rotate-180 transition-transform duration-500" />
+                      <span>
+                        {isRtl
+                          ? `تحميل باقي المقالات (متبقي ${remainingCount})`
+                          : `Load More (${remainingCount} remaining)`}
+                      </span>
+                    </button>
+
+                    {remainingCount > BATCH_SIZE && (
+                      <button
+                        type="button"
+                        onClick={handleShowAll}
+                        className="text-xs font-mono text-stone-400 hover:text-[#508ecb] transition-colors underline"
+                      >
+                        {isRtl ? 'عرض كافة المقالات دفعة واحدة' : 'Show All Articles'}
+                      </button>
+                    )}
+                  </>
+                ) : (
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs font-mono text-stone-500">
+                      {isRtl ? '✓ تم عرض كافة المقالات بنجاح' : '✓ All articles displayed'}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleCollapse}
+                      className="text-xs font-mono text-stone-400 hover:text-stone-200 transition-colors underline"
+                    >
+                      {isRtl ? 'طي القائمة' : 'Collapse list'}
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
