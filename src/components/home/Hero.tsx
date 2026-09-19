@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Shield } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { CGL_COMPANY_INFO } from '@/lib/data';
 import { Locale, getDictionary } from '@/lib/i18n';
 import { HeroSlide } from '@/lib/types';
@@ -452,16 +452,6 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
               <span className="text-stone-600">•</span>
               <span className="font-medium text-white truncate max-w-[140px] sm:max-w-[200px]">{normalizedSlides[currentSlide]?.tag}</span>
             </div>
-          </div>
-
-          {/* Quick Affiliation Info */}
-          <div className="hidden lg:flex items-center gap-3 text-xs text-stone-300 font-sans flex-shrink-0">
-            <span className="flex items-center gap-1.5 text-stone-200">
-              <Shield className="w-3.5 h-3.5 text-[#3b76b3]" />
-              {isRtl ? CGL_COMPANY_INFO.affiliationAr : CGL_COMPANY_INFO.affiliationEn}
-            </span>
-            <span className="text-stone-600">•</span>
-            <span>{dict.hero.sbcCompliance}</span>
           </div>
         </div>
       </div>
