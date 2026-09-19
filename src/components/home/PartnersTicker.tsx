@@ -19,7 +19,9 @@ export default function PartnersTicker({
   const isRtl = lang === 'ar';
 
   return (
-    <section id="partners" className="py-10 sm:py-12 bg-[#FBF9F5] dark:bg-[#000000] border-b border-[#E6DFD3] dark:border-[#1f1f1f] relative overflow-hidden">
+    <section id="partners" className="py-10 sm:py-12 bg-[#FBF9F5] dark:bg-[#000000] border-b border-[#E6DFD3] dark:border-[#1f1f1f] relative overflow-hidden transition-colors duration-300">
+      {/* Seamless Upper Bleed to connect smoothly with Hero bottom */}
+      <div className="absolute top-0 left-0 right-0 h-10 bg-gradient-to-b from-[#FBF9F5] to-transparent dark:from-[#000000] pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-6 text-center">
         <p className="text-xs sm:text-sm font-sans font-medium text-[#52525B] dark:text-stone-400">
           {isRtl
