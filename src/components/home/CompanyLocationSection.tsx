@@ -62,7 +62,7 @@ export default function CompanyLocationSection({ lang = 'ar', companyInfo }: Com
         </div>
 
         {/* Map Box */}
-        <div className="relative isolate z-10 w-full h-[320px] sm:h-[440px] md:h-[480px] rounded-2xl overflow-hidden border border-[#1f1f1f] shadow-2xl bg-[#000000]">
+        <div className="relative isolate z-10 w-full h-[380px] sm:h-[480px] md:h-[540px] rounded-2xl overflow-hidden border border-[#1f1f1f] shadow-2xl bg-[#000000]">
           <DarkLocationMap lang={lang} />
 
           {/* Floating Brand Pin Badge */}
