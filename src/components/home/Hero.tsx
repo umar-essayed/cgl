@@ -208,58 +208,60 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
       {/* Main Content Area */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 w-full my-auto">
         <div className="max-w-4xl">
-          {/* Content Box */}
-          <div className="min-h-[170px] sm:min-h-[280px] flex flex-col justify-center">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeSlide.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="space-y-2.5 sm:space-y-4"
+          {/* Content Box with Architectural Frosted Glass Card in Light Mode (Pure Transparent in Dark Mode) */}
+          <div className="p-4 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl bg-[#FBF9F5]/85 dark:bg-transparent backdrop-blur-md dark:backdrop-blur-none border border-[#E6DFD3] dark:border-transparent shadow-lg shadow-stone-900/5 dark:shadow-none transition-all duration-300">
+            <div className="min-h-[160px] sm:min-h-[220px] flex flex-col justify-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeSlide.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="space-y-2.5 sm:space-y-4"
+                >
+                  {/* Tag Pill */}
+                  <div className="inline-flex items-center gap-2 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white dark:bg-[#111111]/90 border border-[#E6DFD3] dark:border-[#1f1f1f] text-[11px] sm:text-xs font-sans text-[#3b76b3] shadow-sm w-fit">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#3b76b3] animate-pulse" />
+                    <span className="font-semibold">{activeSlide.tag}</span>
+                    {activeSlide.metrics && (
+                      <>
+                        <span className="text-stone-400 dark:text-stone-600">|</span>
+                        <span className="text-[#3F3F46] dark:text-stone-300 font-mono text-[10px] sm:text-xs">{activeSlide.metrics}</span>
+                      </>
+                    )}
+                  </div>
+
+                  {/* Headline */}
+                  <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-[#111317] dark:text-white leading-snug tracking-tight">
+                    {activeSlide.title}
+                  </h1>
+
+                  {/* Subtitle */}
+                  <p className="text-xs sm:text-base md:text-lg text-[#374151] dark:text-stone-200 font-sans leading-relaxed max-w-2xl font-normal line-clamp-2 sm:line-clamp-none">
+                    {activeSlide.subtitle}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-row gap-2.5 sm:gap-4 items-center mt-4 sm:mt-6">
+              <Link
+                href={`/${lang}/rfq`}
+                className="inline-flex items-center justify-center flex-1 sm:flex-initial px-4 sm:px-7 py-2.5 sm:py-3 bg-[#3b76b3] hover:bg-[#2a5b8c] text-white font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-[#3b76b3]/20 active:scale-[0.98] transition-all text-center gap-1.5"
               >
-                {/* Tag Pill */}
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white/95 dark:bg-[#111111]/90 border border-[#E6DFD3] dark:border-[#1f1f1f] text-[11px] sm:text-xs font-sans text-[#3b76b3] shadow-sm w-fit">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#3b76b3] animate-pulse" />
-                  <span className="font-semibold">{activeSlide.tag}</span>
-                  {activeSlide.metrics && (
-                    <>
-                      <span className="text-stone-400 dark:text-stone-600">|</span>
-                      <span className="text-[#3F3F46] dark:text-stone-300 font-mono text-[10px] sm:text-xs">{activeSlide.metrics}</span>
-                    </>
-                  )}
-                </div>
+                <span>{dict.hero.ctaRfq}</span>
+                <ArrowIcon className="w-3.5 h-3.5 text-white" />
+              </Link>
 
-                {/* Headline */}
-                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-[#1b497a] dark:text-white leading-snug tracking-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.7)] dark:drop-shadow-none">
-                  {activeSlide.title}
-                </h1>
-
-                {/* Subtitle */}
-                <p className="text-xs sm:text-base md:text-lg text-[#2a5b8c] dark:text-stone-200 font-sans leading-relaxed max-w-2xl font-normal line-clamp-2 sm:line-clamp-none drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)] dark:drop-shadow-none">
-                  {activeSlide.subtitle}
-                </p>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex flex-row gap-2.5 sm:gap-4 items-center mt-4 sm:mt-6">
-            <Link
-              href={`/${lang}/rfq`}
-              className="inline-flex items-center justify-center flex-1 sm:flex-initial px-4 sm:px-7 py-2.5 sm:py-3 bg-[#3b76b3] hover:bg-[#2a5b8c] text-white font-bold text-xs sm:text-sm rounded-xl shadow-lg shadow-[#3b76b3]/20 active:scale-[0.98] transition-all text-center gap-1.5"
-            >
-              <span>{dict.hero.ctaRfq}</span>
-              <ArrowIcon className="w-3.5 h-3.5 text-white" />
-            </Link>
-
-            <a
-              href={`/${lang}#services`}
-              className="inline-flex items-center justify-center flex-1 sm:flex-initial px-4 sm:px-5 py-2.5 sm:py-3 bg-white hover:bg-stone-50 text-[#18181B] border border-[#E6DFD3] shadow-sm dark:bg-black/60 dark:hover:bg-black/80 dark:backdrop-blur-md dark:text-white dark:border-white/20 font-medium text-xs sm:text-sm rounded-xl transition-all text-center"
-            >
-              <span>{dict.hero.ctaServices}</span>
-            </a>
+              <a
+                href={`/${lang}#services`}
+                className="inline-flex items-center justify-center flex-1 sm:flex-initial px-4 sm:px-5 py-2.5 sm:py-3 bg-white hover:bg-stone-50 text-[#18181B] border border-[#E6DFD3] shadow-sm dark:bg-black/60 dark:hover:bg-black/80 dark:backdrop-blur-md dark:text-white dark:border-white/20 font-medium text-xs sm:text-sm rounded-xl transition-all text-center"
+              >
+                <span>{dict.hero.ctaServices}</span>
+              </a>
+            </div>
           </div>
 
           {/* Mobile-Only Analytics Counter */}

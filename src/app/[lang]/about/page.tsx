@@ -141,7 +141,7 @@ export default async function AboutPage({
       <Navbar lang={lang} />
 
       {/* 1. Architectural Narrative Hero */}
-      <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-28 overflow-hidden min-h-[550px] sm:min-h-[640px] flex flex-col justify-between">
+      <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-28 overflow-hidden min-h-[550px] sm:min-h-[640px] flex flex-col justify-between bg-[#FBF9F5] dark:bg-[#030303] transition-colors duration-300">
         {/* Background Image with Engineering Atmosphere */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
@@ -149,64 +149,64 @@ export default async function AboutPage({
             alt="CGL Geotechnical Site Operations"
             fill
             priority
-            className="object-cover object-center filter contrast-110 brightness-[0.28] scale-105"
+            className="object-cover object-center filter contrast-105 opacity-30 dark:opacity-100 dark:contrast-110 dark:brightness-[0.28] scale-105"
           />
-          {/* Dual Vignette & Depth Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/85 to-[#030303]/60" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-[#030303]/40 to-[#030303]/90" />
+          {/* Dual Vignette & Depth Gradients: Light mode gentle sokari tint, Dark mode deep black */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FBF9F5] via-[#FBF9F5]/60 to-[#FBF9F5]/80 dark:from-[#030303] dark:via-[#030303]/85 dark:to-[#030303]/60" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-[#FBF9F5]/20 to-[#FBF9F5]/70 dark:via-[#030303]/40 dark:to-[#030303]/90" />
           <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#3b76b3]/10 rounded-full blur-3xl" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           
           {/* Top Metadata Strip */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pb-8 mb-12 border-b border-white/10">
+          <div className="flex flex-wrap items-center justify-between gap-4 pb-8 mb-12 border-b border-[#E6DFD3] dark:border-white/10">
             <div className="flex items-center gap-3">
               <BackToHomeButton lang={lang as Locale} />
-              <span className="text-stone-600">/</span>
-              <span className="text-xs font-mono text-stone-300">
+              <span className="text-stone-400 dark:text-stone-600">/</span>
+              <span className="text-xs font-mono text-[#52525B] dark:text-stone-300">
                 {isRtl ? 'ملف الشركة' : 'Company Profile'}
               </span>
             </div>
 
             <div className="flex items-center gap-3 text-xs font-mono">
-              <span className="inline-flex items-center gap-1.5 text-stone-300">
+              <span className="inline-flex items-center gap-1.5 text-[#52525B] dark:text-stone-300">
                 <Globe className="w-3.5 h-3.5 text-[#3b76b3]" />
                 <span>USA • KSA</span>
               </span>
-              <span className="text-stone-700">•</span>
-              <span className="text-stone-400">
+              <span className="text-stone-300 dark:text-stone-700">•</span>
+              <span className="text-[#71717A] dark:text-stone-400">
                 {isRtl ? 'امتياز رسمي لـ CGI' : 'Official CGI Franchise'}
               </span>
             </div>
           </div>
 
-          {/* Bold Editorial Headline */}
-          <div className="max-w-4xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-[#3b76b3]">
+          {/* Bold Editorial Headline with Frosted Glass Protection in Light Mode */}
+          <div className="max-w-4xl space-y-6 p-6 sm:p-9 rounded-2xl sm:rounded-3xl bg-white/75 dark:bg-transparent backdrop-blur-md dark:backdrop-blur-none border border-[#E6DFD3] dark:border-transparent shadow-sm dark:shadow-none">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-white/[0.04] border border-[#E6DFD3] dark:border-white/10 text-xs font-mono text-[#3b76b3] shadow-sm w-fit">
               <Sparkles className="w-3.5 h-3.5" />
               <span>{isRtl ? 'المعامل الإبداعية للجيوتقنية CGL' : 'Creative Geotechnical Laboratories'}</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-bold !text-white tracking-tight leading-[1.08]">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-bold text-[#111317] dark:text-white tracking-tight leading-[1.08]">
               {isRtl ? (
                 <>
                   نبني الأمان من أعماق الأرض، <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-stone-200 to-[#3b76b3]">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#18181B] via-[#3b76b3] to-[#2a5b8c] dark:from-white dark:via-stone-200 dark:to-[#3b76b3]">
                     بدقة هندسية لا تقبل المساومة.
                   </span>
                 </>
               ) : (
                 <>
                   Engineering safety from the ground up, <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-stone-200 to-[#3b76b3]">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#18181B] via-[#3b76b3] to-[#2a5b8c] dark:from-white dark:via-stone-200 dark:to-[#3b76b3]">
                     with uncompromised precision.
                   </span>
                 </>
               )}
             </h1>
 
-            <p className="text-lg sm:text-xl !text-stone-300 font-sans leading-relaxed max-w-3xl font-light">
+            <p className="text-base sm:text-xl text-[#3F3F46] dark:text-stone-300 font-sans leading-relaxed max-w-3xl font-light">
               {isRtl 
                 ? 'تأسست CGL كامتياز فخور لمجموعة CGI بالولايات المتحدة الأمريكية، لتنقل أرقى بروتوكولات الفحص المخبري والاستكشاف الجيوتقني إلى مشاريع المملكة، موفرة أساسات صلبة ودراسات معتمدة تضمن ديمومة وسلامة المنشآت.'
                 : 'Creative Geotechnical Laboratories (CGL) is a proud franchise of CGI, bringing trusted global standards to infrastructure in Saudi Arabia through rigorous subsurface investigations and materials testing.'}
