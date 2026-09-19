@@ -1,6 +1,6 @@
 import React from 'react';
-import { Locale, isValidLocale } from '@/lib/i18n';
 import { notFound } from 'next/navigation';
+import { Locale, isValidLocale } from '@/lib/i18n';
 import LangDirSync from '@/components/theme/LangDirSync';
 import ThemeSync from '@/components/theme/ThemeSync';
 import PageLoader from '@/components/common/PageLoader';
@@ -31,7 +31,11 @@ export default async function LocaleLayout({
   const loaderGlow = themeColor === 'green' ? 'rgba(22, 163, 74, 0.45)' : 'rgba(59, 118, 179, 0.45)';
 
   return (
-    <div dir={isRtl ? 'rtl' : 'ltr'} className="min-h-screen flex flex-col">
+    <div
+      dir={isRtl ? 'rtl' : 'ltr'}
+      data-theme-color={themeColor}
+      className={`min-h-screen flex flex-col ${themeColor === 'green' ? 'theme-green' : 'theme-blue'}`}
+    >
       <LangDirSync lang={lang} />
       <ThemeSync themeColor={themeColor} themeMode={themeMode} />
       <PageLoader color={loaderColor} glowColor={loaderGlow} />

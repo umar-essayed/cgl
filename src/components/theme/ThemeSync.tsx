@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 interface ThemeSyncProps {
   themeColor?: 'blue' | 'green';
@@ -13,13 +13,14 @@ export default function ThemeSync({ themeColor = 'blue', themeMode }: ThemeSyncP
     if (themeColor === 'green') {
       document.documentElement.classList.add('theme-green');
       document.documentElement.classList.remove('theme-blue');
+      document.documentElement.setAttribute('data-theme-color', 'green');
     } else {
       document.documentElement.classList.remove('theme-green');
       document.documentElement.classList.add('theme-blue');
+      document.documentElement.setAttribute('data-theme-color', 'blue');
     }
 
     // 2. Theme Mode Sync (Light / Dark)
-    // Default is strictly Dark mode unless explicitly set to 'light' in localStorage or settings
     let preferredMode = 'dark';
     try {
       const storedMode = localStorage.getItem('cgl_theme_mode');
@@ -39,6 +40,25 @@ export default function ThemeSync({ themeColor = 'blue', themeMode }: ThemeSyncP
     }
   }, [themeColor, themeMode]);
 
-  return null;
+  return (
+    <script
+      id="cgl-theme-script"
+      dangerouslySetInnerHTML={{
+        __html: `
+          (function() {
+            var tc = '${themeColor}';
+            if (tc === 'green') {
+              document.documentElement.classList.add('theme-green');
+              document.documentElement.classList.remove('theme-blue');
+              document.documentElement.setAttribute('data-theme-color', 'green');
+            } else {
+              document.documentElement.classList.remove('theme-green');
+              document.documentElement.classList.add('theme-blue');
+              document.documentElement.setAttribute('data-theme-color', 'blue');
+            }
+          })();
+        `,
+      }}
+    />
+  );
 }
-

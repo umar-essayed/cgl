@@ -3,61 +3,36 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --font-cairo: 'Cairo', sans-serif;
+    --font-el-messiri: 'El Messiri', sans-serif;
+    --cgl-primary: #3b76b3;
+    --cgl-primary-hover: #2a5b8c;
+    --cgl-primary-light: #508ecb;
+  }
+
+  html.theme-green,
+  [data-theme-color="green"] {
+    --cgl-primary: #16a34a;
+    --cgl-primary-hover: #15803d;
+    --cgl-primary-light: #22c55e;
+  }
+
   body {
-    @apply bg-[#FBF9F5] dark:bg-[#000000] text-[#3F3F46] dark:text-stone-100 font-sans antialiased selection:bg-[#3b76b3] selection:text-white;
-    overflow-x: hidden;
+    font-family: var(--font-cairo);
+    background-color: #000000;
+    color: #F4F4F5;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-[#18181B] dark:text-white;
+    font-family: var(--font-el-messiri);
   }
 }
 
-/* Geotechnical Engineering Grid Background */
-.engineering-canvas {
-  background-color: #000000;
-  background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(59, 118, 179, 0.08), transparent),
-    radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 100% 100%, 28px 28px;
-}
-
-.engineering-canvas-secondary {
-  background-color: #0a0a0a;
-  background-image: 
-    radial-gradient(circle at 50% 0%, rgba(59, 118, 179, 0.05), transparent 70%),
-    radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 100% 100%, 24px 24px;
-}
-
-.engineering-card {
-  background: #FFFFFF;
-  border: 1px solid #E6DFD3;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-.dark .engineering-card {
-  background: #0a0a0a;
-  border: 1px solid #1f1f1f;
-}
-
-.engineering-card:hover {
-  background: #FFFFFF;
-  border-color: rgba(59, 118, 179, 0.45);
-  box-shadow: 0 12px 30px -8px rgba(24, 24, 27, 0.08);
-}
-
-.dark .engineering-card:hover {
-  background: #111111;
-  border-color: rgba(59, 118, 179, 0.4);
-  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.85);
-}
-
-/* Mobile-Friendly Smooth Scrollbar */
+/* Precision Scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -73,144 +48,194 @@
   background: #3b76b3;
 }
 
-/* 100% Smooth Infinite Marquee */
-@keyframes marquee-seamless {
+/* Hardware-Accelerated High Speed Instant Spinner */
+@keyframes cglSpinInstant {
   0% {
-    transform: translate3d(0, 0, 0);
+    transform: rotate(0deg);
   }
   100% {
-    transform: translate3d(-50%, 0, 0);
+    transform: rotate(360deg);
+  }
+}
+
+.cgl-instant-spinner {
+  animation: cglSpinInstant 0.85s linear infinite !important;
+  will-change: transform;
+}
+
+/* Selection Color */
+::selection {
+  background-color: #3b76b3;
+  color: #ffffff;
+}
+
+/* Marquee Animations */
+@keyframes marquee-seamless {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 
 .animate-marquee-seamless {
   display: flex;
   width: max-content;
-  will-change: transform;
-  animation: marquee-seamless 45s linear infinite;
+  animation: marquee-seamless 35s linear infinite;
 }
 
 .animate-marquee-seamless:hover {
   animation-play-state: paused;
 }
 
-/* Smooth SVG Drawing Animation */
-@keyframes strokeCircle {
-  0% {
-    stroke-dashoffset: 280;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
+/* Glassmorphism Card Utility */
+.glass-panel {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-@keyframes strokeCheck {
-  0% {
-    stroke-dashoffset: 100;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
+.glass-panel-glow {
+  background: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(59, 118, 179, 0.3);
+  box-shadow: 0 0 20px rgba(59, 118, 179, 0.15);
 }
 
-@keyframes popScale {
-  0% {
-    transform: scale(0.7);
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.08);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+/* Precision Blueprint Grid Overlay */
+.blueprint-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
-.animate-pop-scale {
-  animation: popScale 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+/* High-Contrast Engineering Elevation Card */
+.engineering-card {
+  position: relative;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.animate-stroke-circle {
-  stroke-dasharray: 280;
-  stroke-dashoffset: 280;
-  animation: strokeCircle 0.55s cubic-bezier(0.65, 0, 0.45, 1) forwards;
-}
-
-.animate-stroke-check {
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
-  animation: strokeCheck 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.4s forwards;
+.engineering-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(59, 118, 179, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
 }
 
 /* ====================================================
    Dynamic Theme Overrides: Green Theme (#16a34a / #15803d)
+   Guaranteed full override across both escaped and unescaped classes
    ==================================================== */
-html.theme-green ::selection {
+html.theme-green ::selection,
+[data-theme-color="green"] ::selection {
   background-color: #16a34a !important;
   color: #ffffff !important;
 }
 
-html.theme-green ::-webkit-scrollbar-thumb:hover {
+html.theme-green ::-webkit-scrollbar-thumb:hover,
+[data-theme-color="green"] ::-webkit-scrollbar-thumb:hover {
   background-color: #16a34a !important;
 }
 
-html.theme-green [class*="bg-[#3b76b3]"] {
+/* Background overrides */
+html.theme-green [class*="bg-[#3b76b3]"],
+html.theme-green [class*="bg-\\[\\#3b76b3\\]"],
+[data-theme-color="green"] [class*="bg-[#3b76b3]"],
+[data-theme-color="green"] [class*="bg-\\[\\#3b76b3\\]"] {
   background-color: #16a34a !important;
 }
 
-html.theme-green [class*="text-[#3b76b3]"] {
+/* Text overrides */
+html.theme-green [class*="text-[#3b76b3]"],
+html.theme-green [class*="text-\\[\\#3b76b3\\]"],
+[data-theme-color="green"] [class*="text-[#3b76b3]"],
+[data-theme-color="green"] [class*="text-\\[\\#3b76b3\\]"] {
   color: #22c55e !important;
 }
 
-html.theme-green [class*="text-[#508ecb]"] {
+html.theme-green [class*="text-[#508ecb]"],
+html.theme-green [class*="text-\\[\\#508ecb\\]"],
+[data-theme-color="green"] [class*="text-[#508ecb]"],
+[data-theme-color="green"] [class*="text-\\[\\#508ecb\\]"] {
   color: #4ade80 !important;
 }
 
-html.theme-green [class*="border-[#3b76b3]"] {
+/* Border overrides */
+html.theme-green [class*="border-[#3b76b3]"],
+html.theme-green [class*="border-\\[\\#3b76b3\\]"],
+[data-theme-color="green"] [class*="border-[#3b76b3]"],
+[data-theme-color="green"] [class*="border-\\[\\#3b76b3\\]"] {
   border-color: #16a34a !important;
 }
 
-html.theme-green [class*="ring-[#3b76b3]"] {
+/* Ring & Shadow overrides */
+html.theme-green [class*="ring-[#3b76b3]"],
+html.theme-green [class*="ring-\\[\\#3b76b3\\]"],
+[data-theme-color="green"] [class*="ring-[#3b76b3]"],
+[data-theme-color="green"] [class*="ring-\\[\\#3b76b3\\]"] {
   --tw-ring-color: #16a34a !important;
 }
 
-html.theme-green [class*="shadow-[#3b76b3]"] {
-  --tw-shadow-color: rgba(22, 163, 74, 0.3) !important;
+html.theme-green [class*="shadow-[#3b76b3]"],
+html.theme-green [class*="shadow-\\[\\#3b76b3\\]"],
+[data-theme-color="green"] [class*="shadow-[#3b76b3]"],
+[data-theme-color="green"] [class*="shadow-\\[\\#3b76b3\\]"] {
+  --tw-shadow-color: rgba(22, 163, 74, 0.35) !important;
 }
 
-html.theme-green [class*="from-[#3b76b3]"] {
+/* Gradient overrides */
+html.theme-green [class*="from-[#3b76b3]"],
+html.theme-green [class*="from-\\[\\#3b76b3\\]"],
+[data-theme-color="green"] [class*="from-[#3b76b3]"],
+[data-theme-color="green"] [class*="from-\\[\\#3b76b3\\]"] {
   --tw-gradient-from: #16a34a var(--tw-gradient-from-position) !important;
   --tw-gradient-to: rgb(22 163 74 / 0) var(--tw-gradient-to-position) !important;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
 }
 
-html.theme-green [class*="to-[#3b76b3]"] {
+html.theme-green [class*="to-[#3b76b3]"],
+html.theme-green [class*="to-\\[\\#3b76b3\\]"],
+[data-theme-color="green"] [class*="to-[#3b76b3]"],
+[data-theme-color="green"] [class*="to-\\[\\#3b76b3\\]"] {
   --tw-gradient-to: #16a34a var(--tw-gradient-to-position) !important;
 }
 
+/* Hover overrides */
 html.theme-green [class*="hover:bg-[#2a5b8c]"]:hover,
-html.theme-green [class*="hover:bg-[#3b76b3]"]:hover {
+html.theme-green [class*="hover:bg-[#3b76b3]"]:hover,
+html.theme-green [class*="hover:bg-\\[\\#2a5b8c\\]"]:hover,
+html.theme-green [class*="hover:bg-\\[\\#3b76b3\\]"]:hover,
+[data-theme-color="green"] [class*="hover:bg-[#2a5b8c]"]:hover,
+[data-theme-color="green"] [class*="hover:bg-[#3b76b3]"]:hover,
+[data-theme-color="green"] [class*="hover:bg-\\[\\#2a5b8c\\]"]:hover,
+[data-theme-color="green"] [class*="hover:bg-\\[\\#3b76b3\\]"]:hover {
   background-color: #15803d !important;
 }
 
-html.theme-green [class*="hover:text-[#3b76b3]"]:hover {
+html.theme-green [class*="hover:text-[#3b76b3]"]:hover,
+html.theme-green [class*="hover:text-\\[\\#3b76b3\\]"]:hover,
+[data-theme-color="green"] [class*="hover:text-[#3b76b3]"]:hover,
+[data-theme-color="green"] [class*="hover:text-\\[\\#3b76b3\\]"]:hover {
   color: #22c55e !important;
 }
 
-html.theme-green [class*="hover:border-[#3b76b3]"]:hover {
+html.theme-green [class*="hover:border-[#3b76b3]"]:hover,
+html.theme-green [class*="hover:border-\\[\\#3b76b3\\]"]:hover,
+[data-theme-color="green"] [class*="hover:border-[#3b76b3]"]:hover,
+[data-theme-color="green"] [class*="hover:border-\\[\\#3b76b3\\]"]:hover {
   border-color: #22c55e !important;
 }
 
-html.theme-green .engineering-card:hover {
+html.theme-green .engineering-card:hover,
+[data-theme-color="green"] .engineering-card:hover {
   border-color: rgba(34, 197, 94, 0.4) !important;
 }
 
 /* ====================================================
    Architectural Sokari / Off-White Theme (html.theme-light)
-   CRUCIAL SAFETY GUARANTEES:
-   - When in Dark Mode (default): ZERO changes, 100% untouched!
-   - Hero keeps its cinematic dark backdrop & black vignette.
    ==================================================== */
 html.theme-light {
   color-scheme: light;
@@ -229,9 +254,7 @@ html.theme-light ::-webkit-scrollbar-thumb:hover {
   background: #3B76B3;
 }
 
-html.theme-light.theme-green ::-webkit-scrollbar-thumb:hover {
+html.theme-light.theme-green ::-webkit-scrollbar-thumb:hover,
+html.theme-light[data-theme-color="green"] ::-webkit-scrollbar-thumb:hover {
   background: #16A34A;
 }
-
-
-
