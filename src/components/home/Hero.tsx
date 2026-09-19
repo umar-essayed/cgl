@@ -232,12 +232,12 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                 </div>
 
                 {/* Headline */}
-                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-[#18181B] dark:text-white leading-snug tracking-tight">
+                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-[#1b497a] dark:text-white leading-snug tracking-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.7)] dark:drop-shadow-none">
                   {activeSlide.title}
                 </h1>
 
                 {/* Subtitle */}
-                <p className="text-xs sm:text-base md:text-lg text-[#3F3F46] dark:text-stone-200 font-sans leading-relaxed max-w-2xl font-normal line-clamp-2 sm:line-clamp-none">
+                <p className="text-xs sm:text-base md:text-lg text-[#2a5b8c] dark:text-stone-200 font-sans leading-relaxed max-w-2xl font-normal line-clamp-2 sm:line-clamp-none drop-shadow-[0_1px_1px_rgba(255,255,255,0.6)] dark:drop-shadow-none">
                   {activeSlide.subtitle}
                 </p>
               </motion.div>

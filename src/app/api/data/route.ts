@@ -11,6 +11,9 @@ export async function GET() {
       data
     });
   } catch (error: any) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    console.error('API /data fallback triggered due to error:', error);
+    // Return structured success response using dynamicData fallbacks
+    const fallbackData = await getDynamicSiteData();
+    return NextResponse.json({ success: true, data: fallbackData });
   }
 }
