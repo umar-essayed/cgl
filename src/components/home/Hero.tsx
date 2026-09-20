@@ -215,16 +215,16 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
         {/* Main Content Area */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 w-full my-auto">
           <div className="max-w-4xl">
-            {/* Content Box */}
-            <div className="min-h-[170px] sm:min-h-[280px] flex flex-col justify-center">
+            {/* Content Box with Stable Reserved Height to Prevent Any Layout Shift */}
+            <div className="min-h-[185px] sm:min-h-[225px] md:min-h-[265px] flex flex-col justify-start">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`dark-content-${activeSlide.id}`}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3, ease: 'easeInOut' }}
-                  className="space-y-2.5 sm:space-y-4"
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.28, ease: 'easeInOut' }}
+                  className="space-y-2 sm:space-y-3.5"
                 >
                   {/* Tag Pill */}
                   <div className="inline-flex items-center gap-2 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-[#111111]/90 border border-[#1f1f1f] text-[11px] sm:text-xs font-sans text-[#3b76b3] shadow-sm w-fit">
@@ -238,13 +238,13 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                     )}
                   </div>
 
-                  {/* Headline */}
-                  <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-snug tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                  {/* Headline with Stable Reserved Height */}
+                  <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-snug tracking-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] min-h-[60px] sm:min-h-[85px] lg:min-h-[110px] flex items-center">
                     {activeSlide.title}
                   </h1>
 
-                  {/* Subtitle */}
-                  <p className="text-xs sm:text-base md:text-lg text-stone-200 font-sans leading-relaxed max-w-2xl font-normal line-clamp-2 sm:line-clamp-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                  {/* Subtitle with Stable Reserved Height */}
+                  <p className="text-xs sm:text-base md:text-lg text-stone-200 font-sans leading-relaxed max-w-2xl font-normal line-clamp-3 sm:line-clamp-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] min-h-[44px] sm:min-h-[56px] lg:min-h-[64px]">
                     {activeSlide.subtitle}
                   </p>
                 </motion.div>
@@ -588,25 +588,27 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
                 <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[#FBF9F5] to-transparent pointer-events-none z-10" />
               </div>
 
-              {/* High Contrast Editorial Headline & Subtitle */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`light-headline-${activeSlide.id}`}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.35, ease: 'easeOut' }}
-                  className="space-y-3 sm:space-y-4"
-                >
-                  <h1 className="text-2xl sm:text-4xl lg:text-5xl font-display font-bold text-[#0F172A] leading-[1.25] sm:leading-[1.2] tracking-tight">
-                    {activeSlide.title}
-                  </h1>
+              {/* High Contrast Editorial Headline & Subtitle with Stable Reserved Height Box */}
+              <div className="relative min-h-[160px] sm:min-h-[185px] lg:min-h-[210px] flex flex-col justify-start">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`light-headline-${activeSlide.id}`}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.28, ease: 'easeOut' }}
+                    className="space-y-2.5 sm:space-y-3.5"
+                  >
+                    <h1 className="text-2xl sm:text-4xl lg:text-5xl font-display font-bold text-[#0F172A] leading-[1.25] sm:leading-[1.2] tracking-tight min-h-[58px] sm:min-h-[80px] lg:min-h-[96px] flex items-center">
+                      {activeSlide.title}
+                    </h1>
 
-                  <p className="text-sm sm:text-base lg:text-lg text-[#334155] font-sans leading-relaxed max-w-2xl font-normal">
-                    {activeSlide.subtitle}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
+                    <p className="text-sm sm:text-base lg:text-lg text-[#334155] font-sans leading-relaxed max-w-2xl font-normal min-h-[48px] sm:min-h-[54px] lg:min-h-[64px] line-clamp-3 sm:line-clamp-none">
+                      {activeSlide.subtitle}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
 
               {/* Action Buttons (CTAs) */}
               <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1">
