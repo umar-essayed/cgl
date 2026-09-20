@@ -13,7 +13,7 @@ interface DarkLocationMapProps {
 export default function DarkLocationMap({
   lat = 21.5231047,
   lng = 39.177774,
-  zoom = 14,
+  zoom = 17,
 }: DarkLocationMapProps = {}) {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
