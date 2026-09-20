@@ -48,6 +48,48 @@ export default function Navbar({ lang = 'ar', variant = 'auto' }: NavbarProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Handle hash scrolling on page load (e.g. from another page or direct link)
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const hash = window.location.hash.substring(1);
+      const timer = setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) {
+          const navHeight = 75;
+          const pos = el.getBoundingClientRect().top + window.pageYOffset;
+          window.scrollTo({ top: pos - navHeight, behavior: 'smooth' });
+        }
+      }, 200);
+      return () => clearTimeout(timer);
+    }
+  }, [pathname]);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.includes('#')) {
+      const [targetPath, hash] = href.split('#');
+      const cleanPath = (pathname || '').replace(/\/$/, '');
+      const cleanTarget = (targetPath || '').replace(/\/$/, '');
+      const isCurrentPage = !cleanTarget || cleanPath === cleanTarget;
+
+      if (isCurrentPage && hash) {
+        e.preventDefault();
+        const element = document.getElementById(hash);
+        if (element) {
+          const navHeight = 75;
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          window.scrollTo({
+            top: elementPosition - navHeight,
+            behavior: 'smooth'
+          });
+          window.history.pushState(null, '', `#${hash}`);
+        }
+        setMobileMenuOpen(false);
+      }
+    } else {
+      setMobileMenuOpen(false);
+    }
+  };
+
   const navLinks = [
     { label: dict.nav.about, href: `/${lang}/about` },
     { label: dict.nav.services, href: `/${lang}#services` },
@@ -104,6 +146,7 @@ export default function Navbar({ lang = 'ar', variant = 'auto' }: NavbarProps) {
               <Link
                 key={idx}
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className={`text-xs xl:text-sm font-medium transition-colors whitespace-nowrap ${
                   isSolid
                     ? 'text-[#18181B] dark:text-stone-300 hover:text-[#3b76b3] dark:hover:text-[#3b76b3]'
@@ -185,7 +228,7 @@ export default function Navbar({ lang = 'ar', variant = 'auto' }: NavbarProps) {
                 <Link
                   key={idx}
                   href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="block text-sm font-medium text-[#18181B] dark:text-stone-200 hover:text-[#3b76b3] py-2 px-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
                 >
                   {link.label}

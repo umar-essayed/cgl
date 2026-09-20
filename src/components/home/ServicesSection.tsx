@@ -148,7 +148,7 @@ export default function ServicesSection({ lang = 'ar', services }: ServicesSecti
   };
 
   return (
-    <section id="services" className="py-16 sm:py-24 bg-[#F3ECE2] dark:bg-[#000000] border-b border-[#E6DFD3] dark:border-[#1f1f1f] relative overflow-hidden">
+    <section id="services" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-24 bg-[#F3ECE2] dark:bg-[#000000] border-b border-[#E6DFD3] dark:border-[#1f1f1f] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         
         {/* Section Header */}

@@ -23,7 +23,7 @@ export default function NewsSection({
   const currentNews = news && news.length > 0 ? news : CGL_LATEST_NEWS;
 
   return (
-    <section id="news" className="py-16 sm:py-24 bg-[#FBF9F5] dark:bg-[#080808] border-b border-[#E6DFD3] dark:border-[#1f1f1f] text-[#18181B] dark:text-white">
+    <section id="news" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-24 bg-[#FBF9F5] dark:bg-[#080808] border-b border-[#E6DFD3] dark:border-[#1f1f1f] text-[#18181B] dark:text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
         
         {/* Header */}

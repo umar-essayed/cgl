@@ -5,12 +5,15 @@ import React, { useEffect } from 'react';
 interface ThemeSyncProps {
   themeColor?: 'blue' | 'green';
   themeMode?: 'dark' | 'light';
+  allowLightMode?: boolean;
 }
 
-export default function ThemeSync({ themeColor = 'blue', themeMode }: ThemeSyncProps) {
+export default function ThemeSync({ themeColor = 'blue', themeMode, allowLightMode = false }: ThemeSyncProps) {
   useEffect(() => {
     // 1. Theme Color Sync in DOM
     const root = document.documentElement;
+    root.setAttribute('data-allow-light', allowLightMode ? 'true' : 'false');
+
     if (themeColor === 'green') {
       root.classList.add('theme-green');
       root.classList.remove('theme-blue');
@@ -22,6 +25,14 @@ export default function ThemeSync({ themeColor = 'blue', themeMode }: ThemeSyncP
     }
 
     // 2. Theme Mode Sync (Light / Dark)
+    // If allowLightMode is false, strictly force dark mode!
+    if (!allowLightMode) {
+      root.classList.remove('theme-light');
+      root.classList.add('dark');
+      root.setAttribute('data-theme-mode', 'dark');
+      return;
+    }
+
     let preferredMode = 'dark';
     try {
       const storedMode = localStorage.getItem('cgl_theme_mode');
@@ -41,7 +52,7 @@ export default function ThemeSync({ themeColor = 'blue', themeMode }: ThemeSyncP
       root.classList.add('dark');
       root.setAttribute('data-theme-mode', 'dark');
     }
-  }, [themeColor, themeMode]);
+  }, [themeColor, themeMode, allowLightMode]);
 
   return (
     <>
@@ -54,7 +65,9 @@ export default function ThemeSync({ themeColor = 'blue', themeMode }: ThemeSyncP
               try {
                 var tc = '${themeColor}';
                 var defaultMode = '${themeMode || "dark"}';
+                var allowLight = ${allowLightMode ? 'true' : 'false'};
                 var root = document.documentElement;
+                root.setAttribute('data-allow-light', allowLight ? 'true' : 'false');
 
                 // 1. Sync Theme Color
                 if (tc === 'green') {
@@ -68,26 +81,32 @@ export default function ThemeSync({ themeColor = 'blue', themeMode }: ThemeSyncP
                 }
 
                 // 2. Sync Theme Mode (Light / Dark)
-                var mode = null;
-                try {
-                  mode = localStorage.getItem('cgl_theme_mode');
-                } catch(e) {}
-                if (!mode) {
-                  var m = document.cookie.match(/(?:^|; )cgl_theme_mode=([^;]+)/);
-                  if (m) mode = m[1];
-                }
-                if (!mode && defaultMode) {
-                  mode = defaultMode;
-                }
-
-                if (mode === 'light') {
-                  root.classList.remove('dark');
-                  root.classList.add('theme-light');
-                  root.setAttribute('data-theme-mode', 'light');
-                } else if (mode === 'dark') {
+                if (!allowLight) {
                   root.classList.remove('theme-light');
                   root.classList.add('dark');
                   root.setAttribute('data-theme-mode', 'dark');
+                } else {
+                  var mode = null;
+                  try {
+                    mode = localStorage.getItem('cgl_theme_mode');
+                  } catch(e) {}
+                  if (!mode) {
+                    var m = document.cookie.match(/(?:^|; )cgl_theme_mode=([^;]+)/);
+                    if (m) mode = m[1];
+                  }
+                  if (!mode && defaultMode) {
+                    mode = defaultMode;
+                  }
+
+                  if (mode === 'light') {
+                    root.classList.remove('dark');
+                    root.classList.add('theme-light');
+                    root.setAttribute('data-theme-mode', 'light');
+                  } else if (mode === 'dark') {
+                    root.classList.remove('theme-light');
+                    root.classList.add('dark');
+                    root.setAttribute('data-theme-mode', 'dark');
+                  }
                 }
               } catch(e) {}
             })();

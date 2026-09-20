@@ -35,7 +35,7 @@ export default function CompanyLocationSection({ lang = 'ar', companyInfo }: Com
   const mapsUrl = info.googleMapsUrl || CGL_COMPANY_INFO.googleMapsUrl;
 
   return (
-    <section id="location" className="py-10 sm:py-16 bg-[#F3ECE2] dark:bg-[#000000] border-b border-[#E6DFD3] dark:border-[#1f1f1f] text-[#18181B] dark:text-white relative">
+    <section id="location" className="scroll-mt-20 sm:scroll-mt-24 py-10 sm:py-16 bg-[#F3ECE2] dark:bg-[#000000] border-b border-[#E6DFD3] dark:border-[#1f1f1f] text-[#18181B] dark:text-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         
         {/* Minimal Clean Header */}

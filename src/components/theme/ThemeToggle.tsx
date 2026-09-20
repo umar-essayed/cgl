@@ -11,9 +11,20 @@ interface ThemeToggleProps {
 export default function ThemeToggle({ className = '', isScrolled = true }: ThemeToggleProps) {
   const [mounted, setMounted] = useState(false);
   const [isLight, setIsLight] = useState(false);
+  const [allowLight, setAllowLight] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    const isAllowed = document.documentElement.getAttribute('data-allow-light') === 'true';
+    setAllowLight(isAllowed);
+
+    if (!isAllowed) {
+      document.documentElement.classList.remove('theme-light');
+      document.documentElement.classList.add('dark');
+      setIsLight(false);
+      return;
+    }
+
     const savedTheme = localStorage.getItem('cgl_theme_mode');
     const htmlHasLight = document.documentElement.classList.contains('theme-light');
     if (savedTheme === 'light' || htmlHasLight) {
@@ -28,6 +39,7 @@ export default function ThemeToggle({ className = '', isScrolled = true }: Theme
   }, []);
 
   const toggleTheme = () => {
+    if (!allowLight) return;
     const nextIsLight = !isLight;
     setIsLight(nextIsLight);
 
@@ -52,10 +64,8 @@ export default function ThemeToggle({ className = '', isScrolled = true }: Theme
     }
   };
 
-  if (!mounted) {
-    return (
-      <div className={`w-8 h-8 rounded-lg border border-[#222222] bg-[#111111] opacity-0 ${className}`} />
-    );
+  if (!mounted || !allowLight) {
+    return null;
   }
 
   // Over Hero (not scrolled): Always crisp glassmorphism over the dark cinematic hero

@@ -22,7 +22,7 @@ export default function RfqSection({ lang = 'ar' }: RfqSectionProps) {
   );
 
   return (
-    <section id="rfq" className="py-16 sm:py-24 bg-[#FBF9F5] dark:bg-[#000000] border-b border-[#E6DFD3] dark:border-[#1f1f1f] text-[#18181B] dark:text-white relative overflow-hidden">
+    <section id="rfq" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-24 bg-[#FBF9F5] dark:bg-[#000000] border-b border-[#E6DFD3] dark:border-[#1f1f1f] text-[#18181B] dark:text-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-10 lg:gap-16 border-y border-[#E6DFD3] dark:border-[#1f1f1f] py-12 sm:py-16">
           

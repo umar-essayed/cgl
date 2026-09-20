@@ -32,7 +32,7 @@ export default function ProjectsEvidenceSection({
   const formattedTotal = String(totalCount).padStart(2, '0');
 
   return (
-    <section id="projects" className="py-14 sm:py-24 bg-[#FBF9F5] dark:bg-black border-b border-[#E6DFD3] dark:border-[#1f1f1f] text-[#18181B] dark:text-white relative">
+    <section id="projects" className="scroll-mt-20 sm:scroll-mt-24 py-14 sm:py-24 bg-[#FBF9F5] dark:bg-black border-b border-[#E6DFD3] dark:border-[#1f1f1f] text-[#18181B] dark:text-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10 pb-5 sm:pb-6 border-b border-[#E6DFD3] dark:border-[#1f1f1f]">

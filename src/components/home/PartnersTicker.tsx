@@ -19,7 +19,7 @@ export default function PartnersTicker({
   const isRtl = lang === 'ar';
 
   return (
-    <section id="partners" className="py-10 sm:py-12 bg-[#FBF9F5] dark:bg-[#000000] border-b border-[#E6DFD3] dark:border-[#1f1f1f] relative overflow-hidden transition-colors duration-300">
+    <section id="partners" className="scroll-mt-20 sm:scroll-mt-24 py-10 sm:py-12 bg-[#FBF9F5] dark:bg-[#000000] border-b border-[#E6DFD3] dark:border-[#1f1f1f] relative overflow-hidden transition-colors duration-300">
       {/* Seamless Upper Bleed to connect smoothly with Hero bottom */}
       <div className="absolute top-0 left-0 right-0 h-10 bg-gradient-to-b from-[#FBF9F5] to-transparent dark:from-[#000000] pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-6 text-center">
@@ -43,7 +43,7 @@ export default function PartnersTicker({
               return (
                 <div
                   key={`t1-${partner.id}-${index}`}
-                  className="h-20 sm:h-22 w-48 sm:w-56 flex-shrink-0 flex flex-col items-center justify-center p-3 rounded-xl bg-[#11141a] dark:bg-[#0a0a0a] hover:bg-[#161a22] dark:hover:bg-[#121212] border border-stone-300/40 dark:border-[#1f1f1f] hover:border-[#3b76b3]/60 transition-all duration-300 group shadow-sm hover:shadow-md"
+                  className="h-20 sm:h-22 w-48 sm:w-56 flex-shrink-0 flex flex-col items-center justify-center p-3 rounded-xl bg-white dark:bg-[#0a0a0a] hover:bg-stone-50 dark:hover:bg-[#121212] border border-[#E6DFD3] dark:border-[#1f1f1f] hover:border-[#3b76b3]/60 dark:hover:border-[#3b76b3]/60 transition-all duration-300 group shadow-sm hover:shadow-md"
                   title={`${name} • ${partner.sectorAr || ''}`}
                 >
                   <div className="relative w-full h-10 sm:h-11 flex items-center justify-center">
@@ -52,10 +52,10 @@ export default function PartnersTicker({
                       alt={name}
                       fill
                       sizes="(max-width: 768px) 192px, 224px"
-                      className="object-contain p-0.5 group-hover:scale-105 transition-all duration-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
+                      className="object-contain p-0.5 filter grayscale opacity-60 contrast-125 dark:opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:contrast-100 group-hover:scale-105 transition-all duration-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]"
                     />
                   </div>
-                  <span className="mt-1 text-[11px] font-sans font-medium text-stone-300/90 dark:text-stone-400 group-hover:text-white transition-colors truncate max-w-full px-1 text-center">
+                  <span className="mt-1 text-[11px] font-sans font-medium text-[#52525B] dark:text-stone-400 group-hover:text-[#18181B] dark:group-hover:text-white transition-colors truncate max-w-full px-1 text-center">
                     {name}
                   </span>
                 </div>
@@ -70,7 +70,7 @@ export default function PartnersTicker({
               return (
                 <div
                   key={`t2-${partner.id}-${index}`}
-                  className="h-20 sm:h-22 w-48 sm:w-56 flex-shrink-0 flex flex-col items-center justify-center p-3 rounded-xl bg-[#11141a] dark:bg-[#0a0a0a] hover:bg-[#161a22] dark:hover:bg-[#121212] border border-stone-300/40 dark:border-[#1f1f1f] hover:border-[#3b76b3]/60 transition-all duration-300 group shadow-sm hover:shadow-md"
+                  className="h-20 sm:h-22 w-48 sm:w-56 flex-shrink-0 flex flex-col items-center justify-center p-3 rounded-xl bg-white dark:bg-[#0a0a0a] hover:bg-stone-50 dark:hover:bg-[#121212] border border-[#E6DFD3] dark:border-[#1f1f1f] hover:border-[#3b76b3]/60 dark:hover:border-[#3b76b3]/60 transition-all duration-300 group shadow-sm hover:shadow-md"
                   title={`${name} • ${partner.sectorAr || ''}`}
                 >
                   <div className="relative w-full h-10 sm:h-11 flex items-center justify-center">
@@ -79,10 +79,10 @@ export default function PartnersTicker({
                       alt={name}
                       fill
                       sizes="(max-width: 768px) 192px, 224px"
-                      className="object-contain p-0.5 group-hover:scale-105 transition-all duration-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
+                      className="object-contain p-0.5 filter grayscale opacity-60 contrast-125 dark:opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:contrast-100 group-hover:scale-105 transition-all duration-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]"
                     />
                   </div>
-                  <span className="mt-1 text-[11px] font-sans font-medium text-stone-300/90 dark:text-stone-400 group-hover:text-white transition-colors truncate max-w-full px-1 text-center">
+                  <span className="mt-1 text-[11px] font-sans font-medium text-[#52525B] dark:text-stone-400 group-hover:text-[#18181B] dark:group-hover:text-white transition-colors truncate max-w-full px-1 text-center">
                     {name}
                   </span>
                 </div>

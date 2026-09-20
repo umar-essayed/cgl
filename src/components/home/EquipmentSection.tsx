@@ -41,7 +41,7 @@ export default function EquipmentSection({
   const displayedEquipment = showAll ? filteredEquipment : filteredEquipment.slice(0, 3);
 
   return (
-    <section id="equipment" className="py-16 sm:py-24 bg-[#F3ECE2] dark:bg-black border-b border-[#E6DFD3] dark:border-[#1f1f1f] text-[#18181B] dark:text-white">
+    <section id="equipment" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-24 bg-[#F3ECE2] dark:bg-black border-b border-[#E6DFD3] dark:border-[#1f1f1f] text-[#18181B] dark:text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
         
         {/* Header */}

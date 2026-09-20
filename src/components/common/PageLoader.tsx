@@ -31,17 +31,17 @@ export default function PageLoader({
       id="cgl-preloader"
       className="fixed inset-0 z-[99999] flex items-center justify-center bg-[#FBF9F5]/90 dark:bg-black/85 backdrop-blur-xl pointer-events-none select-none transition-opacity duration-300"
     >
-      <div className="relative flex flex-col items-center justify-center gap-3">
+      <div className="relative flex flex-col items-center justify-center">
         {/* Soft atmospheric ambient glow */}
         <div
-          className="absolute w-24 h-24 rounded-full blur-2xl opacity-35 pointer-events-none"
+          className="absolute w-44 h-44 sm:w-56 sm:h-56 rounded-full blur-3xl opacity-40 pointer-events-none"
           style={{ backgroundColor: color }}
         />
 
-        {/* Instant Hardware-Accelerated 360 SVG Dual-Orbiter (Runs immediately at 0ms via GPU CSS) */}
-        <div className="relative w-16 h-16 flex items-center justify-center">
+        {/* Instant Hardware-Accelerated 360 SVG Dual-Orbiter (Prominent & Scaled) */}
+        <div className="relative w-28 h-28 sm:w-36 sm:h-36 flex items-center justify-center">
           <svg
-            className="w-16 h-16 cgl-instant-spinner"
+            className="w-28 h-28 sm:w-36 sm:h-36 cgl-instant-spinner"
             viewBox="0 0 100 100"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -60,44 +60,38 @@ export default function PageLoader({
               cy="50"
               r="24"
               stroke={color}
-              strokeWidth="1.5"
+              strokeWidth="1.75"
               strokeDasharray="6 4"
-              className="opacity-30"
+              className="opacity-35"
             />
 
             {/* Leading Orb */}
             <circle
               cx="50"
               cy="26"
-              r="7"
+              r="7.5"
               fill="url(#loaderOrbGrad)"
-              className="drop-shadow-[0_0_8px_rgba(59,118,179,0.8)]"
+              className="drop-shadow-[0_0_12px_rgba(59,118,179,0.9)]"
             />
 
             {/* Counter Orb */}
             <circle
               cx="50"
               cy="74"
-              r="7"
+              r="7.5"
               fill="url(#loaderOrbGrad)"
-              className="drop-shadow-[0_0_8px_rgba(59,118,179,0.8)]"
+              className="drop-shadow-[0_0_12px_rgba(59,118,179,0.9)]"
             />
 
             {/* Micro Center Node */}
             <circle
               cx="50"
               cy="50"
-              r="3.5"
+              r="4"
               fill={color}
               className="animate-pulse"
             />
           </svg>
-        </div>
-
-        {/* Professional Minimal Engineering Tag */}
-        <div className="cgl-loader-pill flex items-center gap-1.5 text-[11px] font-mono font-medium tracking-wider text-[#0F172A] dark:text-stone-300 bg-white/90 dark:bg-[#111111]/90 px-3 py-1 rounded-full border border-[#E6DFD3] dark:border-[#1f1f1f] shadow-sm">
-          <span className="w-1.5 h-1.5 rounded-full animate-ping" style={{ backgroundColor: color }} />
-          <span className="cgl-loader-text">CGL • LABS</span>
         </div>
       </div>
     </div>

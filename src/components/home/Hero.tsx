@@ -177,7 +177,7 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
             <motion.div
               key={`dark-bg-${activeSlide.id}-${activeSlide.mediaUrl}`}
               initial={{ opacity: 0, scale: 1.03 }}
-              animate={{ opacity: 0.65, scale: 1 }}
+              animate={{ opacity: 0.78, scale: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.9, ease: 'easeOut' }}
               className="absolute inset-0"
@@ -204,9 +204,9 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
             </motion.div>
           </AnimatePresence>
 
-          {/* Top/Overall Cinematic Dark Vignette */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#000000]/85 via-black/45 to-black/30 pointer-events-none" />
-          <div className="absolute inset-0 bg-black/25 pointer-events-none" />
+          {/* Top/Overall Cinematic Dark Vignette - Softened & Balanced */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#000000]/70 via-black/30 to-black/15 pointer-events-none" />
+          <div className="absolute inset-0 bg-black/15 pointer-events-none" />
 
           {/* Soft Controlled Architectural Bottom Blend to pure #000000 */}
           <div className="absolute bottom-0 left-0 right-0 h-28 sm:h-36 lg:h-44 bg-gradient-to-t from-[#000000] via-[#000000]/60 to-transparent pointer-events-none z-10" />
@@ -263,7 +263,17 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
 
               <a
                 href={`/${lang}#services`}
-                className="inline-flex items-center justify-center flex-1 sm:flex-initial px-4 sm:px-5 py-2.5 sm:py-3 bg-black/60 hover:bg-black/80 backdrop-blur-md text-white border border-white/20 font-medium text-xs sm:text-sm rounded-xl transition-all text-center"
+                onClick={(e) => {
+                  const el = document.getElementById('services');
+                  if (el) {
+                    e.preventDefault();
+                    const navHeight = 75;
+                    const pos = el.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({ top: pos - navHeight, behavior: 'smooth' });
+                    window.history.pushState(null, '', `#services`);
+                  }
+                }}
+                className="inline-flex items-center justify-center flex-1 sm:flex-initial px-4 sm:px-5 py-2.5 sm:py-3 bg-black/60 hover:bg-black/80 backdrop-blur-md text-white border border-white/20 font-medium text-xs sm:text-sm rounded-xl transition-all text-center cursor-pointer"
               >
                 <span>{dict.hero.ctaServices}</span>
               </a>
@@ -622,7 +632,17 @@ export default function Hero({ lang = 'ar', slides, stats }: HeroProps) {
 
                 <a
                   href={`/${lang}#services`}
-                  className="inline-flex items-center justify-center px-5 sm:px-7 py-3 bg-white hover:bg-stone-50 text-[#0F172A] border border-[#E6DFD3] font-semibold text-xs sm:text-sm rounded-xl shadow-sm hover:shadow transition-all"
+                  onClick={(e) => {
+                    const el = document.getElementById('services');
+                    if (el) {
+                      e.preventDefault();
+                      const navHeight = 75;
+                      const pos = el.getBoundingClientRect().top + window.pageYOffset;
+                      window.scrollTo({ top: pos - navHeight, behavior: 'smooth' });
+                      window.history.pushState(null, '', `#services`);
+                    }
+                  }}
+                  className="inline-flex items-center justify-center px-5 sm:px-7 py-3 bg-white hover:bg-stone-50 text-[#0F172A] border border-[#E6DFD3] font-semibold text-xs sm:text-sm rounded-xl shadow-sm hover:shadow transition-all cursor-pointer"
                 >
                   <span>{dict.hero.ctaServices}</span>
                 </a>
