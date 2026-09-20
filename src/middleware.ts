@@ -23,7 +23,7 @@ function detectDeviceLocale(request: NextRequest): Locale {
     return 'ar';
   }
 
-  return 'en';
+  return defaultLocale;
 }
 
 export function middleware(request: NextRequest) {
@@ -44,21 +44,6 @@ export function middleware(request: NextRequest) {
       response.cookies.set('cgl_lang', targetLocale, { path: '/', maxAge: 60 * 60 * 24 * 365, sameSite: 'lax' });
     }
     return response;
-  }
-
-  // Check if visitor opens with mismatched default locale on first visit
-  const userExplicitlySelected = request.cookies.get('cgl_lang_selected')?.value === '1';
-  const cookieLang = request.cookies.get('cgl_lang')?.value;
-
-  if (!userExplicitlySelected && !cookieLang) {
-    const deviceLocale = detectDeviceLocale(request);
-    const currentLocale = pathname.startsWith('/en') ? 'en' : 'ar';
-    if (deviceLocale !== currentLocale) {
-      const newPath = pathname.replace(`/${currentLocale}`, `/${deviceLocale}`);
-      const response = NextResponse.redirect(new URL(newPath, request.url));
-      response.cookies.set('cgl_lang', deviceLocale, { path: '/', maxAge: 60 * 60 * 24 * 365, sameSite: 'lax' });
-      return response;
-    }
   }
 
   return NextResponse.next();
