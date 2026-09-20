@@ -35,9 +35,11 @@ export default function ThemeSync({ themeColor = 'blue', themeMode }: ThemeSyncP
     if (preferredMode === 'light') {
       root.classList.add('theme-light');
       root.classList.remove('dark');
+      root.setAttribute('data-theme-mode', 'light');
     } else {
       root.classList.remove('theme-light');
       root.classList.add('dark');
+      root.setAttribute('data-theme-mode', 'dark');
     }
   }, [themeColor, themeMode]);
 
@@ -51,7 +53,10 @@ export default function ThemeSync({ themeColor = 'blue', themeMode }: ThemeSyncP
             (function() {
               try {
                 var tc = '${themeColor}';
+                var defaultMode = '${themeMode || "dark"}';
                 var root = document.documentElement;
+
+                // 1. Sync Theme Color
                 if (tc === 'green') {
                   root.classList.add('theme-green');
                   root.classList.remove('theme-blue');
@@ -60,6 +65,29 @@ export default function ThemeSync({ themeColor = 'blue', themeMode }: ThemeSyncP
                   root.classList.remove('theme-green');
                   root.classList.add('theme-blue');
                   root.setAttribute('data-theme-color', 'blue');
+                }
+
+                // 2. Sync Theme Mode (Light / Dark)
+                var mode = null;
+                try {
+                  mode = localStorage.getItem('cgl_theme_mode');
+                } catch(e) {}
+                if (!mode) {
+                  var m = document.cookie.match(/(?:^|; )cgl_theme_mode=([^;]+)/);
+                  if (m) mode = m[1];
+                }
+                if (!mode && defaultMode) {
+                  mode = defaultMode;
+                }
+
+                if (mode === 'light') {
+                  root.classList.remove('dark');
+                  root.classList.add('theme-light');
+                  root.setAttribute('data-theme-mode', 'light');
+                } else if (mode === 'dark') {
+                  root.classList.remove('theme-light');
+                  root.classList.add('dark');
+                  root.setAttribute('data-theme-mode', 'dark');
                 }
               } catch(e) {}
             })();

@@ -86,7 +86,38 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ar" dir="rtl" className={`dark ${cairo.variable} ${elMessiri.variable} scroll-smooth`}>
+    <html lang="ar" dir="rtl" className={`dark ${cairo.variable} ${elMessiri.variable} scroll-smooth`} suppressHydrationWarning>
+      <head>
+        <script
+          id="cgl-theme-init"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var mode = null;
+                  try {
+                    mode = localStorage.getItem('cgl_theme_mode');
+                  } catch(e) {}
+                  if (!mode) {
+                    var m = document.cookie.match(/(?:^|; )cgl_theme_mode=([^;]+)/);
+                    if (m) mode = m[1];
+                  }
+                  var root = document.documentElement;
+                  if (mode === 'light') {
+                    root.classList.remove('dark');
+                    root.classList.add('theme-light');
+                    root.setAttribute('data-theme-mode', 'light');
+                  } else if (mode === 'dark') {
+                    root.classList.remove('theme-light');
+                    root.classList.add('dark');
+                    root.setAttribute('data-theme-mode', 'dark');
+                  }
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="bg-[#000000] text-stone-100 font-sans min-h-screen flex flex-col selection:bg-[#3b76b3] selection:text-white">
         {children}
       </body>

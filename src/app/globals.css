@@ -241,6 +241,36 @@ html.theme-light {
   color-scheme: light;
 }
 
+/* Light Theme Body Background Sync */
+html.theme-light body,
+html[data-theme-mode="light"] body {
+  background-color: #FBF9F5 !important;
+  color: #18181B !important;
+}
+
+/* Instant 0ms Preloader Theme Adaptability */
+#cgl-preloader {
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+html.theme-light #cgl-preloader,
+html[data-theme-mode="light"] #cgl-preloader {
+  background-color: rgba(251, 249, 245, 0.92) !important;
+}
+
+html.theme-light #cgl-preloader .cgl-loader-pill,
+html[data-theme-mode="light"] #cgl-preloader .cgl-loader-pill {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: #E6DFD3 !important;
+}
+
+html.theme-light #cgl-preloader .cgl-loader-text,
+html[data-theme-mode="light"] #cgl-preloader .cgl-loader-text {
+  color: #0F172A !important;
+}
+
 html.theme-light ::-webkit-scrollbar-track {
   background: #F3ECE2;
 }
@@ -258,3 +288,4 @@ html.theme-light.theme-green ::-webkit-scrollbar-thumb:hover,
 html.theme-light[data-theme-color="green"] ::-webkit-scrollbar-thumb:hover {
   background: #16A34A;
 }
+

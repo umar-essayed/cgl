@@ -29,7 +29,7 @@ export default function PageLoader({
   return (
     <div
       id="cgl-preloader"
-      className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/80 backdrop-blur-xl pointer-events-none select-none transition-opacity duration-300"
+      className="fixed inset-0 z-[99999] flex items-center justify-center bg-[#FBF9F5]/90 dark:bg-black/85 backdrop-blur-xl pointer-events-none select-none transition-opacity duration-300"
     >
       <div className="relative flex flex-col items-center justify-center gap-3">
         {/* Soft atmospheric ambient glow */}
@@ -95,9 +95,9 @@ export default function PageLoader({
         </div>
 
         {/* Professional Minimal Engineering Tag */}
-        <div className="flex items-center gap-1.5 text-[11px] font-mono font-medium tracking-wider text-stone-300">
+        <div className="cgl-loader-pill flex items-center gap-1.5 text-[11px] font-mono font-medium tracking-wider text-[#0F172A] dark:text-stone-300 bg-white/90 dark:bg-[#111111]/90 px-3 py-1 rounded-full border border-[#E6DFD3] dark:border-[#1f1f1f] shadow-sm">
           <span className="w-1.5 h-1.5 rounded-full animate-ping" style={{ backgroundColor: color }} />
-          <span>CGL • LABS</span>
+          <span className="cgl-loader-text">CGL • LABS</span>
         </div>
       </div>
     </div>
