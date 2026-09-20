@@ -4,7 +4,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Search, Calendar, Clock, ArrowUpLeft, ArrowUpRight, Star, RefreshCw } from 'lucide-react';
+import { Search, Calendar, Clock, ArrowUpLeft, ArrowUpRight, Star, RefreshCw, X } from 'lucide-react';
 import { NewsArticle } from '@/lib/types';
 import { Locale, getDictionary } from '@/lib/i18n';
 
@@ -76,60 +76,71 @@ export default function NewsCatalogClient({ lang, initialNews }: NewsCatalogClie
   };
 
   return (
-    <div className="space-y-8">
-      {/* Search & Category Filter Bar */}
-      <div className="bg-white dark:bg-[#0a0a0a] border border-[#E6DFD3] dark:border-[#1f1f1f] rounded-2xl p-4 sm:p-5 shadow-sm dark:shadow-xl space-y-4">
-        <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
-          {/* Search Box */}
-          <div className="relative w-full sm:max-w-md">
-            <Search className={`w-4 h-4 text-[#71717A] dark:text-stone-400 absolute ${isRtl ? 'right-3' : 'left-3'} top-1/2 -translate-y-1/2 pointer-events-none`} />
-            <input
-              type="text"
-              placeholder={isRtl ? 'البحث بالعنوان، الكلمات المفتاحية، أو كود البناء...' : 'Search articles by title, keywords, or codes...'}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className={`w-full bg-[#FBF9F5] dark:bg-[#111111] border border-[#E6DFD3] dark:border-[#1f1f1f] rounded-xl ${isRtl ? 'pr-9 pl-4' : 'pl-9 pr-4'} py-2.5 text-sm sm:text-sm text-[#18181B] dark:text-stone-100 placeholder-[#71717A] dark:placeholder-stone-400 focus:outline-none focus:border-[#3b76b3] transition-colors`}
-            />
-          </div>
-
-          {/* Results Counter */}
-          <div className="text-xs font-mono text-[#52525B] dark:text-stone-400 bg-[#FBF9F5] dark:bg-[#111111] px-3.5 py-2 rounded-xl border border-[#E6DFD3] dark:border-[#1f1f1f] w-full sm:w-auto flex items-center justify-between sm:justify-start gap-2">
-            <span>{isRtl ? 'المقالات المعروضة:' : 'Articles Displayed:'}</span>
-            <span className="text-[#3b76b3] font-bold">
-              {String(Math.min(visibleCount, filteredNews.length)).padStart(2, '0')} / {String(filteredNews.length).padStart(2, '0')}
-            </span>
-          </div>
+    <div className="space-y-6">
+      {/* Search Bar & Result Stats Row */}
+      <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+        {/* Search Box */}
+        <div className="relative w-full sm:max-w-md">
+          <Search className={`w-4 h-4 text-[#71717A] dark:text-stone-400 absolute ${isRtl ? 'right-3.5' : 'left-3.5'} top-1/2 -translate-y-1/2 pointer-events-none`} />
+          <input
+            type="text"
+            placeholder={isRtl ? 'البحث بالعنوان، الكلمات المفتاحية، أو كود البناء...' : 'Search articles by title, keywords, or codes...'}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className={`w-full bg-white/80 dark:bg-white/5 border border-[#E6DFD3] dark:border-stone-800 rounded-full ${isRtl ? 'pr-10 pl-9' : 'pl-10 pr-9'} py-2 text-xs sm:text-sm text-[#18181B] dark:text-stone-100 placeholder-[#71717A] dark:placeholder-stone-400 focus:outline-none focus:border-[#3b76b3] focus:ring-1 focus:ring-[#3b76b3] shadow-sm transition-all`}
+          />
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery('')}
+              className={`absolute ${isRtl ? 'left-3' : 'right-3'} top-1/2 -translate-y-1/2 text-[#71717A] hover:text-[#18181B] dark:text-stone-400 dark:hover:text-white p-0.5 rounded-full transition-colors`}
+              aria-label="Clear search"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
 
-        {/* Category Filter Pills */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 pt-1 scrollbar-none">
-          <button
-            type="button"
-            onClick={() => setSelectedCategory('all')}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
-              selectedCategory === 'all'
-                ? 'bg-[#3b76b3] text-white font-bold shadow-md'
-                : 'bg-[#FBF9F5] dark:bg-[#111111] text-[#52525B] dark:text-stone-400 hover:text-[#18181B] dark:hover:text-white border border-[#E6DFD3] dark:border-[#1f1f1f]'
-            }`}
-          >
-            {isRtl ? 'كافة التصنيفات' : 'All Categories'}
-          </button>
+        {/* Results Counter */}
+        <div className="text-xs font-mono text-[#52525B] dark:text-stone-400 bg-white/80 dark:bg-white/5 px-4 py-2 rounded-full border border-[#E6DFD3] dark:border-stone-800 shadow-sm w-fit self-start sm:self-auto flex items-center gap-2">
+          <span>{isRtl ? 'المقالات المعروضة:' : 'Articles Displayed:'}</span>
+          <span className="text-[#3b76b3] font-bold">
+            {String(Math.min(visibleCount, filteredNews.length)).padStart(2, '0')} / {String(filteredNews.length).padStart(2, '0')}
+          </span>
+        </div>
+      </div>
 
-          {categories.map((cat) => (
+      {/* Category Tabs - matching EquipmentSection (rounded-full pills, no horizontal scroll, flex-wrap) */}
+      <div className="flex flex-wrap items-center gap-2 pb-4 mb-8 border-b border-[#E6DFD3] dark:border-[#1a1a1a]">
+        <button
+          type="button"
+          onClick={() => setSelectedCategory('all')}
+          className={`px-4 py-2 rounded-full text-xs sm:text-sm transition-all whitespace-nowrap ${
+            selectedCategory === 'all'
+              ? 'bg-[#3b76b3] text-white font-semibold shadow-md shadow-[#3b76b3]/20'
+              : 'text-[#52525B] dark:text-stone-400 hover:text-[#18181B] dark:hover:text-white bg-white/80 dark:bg-white/5 hover:bg-white dark:hover:bg-[#141414] border border-[#E6DFD3] dark:border-transparent shadow-sm'
+          }`}
+        >
+          {isRtl ? 'كافة التصنيفات' : 'All Categories'}
+        </button>
+
+        {categories.map((cat) => {
+          const isSelected = selectedCategory === cat;
+          return (
             <button
               key={cat}
               type="button"
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
-                selectedCategory === cat
-                  ? 'bg-[#3b76b3] text-white font-bold shadow-md'
-                  : 'bg-[#FBF9F5] dark:bg-[#111111] text-[#52525B] dark:text-stone-400 hover:text-[#18181B] dark:hover:text-white border border-[#E6DFD3] dark:border-[#1f1f1f]'
+              className={`px-4 py-2 rounded-full text-xs sm:text-sm transition-all whitespace-nowrap ${
+                isSelected
+                  ? 'bg-[#3b76b3] text-white font-semibold shadow-md shadow-[#3b76b3]/20'
+                  : 'text-[#52525B] dark:text-stone-400 hover:text-[#18181B] dark:hover:text-white bg-white/80 dark:bg-white/5 hover:bg-white dark:hover:bg-[#141414] border border-[#E6DFD3] dark:border-transparent shadow-sm'
               }`}
             >
               {cat}
             </button>
-          ))}
-        </div>
+          );
+        })}
       </div>
 
       {/* News Grid */}
