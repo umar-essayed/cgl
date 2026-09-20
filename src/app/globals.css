@@ -289,3 +289,25 @@ html.theme-light[data-theme-color="green"] ::-webkit-scrollbar-thumb:hover {
   background: #16A34A;
 }
 
+/* Custom Watermark-free Dark Theme for Leaflet Tiles */
+.cgl-dark-tiles {
+  filter: invert(100%) hue-rotate(190deg) contrast(115%) brightness(85%) saturate(75%) !important;
+}
+
+html.theme-light .cgl-dark-tiles,
+html[data-theme-mode="light"] .cgl-dark-tiles {
+  filter: contrast(102%) brightness(98%) !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(0, 0, 0, 0.6) !important;
+  color: #71717A !important;
+  font-size: 10px !important;
+  border-radius: 4px !important;
+  padding: 2px 6px !important;
+}
+
+.leaflet-control-attribution a {
+  color: #a1a1aa !important;
+}
+

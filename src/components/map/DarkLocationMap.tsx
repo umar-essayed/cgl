@@ -40,13 +40,14 @@ export default function DarkLocationMap({
 
       mapInstanceRef.current = map;
 
-      // CartoDB Dark Matter for signature dark theme
-      const tileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png';
+      // Clean OpenStreetMap tiles with CSS dark filter (100% free, permanent, zero watermarks)
+      const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
       L.tileLayer(tileUrl, {
-        attribution: '&copy; CartoDB &copy; OpenStreetMap',
-        subdomains: 'abcd',
+        attribution: '&copy; OpenStreetMap contributors',
+        subdomains: ['a', 'b', 'c'],
         maxZoom: 19,
+        className: 'cgl-dark-tiles',
       }).addTo(map);
 
       // Custom CGL Pin with brand pulse
