@@ -1,44 +1,87 @@
 'use client';
 
-import React from 'react';
-import { MapPin } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import 'leaflet/dist/leaflet.css';
 
 interface DarkLocationMapProps {
   lat?: number;
   lng?: number;
   zoom?: number;
-  lang?: 'ar' | 'en';
+  lang?: string;
 }
 
 export default function DarkLocationMap({
   lat = 21.5231047,
   lng = 39.177774,
-  zoom = 17,
-  lang = 'ar',
-}: DarkLocationMapProps) {
-  const queryParam = `${lat},${lng}`;
-  const embedUrl = `https://maps.google.com/maps?q=${queryParam}&t=m&z=${zoom}&ie=UTF8&iwloc=&output=embed&hl=${lang}`;
+  zoom = 14,
+}: DarkLocationMapProps = {}) {
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<any>(null);
+
+  // Initialize Map Once
+  useEffect(() => {
+    if (!mapContainerRef.current || mapInstanceRef.current) return;
+
+    let isMounted = true;
+
+    // Dynamically import Leaflet on client side
+    import('leaflet').then((L) => {
+      if (!isMounted || !mapContainerRef.current || mapInstanceRef.current) return;
+
+      // Initialize map
+      const map = L.map(mapContainerRef.current, {
+        center: [lat, lng],
+        zoom: zoom,
+        zoomControl: false,
+        scrollWheelZoom: false,
+        // Disable single-finger drag on mobile so user doesn't get trapped while scrolling the page!
+        dragging: !L.Browser.mobile,
+      });
+
+      mapInstanceRef.current = map;
+
+      // CartoDB Dark Matter for signature dark theme
+      const tileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png';
+
+      L.tileLayer(tileUrl, {
+        attribution: '&copy; CartoDB &copy; OpenStreetMap',
+        subdomains: 'abcd',
+        maxZoom: 19,
+      }).addTo(map);
+
+      // Custom CGL Pin with brand pulse
+      const pinHtml = `
+        <div style="position: relative; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px;">
+          <div style="position: absolute; width: 38px; height: 38px; border-radius: 50%; background: var(--cgl-primary, #3b76b3); opacity: 0.35; animation: pulse 2s cubic-bezier(0.4, 0, 1) infinite;"></div>
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: var(--cgl-primary, #3b76b3); border: 3px solid #000000; box-shadow: 0 0 16px var(--cgl-primary, rgba(59, 118, 179, 0.85)); display: flex; align-items: center; justify-content: center;">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: #000000;"></div>
+          </div>
+        </div>
+      `;
+
+      const customPin = L.divIcon({
+        className: 'cgl-custom-marker',
+        html: pinHtml,
+        iconSize: [42, 42],
+        iconAnchor: [21, 21],
+      });
+
+      L.marker([lat, lng], { icon: customPin }).addTo(map);
+    });
+
+    return () => {
+      isMounted = false;
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, [lat, lng, zoom]);
 
   return (
-    <div className="relative w-full h-full bg-white dark:bg-[#000000] overflow-hidden select-none">
-      {/* Google Maps Iframe with Website Theme Filter */}
-      <iframe
-        title="CGL Headquarters Location Map"
-        src={embedUrl}
-        width="100%"
-        height="100%"
-        loading="lazy"
-        allowFullScreen
-        referrerPolicy="no-referrer-when-downgrade"
-        className="w-full h-full border-0 filter contrast-[1.02] dark:invert-[92%] dark:hue-rotate-[195deg] dark:contrast-[1.05] dark:brightness-[0.92] dark:saturate-[0.85]"
-      />
-
-      {/* Quick Location Badge */}
-      <div className="absolute bottom-4 left-4 sm:bottom-5 sm:left-5 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/95 dark:bg-[#0a0a0a]/90 backdrop-blur-md border border-[#E6DFD3] dark:border-white/10 text-xs font-mono text-[#18181B] dark:text-stone-300 shadow-md dark:shadow-xl">
-        <MapPin className="w-3.5 h-3.5 text-[#3b76b3]" />
-        <span>Jeddah • 21.5231° N, 39.1778° E</span>
-      </div>
-    </div>
+    <div
+      ref={mapContainerRef}
+      className="w-full h-full bg-[#000000] isolate z-0"
+    />
   );
 }
-
