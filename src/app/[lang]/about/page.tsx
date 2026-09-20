@@ -141,81 +141,202 @@ export default async function AboutPage({
       <Navbar lang={lang} />
 
       {/* 1. Architectural Narrative Hero */}
-      <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-28 overflow-hidden min-h-[550px] sm:min-h-[640px] flex flex-col justify-between bg-[#000000] text-white transition-colors duration-300">
-        {/* Background Image with Engineering Atmosphere */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <Image
-            src="/assets/sliders/slider1.jpg"
-            alt="CGL Geotechnical Site Operations"
-            fill
-            priority
-            className="object-cover object-center filter contrast-105 brightness-95 opacity-55 scale-105"
-          />
-          {/* Dual Vignette & Smooth Bottom Blend:
-              Confined strictly to lower edge (h-28 sm:h-36 lg:h-44) so desktop view is razor-sharp
-          */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#000000]/85 via-black/45 to-black/30 pointer-events-none" />
-          <div className="absolute inset-0 bg-[#000000]/25 pointer-events-none" />
-          <div className="absolute bottom-0 left-0 right-0 h-28 sm:h-36 lg:h-44 bg-gradient-to-t from-[#F3ECE2] via-[#F3ECE2]/35 to-transparent dark:from-[#060606] dark:via-[#060606]/60 dark:to-transparent pointer-events-none z-10" />
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#3b76b3]/15 rounded-full blur-3xl pointer-events-none" />
+      <section className="relative overflow-hidden transition-colors duration-300 select-none">
+        
+        {/* =========================================================================
+            1. DARK MODE HERO: 100% Exact Previous Cinematic Design
+            ========================================================================= */}
+        <div className="hidden dark:flex relative pt-32 sm:pt-40 pb-20 sm:pb-28 overflow-hidden min-h-[550px] sm:min-h-[640px] flex-col justify-between bg-[#000000] text-white">
+          {/* Background Image with Engineering Atmosphere */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <Image
+              src="/assets/sliders/slider1.jpg"
+              alt="CGL Geotechnical Site Operations"
+              fill
+              priority
+              className="object-cover object-center filter contrast-105 brightness-95 opacity-55 scale-105"
+            />
+            {/* Dual Vignette & Smooth Bottom Blend */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#000000]/85 via-black/45 to-black/30 pointer-events-none" />
+            <div className="absolute inset-0 bg-[#000000]/25 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-28 sm:h-36 lg:h-44 bg-gradient-to-t from-[#F3ECE2] via-[#F3ECE2]/35 to-transparent dark:from-[#060606] dark:via-[#060606]/60 dark:to-transparent pointer-events-none z-10" />
+            <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#3b76b3]/15 rounded-full blur-3xl pointer-events-none" />
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 w-full">
+            {/* Top Metadata Strip */}
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-8 mb-12 border-b border-white/10">
+              <div className="flex items-center gap-3">
+                <BackToHomeButton lang={lang as Locale} />
+                <span className="text-stone-600">/</span>
+                <span className="text-xs font-mono text-stone-300">
+                  {isRtl ? 'ملف الشركة' : 'Company Profile'}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-3 text-xs font-mono">
+                <span className="inline-flex items-center gap-1.5 text-stone-300">
+                  <Globe className="w-3.5 h-3.5 text-[#3b76b3]" />
+                  <span>USA • KSA</span>
+                </span>
+                <span className="text-stone-600">•</span>
+                <span className="text-stone-400">
+                  {isRtl ? 'امتياز رسمي لـ CGI' : 'Official CGI Franchise'}
+                </span>
+              </div>
+            </div>
+
+            {/* Bold Editorial Headline */}
+            <div className="max-w-4xl space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#111111]/90 border border-[#1f1f1f] text-xs font-mono text-[#3b76b3] shadow-sm w-fit">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>{isRtl ? 'المعامل الإبداعية للجيوتقنية CGL' : 'Creative Geotechnical Laboratories'}</span>
+              </div>
+
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-bold text-white tracking-tight leading-[1.08] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                {isRtl ? (
+                  <>
+                    نبني الأمان من أعماق الأرض، <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-stone-200 to-[#3b76b3]">
+                      بدقة هندسية لا تقبل المساومة.
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    Engineering safety from the ground up, <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-stone-200 to-[#3b76b3]">
+                      with uncompromised precision.
+                    </span>
+                  </>
+                )}
+              </h1>
+
+              <p className="text-base sm:text-xl text-stone-200 font-sans leading-relaxed max-w-3xl font-light drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                {isRtl 
+                  ? 'تأسست CGL كامتياز فخور لمجموعة CGI بالولايات المتحدة الأمريكية، لتنقل أرقى بروتوكولات الفحص المخبري والاستكشاف الجيوتقني إلى مشاريع المملكة، موفرة أساسات صلبة ودراسات معتمدة تضمن ديمومة وسلامة المنشآت.'
+                  : 'Creative Geotechnical Laboratories (CGL) is a proud franchise of CGI, bringing trusted global standards to infrastructure in Saudi Arabia through rigorous subsurface investigations and materials testing.'}
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+        {/* =========================================================================
+            2. LIGHT MODE HERO: Split Architectural Layout with Free-Form Blended Image
+            ========================================================================= */}
+        <div className="flex dark:hidden relative pt-28 sm:pt-36 pb-16 sm:pb-24 overflow-hidden min-h-[560px] sm:min-h-[660px] flex-col justify-between bg-[#FBF9F5] text-[#0F172A]">
           
-          {/* Top Metadata Strip */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pb-8 mb-12 border-b border-white/10">
-            <div className="flex items-center gap-3">
-              <BackToHomeButton lang={lang as Locale} />
-              <span className="text-stone-600">/</span>
-              <span className="text-xs font-mono text-stone-300">
-                {isRtl ? 'ملف الشركة' : 'Company Profile'}
-              </span>
-            </div>
+          {/* Blueprint Grid */}
+          <div className="absolute inset-0 blueprint-grid opacity-[0.035] pointer-events-none" />
 
-            <div className="flex items-center gap-3 text-xs font-mono">
-              <span className="inline-flex items-center gap-1.5 text-stone-300">
-                <Globe className="w-3.5 h-3.5 text-[#3b76b3]" />
-                <span>USA • KSA</span>
-              </span>
-              <span className="text-stone-600">•</span>
-              <span className="text-stone-400">
-                {isRtl ? 'امتياز رسمي لـ CGI' : 'Official CGI Franchise'}
-              </span>
-            </div>
+          {/* DESKTOP FULL-BLEED UNLEASHED HALF (LEFT on RTL / RIGHT on LTR) */}
+          <div 
+            className={`hidden lg:block absolute inset-y-0 ${
+              isRtl ? 'left-0 w-1/2 xl:w-[52%]' : 'right-0 w-1/2 xl:w-[52%]'
+            } overflow-hidden select-none z-0`}
+          >
+            <Image
+              src="/assets/sliders/slider1.jpg"
+              alt="CGL Geotechnical Operations"
+              fill
+              priority
+              className="object-cover object-center"
+            />
+
+            {/* Seamless Organic Center & Edge Dissolves */}
+            <div 
+              className={`absolute inset-y-0 ${
+                isRtl 
+                  ? 'right-0 bg-gradient-to-r from-transparent via-[#FBF9F5]/50 via-60% to-[#FBF9F5]' 
+                  : 'left-0 bg-gradient-to-l from-transparent via-[#FBF9F5]/50 via-60% to-[#FBF9F5]'
+              } w-64 lg:w-80 xl:w-[460px] pointer-events-none z-10`} 
+            />
+            <div className="absolute top-0 inset-x-0 h-24 sm:h-32 bg-gradient-to-b from-[#FBF9F5] via-[#FBF9F5]/60 to-transparent pointer-events-none z-10" />
+            <div className="absolute bottom-0 inset-x-0 h-24 sm:h-36 bg-gradient-to-t from-[#FBF9F5] via-[#FBF9F5]/60 to-transparent pointer-events-none z-10" />
           </div>
 
-          {/* Bold Editorial Headline */}
-          <div className="max-w-4xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#111111]/90 border border-[#1f1f1f] text-xs font-mono text-[#3b76b3] shadow-sm w-fit">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{isRtl ? 'المعامل الإبداعية للجيوتقنية CGL' : 'Creative Geotechnical Laboratories'}</span>
+          {/* Main Content Area */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 w-full my-auto py-4">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 xl:gap-14 items-center">
+              
+              {/* TEXT COLUMN: Right half on RTL */}
+              <div className="lg:col-span-7 xl:col-span-6 flex flex-col justify-center space-y-4 sm:space-y-6">
+                
+                {/* Top Metadata Strip */}
+                <div className="flex flex-wrap items-center justify-between gap-4 pb-4 sm:pb-6 border-b border-[#E6DFD3]">
+                  <div className="flex items-center gap-3">
+                    <BackToHomeButton lang={lang as Locale} />
+                    <span className="text-stone-300">/</span>
+                    <span className="text-xs font-mono text-[#475569]">
+                      {isRtl ? 'ملف الشركة' : 'Company Profile'}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-3 text-xs font-mono">
+                    <span className="inline-flex items-center gap-1.5 text-[#475569]">
+                      <Globe className="w-3.5 h-3.5 text-[#3b76b3]" />
+                      <span>USA • KSA</span>
+                    </span>
+                    <span className="text-stone-300">•</span>
+                    <span className="text-[#64748B]">
+                      {isRtl ? 'امتياز رسمي لـ CGI' : 'Official CGI Franchise'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Pill Tag */}
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#E6DFD3] text-xs font-mono text-[#3b76b3] shadow-sm w-fit">
+                  <Sparkles className="w-3.5 h-3.5 text-[#3b76b3]" />
+                  <span className="font-semibold">{isRtl ? 'المعامل الإبداعية للجيوتقنية CGL' : 'Creative Geotechnical Laboratories'}</span>
+                </div>
+
+                {/* Free-Form Image on Mobile (< lg) */}
+                <div className="lg:hidden relative w-full h-[220px] sm:h-[280px] my-1 overflow-hidden select-none">
+                  <Image
+                    src="/assets/sliders/slider1.jpg"
+                    alt="CGL Geotechnical Operations"
+                    fill
+                    priority
+                    className="object-cover object-center"
+                  />
+                  <div className="absolute top-0 inset-x-0 h-14 bg-gradient-to-b from-[#FBF9F5] to-transparent pointer-events-none z-10" />
+                  <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-[#FBF9F5] via-[#FBF9F5]/70 to-transparent pointer-events-none z-10" />
+                  <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-[#FBF9F5] to-transparent pointer-events-none z-10" />
+                  <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[#FBF9F5] to-transparent pointer-events-none z-10" />
+                </div>
+
+                {/* Editorial Headline */}
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold text-[#0F172A] tracking-tight leading-[1.12]">
+                  {isRtl ? (
+                    <>
+                      نبني الأمان من أعماق الأرض، <br />
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0F172A] via-[#1E293B] to-[#3b76b3]">
+                        بدقة هندسية لا تقبل المساومة.
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      Engineering safety from the ground up, <br />
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0F172A] via-[#1E293B] to-[#3b76b3]">
+                        with uncompromised precision.
+                      </span>
+                    </>
+                  )}
+                </h1>
+
+                {/* Subtitle */}
+                <p className="text-sm sm:text-base lg:text-lg text-[#334155] font-sans leading-relaxed max-w-2xl font-normal">
+                  {isRtl 
+                    ? 'تأسست CGL كامتياز فخور لمجموعة CGI بالولايات المتحدة الأمريكية، لتنقل أرقى بروتوكولات الفحص المخبري والاستكشاف الجيوتقني إلى مشاريع المملكة، موفرة أساسات صلبة ودراسات معتمدة تضمن ديمومة وسلامة المنشآت.'
+                    : 'Creative Geotechnical Laboratories (CGL) is a proud franchise of CGI, bringing trusted global standards to infrastructure in Saudi Arabia through rigorous subsurface investigations and materials testing.'}
+                </p>
+
+              </div>
+
+              {/* SPACER ON DESKTOP: Leaves left half open for full-bleed background image */}
+              <div className="hidden lg:block lg:col-span-5 xl:col-span-6 h-full pointer-events-none" />
+
             </div>
-
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-bold text-white tracking-tight leading-[1.08] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-              {isRtl ? (
-                <>
-                  نبني الأمان من أعماق الأرض، <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-stone-200 to-[#3b76b3]">
-                    بدقة هندسية لا تقبل المساومة.
-                  </span>
-                </>
-              ) : (
-                <>
-                  Engineering safety from the ground up, <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-stone-200 to-[#3b76b3]">
-                    with uncompromised precision.
-                  </span>
-                </>
-              )}
-            </h1>
-
-            <p className="text-base sm:text-xl text-stone-200 font-sans leading-relaxed max-w-3xl font-light drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-              {isRtl 
-                ? 'تأسست CGL كامتياز فخور لمجموعة CGI بالولايات المتحدة الأمريكية، لتنقل أرقى بروتوكولات الفحص المخبري والاستكشاف الجيوتقني إلى مشاريع المملكة، موفرة أساسات صلبة ودراسات معتمدة تضمن ديمومة وسلامة المنشآت.'
-                : 'Creative Geotechnical Laboratories (CGL) is a proud franchise of CGI, bringing trusted global standards to infrastructure in Saudi Arabia through rigorous subsurface investigations and materials testing.'}
-            </p>
           </div>
-
         </div>
       </section>
 

@@ -45,7 +45,7 @@ export default function LanguageSwitcher({ currentLang, className = '', isScroll
   };
 
   const buttonStyle = !isScrolled
-    ? 'bg-white/10 hover:bg-white/20 border-white/20 text-white backdrop-blur-md shadow-sm'
+    ? 'bg-white/80 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 border-[#E6DFD3] dark:border-white/20 text-[#18181B] dark:text-white backdrop-blur-md shadow-sm'
     : 'bg-white dark:bg-[#111111] hover:bg-slate-50 dark:hover:bg-[#1a1a1a] border-[#E6DFD3] dark:border-[#222222] text-[#18181B] dark:text-stone-200 shadow-sm';
 
   return (

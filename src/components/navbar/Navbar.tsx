@@ -107,7 +107,7 @@ export default function Navbar({ lang = 'ar', variant = 'auto' }: NavbarProps) {
                 className={`text-xs xl:text-sm font-medium transition-colors whitespace-nowrap ${
                   isSolid
                     ? 'text-[#18181B] dark:text-stone-300 hover:text-[#3b76b3] dark:hover:text-[#3b76b3]'
-                    : 'text-white/90 hover:text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]'
+                    : 'text-[#18181B] dark:text-white/90 hover:text-[#3b76b3] dark:hover:text-white dark:drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]'
                 }`}
               >
                 {link.label}
@@ -125,7 +125,7 @@ export default function Navbar({ lang = 'ar', variant = 'auto' }: NavbarProps) {
               className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg font-mono text-xs transition-colors border ${
                 isSolid
                   ? 'bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-[#18181B] dark:text-stone-300 border-[#E6DFD3] dark:border-[#1f1f1f] shadow-sm'
-                  : 'bg-white/10 hover:bg-white/20 text-white border-white/20 backdrop-blur-md shadow-sm'
+                  : 'bg-white/80 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 text-[#18181B] dark:text-white border-[#E6DFD3] dark:border-white/20 backdrop-blur-md shadow-sm'
               }`}
               dir="ltr"
               title={dict.nav.whatsapp}
@@ -167,7 +167,7 @@ export default function Navbar({ lang = 'ar', variant = 'auto' }: NavbarProps) {
               className={`p-2 rounded-lg border transition-colors ${
                 isSolid
                   ? 'text-[#18181B] dark:text-stone-300 border-[#E6DFD3] dark:border-[#1f1f1f] bg-white dark:bg-[#111111] shadow-sm'
-                  : 'text-white bg-white/10 hover:bg-white/20 border-white/20 backdrop-blur-md shadow-sm'
+                  : 'text-[#18181B] dark:text-white bg-white/80 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 border-[#E6DFD3] dark:border-white/20 backdrop-blur-md shadow-sm'
               }`}
               aria-label="Toggle navigation menu"
             >

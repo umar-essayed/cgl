@@ -61,7 +61,9 @@ export default function ThemeToggle({ className = '', isScrolled = true }: Theme
   // Over Hero (not scrolled): Always crisp glassmorphism over the dark cinematic hero
   // Scrolled: Match page background theme
   const buttonStyle = !isScrolled
-    ? 'bg-white/10 hover:bg-white/20 border-white/20 text-white backdrop-blur-md shadow-sm'
+    ? isLight
+      ? 'bg-white/80 hover:bg-white border-[#E6DFD3] text-amber-500 backdrop-blur-md shadow-sm'
+      : 'bg-white/10 hover:bg-white/20 border-white/20 text-[#3b76b3] hover:text-white backdrop-blur-md shadow-sm'
     : isLight
       ? 'bg-white hover:bg-slate-50 border-[#E6DFD3] text-amber-500 shadow-sm'
       : 'bg-[#111111] hover:bg-[#1a1a1a] border-[#222222] text-[#3b76b3] hover:text-white shadow-sm';
